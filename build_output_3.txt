@@ -1,0 +1,89 @@
+﻿
+> rapidtechpro@0.1.0 build
+> next build
+
+   Ôû▓ Next.js 15.0.3
+
+   Creating an optimized production build ...
+ Ô£ô Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/31) ...
+node.exe :  ÔÜá metadataBase 
+property in metadata export 
+is not set for resolving 
+social open graph or twitter 
+images, using 
+"http://localhost:3000". See 
+https://nextjs.org/docs/app/a
+pi-reference/functions/genera
+te-metadata#metadatabase
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: ( ÔÜá me  
+  tadataBa...ta#metadataba   
+ se:String) [], RemoteExc    
+eption
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+ ÔÜá metadataBase property 
+in metadata export is not 
+set for resolving social 
+open graph or twitter 
+images, using 
+"http://localhost:3000". See 
+https://nextjs.org/docs/app/a
+pi-reference/functions/genera
+te-metadata#metadatabase
+   Generating static pages (7/31) 
+   Generating static pages (15/31) 
+   Generating static pages (23/31) 
+ Ô£ô Generating static pages (31/31)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+Ôöî Ôùï /                                    14.3 kB         237 kB
+Ôö£ Ôùï /_not-found                          900 B           101 kB
+Ôö£ Ôùï /AboutUs                             1.93 kB         168 kB
+Ôö£ Ôùï /Blog                                1.01 kB         133 kB
+Ôö£ Ôùï /Company                             2.33 kB         221 kB
+Ôö£ Ôùï /Company/Careers                     1.7 kB          176 kB
+Ôö£ Ôùï /Company/Culture-Book                2.25 kB         177 kB
+Ôö£ Ôùï /Company/Events                      1.78 kB         177 kB
+Ôö£ Ôùï /Company/Manifesto                   1.83 kB         177 kB
+Ôö£ Ôùï /Company/Press-Release               1.88 kB         177 kB
+Ôö£ Ôùï /Company/Privacy-Policy              3.16 kB         178 kB
+Ôö£ Ôùï /Company/Process                     1.98 kB         177 kB
+Ôö£ Ôùï /Company/Terms-Of-Service            3.36 kB         178 kB
+Ôö£ Ôùï /Company/Testimonials                1.56 kB         176 kB
+Ôö£ Ôùï /ContactUs                           2.54 kB         168 kB
+Ôö£ Ôùï /Help                                3.9 kB          214 kB
+Ôö£ Ôùï /PrivacyPolicy                       189 B           129 kB
+Ôö£ Ôùï /robots.txt                          0 B                0 B
+Ôö£ Ôùï /Services                            4.88 kB         177 kB
+Ôö£ Ôùï /Services/Ecommerce-Solutions        7.56 kB         218 kB
+Ôö£ Ôùï /Services/HR-Solution                6.49 kB         217 kB
+Ôö£ Ôùï /Services/Mobile-Apps                6.58 kB         217 kB
+Ôö£ Ôùï /Services/Point-Of-Sale              6.53 kB         217 kB
+Ôö£ Ôùï /Services/UIUX-Figma                 6.68 kB         217 kB
+Ôö£ Ôùï /Services/Web-Development            6.62 kB         217 kB
+Ôö£ Ôùï /sitemap.xml                         0 B                0 B
+Ôö£ Ôùï /TermsAndConditions                  189 B           129 kB
+Ôöö Ôùï /Work                                3.55 kB         216 kB
++ First Load JS shared by all            100 kB
+  Ôö£ chunks/1517-d05a5cecc446e205.js      45.5 kB
+  Ôö£ chunks/4bd1b696-0288d8f859f896e6.js  52.5 kB
+  Ôöö other shared chunks (total)          1.92 kB
+
+
+Ôùï  (Static)  prerendered as static content
+
