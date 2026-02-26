@@ -87,7 +87,9 @@ export default function RootLayout({ children }) {
 
         <Providers>
           <RootLayoutClient />
-          {children}
+          <main id="main-content">
+            {children}
+          </main>
           <ChatWithWhatsapp />
         </Providers>
       </body>

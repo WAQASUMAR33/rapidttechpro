@@ -140,13 +140,18 @@ export default function Header() {
                     <button
                         className="w-24 md:w-28 h-8 rounded-full font-medium border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black"
                         onClick={() => dispatch(openPopup())}
+                        aria-label="Open contact form"
                     >
                         Get in touch
                     </button>
                 </div>
 
                 {/* Toggle Button - Mobile Only */}
-                <button className="md:hidden text-2xl" onClick={toggleSidebar}>
+                <button
+                    className="md:hidden text-2xl p-2"
+                    onClick={toggleSidebar}
+                    aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
+                >
                     {isSidebarOpen ? <FaTimes /> : <FaBars />}
                 </button>
             </header>
@@ -185,7 +190,11 @@ export default function Header() {
                             <BsTelephone />
                             +92 340 3051059
                         </Link>
-                        <button onClick={() => dispatch(openPopup())} className="w-full h-10 rounded-full bg-white text-black font-medium">
+                        <button
+                            onClick={() => dispatch(openPopup())}
+                            className="w-full h-10 rounded-full bg-white text-black font-medium"
+                            aria-label="Open contact form"
+                        >
                             Get in touch
                         </button>
                     </div>
@@ -196,7 +205,13 @@ export default function Header() {
             {isOpenGetinTouch && (
                 <div className="fixed  md:right-0 z-50  flex items-center justify-center">
                     <div className="bg-gray-900 text-white p-6 max-w-2xl h-full w-full relative">
-                        <button onClick={() => dispatch(closePopup())} className="absolute top-4 right-4 text-black text-3xl md:text-5xl bg-white w-10 h-10 md:w-16 md:h-16 rounded-full flex justify-center items-center">&times;</button>
+                        <button
+                            onClick={() => dispatch(closePopup())}
+                            className="absolute top-4 right-4 text-black text-3xl md:text-5xl bg-white w-10 h-10 md:w-16 md:h-16 rounded-full flex justify-center items-center"
+                            aria-label="Close contact form"
+                        >
+                            &times;
+                        </button>
                         <h2 className="text-2xl sm:text-3xl font-bold mt-6">
                             Got a <span className="text-blue-400">Project?</span>
                         </h2>
@@ -252,7 +267,8 @@ export default function Header() {
 
                             <button
                                 type="submit"
-                                className="w-full mt-6 p-3 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-semibold"
+                                className="w-full mt-6 p-3 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-semibold transition-colors duration-200"
+                                aria-label="Submit contact message"
                             >
                                 Send Message
                             </button>
