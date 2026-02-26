@@ -19,9 +19,8 @@ const LazyImage = ({ src, alt, className }) => {
         alt={alt}
         width={40}
         height={40}
-        className={`${className} object-contain transition-opacity duration-500`}
-        placeholder="blur"
-        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+        className={`${className} object-contain transition-opacity duration-300`}
+        sizes="40px"
       />
     </div>
   );

@@ -4,6 +4,7 @@ import { FaArrowRight, FaPlay } from "react-icons/fa";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { openPopup } from "@/store/popupSlice";
+import Image from "next/image";
 
 export default function HeroSection() {
     const dispatch = useDispatch();
@@ -47,16 +48,30 @@ export default function HeroSection() {
 
     return (
         <div className="relative h-[90vh] md:h-screen w-full overflow-hidden">
-            {/* Background Video */}
-            <video
-                className="absolute inset-0 w-full h-full object-cover scale-105"
-                src="/video/temwork.mp4"
-                poster="/images/herosection.png"
-                autoPlay
-                loop
-                muted
-                playsInline
-            />
+            {/* Background Image (LCP & Fallback) */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/images/herosection.png"
+                    alt="Hero Background"
+                    fill
+                    priority
+                    quality={85}
+                    className="object-cover scale-105"
+                    sizes="100vw"
+                />
+            </div>
+
+            {/* Background Video (Desktop only) */}
+            <div className="hidden md:block absolute inset-0 z-10 w-full h-full">
+                <video
+                    className="w-full h-full object-cover scale-105"
+                    src="/video/temwork.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                />
+            </div>
 
             {/* Multi-layer overlay for depth */}
             <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-[#0FB5B7]/20" />
@@ -148,19 +163,18 @@ export default function HeroSection() {
                 ref={attractAreaRef}
                 className="hidden md:flex absolute -bottom-32 -right-10 h-[500px] w-[500px] z-30 rounded-full items-center justify-center"
             >
-                <button onClick={() => { dispatch(openPopup()); }} className="pointer-events-auto">
+                <button onClick={() => { dispatch(openPopup()); }} className="pointer-events-auto relative">
                     <motion.div
-                        className="h-32 w-32 md:h-[150px] md:w-[200px] bg-[url('/images/cloud.PNG')] bg-contain p-6 flex flex-col justify-center items-center md:text-base text-center text-white"
+                        className="h-32 w-32 md:h-[150px] md:w-[200px] p-6 flex flex-col justify-center items-center md:text-base text-center text-white relative z-10"
                         style={{ x: x, y: y, scale: scale }}
                         transition={{ type: "spring", stiffness: 50, damping: 20, duration: 0.8 }}
-                        initial={{ backgroundImage: "url('/images/cloud.PNG')" }}
-                        whileHover={{
-                            backgroundImage: "url('/images/cloud2.png')",
-                            scale: 1.1,
-                            color: "black",
-                            transition: { duration: 0.5 }
-                        }}
                     >
+                        <Image
+                            src="/images/cloud.PNG"
+                            alt="Cloud background"
+                            fill
+                            className="object-contain -z-10"
+                        />
                         <FaArrowRight className="transform -rotate-45 mb-2" />
                         Let's Talk About Your Project
                     </motion.div>

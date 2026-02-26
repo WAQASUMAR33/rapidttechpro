@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: 'export',
+    // Removed output: 'export' to enable full Next.js features like Image Optimization on Vercel
     images: {
-        unoptimized: true,
+        formats: ['image/avif', 'image/webp'],
+    },
+    experimental: {
+        optimizePackageImports: ['react-icons', 'framer-motion', 'gsap'],
     },
 };
 
