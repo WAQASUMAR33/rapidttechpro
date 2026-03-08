@@ -402,7 +402,12 @@ const TabsSection = ({ successStoriesRef }) => {
               transition={{ duration: 0.3 }}
             >
               <div className="col-span-2">
-                <img loading='lazy' src={selectedProject.image} alt={selectedProject.title} className="w-[20em] h-[20em] object-cover rounded-md" />
+                <img
+                  loading='lazy'
+                  src={resolveImage(selectedProject.mainImage || selectedProject.image)}
+                  alt={selectedProject.title}
+                  className="w-[20em] h-[20em] object-cover rounded-md"
+                />
               </div>
               <div className="col-span-3 p-4">
                 <h1 className="text-3xl font-semibold">{selectedProject.title}</h1>

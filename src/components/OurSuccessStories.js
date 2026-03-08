@@ -64,7 +64,7 @@ const SuccessStories = forwardRef((props, ref) => {
           url: `${apiBaseUrl}/api/projects`,
           stack: err.stack
         });
-        setError('unavailable');
+        setError('Service temporarily unavailable. Please try again later.');
       } finally {
         setLoading(false);
       }
