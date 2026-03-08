@@ -411,8 +411,12 @@ const TabsSection = ({ successStoriesRef }) => {
               </div>
               <div className="col-span-3 p-4">
                 <h1 className="text-3xl font-semibold">{selectedProject.title}</h1>
-                <p className="text-xl">{selectedProject.category}</p>
-                <p className="text-xl">{selectedProject.description}</p>
+                <p className="text-xl">
+                  {selectedProject.categories?.length > 0
+                    ? (typeof selectedProject.categories[0] === 'string' ? selectedProject.categories[0] : selectedProject.categories[0]?.name)
+                    : (selectedProject.category || 'Project')}
+                </p>
+                <p className="text-xl">{selectedProject.shortDescription || selectedProject.description}</p>
                 <button
                   onClick={() => setShowOverlay(false)}
                   className="absolute top-4 right-4 text-2xl font-bold text-gray-500 hover:text-gray-800"
