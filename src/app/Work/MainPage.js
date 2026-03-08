@@ -22,7 +22,7 @@ export default function WorkMainPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || 'http://localhost:3001';
+  const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
   const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
 
   const fetchWithAuth = async (url) => {
@@ -330,7 +330,7 @@ function InViewCard({ story, index }) {
   });
 
   // Backend images are uploaded to localhost:3001/uploads/ — must prefix with backend URL
-  const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || 'http://localhost:3001';
+  const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
   const resolveImage = (path) => {
     if (!path) return null;
     if (path.startsWith('http')) return path;

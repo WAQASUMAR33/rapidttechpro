@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import UserLayout from '@/app/UserLayout';
 import CallToAction from '@/components/CallToAction';
 
-const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || 'http://localhost:3001';
+const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
 const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
 const headers = { 'x-api-key': apiKey };
 

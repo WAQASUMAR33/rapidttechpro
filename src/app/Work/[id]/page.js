@@ -23,7 +23,7 @@ export default function ProjectDetailPage() {
   // Define scale transform at the top level to avoid hook violation
   const galleryScale = useTransform(scrollYProgress, [0.2, 0.4], [0.95, 1]);
 
-  const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || 'http://localhost:3001';
+  const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
   const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
 
   const fetchWithAuth = async (url) => {

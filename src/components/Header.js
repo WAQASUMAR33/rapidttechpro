@@ -34,7 +34,7 @@ export default function Header() {
         { title: 'Point Of Sale Solutions', slug: 'Point-Of-Sale' },
     ]);
 
-    const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || 'http://localhost:3001';
+    const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
     const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
     const handleInterestClick = (interest) => {
