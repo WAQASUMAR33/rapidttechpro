@@ -1,5 +1,5 @@
 'use client';
-import { AiOutlineMessage } from "react-icons/ai";
+import { BsChatDots } from "react-icons/bs";
 import { MdOutlineDesignServices } from "react-icons/md";
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 export default function Features() {
@@ -8,7 +8,7 @@ export default function Features() {
       id: '01',
       title: 'Strong admin',
       description: 'Enjoy the process of setting up and managing the site without special tasks. Now even a beginner can easily create their own website.',
-      icon: <AiOutlineMessage />, // Replace with actual icon or SVG
+      icon: <BsChatDots />, // Replace with actual icon or SVG
     },
     {
       id: '02',

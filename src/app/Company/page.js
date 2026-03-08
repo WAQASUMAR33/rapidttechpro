@@ -1,3 +1,4 @@
+'use client';
 import HomePageHeader from "@/components/HomePageHeader";
 import UserLayout from "../UserLayout";
 import BigSection from "./components/BigSection";
@@ -8,21 +9,21 @@ import Section from "./components/Section";
 import FeatureSection from "./components/Weareteam";
 import Footer from "@/components/Footer";
 
-export default function CompanyPage(){
-    return(
+export default function CompanyPage() {
+    return (
         <>
-        {/* <UserLayout> */}
-        <HomePageHeader/>
-        <div className="bg-white">
-        <CompanyHerosection/>
-        <Features/>
-        <BigSection/>
-        <FeatureSection/>
-        <PortfolioSection/>
-        <Section/>
-        </div>
-        <Footer/>
-        {/* </UserLayout> */}
+            {/* <UserLayout> */}
+            <HomePageHeader />
+            <div className="bg-white">
+                <CompanyHerosection />
+                <Features />
+                <BigSection />
+                <FeatureSection />
+                <PortfolioSection />
+                <Section />
+            </div>
+            <Footer />
+            {/* </UserLayout> */}
         </>
     )
 }
