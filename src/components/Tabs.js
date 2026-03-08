@@ -346,7 +346,7 @@ const TabsSection = ({ successStoriesRef }) => {
 
   const renderProjects = () => {
     if (loading) return <div className="text-sm text-gray-500 py-4">Loading projects...</div>;
-    if (error) return null;
+    if (error) return <div className="text-sm text-red-500 py-4">Projects currently unavailable.</div>;
 
     // Filter projects based on activeTab (category)
     const filteredProjects = projects.filter(project => {

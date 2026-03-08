@@ -128,7 +128,13 @@ const SuccessStories = forwardRef((props, ref) => {
   };
 
   if (error) {
-    return <section ref={ref} style={{ display: 'none' }} />;
+    return (
+      <section ref={ref} className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <p className="text-gray-500">{error}</p>
+        </div>
+      </section>
+    );
   }
 
   return (
