@@ -171,7 +171,7 @@ const SuccessStories = forwardRef((props, ref) => {
                   </Link>
                   <div className="pt-6">
                     <h3 className="text-2xl font-bold text-gray-900">{story.title}</h3>
-                    <p className="text-gray-600 mt-2 line-clamp-2 min-h-[3rem]">{story.shortDescription || story.description}</p>
+                    <p className="text-gray-600 mt-2 line-clamp-2 min-h-[3rem]">{(typeof story.shortDescription === 'string' ? story.shortDescription : '') || (typeof story.description === 'string' ? story.description : '')}</p>
                     <Link
                       href={story.websiteLink || story.link || `/Work/${story.id}`}
                       target={story.websiteLink ? "_blank" : "_self"}
