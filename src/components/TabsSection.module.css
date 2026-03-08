@@ -1,0 +1,29 @@
+.item-name {
+    display: inline-block;
+    position: relative;
+    transform: translateY(15%);
+    opacity: 1;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
+  
+  .link-container:hover .item-name {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
+  
+  .item-name-hover {
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out; /* No delay here */
+  }
+  
+  .link-container:hover .item-name-hover {
+    transform: translateY(-150%);
+    opacity: 1;
+    transition: transform 0.2s ease-in-out 0.2s, opacity 0.2s ease-in-out; /* Delayed transition on hover */
+  }
+  
