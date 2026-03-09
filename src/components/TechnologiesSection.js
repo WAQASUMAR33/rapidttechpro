@@ -78,14 +78,14 @@ export default function TechnologiesSection() {
                 {/* Main Tabs Container */}
                 <div className="flex flex-col lg:flex-row gap-12 min-h-[500px] border-t border-gray-100 pt-12">
                     {/* Sidebar Buttons */}
-                    <div className="lg:w-1/4 flex flex-col gap-2">
+                    <div className="lg:w-1/4 flex flex-col gap-1">
                         {techData.map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`text-left px-6 py-4 rounded-2xl text-lg md:text-xl font-semibold transition-all duration-300 border-2 ${activeTab === tab.id
-                                    ? 'bg-[#0FB5B7] text-white border-[#0FB5B7] shadow-lg shadow-[#0FB5B7]/20 scale-[1.02]'
-                                    : 'text-gray-500 border-transparent hover:text-[#0FB5B7] hover:bg-[#0FB5B7]/5 hover:border-[#0FB5B7]/20 font-medium'
+                                className={`text-left px-6 py-3.5 rounded-full text-base md:text-lg font-semibold transition-all duration-300 ${activeTab === tab.id
+                                        ? 'bg-[#0FB5B7]/10 text-[#0FB5B7]'
+                                        : 'text-gray-500 hover:text-[#0FB5B7] hover:bg-[#0FB5B7]/5'
                                     }`}
                             >
                                 {tab.title}
@@ -106,26 +106,30 @@ export default function TechnologiesSection() {
                             >
                                 {activeTech?.categories.length > 0 ? (
                                     activeTech.categories.map((cat, idx) => (
-                                        <div key={idx} className="space-y-8">
-                                            <h3 className="text-2xl md:text-3xl font-bold text-black tracking-tight border-l-4 border-[#0FB5B7] pl-4">
+                                        <div key={idx} className="space-y-6">
+                                            <h3 className="text-2xl md:text-3xl font-bold text-black tracking-tight">
                                                 {cat.name}
                                             </h3>
-                                            <div className="flex flex-wrap gap-5">
+                                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                                                 {cat.items.map((item, i) => (
                                                     <motion.div
                                                         key={i}
-                                                        whileHover={{ scale: 1.05, y: -5 }}
-                                                        className="group flex items-center gap-4 px-6 py-3.5 bg-white rounded-2xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(15,181,183,0.15)] transition-all border border-gray-100 hover:border-[#0FB5B7]/30 cursor-pointer"
+                                                        whileHover={{ y: -4 }}
+                                                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                                                        className="group flex items-center gap-3 px-5 py-4 bg-[#F5F5F5] rounded-full cursor-pointer overflow-hidden relative"
+                                                        style={{ transition: 'background 0.3s ease, box-shadow 0.3s ease' }}
+                                                        onMouseEnter={e => { e.currentTarget.style.background = '#0FB5B7'; e.currentTarget.querySelectorAll('.chip-text').forEach(el => { el.style.color = '#fff'; }); }}
+                                                        onMouseLeave={e => { e.currentTarget.style.background = '#F5F5F5'; e.currentTarget.querySelectorAll('.chip-text').forEach(el => { el.style.color = ''; }); }}
                                                     >
-                                                        <div className="w-8 h-8 flex items-center justify-center p-1.5 bg-gray-50 rounded-lg group-hover:bg-[#0FB5B7]/10 transition-colors">
+                                                        <div className="w-9 h-9 flex items-center justify-center flex-shrink-0 bg-white rounded-full shadow-sm">
                                                             <img
                                                                 src={item.icon}
                                                                 alt={item.name}
-                                                                className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                                                                className="w-5 h-5 object-contain"
                                                                 onError={(e) => { e.target.style.display = 'none'; }}
                                                             />
                                                         </div>
-                                                        <span className="text-gray-800 font-bold group-hover:text-[#0FB5B7] transition-colors">{item.name}</span>
+                                                        <span className="chip-text text-gray-900 font-semibold text-sm md:text-base transition-colors duration-300">{item.name}</span>
                                                     </motion.div>
                                                 ))}
                                             </div>
