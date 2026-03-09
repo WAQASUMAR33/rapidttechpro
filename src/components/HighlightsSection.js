@@ -6,7 +6,7 @@ import { FaPlay } from 'react-icons/fa';
 const highlightTabs = [
     { id: 'recommendations', title: 'Recommendations' },
     { id: 'meetup', title: 'Meet Up' },
-    { id: 'life', title: 'Life at Cubix' },
+    { id: 'life', title: 'Life at RapidTechPro' },
 ];
 
 const highlightsData = {
@@ -31,7 +31,7 @@ const highlightsData = {
     },
     life: {
         featured: {
-            title: "Life at Cubix - Annual Retreat",
+            title: "Life at RapidTechPro - Annual Retreat",
             thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg",
         },
         videos: [
@@ -61,8 +61,8 @@ export default function HighlightsSection() {
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`text-left px-6 py-3 rounded-full text-lg font-medium transition-all duration-300 ${activeTab === tab.id
-                                        ? 'bg-[#E8F5EE]/10 text-[#2BA55E] border border-[#2BA55E]/30'
-                                        : 'text-gray-500 hover:text-white hover:bg-white/5'
+                                    ? 'bg-[#E8F5EE]/10 text-[#2BA55E] border border-[#2BA55E]/30'
+                                    : 'text-gray-500 hover:text-white hover:bg-white/5'
                                     }`}
                             >
                                 {tab.title}

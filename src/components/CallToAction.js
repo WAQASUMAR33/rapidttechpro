@@ -17,9 +17,9 @@ export default function CallToAction() {
         className="max-w-5xl"
       >
         <p className="text-gray-500 text-lg md:text-xl mb-6 font-medium">Pull the Trigger!</p>
-        <h2 className="text-5xl md:text-8xl lg:text-9xl font-bold text-gray-900 mb-16 leading-[1.1] tracking-tight">
+        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#0FB5B7] mb-12 leading-[1.1] tracking-tight">
           Let's bring your <br />
-          <span className="text-black">vision to life</span>
+          <span className="text-[#0FB5B7]">vision to life</span>
         </h2>
 
         <button
