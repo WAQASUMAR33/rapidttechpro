@@ -26,9 +26,7 @@ export default function TestimonialSlider() {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const res = await fetch(`${apiBaseUrl}/api/testimonials`, {
-          headers: { 'x-api-key': apiKey },
-        });
+        const res = await fetch('/api/testimonials', { cache: 'no-store' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         let items = [];
@@ -37,11 +35,11 @@ export default function TestimonialSlider() {
         else if (data?.testimonials && Array.isArray(data.testimonials)) items = data.testimonials;
         if (items.length > 0) setReviews(items);
       } catch (err) {
-        console.error('TestimonialSlider fetch error:', err);
+        // Silently fall back to static data
       }
     };
     fetchTestimonials();
-  }, [apiBaseUrl, apiKey]);
+  }, []);
 
   const handleNext = () => {
     setCurrentIndex(prev => prev + 3 < reviews.length ? prev + 3 : 0);

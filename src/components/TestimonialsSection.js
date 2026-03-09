@@ -43,9 +43,7 @@ export default function TestimonialsSection() {
     useEffect(() => {
         const fetchTestimonials = async () => {
             try {
-                const res = await fetch(`${apiBaseUrl}/api/testimonials`, {
-                    headers: { 'x-api-key': apiKey },
-                });
+                const res = await fetch('/api/testimonials', { cache: 'no-store' });
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
                 let items = [];
@@ -54,14 +52,13 @@ export default function TestimonialsSection() {
                 else if (data?.testimonials && Array.isArray(data.testimonials)) items = data.testimonials;
                 if (items.length > 0) setTestimonials(items);
             } catch (err) {
-                console.error('Testimonials fetch error:', err);
-                // keep fallback silently
+                // Silently fall back to static data
             } finally {
                 setLoading(false);
             }
         };
         fetchTestimonials();
-    }, [apiBaseUrl, apiKey]);
+    }, []);
 
     return (
         <section className="bg-black text-white py-16 md:py-24 px-6 md:px-12 lg:px-24">
