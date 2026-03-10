@@ -11,51 +11,45 @@ gsap.registerPlugin(ScrollTrigger);
 const cards = [
   {
     image: '/carousel/idea.png',
-    title: 'Ideation',
+    title: 'Ideate',
     description:
-      'We dive deep into your vision, collaborating closely to create a strategic roadmap that aligns perfectly with your goals, setting the foundation for a successful product journey.',
-    date: '1/2/2024',
+      'We analyze your vision thoroughly to ensure the roadmap is perfectly aligned with your end goals, setting the stage for product success.',
     id: 1,
   },
   {
     image: '/carousel/uiux.jpeg',
-    title: 'Designing',
+    title: 'Design',
     description:
-      'We craft a sleek, functional Minimum Viable Product (MVP), blending intuitive design with core features to deliver maximum value and an exceptional user experience.',
-    date: '1/2/2024',
+      'Crafting a minimal viable product (MVP) that balances design with core functionality, maximizing value and user satisfaction.',
     id: 2,
   },
   {
     image: '/carousel/softwaredeveloper.jpg',
-    title: 'Development',
+    title: 'Develop',
     description:
-      'From concept to reality, we develop end-to-end solutions with a focus on feasibility, solid architecture, and agile methodologies to ensure rapid delivery without compromising quality.',
-    date: '1/2/2024',
+      'From concept to reality, we develop end-to-end solutions with a focus on feasibility, solid architecture, and agile methodologies.',
     id: 3,
   },
   {
     image: '/carousel/softwaretesting.png',
     title: 'Testing',
     description:
-      'Quality is paramount. Through rigorous testing and quality assurance, we ensure your product meets the highest standards, providing a seamless user experience across all touchpoints.',
-    date: '1/2/2024',
+      'Quality is paramount. Through rigorous testing and quality assurance, we ensure your product meets the highest standards.',
     id: 4,
   },
   {
     image: '/carousel/launcher.png',
     title: 'Launch',
     description:
-      'We prepare for a smooth, impactful product launch with customized deployment strategies, ensuring a flawless rollout and offering continuous support post-launch.',
-    date: '1/2/2024',
+      'We prepare for a smooth, impactful product launch with customized deployment strategies, ensuring a flawless rollout.',
     id: 5,
   },
   {
     image: '/carousel/support.jpg',
     title: 'Ongoing Support',
     description:
-      'Our commitment doesn’t end at launch. We provide continuous updates and improvements, ensuring your product remains optimized for long-term success.',
-    date: '1/2/2024',
-    id: 'custom',
+      'Our commitment doesn\'t end at launch. We provide continuous updates and improvements for long-term success.',
+    id: 6,
   },
 ];
 
@@ -63,24 +57,31 @@ export default function ProductProcess() {
   const [activeStep, setActiveStep] = useState(0);
   const sectionRefs = useRef([]);
   const imageRefs = useRef([]);
+  const containerRef = useRef(null);
+  const progressLineRef = useRef(null);
+
+  const totalSteps = cards.length;
 
   useEffect(() => {
-    // Set up ScrollTrigger for each section
+    // ScrollTrigger for each section to track active step
     sectionRefs.current.forEach((section, index) => {
       ScrollTrigger.create({
         trigger: section,
         start: 'top center',
         end: 'bottom center',
         onEnter: () => setActiveStep(index),
-        onLeaveBack: () => setActiveStep(index - 1),
+        onLeaveBack: () => setActiveStep(Math.max(0, index - 1)),
         scrub: true,
       });
     });
 
-    // Set initial position of images off-screen at the bottom
+    // Animate images on scroll
     gsap.set(imageRefs.current, { opacity: 0, y: 50 });
+    // Ensure the first image is visible initially if activeStep is 0
+    if (imageRefs.current[0]) {
+      gsap.set(imageRefs.current[0], { opacity: 1, y: 0 });
+    }
 
-    // Quickly transition images when the section is in view
     cards.forEach((step, index) => {
       const image = imageRefs.current[index];
 
@@ -89,40 +90,34 @@ export default function ProductProcess() {
         start: 'top center',
         end: 'bottom center',
         onEnter: () => {
-          gsap.to(image, {
-            opacity: 1,  // Make the image fully visible when in view
-            y: 0, // Move image up to its natural position
-            duration: 0.01, // Smooth transition duration
-            ease: 'none', // Ease for smooth animation
-          });
+          gsap.to(image, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
         },
         onLeave: () => {
-          gsap.to(image, {
-            opacity: 0,  // Fade out when the section leaves
-            y: 50, // Move image down to simulate exit
-            duration: 0.01, // Smooth fade-out duration
-            ease: 'none', // Ease for fade-out animation
-          });
+          gsap.to(image, { opacity: 0, y: -50, duration: 0.3, ease: 'power2.in' });
         },
         onEnterBack: () => {
-          gsap.to(image, {
-            opacity: 1,  // Fade in when scrolling back into view
-            y: 0,
-            duration: 0.01,
-            ease: 'none',
-          });
+          gsap.to(image, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
         },
         onLeaveBack: () => {
-          gsap.to(image, {
-            opacity: 0, // Fade out quickly when leaving
-            y: 50,
-            duration: 0.01,
-            ease: 'none',
-          });
+          gsap.to(image, { opacity: 0, y: 50, duration: 0.3, ease: 'power2.in' });
         },
-        scrub: 1,  // Scrub the scroll so the animation progresses with the scroll
+        scrub: false,
       });
     });
+
+    // Animate the progress line
+    if (progressLineRef.current && containerRef.current) {
+      gsap.to(progressLineRef.current, {
+        scaleY: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top center',
+          end: 'bottom center',
+          scrub: true,
+        },
+      });
+    }
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -130,8 +125,9 @@ export default function ProductProcess() {
   }, []);
 
   return (
-    <div className='flex bg-black w-full flex-col px-6 md:px-12 lg:px-24'>
-      <div className="md:h-60 md:pt-20 font-semibold text-3xl py-10  md:text-5xl">
+    <div className='flex bg-black w-full flex-col px-4 sm:px-12'>
+      {/* Header */}
+      <div className="md:h-60 md:pt-20 font-semibold text-3xl py-10 md:text-5xl">
         <h2 className="text-white">Our Product</h2>
         <h2 className="text-bluish">Development Journey</h2>
         <p className="flex text-white text-sm md:text-xl font-medium items-center gap-2 mt-4">
@@ -140,20 +136,49 @@ export default function ProductProcess() {
         </p>
       </div>
 
-      <div className="flex bg-black text-white">
-        {/* Left Content Area with Vertical Line */}
-        <div className="relative flex flex-col items-center justify-center w-full md:w-1/2  lg:px-16 md:py-16">
+      {/* Main Content */}
+      <div ref={containerRef} className="flex bg-black text-white relative">
+        {/* Left Progress Line */}
+        <div className="hidden md:flex flex-col items-center w-[3px] mr-8 lg:mr-12 relative flex-shrink-0">
+          {/* Background line */}
+          <div className="absolute top-0 left-0 w-full h-full bg-white/10 rounded-full" />
+          {/* Animated fill line */}
+          <div
+            ref={progressLineRef}
+            className="absolute top-0 left-0 w-full h-full bg-white rounded-full origin-top"
+            style={{ transform: 'scaleY(0)' }}
+          />
+        </div>
+
+        {/* Left Content Area (Scrollable Horizontally on Mobile, Vertically on Desktop) */}
+        <div className="relative flex flex-row w-full lg:w-1/2 overflow-x-auto lg:overflow-visible flex-nowrap lg:flex-col gap-6 lg:gap-0 snap-x snap-mandatory lg:snap-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pb-10 lg:pb-0">
           {cards.map((step, index) => (
             <div
               key={index}
               ref={(el) => (sectionRefs.current[index] = el)}
-              className={`step transition-opacity duration-500 min-h-[40vh] md:min-h-[50vh] flex flex-col justify-center`}
+              className="step min-w-[85vw] md:min-w-0 lg:min-h-[70vh] flex flex-col justify-start lg:justify-center snap-center lg:snap-align-none"
             >
-              <div className="flex flex-col text-left md:p-12 transition-all duration-1000 ease-in-out">
-                <p className="text-lg md:text-[20px] text-white mb-2 md:mb-4">{step.date}</p>
-                <h3 className="text-3xl md:text-[60px] text-bluish font-bold leading-tight">{step.title}</h3>
-                <p className="mt-2 md:mt-8 text-sm md:text-[18px] font-[400] text-white leading-relaxed">{step.description}</p>
+              {/* Mobile Image (Visible only on mobile) */}
+              <div className="lg:hidden w-[280px] mx-auto h-[400px] relative rounded-[200px] overflow-hidden mb-4 mt-4 bg-gray-900/10">
+                <Image
+                  src={step.image}
+                  alt={step.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="transition-transform duration-500 hover:scale-105 opacity-90"
+                />
+              </div>
 
+              <div className="flex flex-col text-left lg:py-12 lg:pr-16 transition-all duration-700 ease-in-out z-20 px-2 lg:px-0">
+                <p className="text-sm md:text-lg lg:text-xl text-white/50 mb-1 md:mb-6 font-mono tracking-wider">
+                  {String(index + 1).padStart(2, '0')}/{String(totalSteps).padStart(2, '0')}
+                </p>
+                <h3 className="text-3xl md:text-5xl lg:text-[70px] text-[#0FB5B7] font-bold leading-tight italic">
+                  {step.title}
+                </h3>
+                <p className="mt-3 md:mt-10 text-sm md:text-base lg:text-xl font-normal text-white/80 leading-relaxed max-w-2xl">
+                  {step.description}
+                </p>
               </div>
             </div>
           ))}
@@ -161,16 +186,17 @@ export default function ProductProcess() {
 
         {/* Right Sticky Image Area */}
         <div className="lg:flex w-1/2 sticky top-0 h-screen items-center justify-center hidden">
-          <div className="relative w-[350px] h-[500px] overflow-hidden ">
+          <div className="relative w-[320px] h-[450px] rounded-[160px] overflow-hidden bg-gray-900/10 shadow-2xl">
             {cards.map((step, index) => (
               <Image
                 key={index}
-                ref={(el) => (imageRefs.current[index] = el)}
                 src={step.image}
                 alt={step.title}
                 layout="fill"
                 objectFit="cover"
-                className={`absolute top-0 left-0 transition-all duration-500  transform rounded-full opacity-50 ${index === activeStep ? 'opacity-100' : 'opacity-50'
+                className={`absolute inset-0 transition-all duration-700 ease-in-out ${index === activeStep
+                    ? 'opacity-100 scale-100'
+                    : 'opacity-0 scale-110'
                   }`}
               />
             ))}

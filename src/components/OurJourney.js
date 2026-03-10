@@ -54,36 +54,36 @@ export default function OurJourney() {
     }, [isVisible]);
 
     return (
-        <section ref={ref} className="bg-white pt-16 pb-20 md:pt-24 md:pb-32 px-6 md:px-12 lg:px-24 border-t border-gray-100">
-            <div className="max-w-7xl mx-auto flex flex-col gap-12 md:gap-16">
+        <section ref={ref} className="bg-white py-12 md:py-24 lg:py-32 px-6 md:px-12 lg:px-24 rounded-[30px] md:rounded-none">
+            <div className="max-w-7xl mx-auto flex flex-col gap-12 md:gap-24">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.05 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="flex flex-col gap-6"
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="flex flex-col gap-6 text-left"
                 >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black tracking-tight">
+                    <h2 className="text-4xl md:text-6xl lg:text-[80px] font-bold text-black tracking-tighter leading-[1.1]">
                         Our journey of building success
                     </h2>
-                    <p className="text-lg md:text-xl text-gray-700 max-w-4xl leading-relaxed">
+                    <p className="text-sm md:text-lg lg:text-xl text-gray-500 max-w-[900px] leading-relaxed font-medium">
                         We are a full-cycle product development company that combines creative thinking with technical expertise to create user-centric products that solve real problems and drive business growth.
                     </p>
                 </motion.div>
 
                 {/* Stats Counters */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 lg:gap-24">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
                     <div className="flex flex-col gap-2">
-                        <span className="text-5xl md:text-6xl font-bold text-black">{completedProjects.toLocaleString()}+</span>
-                        <span className="text-gray-800 text-xl font-normal">Completed Projects</span>
+                        <span className="text-4xl md:text-7xl lg:text-[84px] font-bold text-black tracking-tighter">{completedProjects.toLocaleString()}+</span>
+                        <span className="text-gray-600 text-sm md:text-xl font-medium">Completed Projects</span>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <span className="text-5xl md:text-6xl font-bold text-black">{talentedTeam}+</span>
-                        <span className="text-gray-800 text-xl font-normal">Talented Cubixians</span>
+                        <span className="text-4xl md:text-7xl lg:text-[84px] font-bold text-black tracking-tighter">{talentedTeam}+</span>
+                        <span className="text-gray-600 text-sm md:text-xl font-medium">Talented Cubixians</span>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <span className="text-5xl md:text-6xl font-bold text-black">{satisfiedClients}+</span>
-                        <span className="text-gray-800 text-xl font-normal">Satisfied Clients</span>
+                        <span className="text-4xl md:text-7xl lg:text-[84px] font-bold text-black tracking-tighter">{satisfiedClients}+</span>
+                        <span className="text-gray-600 text-sm md:text-xl font-medium">Satisfied Clients</span>
                     </div>
                 </div>
             </div>

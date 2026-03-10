@@ -109,7 +109,7 @@ export default function Header() {
                 </Link>
 
                 {/* Desktop Nav Links */}
-                <nav className="hidden md:flex space-x-6 lg:space-x-12 text-base lg:text-base relative">
+                <nav className="hidden md:flex md:space-x-4 lg:space-x-8 xl:space-x-12 text-sm lg:text-base relative items-center">
                     <div
                         className="relative"
                         onMouseEnter={() => setIsSolutionsOpen(true)}
@@ -119,11 +119,11 @@ export default function Header() {
                         {/* Full-Screen Mega Menu */}
                         {isSolutionsOpen && (
                             <div
-                                className="fixed top-[100px]   inset-0 bg-white hidden md:flex justify-center items-center z-40"
+                                className="fixed top-[64px] inset-x-0 bg-white hidden md:flex justify-center z-40 max-h-[calc(100vh-64px)] overflow-y-auto shadow-lg"
                                 onClick={closeMegaMenu}
                             >
                                 <div
-                                    className="w-full p-16 grid grid-cols-2 lg:grid-cols-5 gap-6 text-black bg-white mt-32"
+                                    className="w-full max-w-7xl mx-auto p-6 md:p-8 lg:p-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 text-black bg-white"
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     <div className="flex">
@@ -162,13 +162,13 @@ export default function Header() {
                 </nav>
 
                 {/* Contact & Button - Desktop Only */}
-                <div className="hidden md:flex items-center space-x-4">
-                    <Link href="tel:8669782220" className="flex items-center gap-1 text-base lg:text-base">
+                <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
+                    <Link href="tel:8669782220" className="flex items-center gap-1 text-sm lg:text-base whitespace-nowrap">
                         <BsTelephone />
-                        866-978-2220
+                        <span className="hidden lg:inline">866-978-2220</span>
                     </Link>
                     <button
-                        className="w-28 md:w-32 h-10 rounded-full font-medium border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black transition-all"
+                        className="w-24 lg:w-32 h-10 rounded-full font-medium border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black transition-all text-xs lg:text-sm"
                         onClick={() => dispatch(openPopup())}
                     >
                         Get in Touch
@@ -183,8 +183,8 @@ export default function Header() {
 
             {/* Sidebar - Mobile Only */}
             <aside
-                className={`fixed top-0 right-0 w-64 h-full bg-black/90 text-white transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
-                    } transition-transform duration-300 ease-in-out z-40`}
+                className={`fixed top-0 right-0 w-full sm:w-80 h-full bg-black/95 text-white transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
+                    } transition-transform duration-300 ease-in-out z-40 shadow-2xl overflow-y-auto`}
             >
                 <div className="flex flex-col items-start p-6 space-y-6">
                     {/* Logo in Sidebar */}
@@ -248,7 +248,7 @@ export default function Header() {
                         <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] pointer-events-none opacity-20" style={{ background: '#0FB5B7', transform: 'translate(30%, -30%)' }} />
 
                         <h2 className="text-2xl sm:text-3xl font-bold mt-6">
-                            Got a <span style={{ color: '#0FB5B7' }}>Project?</span>
+                            Got a <span className="text-bluish">Project?</span>
                         </h2>
                         <p className="text-sm sm:text-base text-gray-400 mt-2">
                             Share the details — scope, timeframes, or business challenges. We'll respond promptly.
@@ -256,7 +256,7 @@ export default function Header() {
 
                         <p className="text-sm mt-5 mb-3 font-semibold text-gray-300">I'm interested in</p>
                         <div className="flex flex-wrap gap-2 mb-5">
-                            {['Custom Software', 'Mobile App', 'UX/UI', 'Web Development'].map((interest) => (
+                            {(navServices.length > 0 ? navServices.map(s => s.title) : ['Custom Software', 'Mobile App', 'UX/UI', 'Web Development']).map((interest) => (
                                 <button
                                     key={interest}
                                     onClick={() => handleInterestClick(interest)}
@@ -320,7 +320,7 @@ export default function Header() {
                                 className="w-full mt-2 p-3 rounded-xl text-white font-bold text-base transition-all hover:opacity-90"
                                 style={{ background: 'linear-gradient(135deg, #0FB5B7, #0a8e90)', boxShadow: '0 8px 25px rgba(15,181,183,0.3)' }}
                             >
-                                Send Message →
+                                Send Message
                             </button>
                         </form>
 

@@ -33,7 +33,7 @@ const SuccessStories = forwardRef((props, ref) => {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 15000); // Increased to 15s for Vercel cold starts
 
-        const response = await fetch(`${apiBaseUrl}/api/projects`, {
+        const response = await fetch(`/api/projects`, {
           headers: { 'x-api-key': apiKey },
           signal: controller.signal,
         });
@@ -138,11 +138,11 @@ const SuccessStories = forwardRef((props, ref) => {
   }
 
   return (
-    <section ref={ref} className="py-12 bg-white relative overflow-hidden h-full">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={ref} className="py-16 md:py-24 bg-white relative overflow-hidden h-full">
+      <div className="w-full px-4 sm:px-12">
         <h2
           ref={headingRef}
-          className="md:text-5xl text-3xl font-bold text-gray-900 mb-8 text-left"
+          className="md:text-5xl lg:text-6xl text-3xl font-bold text-gray-900 mb-12 md:mb-16 text-left"
         >
           Our Success Stories
         </h2>
@@ -152,34 +152,47 @@ const SuccessStories = forwardRef((props, ref) => {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#25CBA1]"></div>
           </div>
         ) : (
-          <div className="flex flex-wrap md:-mx-4 md:space-y-16 space-y-4">
+          <div className="flex flex-wrap md:-mx-6 lg:-mx-8 md:space-y-20 space-y-6">
             {stories.map((story, index) => (
               <div
                 key={story.id}
-                className={`w-full md:w-1/2 px-4 md:px-12 md:mb-16 ${index % 2 === 1 ? 'md:mt-[80px]' : ''}`}
+                className={`w-full md:w-1/2 px-4 md:px-6 lg:px-8 md:mb-16 ${index % 2 === 1 ? 'md:mt-[120px]' : ''}`}
                 ref={(el) => (cardRefs.current[index] = el)}
               >
                 <div className="bg-white rounded-lg overflow-hidden group">
                   <Link href={`/Work/${story.id}`}>
-                    <div className="overflow-hidden rounded-xl h-[300px] md:h-[400px] bg-gray-50 flex items-center justify-center">
+                    <div className="overflow-hidden rounded-[40px] h-[300px] md:h-[450px] lg:h-[550px] bg-gray-50 flex items-center justify-center">
                       <img
                         src={resolveImage(story.mainImage || story.image)}
                         alt={story.title}
-                        className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover rounded-[40px] group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                   </Link>
-                  <div className="pt-6">
-                    <h3 className="text-2xl font-bold text-gray-900">{story.title}</h3>
-                    <p className="text-gray-600 mt-2 line-clamp-2 min-h-[3rem]">{(typeof story.shortDescription === 'string' ? story.shortDescription : '') || (typeof story.description === 'string' ? story.description : '')}</p>
-                    <Link
-                      href={story.websiteLink || story.link || `/Work/${story.id}`}
-                      target={story.websiteLink ? "_blank" : "_self"}
-                      rel="noopener noreferrer"
-                      className="inline-block mt-4 text-[#25CBA1] hover:underline font-semibold"
-                    >
-                      View live
-                    </Link>
+                  <div className="pt-8 flex flex-col gap-4">
+                    {(story.logo || story.projectIcon) && (
+                      <img
+                        src={resolveImage(story.logo || story.projectIcon)}
+                        alt={`${story.title} logo`}
+                        className="h-8 md:h-10 w-auto object-contain self-start"
+                      />
+                    )}
+
+                    <div className="flex flex-col gap-2">
+                      <Link href={`/Work/${story.id}`}>
+                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 border-b-2 border-black inline-block self-start hover:text-bluish hover:border-bluish transition-colors">
+                          {story.title}
+                        </h3>
+                      </Link>
+
+                      <p className="text-gray-600 mt-2 text-base md:text-lg leading-relaxed">
+                        {(() => {
+                          const desc = (typeof story.shortDescription === 'string' ? story.shortDescription : '') || (typeof story.description === 'string' ? story.description : '');
+                          const firstSentence = desc.split('.')[0];
+                          return firstSentence ? firstSentence + '.' : desc;
+                        })()}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

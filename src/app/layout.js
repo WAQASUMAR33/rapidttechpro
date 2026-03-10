@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className="font-manrope antialiased text-gray-900 min-h-screen"
+        className="font-manrope antialiased text-gray-900 min-h-screen overflow-x-hidden"
         suppressHydrationWarning
       >
         <Provider store={store}>

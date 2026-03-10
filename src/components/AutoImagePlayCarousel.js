@@ -38,11 +38,11 @@ const AutoImagePlayCarousel = () => {
       <div ref={containerRef} className="flex whitespace-nowrap">
         <ul className="flex list-none p-0">
           {extendedImages.map((src, index) => (
-            <li key={index} className="inline-flex items-center mr-6 flex-shrink-0">
+            <li key={index} className="inline-flex items-center mr-16 flex-shrink-0">
               <img
                 src={src}
                 alt={`Carousel image ${index + 1}`}
-                className="w-auto h-10 object-contain"
+                className="w-auto h-20 object-contain"
               />
             </li>
           ))}

@@ -48,8 +48,8 @@ export default function HighlightsSection() {
         <section className="bg-black text-white py-16 md:py-24 px-6 md:px-12 lg:px-24">
             <div className="max-w-7xl mx-auto">
                 <div className="mb-12">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                        Our <span className="text-[#25CBA1]">highlights</span>
+                    <h2 className="text-4xl md:text-5xl lg:text-[70px] font-bold mb-6">
+                        Our <span className="text-bluish">highlights</span>
                     </h2>
                 </div>
 
@@ -60,9 +60,9 @@ export default function HighlightsSection() {
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`text-left px-6 py-3 rounded-full text-lg font-medium transition-all duration-300 ${activeTab === tab.id
-                                    ? 'bg-[#E8F5EE]/10 text-[#2BA55E] border border-[#2BA55E]/30'
-                                    : 'text-gray-500 hover:text-white hover:bg-white/5'
+                                className={`text-left px-8 py-4 rounded-full text-xl md:text-2xl transition-all duration-300 ${activeTab === tab.id
+                                    ? 'bg-gradient-to-r from-bluish/20 via-bluish/5 to-black text-white font-bold'
+                                    : 'text-gray-400 font-medium hover:text-white hover:bg-white/5'
                                     }`}
                             >
                                 {tab.title}

@@ -2,7 +2,7 @@ import { FaShippingFast, FaUndoAlt, FaBan, FaQuestionCircle } from "react-icons/
 
 export default function BoxSection() {
     return (
-        <div className="max-w-6xl mx-auto grid grid-cols-4 gap-6 py-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 py-8 px-4">
             <a
                 href="/Orders"
                 className="w-full h-full rounded-xl flex flex-col group justify-center items-center border p-6 hover:shadow-lg transition"

@@ -76,7 +76,7 @@ export default function BigSectionCarousel() {
             initial="enter"
             animate="center"
             exit="exit"
-            className="absolute  grid grid-cols-2  w-full h-full  "
+            className="absolute grid grid-cols-1 md:grid-cols-2 w-full h-full"
           >
             {/* Left Section */}
             <div className="flex flex-col justify-center">

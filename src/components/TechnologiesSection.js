@@ -78,14 +78,14 @@ export default function TechnologiesSection() {
                 {/* Main Tabs Container */}
                 <div className="flex flex-col lg:flex-row gap-12 min-h-[500px] border-t border-gray-100 pt-12">
                     {/* Sidebar Buttons */}
-                    <div className="lg:w-1/4 flex flex-col gap-1">
+                    <div className="lg:w-1/4 flex overflow-x-auto lg:overflow-visible flex-row lg:flex-col gap-6 lg:gap-1 border-b border-gray-200 lg:border-none mb-8 lg:mb-0 pb-0 lg:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                         {techData.map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`text-left px-6 py-3.5 rounded-full text-base md:text-lg font-semibold transition-all duration-300 ${activeTab === tab.id
-                                        ? 'bg-[#0FB5B7]/10 text-[#0FB5B7]'
-                                        : 'text-gray-500 hover:text-[#0FB5B7] hover:bg-[#0FB5B7]/5'
+                                className={`text-left px-2 lg:px-8 pt-2 pb-1 lg:py-5 lg:rounded-full text-lg md:text-2xl font-bold transition-all duration-300 whitespace-nowrap flex-shrink-0 ${activeTab === tab.id
+                                    ? 'border-b-[3px] border-[#0FB5B7] lg:border-none lg:bg-gradient-to-r lg:from-[#DFF7F5] lg:to-white text-black lg:shadow-sm'
+                                    : 'border-b-[3px] border-transparent text-gray-500 hover:text-black lg:hover:bg-gray-50'
                                     }`}
                             >
                                 {tab.title}

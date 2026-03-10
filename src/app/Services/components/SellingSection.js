@@ -13,9 +13,9 @@ export default function SellingSection() {
     "Point of Sale System",
     "UI/UX - Figma",
   ];
-  
+
   const [selectedCategory, setSelectedCategory] = useState("Ecommerce Solutions");
-  
+
   const pricingData = {
     "Ecommerce Solutions": {
       price: 300,
@@ -95,68 +95,68 @@ export default function SellingSection() {
       ],
     },
   };
-  
+
   const imageData = {
     "Ecommerce Solutions": [
-        "/projects/Store2u/Store2u 1.png",
-        "/projects/Store2u/Store2U 2.png",
-        "/projects/Store2u/Store2U 3.png",
-        "/projects/Store2u/Store2U 4.png",
-        "/projects/Store2u/Store2U 5.png",
-        "/projects/Store2u/Store2U 6.png",
+      "/projects/Store2u/Store2u 1.png",
+      "/projects/Store2u/Store2U 2.png",
+      "/projects/Store2u/Store2U 3.png",
+      "/projects/Store2u/Store2U 4.png",
+      "/projects/Store2u/Store2U 5.png",
+      "/projects/Store2u/Store2U 6.png",
     ],
     "Web Applications": [
-       "/projects/maker4u/Maker4u 0.png",
-       "/projects/maker4u/Maker4u 2.png",
-       "/projects/maker4u/Maker4u 3.png",
-       "/projects/maker4u/Maker4u 4.png",
-       "/projects/maker4u/Maker4u 5.png",
-       "/projects/maker4u/Maker4u 6.png",
+      "/projects/maker4u/Maker4u 0.png",
+      "/projects/maker4u/Maker4u 2.png",
+      "/projects/maker4u/Maker4u 3.png",
+      "/projects/maker4u/Maker4u 4.png",
+      "/projects/maker4u/Maker4u 5.png",
+      "/projects/maker4u/Maker4u 6.png",
     ],
     "CMS": [
-        "/carousel/launcher.png",
-        "/carousel/launcher.png",
-        "/carousel/launcher.png",
-        "/projects/maker4u3.png",
-        "/projects/maker4u3.png",
-        "/projects/maker4u3.png",
+      "/carousel/launcher.png",
+      "/carousel/launcher.png",
+      "/carousel/launcher.png",
+      "/projects/maker4u3.png",
+      "/projects/maker4u3.png",
+      "/projects/maker4u3.png",
     ],
     "Mobile Apps": [
-        "/projects/Tebaro.png",
-        "/projects/3dots.jpg",
-        "/projects/figma/Tebaro/Terbaro (4).png",
-        "/projects/figma/3dots/3dots (4).jpg",
-        "/projects/figma/Tebaro/Terbaro (2).jpg",
-        "/projects/figma/3dots/3dots (3).jpg",
+      "/projects/Tebaro.png",
+      "/projects/3dots.jpg",
+      "/projects/figma/Tebaro/Terbaro (4).png",
+      "/projects/figma/3dots/3dots (4).jpg",
+      "/projects/figma/Tebaro/Terbaro (2).jpg",
+      "/projects/figma/3dots/3dots (3).jpg",
     ],
     "HR Solutions": [
-        "/projects/maker4u3.png",
-        "/projects/maker4u3.png",
-        "/carousel/launcher.png",
-        "/carousel/launcher.png",
-        "/carousel/launcher.png",
-        "/projects/maker4u3.png",
+      "/projects/maker4u3.png",
+      "/projects/maker4u3.png",
+      "/carousel/launcher.png",
+      "/carousel/launcher.png",
+      "/carousel/launcher.png",
+      "/projects/maker4u3.png",
     ],
     "Point of Sale System": [
-        "/projects/maker4u3.png",
-        "/carousel/launcher.png",
-        "/projects/maker4u3.png",
-        "/carousel/launcher.png",
-        "/projects/maker4u3.png",
-        "/carousel/launcher.png",
+      "/projects/maker4u3.png",
+      "/carousel/launcher.png",
+      "/projects/maker4u3.png",
+      "/carousel/launcher.png",
+      "/projects/maker4u3.png",
+      "/carousel/launcher.png",
     ],
     "UI/UX - Figma": [
-        "/projects/Tebaro.png",
-        "/projects/3dots.jpg",
-        "/projects/figma/spareonwheel.png",
-        "/projects/figma/Tebaro/Terbaro (4).png",
-        "/projects/figma/rapidtechprowebsite.jpg",
-        "/projects/figma/Tebaro/Terbaro (2).jpg",
+      "/projects/Tebaro.png",
+      "/projects/3dots.jpg",
+      "/projects/figma/spareonwheel.png",
+      "/projects/figma/Tebaro/Terbaro (4).png",
+      "/projects/figma/rapidtechprowebsite.jpg",
+      "/projects/figma/Tebaro/Terbaro (2).jpg",
     ],
-};
+  };
 
-  
-  
+
+
   const handleFilterChange = (category) => {
     setSelectedCategory(category);
   };
@@ -182,7 +182,7 @@ export default function SellingSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10 ">
-            <div className="bg-[#f3f6f9] border border-white rounded-lg relative flex flex-col justify-between h-[30em] ">
+          <div className="bg-[#f3f6f9] border border-white rounded-lg relative flex flex-col justify-between h-[30em] ">
             <div className="absolute top-10 -left-10 h-16 w-36 -rotate-90 bg-bluish text-white rounded-tr-lg rounded-bl-lg px-3 py-1 flex justify-center items-center">
               {selectedCategory}
             </div>
@@ -224,7 +224,7 @@ export default function SellingSection() {
                 {imageData[selectedCategory].map((imageSrc, index) => (
                   <motion.div
                     key={imageSrc + index}
-                    className={`overflow-hidden w-[18vw] h-[18vw] rounded-lg `}
+                    className={`overflow-hidden w-[40vw] h-[40vw] md:w-[18vw] md:h-[18vw] rounded-lg `}
                     initial={{
                       x: Math.random() * 500 - 250, // Random x offset
                       y: Math.random() * 500 - 250, // Random y offset

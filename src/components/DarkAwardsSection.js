@@ -56,7 +56,7 @@ export default function DarkAwardsSection() {
             <div className="px-6 md:px-12 lg:px-24 mb-12 max-w-7xl mx-auto">
                 <h2 className="text-4xl md:text-5xl font-bold mb-6">
                     Our awards and <br />
-                    <span className="text-[#25CBA1]">recognitions</span>
+                    <span className="text-bluish">recognitions</span>
                 </h2>
                 <p className="text-gray-400 text-lg max-w-2xl leading-relaxed">
                     Recognized globally for our industry-leading development expertise and innovative solutions. Creating innovative, user-friendly, and life-changing products is what we do!
@@ -82,7 +82,7 @@ export default function DarkAwardsSection() {
                     {duplicatedAwards.map((award, index) => (
                         <div
                             key={index}
-                            className="w-[320px] md:w-[380px] bg-[#111111] border border-gray-800 rounded-[32px] p-8 flex flex-col justify-between h-56 shrink-0 hover:border-[#25CBA1]/50 transition-colors"
+                            className="w-[320px] md:w-[380px] bg-[#111111] border border-gray-800 rounded-[32px] p-8 flex flex-col justify-between h-56 shrink-0 hover:border-bluish/50 transition-colors"
                         >
                             <div className="flex justify-between items-start">
                                 <div className="flex items-center gap-3">
@@ -97,7 +97,7 @@ export default function DarkAwardsSection() {
                                     <span className="font-bold text-xl tracking-tight text-white uppercase">{award.company}</span>
                                 </div>
                                 <div className="flex items-center gap-1.5 bg-black/40 px-3 py-1 rounded-full border border-gray-800">
-                                    <span className="text-[#25CBA1] text-sm">★</span>
+                                    <span className="text-bluish text-sm">★</span>
                                     <span className="font-bold text-sm">{award.rating}</span>
                                 </div>
                             </div>

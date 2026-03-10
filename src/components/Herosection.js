@@ -49,7 +49,7 @@ export default function HeroSection() {
     }, [x, y]);
 
     return (
-        <div className="relative h-[80vh] md:h-screen  w-full overflow-hidden">
+        <div className="relative flex-1 w-full overflow-hidden">
             <video
                 className="absolute inset-0 w-full h-full object-cover "
                 src="/video/temwork.mp4"
@@ -58,21 +58,21 @@ export default function HeroSection() {
                 muted
                 playsInline
             />
-            <div className="relative  flex flex-col justify-center items-center h-full mx-auto w-full px-4 md:px-0 bg-black bg-opacity-50">
-                <h1 className="max-w-2xl mx-auto text-4xl md:text-6xl font-bold text-white">
-                Your Trusted Custom <span className="text-bluish">Software Development</span>
+            <div className="relative  flex flex-col justify-center items-center h-full mx-auto w-full px-4 md:px-0 bg-black bg-opacity-50 text-center">
+                <h1 className="max-w-2xl lg:max-w-4xl mx-auto text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-white">
+                    Your Trusted Custom <span className="text-bluish">Software Development</span>
                     <br />
                     Company.
                 </h1>
-                <p className="max-w-2xl mx-auto text-base md:text-lg tracking-wide text-white mt-4">
-                Are you struggling with manual processes? 
-                {/* <br></br> */}
-                At RapidTag Pro, we specialize in creating custom software solutions that automate your workflows, allowing you to break free from tedious, time-consuming tasks and focus on what truly matters.
+                <p className="max-w-2xl lg:max-w-4xl mx-auto text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl tracking-wide text-white mt-4">
+                    Are you struggling with manual processes?
+                    {/* <br></br> */}
+                    At RapidTag Pro, we specialize in creating custom software solutions that automate your workflows, allowing you to break free from tedious, time-consuming tasks and focus on what truly matters.
 
                 </p>
-                <div className="md:hidden flex justify-start mt-8 w-full">
-                    <button className="bg-bluish text-white px-6 py-3 rounded-full text-sm font-medium">
-                    Let's Talk About Your Project
+                <div className="md:hidden flex justify-center mt-8 w-full">
+                    <button className="bg-bluish text-white px-6 py-3 rounded-full text-sm font-medium" onClick={() => dispatch(openPopup())}>
+                        Let's Talk About Your Project
                     </button>
                 </div>
             </div>
@@ -90,7 +90,7 @@ export default function HeroSection() {
                 ref={attractAreaRef}
                 className="hidden md:flex  absolute -bottom-32 -right-10 h-[500px] w-[500px] z-30 rounded-full items-center justify-center"
             >
-                <button onClick={()=>{dispatch(openPopup());}} className="pointer-events-auto">
+                <button onClick={() => { dispatch(openPopup()); }} className="pointer-events-auto">
 
                     <motion.div
                         className="h-32 w-32 md:h-[150px] md:w-[200px] bg-[url('/images/cloud.PNG')] bg-contain p-6 flex flex-col justify-center items-center md:text-base text-center text-white"

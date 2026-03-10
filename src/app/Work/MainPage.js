@@ -361,10 +361,7 @@ function InViewCard({ story, index }) {
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
       animate={controls}
-      className="w-full md:w-1/2 md:px-12 mt-8 md:mb-16"
-      style={{
-        marginTop: index % 2 === 1 ? '80px' : '0px',
-      }}
+      className={`w-full md:w-1/2 md:px-12 mt-8 md:mb-16 ${index % 2 === 1 ? 'md:mt-[80px]' : ''}`}
     >
       <Link href={`/Work/${story.id}`} className="block h-full group">
         <div className="bg-transparent flex flex-col h-full group-hover:-translate-y-2 transition-transform duration-500">

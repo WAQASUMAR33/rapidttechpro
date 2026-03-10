@@ -66,8 +66,8 @@ export default function Header() {
                 </Link>
 
                 {/* Desktop Nav Links */}
-                <nav className="hidden md:flex space-x-6 lg:space-x-12 text-base lg:text-base relative">
-                    <Link href="/">Home</Link>
+                <nav className="hidden md:flex md:space-x-4 lg:space-x-8 xl:space-x-12 text-sm lg:text-base relative items-center">
+
                     <div
                         className="relative"
                         onMouseEnter={() => setIsSolutionsOpen(true)}
@@ -77,11 +77,11 @@ export default function Header() {
                         {/* Full-Screen Mega Menu */}
                         {isSolutionsOpen && (
                             <div
-                                className="fixed top-[100px]  inset-0 bg-white hidden md:flex justify-center items-center z-40"
+                                className="fixed top-[64px] inset-x-0 bg-white hidden md:flex justify-center z-40 max-h-[calc(100vh-64px)] overflow-y-auto"
                                 onClick={closeMegaMenu}
                             >
                                 <div
-                                    className="w-full p-16 grid grid-cols-2 lg:grid-cols-5 gap-6 text-black bg-white mt-32"
+                                    className="w-full max-w-7xl mx-auto p-6 md:p-8 lg:p-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 text-black bg-white"
                                     onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside menu
                                 >
                                     <div className=" flex ">
@@ -121,7 +121,8 @@ export default function Header() {
                             </div>
                         )}
                     </div>
-                    <Link href="/Work">Inspire Me</Link>
+                    <Link href="/Industries">Industries</Link>
+                    <Link href="/Work">Work</Link>
                     <Link href="/Company">Company</Link>
                     {/* <Link href="/ContactUs">Contact</Link> */}
                     <Link href="/Help">Help</Link>
@@ -129,13 +130,13 @@ export default function Header() {
                 </nav>
 
                 {/* Contact & Button - Desktop Only */}
-                <div className="hidden md:flex items-center space-x-4">
-                    <Link href="/" className="flex items-center gap-1 text-base lg:text-base">
+                <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
+                    <Link href="/" className="flex items-center gap-1 text-sm lg:text-base whitespace-nowrap">
                         <BsTelephone />
-                        +92 340 3051059
+                        <span className="hidden lg:inline">+92 340 3051059</span>
                     </Link>
                     <button
-                        className="w-24 md:w-28 h-8 rounded-full font-medium border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black"
+                        className="w-24 lg:w-28 h-8 rounded-full font-medium border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black text-xs lg:text-sm transition-all"
                         onClick={() => dispatch(openPopup())}
                     >
                         Get in touch
@@ -150,8 +151,8 @@ export default function Header() {
 
             {/* Sidebar - Mobile Only */}
             <aside
-                className={`fixed top-0 right-0 w-64 h-full bg-black/90 text-white transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
-                    } transition-transform duration-300 ease-in-out z-40`}
+                className={`fixed top-0 right-0 w-full sm:w-80 h-full bg-black/95 text-white transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
+                    } transition-transform duration-300 ease-in-out z-40 shadow-2xl overflow-y-auto`}
             >
                 <div className="flex flex-col items-start p-6 space-y-6">
                     {/* Logo in Sidebar */}
@@ -167,7 +168,7 @@ export default function Header() {
                         Solutions
                     </Link>
                     <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg">
-                        Inspire Me
+                        Work
                     </Link>
                     <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg">
                         Company
@@ -199,7 +200,7 @@ export default function Header() {
                     ></div>
 
                     {/* Form Container */}
-                    <div className="bg-[#0a0b14] text-white w-full md:w-[500px] h-full overflow-y-auto relative shadow-2xl border-l border-white/10 no-scrollbar">
+                    <div className="bg-[#0a0b14] text-white w-full sm:w-[400px] md:w-[500px] h-full overflow-y-auto relative shadow-2xl border-l border-white/10 no-scrollbar">
                         <div className="p-6 md:p-10 min-h-full flex flex-col">
                             <button
                                 onClick={() => dispatch(closePopup())}

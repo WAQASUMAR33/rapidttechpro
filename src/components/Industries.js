@@ -58,11 +58,11 @@ export default function Industries() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -5, scale: 1.02 }}
               className={`p-8 md:p-10 rounded-[32px] border-2 transition-all duration-300 flex flex-col h-full cursor-pointer group ${item.highlight
-                ? 'border-[#25CBA1] shadow-lg shadow-green-50'
-                : 'border-gray-100 hover:border-[#25CBA1] bg-white hover:shadow-xl hover:shadow-green-50/30'
+                ? 'border-bluish shadow-lg shadow-bluish/10'
+                : 'border-gray-100 hover:border-bluish bg-white hover:shadow-xl hover:shadow-bluish/5'
                 }`}
             >
-              <h3 className={`text-2xl md:text-3xl font-bold mb-6 transition-colors duration-300 ${item.highlight ? 'text-[#25CBA1]' : 'text-black group-hover:text-[#25CBA1]'
+              <h3 className={`text-2xl md:text-3xl font-bold mb-6 transition-colors duration-300 ${item.highlight ? 'text-bluish' : 'text-black group-hover:text-bluish'
                 }`}>
                 {item.name}
               </h3>

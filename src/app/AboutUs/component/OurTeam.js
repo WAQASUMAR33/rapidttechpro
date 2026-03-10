@@ -17,7 +17,7 @@ export default function OurTeam() {
                 <div className="my-10">
                     <h1 className="text-5xl font-[800] text-center">Our Team</h1>
                 </div>
-                <div className="grid grid-cols-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {TeamMembers.map((member, index) => {
                         return (
                             <div key={index} className="p-4">

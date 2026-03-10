@@ -61,9 +61,11 @@ export default function Home() {
           style={{ marginBottom: footerHeight }}
         >
           <ChatWithWhatsapp />
-          <HomePageHeader />
-          <Herosection />
-          <AutoImagePlayCarousel />
+          <div className="flex flex-col h-screen">
+            <HomePageHeader />
+            <Herosection />
+            <AutoImagePlayCarousel />
+          </div>
           <OurJourney />
           <SuccessStories ref={successStoriesRef} />
           <TwoColumnSection />
