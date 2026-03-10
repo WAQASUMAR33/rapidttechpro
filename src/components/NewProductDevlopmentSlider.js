@@ -18,9 +18,9 @@ const cards = [
   },
   {
     image: '/carousel/uiux.jpeg',
-    title: 'Design',
+    title: 'Designing',
     description:
-      'Crafting a minimal viable product (MVP) that balances design with core functionality, maximizing value and user satisfaction.',
+      'We craft a sleek, functional Minimum Viable Product (MVP), blending intuitive design with core features to deliver maximum value and an exceptional user experience.',
     id: 2,
   },
   {
@@ -56,7 +56,6 @@ const cards = [
 export default function ProductProcess() {
   const [activeStep, setActiveStep] = useState(0);
   const sectionRefs = useRef([]);
-  const imageRefs = useRef([]);
   const containerRef = useRef(null);
   const progressLineRef = useRef(null);
 
@@ -70,38 +69,7 @@ export default function ProductProcess() {
         start: 'top center',
         end: 'bottom center',
         onEnter: () => setActiveStep(index),
-        onLeaveBack: () => setActiveStep(Math.max(0, index - 1)),
-        scrub: true,
-      });
-    });
-
-    // Animate images on scroll
-    gsap.set(imageRefs.current, { opacity: 0, y: 50 });
-    // Ensure the first image is visible initially if activeStep is 0
-    if (imageRefs.current[0]) {
-      gsap.set(imageRefs.current[0], { opacity: 1, y: 0 });
-    }
-
-    cards.forEach((step, index) => {
-      const image = imageRefs.current[index];
-
-      ScrollTrigger.create({
-        trigger: sectionRefs.current[index],
-        start: 'top center',
-        end: 'bottom center',
-        onEnter: () => {
-          gsap.to(image, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
-        },
-        onLeave: () => {
-          gsap.to(image, { opacity: 0, y: -50, duration: 0.3, ease: 'power2.in' });
-        },
-        onEnterBack: () => {
-          gsap.to(image, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
-        },
-        onLeaveBack: () => {
-          gsap.to(image, { opacity: 0, y: 50, duration: 0.3, ease: 'power2.in' });
-        },
-        scrub: false,
+        onEnterBack: () => setActiveStep(index),
       });
     });
 
@@ -118,6 +86,9 @@ export default function ProductProcess() {
         },
       });
     }
+
+    // Ensure the first image is handled by state
+    setActiveStep(0);
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -156,7 +127,7 @@ export default function ProductProcess() {
             <div
               key={index}
               ref={(el) => (sectionRefs.current[index] = el)}
-              className="step min-w-[85vw] md:min-w-0 lg:min-h-[70vh] flex flex-col justify-start lg:justify-center snap-center lg:snap-align-none"
+              className="step min-w-[85vw] md:min-w-0 lg:h-screen flex flex-col justify-start lg:justify-center snap-center lg:snap-align-none"
             >
               {/* Mobile Image (Visible only on mobile) */}
               <div className="lg:hidden w-[280px] mx-auto h-[400px] relative rounded-[200px] overflow-hidden mb-4 mt-4 bg-gray-900/10">
@@ -170,13 +141,16 @@ export default function ProductProcess() {
               </div>
 
               <div className="flex flex-col text-left lg:py-12 lg:pr-16 transition-all duration-700 ease-in-out z-20 px-2 lg:px-0">
-                <p className="text-sm md:text-lg lg:text-xl text-white/50 mb-1 md:mb-6 font-mono tracking-wider">
+                <p className={`text-sm md:text-lg lg:text-xl mb-1 md:mb-6 font-mono tracking-wider transition-colors duration-500 ${activeStep === index ? 'text-white' : 'text-white/30'
+                  }`}>
                   {String(index + 1).padStart(2, '0')}/{String(totalSteps).padStart(2, '0')}
                 </p>
-                <h3 className="text-3xl md:text-5xl lg:text-[70px] text-[#0FB5B7] font-bold leading-tight italic">
+                <h3 className={`text-3xl md:text-5xl lg:text-[80px] font-bold leading-tight italic transition-colors duration-500 ${activeStep === index ? 'text-[#0FB5B7]' : 'text-white/20'
+                  }`}>
                   {step.title}
                 </h3>
-                <p className="mt-3 md:mt-10 text-sm md:text-base lg:text-xl font-normal text-white/80 leading-relaxed max-w-2xl">
+                <p className={`mt-3 md:mt-10 text-sm md:text-base lg:text-xl font-normal leading-relaxed max-w-2xl transition-colors duration-500 ${activeStep === index ? 'text-white/90' : 'text-white/20'
+                  }`}>
                   {step.description}
                 </p>
               </div>
@@ -195,8 +169,8 @@ export default function ProductProcess() {
                 layout="fill"
                 objectFit="cover"
                 className={`absolute inset-0 transition-all duration-700 ease-in-out ${index === activeStep
-                    ? 'opacity-100 scale-100'
-                    : 'opacity-0 scale-110'
+                  ? 'opacity-100 scale-100'
+                  : 'opacity-0 scale-110'
                   }`}
               />
             ))}
