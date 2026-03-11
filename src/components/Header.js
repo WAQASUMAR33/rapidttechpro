@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BsTelephone } from "react-icons/bs";
 import { FaArrowRight, FaBars, FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +10,11 @@ import { openPopup, closePopup } from "@/store/popupSlice";
 
 export default function Header() {
     const dispatch = useDispatch();
+    const pathname = usePathname();
     const isOpenGetinTouch = useSelector((state) => state.popup.isOpen);
+
+    // Light-themed pages where header should be black even when not scrolled
+    const isLightPage = pathname?.startsWith('/Services') || pathname?.startsWith('/ContactUs') || pathname?.startsWith('/Work');
 
     const togglePopup = () => {
         if (isOpenGetinTouch) {
@@ -33,6 +38,8 @@ export default function Header() {
         { title: 'Website Development Solutions', slug: 'Web-Development' },
         { title: 'Point Of Sale Solutions', slug: 'Point-Of-Sale' },
     ]);
+
+    const [logoError, setLogoError] = useState(false);
 
     const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
     const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
@@ -64,7 +71,8 @@ export default function Header() {
     useEffect(() => {
         const fetchNavServices = async () => {
             try {
-                const response = await fetch(`${apiBaseUrl}/api/services`, {
+                const targetUrl = apiBaseUrl.includes('localhost') ? '/api/proxy/api/services' : `${apiBaseUrl}/api/services`;
+                const response = await fetch(targetUrl, {
                     headers: { 'x-api-key': apiKey }
                 });
                 if (!response.ok) return;
@@ -98,41 +106,51 @@ export default function Header() {
     return (
         <>
             <header
-                className={`fixed z-50 w-full h-16 flex items-center justify-between px-4 sm:px-12 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-16"
-                    } ${isScrolled ? "bg-white shadow-md text-black border-b" : "bg-white shadow-md text-black border-b"}`}
+                className={`fixed top-0 left-0 z-50 w-full h-20 flex items-center justify-between px-6 sm:px-12 lg:px-20 transition-all duration-300 ${isVisible ? "translate-y-0" : "-translate-y-20"
+                    } ${isScrolled ? "bg-white text-black shadow-md border-b border-gray-100" : (isLightPage ? "bg-transparent text-black" : "bg-transparent text-white")}`}
             >
                 {/* Logo */}
-                <Link href="/" className="text-xl md:text-[30px] font-bold flex justify-center items-center">
-                    <img src="/company/logo.png" className="md:h-[60px] md:w-[60px] h-[40px] w-[40px]" />
-                    Rapid<span className={"text-bluish"}>TechPro</span>
-
+                <Link href="/" className="text-xl md:text-[23px] font-bold flex items-center gap-2.5 tracking-tighter group">
+                    {!logoError ? (
+                        <img
+                            src="/company/logo.png"
+                            alt="RapidTechPro Logo"
+                            className={`h-8 w-auto object-contain transition-all duration-300 ${isScrolled || isLightPage ? "" : "brightness-0 invert"}`}
+                            onError={() => setLogoError(true)}
+                        />
+                    ) : (
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-black text-white ${isScrolled || isLightPage ? "bg-[#0FB5B7]" : "bg-white/20"}`}>R</div>
+                    )}
+                    <span className={`transition-colors duration-300 ${isScrolled || isLightPage ? "text-black group-hover:text-[#0FB5B7]" : "text-white group-hover:text-white/80"}`}>
+                        Rapid<span className="text-[#0FB5B7]">TechPro</span>.
+                    </span>
                 </Link>
 
                 {/* Desktop Nav Links */}
-                <nav className="hidden md:flex md:space-x-4 lg:space-x-8 xl:space-x-12 text-sm lg:text-base relative items-center">
+                <nav className="hidden xl:flex items-center space-x-8 lg:space-x-12 text-[14px] tracking-tight">
                     <div
                         className="relative"
                         onMouseEnter={() => setIsSolutionsOpen(true)}
                         onMouseLeave={() => setIsSolutionsOpen(false)}
                     >
-                        <Link href="/Services" className="py-2 ">Services</Link>
+                        <Link href="/Services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Services</Link>
                         {/* Full-Screen Mega Menu */}
                         {isSolutionsOpen && (
                             <div
-                                className="fixed top-[64px] inset-x-0 bg-white hidden md:flex justify-center z-40 max-h-[calc(100vh-64px)] overflow-y-auto shadow-lg"
+                                className="fixed top-[80px] inset-x-0 bg-white hidden md:flex justify-center z-40 max-h-[calc(100vh-80px)] overflow-y-auto shadow-2xl border-t border-gray-100"
                                 onClick={closeMegaMenu}
                             >
                                 <div
-                                    className="w-full max-w-7xl mx-auto p-6 md:p-8 lg:p-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 text-black bg-white"
+                                    className="w-full max-w-7xl mx-auto p-12 lg:p-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 text-black bg-white"
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     <div className="flex">
                                         <div className="px-4 w-full">
-                                            <h1 className="text-xl md:text-3xl flex justify-between w-full">Solutions <FaArrowRight /></h1>
+                                            <h1 className="text-xl md:text-3xl font-bold flex justify-between w-full">Solutions <FaArrowRight className="text-[#0FB5B7]" /></h1>
                                         </div>
-                                        <div className="h-24 border-r-2"></div>
+                                        <div className="h-24 border-r border-gray-200"></div>
                                     </div>
-                                    {/* Dynamic service columns: group into chunks of 2 */}
+                                    {/* Dynamic service columns */}
                                     {Array.from({ length: Math.ceil(navServices.length / 2) }, (_, i) => navServices.slice(i * 2, i * 2 + 2)).map((chunk, colIdx) => (
                                         <div key={colIdx} className="flex justify-between">
                                             <div className="flex flex-col gap-4">
@@ -140,35 +158,41 @@ export default function Header() {
                                                     <Link
                                                         key={svc.slug}
                                                         href={`/Services/${svc.slug}`}
-                                                        className="text-gray-800 hover:text-bluish"
+                                                        className="text-gray-800 hover:text-[#0FB5B7] font-semibold text-base transition-colors"
                                                         onClick={closeMegaMenu}
                                                     >
                                                         {svc.title}
                                                     </Link>
                                                 ))}
                                             </div>
-                                            <div className="h-24 border-r-2"></div>
+                                            <div className="h-24 border-r border-gray-200"></div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
                         )}
                     </div>
-                    <Link href="/">Industries</Link>
-                    <Link href="/">Solutions</Link>
-                    <Link href="/Work">Work</Link>
-                    <Link href="/Company">Company</Link>
-                    <Link href="/ContactUs">Contact</Link>
+                    <Link href="/" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Industries</Link>
+                    <div
+                        className="relative"
+                        onMouseEnter={() => setIsSolutionsOpen(true)}
+                        onMouseLeave={() => setIsSolutionsOpen(false)}
+                    >
+                        <Link href="/Services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Solutions</Link>
+                    </div>
+                    <Link href="/Work" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Work</Link>
+                    <Link href="/Company" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Company</Link>
+                    <Link href="/ContactUs" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Contact</Link>
                 </nav>
 
                 {/* Contact & Button - Desktop Only */}
-                <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
-                    <Link href="tel:8669782220" className="flex items-center gap-1 text-sm lg:text-base whitespace-nowrap">
-                        <BsTelephone />
+                <div className="hidden md:flex items-center space-x-6">
+                    <Link href="tel:8669782220" className={`flex items-center gap-2 text-sm lg:text-base font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>
+                        <BsTelephone className="text-sm" />
                         <span className="hidden lg:inline">866-978-2220</span>
                     </Link>
                     <button
-                        className="w-24 lg:w-32 h-10 rounded-full font-medium border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black transition-all text-xs lg:text-sm"
+                        className="px-8 py-3 rounded-full font-bold bg-black text-white hover:bg-black/90 transition-all text-sm tracking-tight shadow-md"
                         onClick={() => dispatch(openPopup())}
                     >
                         Get in Touch
@@ -194,7 +218,7 @@ export default function Header() {
 
                     {/* Navigation Links */}
                     <div className="flex flex-col gap-3">
-                        <Link href="/Services" onClick={toggleSidebar} className="text-base sm:text-lg font-semibold">
+                        <Link href="/Services" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                             Services
                         </Link>
                         <div className="flex flex-col gap-2 pl-3 border-l border-gray-600">
@@ -203,26 +227,26 @@ export default function Header() {
                                     key={svc.slug}
                                     href={`/Services/${svc.slug}`}
                                     onClick={toggleSidebar}
-                                    className="text-sm text-gray-300 hover:text-[#0FB5B7]"
+                                    className="text-sm text-gray-300 hover:text-[#0FB5B7] font-bold"
                                 >
                                     {svc.title}
                                 </Link>
                             ))}
                         </div>
                     </div>
-                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg">
+                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                         Industries
                     </Link>
-                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg">
+                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                         Solutions
                     </Link>
-                    <Link href="/Work" onClick={toggleSidebar} className="text-base sm:text-lg">
+                    <Link href="/Work" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                         Work
                     </Link>
-                    <Link href="/Company" onClick={toggleSidebar} className="text-base sm:text-lg">
+                    <Link href="/Company" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                         Company
                     </Link>
-                    <Link href="/ContactUs" onClick={toggleSidebar} className="text-base sm:text-lg">
+                    <Link href="/ContactUs" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                         Contact
                     </Link>
 

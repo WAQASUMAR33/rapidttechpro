@@ -25,6 +25,14 @@ export default function Header() {
     // const [isOpenGetinTouch, setisOpenGetinTouch] = useState(false);
     const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
     const [interests, setInterests] = useState([]);
+    const [navServices, setNavServices] = useState([
+        { title: 'Ecommerce Solutions', slug: 'Ecommerce-Solutions' },
+        { title: 'HR Solutions', slug: 'HR-Solution' },
+        { title: 'Mobile App Solutions', slug: 'Mobile-Apps' },
+        { title: 'UI/UX - Figma Solutions', slug: 'UIUX-Figma' },
+        { title: 'Website Development Solutions', slug: 'Web-Development' },
+        { title: 'Point Of Sale Solutions', slug: 'Point-Of-Sale' },
+    ]);
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
     const handleInterestClick = (interest) => {
         setInterests((prevInterests) => {
@@ -50,6 +58,39 @@ export default function Header() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
+    const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
+    const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
+
+    useEffect(() => {
+        const fetchNavServices = async () => {
+            try {
+                const targetUrl = apiBaseUrl.includes('localhost') ? '/api/proxy/api/services' : `${apiBaseUrl}/api/services`;
+                const response = await fetch(targetUrl, {
+                    headers: { 'x-api-key': apiKey }
+                });
+                if (!response.ok) return;
+                const data = await response.json();
+
+                let servicesData = [];
+                if (data && data.data && Array.isArray(data.data)) {
+                    servicesData = data.data;
+                } else if (Array.isArray(data)) {
+                    servicesData = data;
+                } else if (data && data.services && Array.isArray(data.services)) {
+                    servicesData = data.services;
+                }
+
+                if (servicesData.length > 0) {
+                    setNavServices(servicesData.map((svc) => ({
+                        title: svc.title || svc.name,
+                        slug: svc.slug || (svc.title || svc.name)?.replace(/\s+/g, '-'),
+                    })));
+                }
+            } catch (err) { }
+        };
+        fetchNavServices();
+    }, [apiBaseUrl, apiKey]);
+
     const closeMegaMenu = () => setIsSolutionsOpen(false);
 
     return (
@@ -73,7 +114,7 @@ export default function Header() {
                         onMouseEnter={() => setIsSolutionsOpen(true)}
                         onMouseLeave={() => setIsSolutionsOpen(false)}
                     >
-                        <Link href="/Services" className="py-2">Services</Link>
+                        <Link href="/Services" className="py-2 font-bold whitespace-nowrap">Services</Link>
                         {/* Full-Screen Mega Menu */}
                         {isSolutionsOpen && (
                             <div
@@ -86,47 +127,47 @@ export default function Header() {
                                 >
                                     <div className=" flex ">
                                         <div className="px-4 w-full">
-                                            <h1 className="text-xl md:text-3xl flex justify-between  w-full">Solutions <FaArrowRight /></h1>
-                                        </div>
-                                        <div className="h-24 border-r-2 "></div>
-
-                                    </div>
-                                    <div className=" flex justify-between">
-                                        <div className="flex flex-col gap-4">
-                                            <Link href='/Services/Ecommerce-Solutions' className="text-gray-800 hover:text-bluish">Ecommerce Solutions</Link>
-                                            <Link href='/Services/HR-Solution' className="text-gray-800 hover:text-bluish">HR Solutions</Link>
+                                            <h1 className="text-xl md:text-3xl flex justify-between  w-full tracking-tighter font-bold">Solutions <FaArrowRight className="text-bluish" /></h1>
                                         </div>
                                         <div className="h-24 border-r-2 "></div>
                                     </div>
 
-                                    <div className=" flex justify-between">
-                                        <div className="flex flex-col gap-4">
-                                            <Link href='/Services/Mobile-Apps' className="text-gray-800 hover:text-bluish">Mobile App Solutions</Link>
-                                            <Link href='/Services/UIUX-Figma' className="text-gray-800 hover:text-bluish">UI/UX - Figma Solutions</Link>
+                                    {/* Dynamic columns */}
+                                    {Array.from({ length: Math.ceil(navServices.length / 2) }, (_, i) => navServices.slice(i * 2, i * 2 + 2)).map((chunk, colIdx) => (
+                                        <div key={colIdx} className="flex justify-between">
+                                            <div className="flex flex-col gap-4">
+                                                {chunk.map((svc) => (
+                                                    <Link
+                                                        key={svc.slug}
+                                                        href={`/Services/${svc.slug}`}
+                                                        className="text-gray-800 hover:text-bluish font-bold text-sm md:text-base transition-colors"
+                                                        onClick={closeMegaMenu}
+                                                    >
+                                                        {svc.title}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                            {colIdx < 3 && <div className="h-24 border-r-2 "></div>}
                                         </div>
-                                        <div className="h-24 border-r-2 "></div>
-                                    </div>
-
-                                    <div className=" flex justify-between">
-                                        <div className="flex flex-col gap-4">
-                                            <Link href='/Services/Web-Development' className="text-gray-800 hover:text-bluish">Website Development Solutions</Link>
-                                        </div>
-                                        <div className="h-24 border-r-2 "></div>
-                                    </div>
-                                    <div className="flex flex-col gap-4">
-                                        <Link href='/Services/Point-Of-Sale' className="text-gray-800 hover:text-bluish">Point Of Sale Solutions</Link>
-                                    </div>
+                                    ))}
 
                                 </div>
                             </div>
                         )}
                     </div>
-                    <Link href="/Industries">Industries</Link>
-                    <Link href="/Work">Work</Link>
-                    <Link href="/Company">Company</Link>
+                    <Link href="/Industries" className="font-bold whitespace-nowrap">Industries</Link>
+                    <div
+                        className="relative"
+                        onMouseEnter={() => setIsSolutionsOpen(true)}
+                        onMouseLeave={() => setIsSolutionsOpen(false)}
+                    >
+                        <Link href="/Services" className="py-2 font-bold whitespace-nowrap">Solutions</Link>
+                    </div>
+                    <Link href="/Work" className="font-bold whitespace-nowrap">Work</Link>
+                    <Link href="/Company" className="font-bold whitespace-nowrap">Company</Link>
                     {/* <Link href="/ContactUs">Contact</Link> */}
-                    <Link href="/Help">Help</Link>
-                    <Link href="/AboutUs">Our Team</Link>
+                    <Link href="/Help" className="font-bold whitespace-nowrap">Help</Link>
+                    <Link href="/AboutUs" className="font-bold whitespace-nowrap">Our Team</Link>
                 </nav>
 
                 {/* Contact & Button - Desktop Only */}
@@ -161,19 +202,19 @@ export default function Header() {
                     </Link>
 
                     {/* Navigation Links */}
-                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg">
+                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                         Services
                     </Link>
-                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg">
+                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                         Solutions
                     </Link>
-                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg">
+                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                         Work
                     </Link>
-                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg">
+                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                         Company
                     </Link>
-                    <Link href="/ContactUs" onClick={toggleSidebar} className="text-base sm:text-lg">
+                    <Link href="/ContactUs" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                         Contact
                     </Link>
 

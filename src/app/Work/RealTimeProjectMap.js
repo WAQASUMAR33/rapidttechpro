@@ -46,25 +46,33 @@ export default function RealTimeProjectMap() {
                 setLoading(true);
 
                 // Fetch Categories
-                const catResponse = await fetch(`${apiBaseUrl}/api/categories`, {
+                const catTargetUrl = apiBaseUrl.includes('localhost') ? '/api/proxy/api/categories' : `${apiBaseUrl}/api/categories`;
+                const catResponse = await fetch(catTargetUrl, {
                     headers: { 'x-api-key': apiKey }
                 });
+
                 if (catResponse.ok) {
                     const catData = await catResponse.json();
-                    const rawCats = Array.isArray(catData) ? catData : (catData.data || []);
-                    const dynamicCats = ['All', ...rawCats.map(c => typeof c === 'string' ? c : c.name)];
+                    // Robust parsing for various shapes: direct array, data: [], categories: []
+                    const rawCats = Array.isArray(catData)
+                        ? catData
+                        : (catData.data || catData.categories || []);
+
+                    const dynamicCats = ['All', ...rawCats.map(c => typeof c === 'string' ? c : c.name).filter(Boolean)];
                     setCategories(dynamicCats.length > 1 ? dynamicCats : FALLBACK_CATEGORIES);
                 } else {
+                    console.error(`Categories API returned ${catResponse.status} at ${catTargetUrl}`);
                     setCategories(FALLBACK_CATEGORIES);
                 }
 
                 // Fetch Projects
-                const response = await fetch(`${apiBaseUrl}/api/projects`, {
+                const projTargetUrl = apiBaseUrl.includes('localhost') ? '/api/proxy/api/projects' : `${apiBaseUrl}/api/projects`;
+                const response = await fetch(projTargetUrl, {
                     headers: {
                         'x-api-key': apiKey
                     }
                 });
-                if (!response.ok) throw new Error('Failed to fetch projects');
+                if (!response.ok) throw new Error(`Failed to fetch projects (${response.status}) at ${projTargetUrl}`);
                 const data = await response.json();
 
                 // Handle new API response format { success: true, data: [...] }
@@ -171,7 +179,7 @@ export default function RealTimeProjectMap() {
                                 <div className="text-gray-500 py-10">No projects found in this category.</div>
                             )}
                         </div>
-                        {/* Custom scrollbar track line visual reference mimicking Cubix */}
+                        {/* Custom scrollbar track line visual reference */}
                         <div className="hidden lg:block absolute left-[-24px] top-6 bottom-6 w-[2px] bg-gray-800 rounded-full">
                             <div
                                 className="w-full h-1/3 rounded-full"

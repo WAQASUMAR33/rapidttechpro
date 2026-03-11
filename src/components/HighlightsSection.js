@@ -16,8 +16,8 @@ const highlightsData = {
             thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg", // Placeholder
         },
         videos: [
-            { id: 1, title: "Cubix Reviews & Testimonials Greg...", thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" },
-            { id: 2, title: "Cubix Reviews & Testimonials - Karen...", thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" },
+            { id: 1, title: "RapidTechPro Reviews & Testimonials Greg...", thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" },
+            { id: 2, title: "RapidTechPro Reviews & Testimonials - Karen...", thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" },
         ]
     },
     meetup: {

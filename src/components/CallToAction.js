@@ -1,34 +1,26 @@
 'use client';
 import React from 'react';
-import { useDispatch } from "react-redux";
-import { openPopup } from "@/store/popupSlice";
-import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { FaArrowRight } from 'react-icons/fa';
 
 export default function CallToAction() {
-  const dispatch = useDispatch();
-
   return (
-    <section className="bg-white py-12 md:py-20 flex flex-col items-center text-center px-6 relative z-10 shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="max-w-5xl"
-      >
-        <p className="text-gray-500 text-lg md:text-xl mb-6 font-medium">Pull the Trigger!</p>
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#0FB5B7] mb-12 leading-[1.1] tracking-tight">
-          Let's bring your <br />
-          <span className="text-[#0FB5B7]">vision to life</span>
+    <div className="bg-white py-24 md:py-40 px-6 md:px-12 w-full flex flex-col items-center justify-center border-t border-gray-50 relative overflow-hidden">
+      <div className="max-w-4xl mx-auto text-center flex flex-col items-center relative z-10">
+        <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-[0.3em] mb-6 md:mb-10">
+          Pull the Trigger!
+        </span>
+        <h2 className="text-4xl md:text-[64px] lg:text-[76px] font-black text-black tracking-tighter leading-[1.05] mb-12 max-w-3xl">
+          Let’s bring your <br className="hidden md:block" /> ideas to life
         </h2>
-
-        <button
-          onClick={() => dispatch(openPopup())}
-          className="px-12 py-4 bg-black text-white rounded-full text-lg md:text-xl font-bold hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 shadow-xl"
+        <Link
+          href="/Contact"
+          className="bg-black text-white font-bold py-3.5 px-10 rounded-full hover:bg-black/90 transition-all duration-300 text-xs md:text-[13px] uppercase tracking-widest cursor-pointer shadow-xl"
         >
-          Get Started
-        </button>
-      </motion.div>
-    </section>
+          GET STARTED
+        </Link>
+      </div>
+
+    </div>
   );
 }

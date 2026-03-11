@@ -236,7 +236,8 @@ const TabsSection = ({ successStoriesRef }) => {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 15000);
 
-        const response = await fetch(`${apiBaseUrl}/api/projects`, {
+        const targetUrl = apiBaseUrl.includes('localhost') ? '/api/proxy/api/projects' : `${apiBaseUrl}/api/projects`;
+        const response = await fetch(targetUrl, {
           headers: {
             'x-api-key': apiKey
           },

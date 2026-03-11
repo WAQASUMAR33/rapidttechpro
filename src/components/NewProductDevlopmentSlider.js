@@ -66,8 +66,8 @@ export default function ProductProcess() {
     sectionRefs.current.forEach((section, index) => {
       ScrollTrigger.create({
         trigger: section,
-        start: 'top center',
-        end: 'bottom center',
+        start: 'top 60%',
+        end: 'bottom 40%',
         onEnter: () => setActiveStep(index),
         onEnterBack: () => setActiveStep(index),
       });
@@ -80,8 +80,8 @@ export default function ProductProcess() {
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top center',
-          end: 'bottom center',
+          start: 'top 50%',
+          end: 'bottom 50%',
           scrub: true,
         },
       });
@@ -96,7 +96,7 @@ export default function ProductProcess() {
   }, []);
 
   return (
-    <div className='flex bg-black w-full flex-col px-4 sm:px-12'>
+    <div className='flex bg-black w-full flex-col px-6 md:px-16 lg:px-24 xl:px-40 pb-20'>
       {/* Header */}
       <div className="md:h-60 md:pt-20 font-semibold text-3xl py-10 md:text-5xl">
         <h2 className="text-white">Our Product</h2>
@@ -108,7 +108,7 @@ export default function ProductProcess() {
       </div>
 
       {/* Main Content */}
-      <div ref={containerRef} className="flex bg-black text-white relative">
+      <div ref={containerRef} className="flex bg-black text-white relative pt-10">
         {/* Left Progress Line */}
         <div className="hidden md:flex flex-col items-center w-[3px] mr-8 lg:mr-12 relative flex-shrink-0">
           {/* Background line */}
@@ -127,10 +127,10 @@ export default function ProductProcess() {
             <div
               key={index}
               ref={(el) => (sectionRefs.current[index] = el)}
-              className="step min-w-[85vw] md:min-w-0 lg:h-screen flex flex-col justify-start lg:justify-center snap-center lg:snap-align-none"
+              className="step min-w-[85vw] md:min-w-0 lg:h-[80vh] flex flex-col justify-start lg:justify-center snap-center lg:snap-align-none"
             >
               {/* Mobile Image (Visible only on mobile) */}
-              <div className="lg:hidden w-[280px] mx-auto h-[400px] relative rounded-[200px] overflow-hidden mb-4 mt-4 bg-gray-900/10">
+              <div className="lg:hidden w-[85vw] sm:w-[400px] aspect-[3/4] mx-auto relative rounded-[150px] overflow-hidden mb-8 mt-6 bg-gray-900/10">
                 <Image
                   src={step.image}
                   alt={step.title}
@@ -140,12 +140,12 @@ export default function ProductProcess() {
                 />
               </div>
 
-              <div className="flex flex-col text-left lg:py-12 lg:pr-16 transition-all duration-700 ease-in-out z-20 px-2 lg:px-0">
+              <div className="flex flex-col text-left lg:py-12 lg:pr-16 transition-all duration-700 ease-in-out z-20 px-2 lg:px-0 mt-20 lg:mt-0">
                 <p className={`text-sm md:text-lg lg:text-xl mb-1 md:mb-6 font-mono tracking-wider transition-colors duration-500 ${activeStep === index ? 'text-white' : 'text-white/30'
                   }`}>
                   {String(index + 1).padStart(2, '0')}/{String(totalSteps).padStart(2, '0')}
                 </p>
-                <h3 className={`text-3xl md:text-5xl lg:text-[80px] font-bold leading-tight italic transition-colors duration-500 ${activeStep === index ? 'text-[#0FB5B7]' : 'text-white/20'
+                <h3 className={`text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight italic transition-colors duration-500 ${activeStep === index ? 'text-[#0FB5B7]' : 'text-white/20'
                   }`}>
                   {step.title}
                 </h3>
@@ -160,7 +160,7 @@ export default function ProductProcess() {
 
         {/* Right Sticky Image Area */}
         <div className="lg:flex w-1/2 sticky top-0 h-screen items-center justify-center hidden">
-          <div className="relative w-[320px] h-[450px] rounded-[160px] overflow-hidden bg-gray-900/10 shadow-2xl">
+          <div className="relative w-[320px] xl:w-[400px] 2xl:w-[450px] h-[450px] xl:h-[550px] 2xl:h-[650px] rounded-[160px] overflow-hidden bg-gray-900/10 shadow-2xl mt-[-10vh]">
             {cards.map((step, index) => (
               <Image
                 key={index}

@@ -29,7 +29,8 @@ export default function ServiceDetailPage() {
         const fetchService = async () => {
             try {
                 setLoading(true);
-                const res = await fetch(`${apiBaseUrl}/api/services/slug/${slug}`, { headers });
+                const targetUrl = apiBaseUrl.includes('localhost') ? `/api/proxy/api/services/slug/${slug}` : `${apiBaseUrl}/api/services/slug/${slug}`;
+                const res = await fetch(targetUrl, { headers });
                 if (!res.ok) throw new Error(`Service not found (${res.status})`);
                 const data = await res.json();
                 setService(data?.data || data);
@@ -319,18 +320,7 @@ export default function ServiceDetailPage() {
                 )}
 
                 {/* ===== CTA ===== */}
-                <section className="py-24 bg-black text-white text-center">
-                    <div className="max-w-4xl mx-auto px-4">
-                        <h2 className="text-4xl md:text-6xl font-bold mb-6">{service.ctaTitle || `Ready to Start Your ${service.title} Project?`}</h2>
-                        {service.ctaText && <p className="text-xl text-gray-400 mb-10">{service.ctaText}</p>}
-                        <Link
-                            href="/ContactUs"
-                            className="inline-block px-12 py-5 bg-[#0FB5B7] text-white rounded-full font-bold text-xl hover:bg-white hover:text-black transition-all duration-300 shadow-xl"
-                        >
-                            {service.ctaButtonText || 'Get A Free Consultation'}
-                        </Link>
-                    </div>
-                </section>
+                <CallToAction />
 
             </div>
         </UserLayout>

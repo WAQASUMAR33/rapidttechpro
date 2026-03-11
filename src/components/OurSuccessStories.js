@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, AnimatePresence } from 'framer-motion';
 import { forwardRef } from 'react';
 import Link from 'next/link';
+import { FaArrowRight } from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -140,52 +141,57 @@ const SuccessStories = forwardRef((props, ref) => {
   return (
     <section ref={ref} className="py-16 md:py-24 bg-white relative overflow-hidden h-full">
       <div className="w-full px-4 sm:px-12">
-        <h2
-          ref={headingRef}
-          className="md:text-5xl lg:text-6xl text-3xl font-bold text-gray-900 mb-12 md:mb-16 text-left"
-        >
-          Our Success Stories
-        </h2>
+        <div className="flex justify-between items-end mb-12 md:mb-16">
+          <h2
+            ref={headingRef}
+            className="text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 text-left"
+          >
+            Our success stories
+          </h2>
+          <Link href="/Work" className="hidden md:flex items-center gap-2 text-gray-500 hover:text-black transition-colors font-medium">
+            More case studies <FaArrowRight className="text-sm" />
+          </Link>
+        </div>
 
         {loading ? (
           <div className="flex justify-center py-20">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#25CBA1]"></div>
           </div>
         ) : (
-          <div className="flex flex-wrap md:-mx-6 lg:-mx-8 md:space-y-20 space-y-6">
+          <div className="flex flex-wrap md:-mx-6 lg:-mx-8">
             {stories.map((story, index) => (
               <div
                 key={story.id}
-                className={`w-full md:w-1/2 px-4 md:px-6 lg:px-8 md:mb-16 ${index % 2 === 1 ? 'md:mt-[120px]' : ''}`}
+                className={`w-full md:w-1/2 px-4 md:px-6 lg:px-8 mb-12 md:mb-24 ${index % 2 === 1 ? 'md:mt-32' : ''}`}
                 ref={(el) => (cardRefs.current[index] = el)}
               >
-                <div className="bg-white rounded-lg overflow-hidden group">
+                <div className="bg-white group">
                   <Link href={`/Work/${story.id}`}>
-                    <div className="overflow-hidden rounded-[40px] h-[300px] md:h-[450px] lg:h-[550px] bg-gray-50 flex items-center justify-center">
+                    <div className="overflow-hidden rounded-xl h-[400px] md:h-[500px] lg:h-[650px] bg-gray-50">
                       <img
                         src={resolveImage(story.mainImage || story.image)}
                         alt={story.title}
-                        className="w-full h-full object-cover rounded-[40px] group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                   </Link>
-                  <div className="pt-8 flex flex-col gap-4">
+                  <div className="pt-6 flex flex-col items-start gap-4">
                     {(story.logo || story.projectIcon) && (
                       <img
                         src={resolveImage(story.logo || story.projectIcon)}
                         alt={`${story.title} logo`}
-                        className="h-8 md:h-10 w-auto object-contain self-start"
+                        className="h-6 md:h-8 w-auto object-contain"
                       />
                     )}
 
                     <div className="flex flex-col gap-2">
                       <Link href={`/Work/${story.id}`}>
-                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 border-b-2 border-black inline-block self-start hover:text-bluish hover:border-bluish transition-colors">
+                        <h3 className="text-lg md:text-xl font-bold text-gray-900 leading-tight hover:text-bluish transition-colors">
                           {story.title}
                         </h3>
                       </Link>
 
-                      <p className="text-gray-600 mt-2 text-base md:text-lg leading-relaxed">
+                      <p className="text-gray-500 mt-1 text-xs md:text-sm leading-relaxed max-w-lg">
                         {(() => {
                           const desc = (typeof story.shortDescription === 'string' ? story.shortDescription : '') || (typeof story.description === 'string' ? story.description : '');
                           const firstSentence = desc.split('.')[0];
@@ -200,7 +206,7 @@ const SuccessStories = forwardRef((props, ref) => {
           </div>
         )}
 
-        <div className="w-full flex justify-center items-center mt-12">
+        <div className="md:hidden w-full flex justify-center items-center mt-8">
           <Link href="/Work" className="px-8 h-12 flex justify-center items-center rounded-full border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black transition-all font-semibold">
             Explore All Work
           </Link>

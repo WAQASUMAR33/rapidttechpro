@@ -79,7 +79,7 @@ export default function OurJourney() {
                     </div>
                     <div className="flex flex-col gap-2">
                         <span className="text-4xl md:text-7xl lg:text-[84px] font-bold text-black tracking-tighter">{talentedTeam}+</span>
-                        <span className="text-gray-600 text-sm md:text-xl font-medium">Talented Cubixians</span>
+                        <span className="text-gray-600 text-sm md:text-xl font-medium">Talented Professionals</span>
                     </div>
                     <div className="flex flex-col gap-2">
                         <span className="text-4xl md:text-7xl lg:text-[84px] font-bold text-black tracking-tighter">{satisfiedClients}+</span>

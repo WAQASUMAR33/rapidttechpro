@@ -8,8 +8,7 @@ const TeamSection = () => {
     const teamMembers = [
         { name: "Waqas Umar", position: "CEO", image: "/team/waqas.png", link: 'https://www.linkedin.com/in/waqas-umar-5b0678196/' },
         { name: "Kashif", position: "Co-founder", image: "/team/kashif.jpg", link: 'https://www.linkedin.com/in/kashif-rasheed-seo/' },
-        { name: "Usama", position: "UI/UX Designer", image: "/team/usama.png" },
-        { name: "Ali", position: "Developer", image: "/team/ali.png" },
+        { name: "Hannan Khan", position: "Backend Developer", image: "/team/hannan.png" },
     ];
 
     const containerVariants = {
@@ -35,7 +34,7 @@ const TeamSection = () => {
     };
 
     return (
-        <section className="bg-white pt-16 pb-0 md:pt-24 md:pb-0 mb-0">
+        <section className="bg-gray-50 pt-16 pb-0 md:pt-24 md:pb-0 mb-0">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

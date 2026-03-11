@@ -41,14 +41,21 @@ export default function TestimonialSlider() {
     fetchTestimonials();
   }, []);
 
+  const [stepSize, setStepSize] = useState(1);
+
+  useEffect(() => {
+    // Setting stepSize to 1 for all viewports as per new "one testimonial per row" requirement
+    setStepSize(1);
+  }, []);
+
   const handleNext = () => {
-    setCurrentIndex(prev => prev + 3 < reviews.length ? prev + 3 : 0);
+    setCurrentIndex(prev => (prev + stepSize < reviews.length ? prev + stepSize : 0));
   };
   const handlePrevious = () => {
-    setCurrentIndex(prev => prev - 3 >= 0 ? prev - 3 : Math.max(0, reviews.length - 3));
+    setCurrentIndex(prev => (prev - stepSize >= 0 ? prev - stepSize : Math.max(0, Math.floor((reviews.length - 1) / stepSize) * stepSize)));
   };
 
-  // Normalise field names from API (name/role/ratings or name/title/rating)
+  // Normalise field names from API
   const normalise = (r) => ({
     id: r.id,
     name: r.name || '',
@@ -61,27 +68,40 @@ export default function TestimonialSlider() {
   const items = reviews.map(normalise);
 
   return (
-    <div className="relative bg-white md:min-h-screen flex items-center justify-center md:px-4 py-8 md:py-16 overflow-hidden w-full">
-      <div className="text-center md:max-w-7xl mx-auto text-black h-full w-full px-4">
-        <h2 className="text-xl md:text-4xl font-bold mb-6">
-          Our Clients Simply love <span className="text-[#0FB5B7]">What We Do.</span>
+    <div className="relative md:min-h-screen flex items-center justify-center md:px-4 py-16 md:py-24 overflow-hidden w-full bg-[#030907]">
+      {/* Background Glow */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#0A3D2C] via-[#030907] to-[#030907] opacity-60"></div>
+
+      <div className="text-center md:max-w-7xl mx-auto h-full w-full px-6 relative z-10">
+        <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white tracking-tight">
+          Our clients simply love <span className="text-[#0FB5B7]">what we do</span>
         </h2>
-        <p className="text-gray-700 mb-10 text-sm md:text-lg">
+        <p className="text-gray-300 md:text-lg mb-12 max-w-3xl mx-auto">
           Proud to serve as the innovation partner for industry leaders who have experienced our expertise and excellence firsthand.
         </p>
-        <div className="flex justify-center items-center space-x-4 mb-10">
-          <div className="text-[#0FB5B7] text-4xl font-bold">R</div>
-          <div className="text-gray-700">52 REVIEWS</div>
-          <div className="text-[#0FB5B7] text-4xl font-bold">F</div>
-          <div className="text-gray-700">32 REVIEWS</div>
+
+        {/* Brands / Logos Area (Placeholder based on screenshot) */}
+        <div className="flex justify-center flex-wrap items-center gap-6 md:gap-12 mb-16 opacity-80">
+          <div className="flex items-center gap-2">
+            <span className="text-white font-bold text-xl flex items-center gap-1">
+              <span className="text-red-500 text-3xl shrink-0">C</span> Clutch
+            </span>
+            <div className="flex text-red-500 text-sm ml-2">★★★★★</div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-white font-bold text-xl flex items-center gap-1">
+              <span className="text-blue-500 text-3xl font-serif shrink-0">f</span> GoodFirms
+            </span>
+            <div className="flex text-blue-500 text-sm ml-2">★★★★★</div>
+          </div>
         </div>
 
         {/* Desktop Slider */}
         <div className="hidden md:block relative">
-          <button onClick={handlePrevious} className="absolute -left-5 top-1/2 transform -translate-y-1/2 z-10 text-gray-500 hover:text-[#0FB5B7] transition-colors">
+          <button onClick={handlePrevious} className="absolute -left-12 top-1/2 transform -translate-y-1/2 z-10 text-gray-400 hover:text-[#0FB5B7] transition-colors">
             <FaChevronLeft size={30} />
           </button>
-          <button onClick={handleNext} className="absolute -right-5 top-1/2 transform -translate-y-1/2 z-10 text-gray-500 hover:text-[#0FB5B7] transition-colors">
+          <button onClick={handleNext} className="absolute -right-12 top-1/2 transform -translate-y-1/2 z-10 text-gray-400 hover:text-[#0FB5B7] transition-colors">
             <FaChevronRight size={30} />
           </button>
 
@@ -92,29 +112,30 @@ export default function TestimonialSlider() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
-              className="flex justify-center space-x-4 w-full"
+              className="flex justify-center w-full"
             >
-              {items.slice(currentIndex, currentIndex + 3).map((r, idx) => (
-                <div key={r.id ?? idx} className="border border-gray-200 hover:border-[#0FB5B7]/40 md:p-8 rounded-2xl flex flex-col justify-between h-[300px] md:h-[380px] md:w-[calc(33.333%-1rem)] transition-colors duration-300 hover:shadow-lg hover:shadow-[#0FB5B7]/10">
+              {items.slice(currentIndex, currentIndex + 1).map((r, idx) => (
+                <div key={r.id ?? idx} className="bg-black/40 backdrop-blur-sm border border-[#0FB5B7]/20 p-10 md:p-16 rounded-[40px] flex flex-col justify-between min-h-[400px] w-full max-w-4xl transition-all duration-300 hover:border-[#0FB5B7]/50 hover:shadow-[0_0_30px_rgba(15,181,183,0.15)]">
                   <div>
-                    <div className="flex text-yellow-400 text-sm mb-4">
-                      {[...Array(r.ratings)].map((_, i) => <span key={i}>★</span>)}
-                    </div>
-                    <p className="text-sm text-justify md:text-base mb-6 text-gray-700 leading-relaxed">
+                    <p className="text-base text-left mb-8 text-gray-300 leading-relaxed font-light">
                       &ldquo;{r.review}&rdquo;
                     </p>
                   </div>
-                  <div className="flex items-center justify-start border-t border-gray-100 pt-4">
-                    {r.image ? (
-                      <img src={r.image} alt={r.name} className="w-12 h-12 rounded-full object-cover mr-4 ring-2 ring-[#0FB5B7]/20" onError={e => { e.target.style.display = 'none'; }} />
-                    ) : (
-                      <div className="bg-[#0FB5B7] w-12 h-12 rounded-full flex items-center justify-center text-base font-bold text-white mr-4">
-                        {getInitials(r.name)}
+                  <div className="flex items-center justify-between pt-4">
+                    <div className="flex items-center gap-4">
+                      {r.image ? (
+                        <img src={r.image} alt={r.name} className="w-12 h-12 rounded-full object-cover" onError={e => { e.target.style.display = 'none'; }} />
+                      ) : (
+                        <div className="bg-[#0FB5B7] w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold text-white">
+                          {getInitials(r.name)}
+                        </div>
+                      )}
+                      <div className="text-left">
+                        <p className="text-base font-semibold text-white">{r.name}</p>
+                        <div className="flex text-[#0FB5B7] text-sm mt-1">
+                          {[...Array(r.ratings)].map((_, i) => <span key={i}>★</span>)}
+                        </div>
                       </div>
-                    )}
-                    <div className="text-left">
-                      <p className="text-sm md:text-base font-semibold text-gray-800">{r.name}</p>
-                      <p className="text-xs md:text-sm text-gray-500">{r.role}</p>
                     </div>
                   </div>
                 </div>
@@ -125,7 +146,7 @@ export default function TestimonialSlider() {
 
         {/* Mobile Slider */}
         {items.length > 0 && (
-          <div className="md:hidden overflow-hidden p-2">
+          <div className="md:hidden overflow-hidden relative">
             <AnimatePresence mode="wait">
               <motion.div
                 key={items[currentIndex]?.id ?? currentIndex}
@@ -133,36 +154,35 @@ export default function TestimonialSlider() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ duration: 0.5 }}
-                className="flex justify-center space-x-4 w-full"
+                className="w-full"
               >
                 {items.slice(currentIndex, currentIndex + 1).map((r, idx) => (
-                  <div key={r.id ?? idx} className="border border-gray-200 p-5 rounded-2xl flex flex-col justify-between h-[320px] w-full mx-auto">
+                  <div key={r.id ?? idx} className="bg-black/40 backdrop-blur-sm border border-[#0FB5B7]/20 p-6 rounded-3xl flex flex-col justify-between h-[380px] w-full mx-auto">
                     <div>
-                      <div className="flex text-yellow-400 text-sm mb-3">
-                        {[...Array(r.ratings)].map((_, i) => <span key={i}>★</span>)}
-                      </div>
-                      <p className="text-base text-justify mb-4 text-gray-700">&ldquo;{r.review}&rdquo;</p>
+                      <p className="text-base text-left mb-6 text-gray-300 leading-relaxed font-light">&ldquo;{r.review}&rdquo;</p>
                     </div>
-                    <div className="flex items-center justify-start border-t border-gray-100 pt-3">
+                    <div className="flex items-center gap-4 pt-4">
                       {r.image ? (
-                        <img src={r.image} alt={r.name} className="w-12 h-12 rounded-full object-cover mr-4" onError={e => { e.target.style.display = 'none'; }} />
+                        <img src={r.image} alt={r.name} className="w-12 h-12 rounded-full object-cover" onError={e => { e.target.style.display = 'none'; }} />
                       ) : (
-                        <div className="bg-[#0FB5B7] w-12 h-12 rounded-full flex items-center justify-center text-base font-bold text-white mr-4">
+                        <div className="bg-[#0FB5B7] w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold text-white">
                           {getInitials(r.name)}
                         </div>
                       )}
                       <div className="text-left">
-                        <p className="text-sm font-semibold text-gray-800">{r.name}</p>
-                        <p className="text-xs text-gray-500">{r.role}</p>
+                        <p className="text-base font-semibold text-white">{r.name}</p>
+                        <div className="flex text-[#0FB5B7] text-sm mt-1">
+                          {[...Array(r.ratings)].map((_, i) => <span key={i}>★</span>)}
+                        </div>
                       </div>
                     </div>
                   </div>
                 ))}
               </motion.div>
             </AnimatePresence>
-            <div className="flex justify-center gap-6 mt-6">
-              <button onClick={handlePrevious} className="text-gray-400 hover:text-[#0FB5B7] transition-colors"><FaChevronLeft size={22} /></button>
-              <button onClick={handleNext} className="text-gray-400 hover:text-[#0FB5B7] transition-colors"><FaChevronRight size={22} /></button>
+            <div className="flex justify-center gap-8 mt-8">
+              <button onClick={handlePrevious} className="text-gray-400 hover:text-[#0FB5B7] transition-colors"><FaChevronLeft size={24} /></button>
+              <button onClick={handleNext} className="text-gray-400 hover:text-[#0FB5B7] transition-colors"><FaChevronRight size={24} /></button>
             </div>
           </div>
         )}

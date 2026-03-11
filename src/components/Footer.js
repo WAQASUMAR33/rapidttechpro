@@ -18,7 +18,8 @@ export default function Footer() {
   useEffect(() => {
     const fetchFooterServices = async () => {
       try {
-        const response = await fetch(`${apiBaseUrl}/api/services`, {
+        const targetUrl = apiBaseUrl.includes('localhost') ? '/api/proxy/api/services' : `${apiBaseUrl}/api/services`;
+        const response = await fetch(targetUrl, {
           headers: { 'x-api-key': apiKey }
         });
         if (!response.ok) return;
@@ -47,7 +48,7 @@ export default function Footer() {
   }, [apiBaseUrl, apiKey]);
 
   return (
-    <footer className="bg-black text-white w-full relative z-0">
+    <footer className="bg-black text-white w-full relative z-0 min-h-screen flex flex-col justify-center">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-8 pb-6 md:pt-10 md:pb-8">
 
         {/* Main Links Grid */}

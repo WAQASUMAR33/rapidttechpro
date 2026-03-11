@@ -58,7 +58,7 @@ export default function HeroSection() {
                 muted
                 playsInline
             />
-            <div className="relative  flex flex-col justify-center items-center h-full mx-auto w-full px-4 md:px-0 bg-black bg-opacity-50 text-center">
+            <div className="relative flex flex-col justify-center items-center h-full mx-auto w-full px-4 md:px-0 pt-32 bg-black bg-opacity-50 text-center">
                 <h1 className="max-w-2xl lg:max-w-4xl mx-auto text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-white">
                     Your Trusted Custom <span className="text-bluish">Software Development</span>
                     <br />

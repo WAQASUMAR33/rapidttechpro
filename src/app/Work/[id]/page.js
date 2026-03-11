@@ -4,8 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { FaMapMarkerAlt } from 'react-icons/fa';
 import UserLayout from '../../UserLayout';
 import CallToAction from '@/components/CallToAction';
+import DottedWorldMap from '@/components/DottedWorldMap';
 
 export default function ProjectDetailPage() {
   const params = useParams();
@@ -37,7 +39,13 @@ export default function ProjectDetailPage() {
       'Content-Type': 'application/json',
       'x-api-key': apiKey,
     };
-    const response = await fetch(url, { headers });
+
+    // Proxy fix for localhost CORS
+    const targetUrl = apiBaseUrl.includes('localhost') && url.startsWith(apiBaseUrl)
+      ? `/api/proxy${url.replace(apiBaseUrl, '')}`
+      : url;
+
+    const response = await fetch(targetUrl, { headers });
     return response;
   };
 
@@ -107,7 +115,26 @@ export default function ProjectDetailPage() {
     return path;
   };
 
-  const rawImage = resolveImage(project.mainImage || project.imageUrl || project.image || project.projectIcon) || '/images/herosection.png';
+  // Named image fields from API
+  const mainImage = resolveImage(project.mainImage) || resolveImage(project.imageUrl || project.image) || '/images/herosection.png';
+  const bannerImage = resolveImage(project.bannerImage) || mainImage;
+  const projectIcon = resolveImage(project.projectIcon || project.logo);
+
+  // Challenge section images
+  const challengeImage1 = resolveImage(project.challengeImage1) || mainImage;
+  const challengeImage2 = resolveImage(project.challengeImage2) || resolveImage(project.images?.[0]?.imageUrl) || '/images/mobile-hero.png';
+  const challengeImage3 = resolveImage(project.challengeImage3) || resolveImage(project.images?.[1]?.imageUrl) || '/images/webhero.png';
+
+  // Adaptable design / AR section images
+  const adaptableImage1 = resolveImage(project.adaptableImage1) || resolveImage(project.images?.[0]?.imageUrl) || '/images/mobile-hero.png';
+  const adaptableImage2 = resolveImage(project.adaptableImage2) || resolveImage(project.images?.[1]?.imageUrl) || '/images/serviceshero.png';
+  const adaptableImage3 = resolveImage(project.adaptableImage3) || resolveImage(project.images?.[2]?.imageUrl) || '/images/companybanner.png';
+
+  // Full gallery from images[].imageUrl
+  const rawGallery = project.images?.length > 0
+    ? project.images.map(img => resolveImage(img.imageUrl || img.url)).filter(Boolean)
+    : [];
+
   const rawDesc = project.shortDescription || project.description || project.blog || '';
   const rawCategory = project.categories?.length > 0
     ? (typeof project.categories[0] === 'string' ? project.categories[0] : project.categories[0]?.name)
@@ -139,15 +166,20 @@ export default function ProjectDetailPage() {
       { name: 'Node.js', icon: null }
     ];
 
-  const rawGallery = project.images?.length > 0
-    ? project.images.map(img => resolveImage(img.imageUrl || img.url)).filter(Boolean)
-    : [rawImage, rawImage, rawImage, rawImage];
-
   const p = {
     ...project,
     title: project.title || "Project",
     subTitle: project.shortDescription || project.description || "Innovation meets performance in every detail.",
-    imageUrl: rawImage,
+    // Named image fields
+    imageUrl: mainImage,
+    bannerImage,
+    projectIcon,
+    challengeImage1,
+    challengeImage2,
+    challengeImage3,
+    adaptableImage1,
+    adaptableImage2,
+    adaptableImage3,
     category: rawCategory,
     clientName: project.client || project.clientName || 'Confidential',
     duration: project.duration || '1 Year',
@@ -172,8 +204,8 @@ export default function ProjectDetailPage() {
       '99.9% Infrastructure Uptime', 'Over 1M Active Daily Transactions', 'Real-time Analytics Dashboard', 'Auto-scaling Cloud Architecture'
     ],
     // Section 9
-    arHeading: project.arHeading || "Adaptable design and AR features",
-    arDescription: project.arDescription || "Creating solutions that are versatile, accommodating various user preferences. Enhancing user interaction and engagement with innovative pet profiles, animations and AR filters.",
+    arHeading: project.adaptableHeading || "Adaptable design and AR features",
+    arDescription: project.adaptableDescription || "Creating solutions that are versatile, accommodating various user preferences. Enhancing user interaction and engagement with innovative pet profiles, animations and AR filters.",
     // Section 11
     resultsHeading: project.resultsHeading || "Project Results",
     resultsList: project.resultsList ? (typeof project.resultsList === 'string' ? JSON.parse(project.resultsList) : project.resultsList) : [
@@ -186,61 +218,78 @@ export default function ProjectDetailPage() {
       <div className="bg-white overflow-hidden font-sans" ref={targetRef}>
 
         {/* 1. BRAND HERO */}
-        <section className="pt-40 pb-20 px-6 md:px-16 max-w-7xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="space-y-10">
+        <section className="pt-32 pb-16 px-6 md:px-16 max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8 md:max-w-[60%] lg:max-w-[50%]"
+          >
             <div>
-              {(project.logo || project.projectIcon) && (
-                <img src={resolveImage(project.logo || project.projectIcon)} className="h-16 w-auto object-contain" alt="Logo" />
+              {p.projectIcon && (
+                <img src={p.projectIcon} className="h-12 w-auto object-contain" alt="Logo" />
               )}
             </div>
-            <h1 className="text-5xl md:text-8xl font-black text-gray-900 leading-[1.1] tracking-tight max-w-5xl">
+            <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-[1.1] tracking-tight">
               {p.title}
             </h1>
-            <div className="pt-4">
-              <span className="px-8 py-3.5 border-2 border-gray-900 rounded-full text-lg font-black text-gray-900 uppercase">
-                {p.category} for {p.clientName}
+            <div className="pt-2">
+              <span className="px-3 py-1 border border-gray-300 rounded-full text-[10px] md:text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                Industry: {p.category}
               </span>
             </div>
           </motion.div>
         </section>
 
-        {/* 2. MAIN IMAGE SECTION (130vh) */}
+        {/* 2. BANNER IMAGE SECTION (130vh) */}
         <section className="h-[130vh] w-full px-0 relative overflow-hidden">
-          <img src={p.imageUrl} className="w-full h-full object-cover" alt="Main Banner" />
+          <img src={p.bannerImage} className="w-full h-full object-cover" alt="Hero Banner" />
         </section>
 
         {/* 3. ABOUT CLIENT SECTION (100vh) */}
         <section className="h-screen w-full flex items-center px-6 md:px-16 max-w-7xl mx-auto border-b border-gray-900/10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20 w-full items-center text-gray-900 relative">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-10 z-10">
-              <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter">About the client</h2>
-              <p className="text-xl md:text-2xl leading-relaxed font-black">
+              <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter">About the client</h2>
+              <p className="text-lg md:text-xl leading-relaxed font-bold">
                 {p.aboutText}
               </p>
-              <div className="pt-10">
-                <p className="text-lg font-black uppercase tracking-widest inline-block mr-4 opacity-50">Location:</p>
-                <p className="text-2xl font-black inline-block">{p.location}</p>
+              <div className="pt-10 flex items-center gap-4">
+                <p className="text-lg font-medium text-gray-500">Location:</p>
+                <p className="text-xl font-bold text-gray-900">{p.location}</p>
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="flex justify-center relative">
-              <img src="/globe.svg" alt="World Map" className="w-full h-auto opacity-30 grayscale invert" />
-              <div className="absolute top-1/2 left-[60%] w-6 h-6 bg-bluish rounded-full animate-ping opacity-50" />
-              <div className="absolute top-1/2 left-[60%] w-3 h-3 bg-bluish rounded-full" />
+              <div className="w-full max-w-lg relative group">
+                <DottedWorldMap className="w-full h-auto text-gray-200" />
+
+                {/* Location Pin */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  className="absolute top-[40%] left-[55%] flex flex-col items-center"
+                >
+                  <div className="bg-bluish/20 p-2 rounded-full animate-pulse">
+                    <FaMapMarkerAlt className="text-bluish text-2xl" />
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
           </div>
         </section>
 
         {/* 4. INNOVATION SECTION */}
-        <section className="py-32 px-6 md:px-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-start text-gray-900">
+        <section className="pt-32 pb-16 px-6 md:px-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-start text-gray-900">
           <div className="space-y-10">
-            <h2 className="text-5xl font-black leading-tight uppercase tracking-tighter">Innovation {p.title}</h2>
-            <p className="text-xl leading-relaxed font-black">
+            <h2 className="text-3xl md:text-4xl font-bold leading-tight uppercase tracking-tighter">Innovation {p.title}</h2>
+            <p className="text-base md:text-lg leading-relaxed">
               {p.description || "We developed a comprehensive ecosystem that bridges the gap between complex backend data and a fluid, user-centric mobile experience."}
             </p>
           </div>
           <div className="space-y-10">
             <div>
-              <p className="text-xs font-black uppercase tracking-widest mb-6 px-1 opacity-50">Tech Stack:</p>
+              <p className="text-xs font-bold uppercase tracking-widest mb-6 px-1 opacity-50">Tech Stack:</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {p.technologies.slice(0, 4).map((tech, i) => (
                   <div key={i} className="flex items-center gap-4 px-8 py-5 bg-gray-50 rounded-full border-2 border-transparent hover:border-bluish transition-all shadow-sm">
@@ -248,71 +297,75 @@ export default function ProjectDetailPage() {
                       {tech.icon ? (
                         <img src={tech.icon} className="w-full h-full object-contain" alt={tech.name} />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-white rounded-lg font-black text-xl border border-gray-200">{tech.name.charAt(0)}</div>
+                        <div className="w-full h-full flex items-center justify-center bg-white rounded-lg font-bold text-xl border border-gray-200">{tech.name.charAt(0)}</div>
                       )}
                     </div>
-                    <span className="text-xl font-black tracking-tight">{tech.name}</span>
+                    <span className="text-xl font-bold tracking-tight">{tech.name}</span>
                   </div>
                 ))}
               </div>
             </div>
             <div className="pt-4">
-              <p className="text-xs font-black uppercase tracking-widest mb-2 px-1 opacity-50">Duration:</p>
-              <p className="text-2xl font-black px-1">{p.duration}</p>
+              <p className="text-xs font-bold uppercase tracking-widest mb-2 px-1 opacity-50">Duration:</p>
+              <p className="text-2xl font-bold px-1">{p.duration}</p>
             </div>
           </div>
         </section>
 
-        {/* 5. OUR CHALLENGE (Text + 1 Screen Left, 2 Screens Right) */}
-        <section className="py-20 md:py-40 px-6 md:px-16 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
-            {/* Left Column: Text + 1st Phone */}
-            <div className="space-y-16">
-              <div className="max-w-md">
-                <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Our challenge</h2>
-                <p className="text-xl text-gray-900 leading-relaxed font-black opacity-80">
-                  {p.challengeText}
-                </p>
-              </div>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="rounded-[40px] md:rounded-[60px] overflow-hidden aspect-[9/18.5] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border-[8px] md:border-[16px] border-black bg-black"
-              >
-                <img src={p.gallery[0] || p.imageUrl} className="w-full h-full object-cover" alt="Challenge Screen 1" />
-              </motion.div>
-            </div>
+        {/* 5. OUR CHALLENGE */}
+        <section className="pt-16 md:pt-20 pb-20 md:pb-40 px-6 md:px-16 max-w-7xl mx-auto flex flex-col gap-16 md:gap-24">
 
-            {/* Right Column: 2nd and 3rd Phone Stacked */}
-            <div className="space-y-10 md:space-y-20 md:pt-40">
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                viewport={{ once: true }}
-                className="rounded-[40px] md:rounded-[60px] overflow-hidden aspect-[9/18.5] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border-[8px] md:border-[16px] border-black bg-black"
-              >
-                <img src={p.gallery[1] || p.imageUrl} className="w-full h-full object-cover" alt="Challenge Screen 2" />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                viewport={{ once: true }}
-                className="rounded-[40px] md:rounded-[60px] overflow-hidden aspect-[9/18.5] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border-[8px] md:border-[16px] border-black bg-black"
-              >
-                <img src={p.gallery[2] || p.imageUrl} className="w-full h-full object-cover" alt="Challenge Screen 3" />
-              </motion.div>
-            </div>
+          {/* Top Row: Text Description */}
+          <div className="max-w-3xl">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tighter">Our challenge</h2>
+            <p className="text-xl md:text-2xl text-gray-900 leading-relaxed font-bold opacity-80">
+              {p.challengeText}
+            </p>
+          </div>
+
+          {/* Bottom Row: 3 Staggered Mobile Mockups */}
+          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-10 md:gap-6 lg:gap-10">
+
+            {/* Screen 1 - Left (Lowered) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 100 }}
+              whileInView={{ opacity: 1, scale: 1, y: 60 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.1 }}
+              className="w-full md:w-[30%] aspect-[9/18] rounded-[40px] md:rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black bg-white"
+            >
+              <img src={p.challengeImage1} className="w-full h-full object-cover" alt="Challenge Screen 1" />
+            </motion.div>
+
+            {/* Screen 2 - Center (Raised & Slightly Larger) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 100 }}
+              whileInView={{ opacity: 1, scale: 1, y: -40 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="w-full md:w-[32%] aspect-[9/19] rounded-[45px] md:rounded-[55px] overflow-hidden shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2)] border-[10px] border-black z-10 bg-white"
+            >
+              <img src={p.challengeImage2} className="w-full h-full object-cover" alt="Challenge Screen 2" />
+            </motion.div>
+
+            {/* Screen 3 - Right (Lowered) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 100 }}
+              whileInView={{ opacity: 1, scale: 1, y: 80 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="w-full md:w-[30%] aspect-[9/18] rounded-[40px] md:rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black bg-white"
+            >
+              <img src={p.challengeImage3} className="w-full h-full object-cover" alt="Challenge Screen 3" />
+            </motion.div>
+
           </div>
         </section>
-
         {/* 6. THE PROCESS (Sticky Heading + Scrolling Cards) */}
         <section className="px-6 md:px-16 max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-32 lg:gap-48 items-start relative py-20 md:py-40">
           {/* Left Column: Sticky Static Heading */}
           <div className="md:sticky md:top-40 w-full md:w-1/3">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight tracking-tighter">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight tracking-tighter">
               The <br className="hidden md:block" /> process
             </h2>
           </div>
@@ -322,8 +375,8 @@ export default function ProjectDetailPage() {
             {p.processSteps.map((step, idx) => (
               <div key={idx} className="bg-[#f2f2f2] p-8 md:p-14 rounded-[30px] md:rounded-[40px] border border-gray-200 group hover:shadow-xl transition-all">
                 <div className="space-y-4">
-                  <span className="text-4xl md:text-5xl font-black text-gray-900 leading-none">0{idx + 1}</span>
-                  <h3 className="text-2xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight">{step.title}</h3>
+                  <span className="text-4xl md:text-5xl font-bold text-gray-900 leading-none">0{idx + 1}</span>
+                  <h3 className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tight leading-tight">{step.title}</h3>
                   <p className="text-lg md:text-xl text-gray-900 leading-relaxed font-medium opacity-70">
                     {step.desc}
                   </p>
@@ -334,10 +387,10 @@ export default function ProjectDetailPage() {
         </section>
 
         {/* 7. BLENDING DESIGN & FUNCTIONALITY (Restored Black Area) */}
-        <section className="bg-black pt-16 md:pt-24 pb-64 md:pb-[550px] relative overflow-visible">
+        <section className="bg-black pt-16 md:pt-24 pb-16 md:pb-24 relative z-10">
           <div className="max-w-7xl mx-auto px-6 md:px-16 flex flex-col items-start text-left">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="space-y-6">
-              <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter leading-tight max-w-4xl">
+              <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tighter leading-tight max-w-4xl">
                 {p.blendingHeading.split('<br />').length > 1 ? (
                   <>
                     {p.blendingHeading.split('<br />')[0]} <br /> {p.blendingHeading.split('<br />')[1]}
@@ -348,51 +401,60 @@ export default function ProjectDetailPage() {
                 {p.blendingDescription}
               </p>
               <div className="flex flex-col items-start gap-y-5 max-w-3xl pt-4">
-                {p.blendingPoints.map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 w-full group">
-                    <div className="w-6 h-6 rounded-full bg-[#10d056] flex items-center justify-center mt-1 shrink-0">
-                      <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
+                {p.blendingPoints.map((item, i) => {
+                  const [title, desc] = item.includes(':') ? item.split(':') : [item, ''];
+                  return (
+                    <div key={i} className="flex items-start gap-4 w-full group">
+                      <div className="w-4 h-4 rounded-full bg-[#10d056] mt-1.5 shrink-0 shadow-[0_0_10px_rgba(16,208,86,0.3)]"></div>
+                      <span className="text-base md:text-lg text-white tracking-tight leading-relaxed">
+                        <strong className="font-bold text-white">{title}{desc ? ':' : ''}</strong> {desc}
+                      </span>
                     </div>
-                    <span className="text-base md:text-lg text-white font-bold tracking-tight group-hover:text-[#10d056] transition-colors">{item}</span>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* 8. HANDLING GROWTH (With 50/50 Overlapping Image) */}
-        <section className="bg-white text-gray-900 relative">
-          {/* Centered Image Bridging the Split - sitting UNDER the points relative to Section 7 */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl px-6 z-30">
+        {/* 8. MAIN IMAGE OVERLAP (Exact 50/50 Black & White Split) */}
+        <section className="relative z-20">
+          {/* Half Black, Half White Background */}
+          <div className="absolute inset-0 z-0 flex flex-col pointer-events-none">
+            <div className="w-full h-1/2 bg-black"></div>
+            <div className="w-full h-1/2 bg-white"></div>
+          </div>
+
+          <div className="w-full max-w-[95%] 2xl:max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 relative z-10 py-0">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="w-full h-auto rounded-[40px] md:rounded-[80px] overflow-hidden"
+              className="w-full h-auto rounded-[12px] md:rounded-[24px] overflow-hidden shadow-2xl bg-white border-2 border-gray-100"
             >
-              <img src={p.gallery[1] || p.imageUrl} className="w-full h-auto object-cover" alt="Focus Visual" />
+              <img src={p.imageUrl} className="w-full h-auto object-cover" alt="Main Project Overview" />
             </motion.div>
           </div>
+        </section>
 
-          <div className="max-w-7xl mx-auto space-y-20 pt-64 md:pt-[600px] pb-32 px-6 md:px-16">
-            <h2 className="text-5xl md:text-8xl font-black max-w-4xl uppercase tracking-tighter">{p.growthHeading}</h2>
+        {/* 9. HANDLING GROWTH */}
+        <section className="bg-white text-gray-900 relative z-20">
+          <div className="max-w-7xl mx-auto space-y-16 pt-10 md:pt-16 pb-32 px-6 md:px-16">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold max-w-4xl uppercase tracking-tighter leading-tight">{p.growthHeading}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-              <div className="space-y-10">
+              <div className="space-y-8">
                 {p.growthStats.map(stat => (
                   <div key={stat} className="flex items-center gap-6 group">
-                    <div className="w-12 h-12 rounded-full bg-bluish flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(15,181,183,0.3)]">
-                      <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" /></svg>
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-bluish flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(15,181,183,0.3)]">
+                      <svg className="w-5 h-5 md:w-6 md:h-6 text-black" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" /></svg>
                     </div>
-                    <span className="text-2xl font-black group-hover:text-bluish transition-all tracking-tight">{stat}</span>
+                    <span className="text-lg md:text-xl font-bold group-hover:text-bluish transition-all tracking-tight">{stat}</span>
                   </div>
                 ))}
               </div>
-              <div className="rounded-[80px] bg-gray-100 p-5 h-[600px] shadow-inner overflow-hidden border-2 border-gray-200">
-                <img src="/images/herosection.png" className="w-full h-full object-cover rounded-[60px]" alt="Growth Visual" />
+              <div className="rounded-[40px] md:rounded-[80px] bg-gray-100 p-2 md:p-5 h-[400px] md:h-[600px] shadow-inner overflow-hidden border-2 border-gray-200">
+                <img src={p.gallery[4 % p.gallery.length] || p.imageUrl} className="w-full h-full object-cover rounded-[30px] md:rounded-[60px]" alt="Growth Visual" />
               </div>
             </div>
           </div>
@@ -402,14 +464,14 @@ export default function ProjectDetailPage() {
         <section className="bg-white py-32 md:py-48 px-6 md:px-16 overflow-hidden">
           <div className="max-w-7xl mx-auto flex flex-col items-start">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="space-y-6 mb-24 max-w-4xl">
-              <h2 className="text-4xl md:text-7xl font-black text-gray-900 tracking-tighter leading-tight">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tighter leading-tight">
                 {p.arHeading.split('<br />').length > 1 ? (
                   <>
                     {p.arHeading.split('<br />')[0]} <br /> {p.arHeading.split('<br />')[1]}
                   </>
                 ) : p.arHeading}
               </h2>
-              <p className="text-lg md:text-2xl text-gray-500 font-medium leading-relaxed max-w-3xl">
+              <p className="text-base md:text-lg text-gray-500 font-medium leading-relaxed max-w-3xl">
                 {p.arDescription}
               </p>
             </motion.div>
@@ -424,7 +486,7 @@ export default function ProjectDetailPage() {
                 transition={{ duration: 1, delay: 0.1 }}
                 className="w-full md:w-[30%] aspect-[9/18] rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black"
               >
-                <img src={p.gallery[2] || p.imageUrl} className="w-full h-full object-cover" alt="App Screen 1" />
+                <img src={p.adaptableImage1} className="w-full h-full object-cover" alt="App Screen 1" />
               </motion.div>
 
               {/* Screen 2 - Center Main */}
@@ -435,7 +497,7 @@ export default function ProjectDetailPage() {
                 transition={{ duration: 1, delay: 0.3 }}
                 className="w-full md:w-[32%] aspect-[9/19] rounded-[55px] overflow-hidden shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2)] border-[10px] border-black z-10"
               >
-                <img src={p.gallery[3] || p.imageUrl} className="w-full h-full object-cover" alt="App Screen 2" />
+                <img src={p.adaptableImage2} className="w-full h-full object-cover" alt="App Screen 2" />
               </motion.div>
 
               {/* Screen 3 - Right Staggered */}
@@ -446,7 +508,7 @@ export default function ProjectDetailPage() {
                 transition={{ duration: 1, delay: 0.5 }}
                 className="w-full md:w-[30%] aspect-[9/18] rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black"
               >
-                <img src={p.gallery[4] || p.imageUrl} className="w-full h-full object-cover" alt="App Screen 3" />
+                <img src={p.adaptableImage3} className="w-full h-full object-cover" alt="App Screen 3" />
               </motion.div>
             </div>
           </div>
@@ -456,14 +518,14 @@ export default function ProjectDetailPage() {
         <section className="bg-white py-24 md:py-32 px-6 md:px-16 overflow-hidden border-t border-gray-100">
           <div className="max-w-7xl mx-auto flex flex-col items-start text-left">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="space-y-10 max-w-5xl">
-              <h2 className="text-4xl md:text-7xl font-black text-gray-900 tracking-tighter leading-tight">
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tighter leading-tight">
                 Fostering digital excellence <br /> and innovation for {p.title}
               </h2>
               <div className="space-y-8">
-                <p className="text-xl md:text-2xl text-gray-600 font-medium leading-relaxed">
+                <p className="text-lg md:text-xl text-gray-600 font-medium leading-relaxed">
                   {p.title} emerged as a trailblazing solution precisely developed to meet the evolving needs of its users. This innovative platform allows for enhanced engagement and streamlined management, giving users the freedom to connect, collaborate, and thrive within their specific industry.
                 </p>
-                <p className="text-xl md:text-2xl text-gray-600 font-medium leading-relaxed">
+                <p className="text-lg md:text-xl text-gray-600 font-medium leading-relaxed">
                   The design and development of this project by the RapidTechPro team involved a strategic blend of creativity and technical expertise. The result is a vibrant, interactive network that brings together diverse functionalities into a common platform that is not only visually stunning but also technically robust, ensuring a seamless experience for all daily operational needs.
                 </p>
               </div>
@@ -471,47 +533,89 @@ export default function ProjectDetailPage() {
           </div>
         </section>
         {/* 11. FEATURE RESULTS IMAGE */}
-        <section className="py-20 md:py-32 px-6 md:px-16 bg-[#F8F9FA]">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-              className="relative aspect-[16/9] bg-[#4B42D1] rounded-[40px] md:rounded-[80px] overflow-hidden flex items-center justify-center p-12 md:p-24"
-            >
-              <img
-                src={p.gallery[5] || p.imageUrl}
-                className="w-full h-auto object-contain drop-shadow-[0_50px_100px_rgba(0,0,0,0.3)]"
-                alt="Product Showcase"
-              />
-            </motion.div>
-          </div>
+        <section className="w-full relative overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="w-full"
+          >
+            <img
+              src={p.gallery[5 % p.gallery.length] || p.imageUrl}
+              className="w-full h-auto object-cover"
+              alt="Product Showcase"
+            />
+          </motion.div>
         </section>
 
-        {/* 12. PROJECT RESULTS */}
+        {/* 12. PROJECT SHOWCASE (SCROLLING ROWS) */}
+        {p.gallery?.length > 0 && (
+          <section className="pt-24 md:pt-32 pb-0 bg-gray-50 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6 md:px-16 mb-16 md:mb-24 text-center">
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 tracking-tighter uppercase mb-6">Project Showcase</h2>
+              <p className="text-xl md:text-2xl text-gray-500 font-medium">A closer look at the project's visual journey and interface design.</p>
+            </div>
+
+            {/* Dark Navy Background Only Behind Images */}
+            <div className="w-full flex flex-col gap-8 md:gap-12 relative py-16 md:py-24 bg-slate-900 px-4 md:px-0">
+              {/* Row 1: Right to Left */}
+              <div className="w-full relative overflow-hidden flex">
+                <motion.div
+                  className="flex gap-8 md:gap-12 whitespace-nowrap min-w-max"
+                  animate={{ x: ["0%", "-50%"] }}
+                  transition={{ repeat: Infinity, ease: "linear", duration: 60 }}
+                >
+                  {[...p.gallery, ...p.gallery, ...p.gallery, ...p.gallery, ...p.gallery].map((img, i) => (
+                    <div key={`row1-${i}`} className="w-[450px] md:w-[700px] lg:w-[1000px] shrink-0 rounded-[30px] md:rounded-[40px] overflow-hidden shadow-2xl bg-white border border-slate-700/50">
+                      <img src={img} className="w-full h-[200px] md:h-[300px] lg:h-[450px] object-cover" alt={`Showcase item row 1 - ${i}`} />
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+
+              {/* Row 2: Left to Right */}
+              <div className="w-full relative overflow-hidden flex">
+                <motion.div
+                  className="flex gap-8 md:gap-12 whitespace-nowrap min-w-max"
+                  animate={{ x: ["-50%", "0%"] }}
+                  transition={{ repeat: Infinity, ease: "linear", duration: 70 }}
+                >
+                  {/* Reversing the array to provide visual variation between rows */}
+                  {[...p.gallery, ...p.gallery, ...p.gallery, ...p.gallery, ...p.gallery].reverse().map((img, i) => (
+                    <div key={`row2-${i}`} className="w-[450px] md:w-[700px] lg:w-[1000px] shrink-0 rounded-[30px] md:rounded-[40px] overflow-hidden shadow-2xl bg-white border border-slate-700/50">
+                      <img src={img} className="w-full h-[200px] md:h-[300px] lg:h-[450px] object-cover" alt={`Showcase item row 2 - ${i}`} />
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 13. PROJECT RESULTS */}
         <section className="py-24 md:py-48 px-6 md:px-16 bg-white overflow-hidden">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-20">
             {/* Sidebar Label */}
             <div className="flex-shrink-0">
-              <span className="inline-block px-12 py-3 bg-[#10d056] text-black text-xl font-black uppercase tracking-widest rounded-full [writing-mode:vertical-lr] rotate-180">
+              <span className="inline-block px-12 py-3 bg-bluish text-white text-xl font-bold uppercase tracking-widest rounded-full [writing-mode:vertical-lr] rotate-180">
                 Results
               </span>
             </div>
 
             <div className="flex-grow space-y-16">
-              <h2 className="text-5xl md:text-8xl font-black text-gray-900 tracking-tighter leading-tight uppercase">
+              <h2 className="text-4xl md:text-6xl font-bold text-gray-900 tracking-tighter leading-tight uppercase">
                 {p.resultsHeading}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-12">
                 {p.resultsList.map((item, i) => (
                   <div key={i} className="flex items-center gap-6 group">
-                    <div className="w-8 h-8 rounded-full bg-[#10d056] flex items-center justify-center shrink-0">
-                      <svg className="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="4">
+                    <div className="w-8 h-8 rounded-full bg-bluish flex items-center justify-center shrink-0">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="text-xl md:text-3xl font-black text-gray-900 tracking-tight leading-tight">
+                    <span className="text-lg md:text-2xl font-bold text-gray-900 tracking-tight leading-tight">
                       {item}
                     </span>
                   </div>
@@ -521,22 +625,6 @@ export default function ProjectDetailPage() {
           </div>
         </section>
 
-        {/* 13. FINAL CTA */}
-        <section className="py-32 md:py-64 px-6 md:px-16 bg-white">
-          <div className="max-w-5xl mx-auto text-center space-y-12">
-            <span className="text-bluish text-2xl font-black uppercase tracking-[0.3em]">
-              Pick the Project
-            </span>
-            <h2 className="text-6xl md:text-[10rem] font-black text-gray-900 leading-[0.85] tracking-tighter uppercase italic">
-              Let's bring your <br /> vision to life
-            </h2>
-            <div className="pt-20">
-              <Link href="/ContactUs" className="inline-block px-24 py-10 bg-black text-white rounded-full font-black text-4xl uppercase tracking-tighter hover:bg-gray-800 transition-all hover:scale-105 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)]">
-                Get Started
-              </Link>
-            </div>
-          </div>
-        </section>
 
       </div>
       <CallToAction />

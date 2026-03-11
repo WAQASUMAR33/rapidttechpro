@@ -21,6 +21,7 @@ export default function WorkMainPage() {
   const [showPopup, setShowPopup] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
   const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
@@ -31,7 +32,12 @@ export default function WorkMainPage() {
       'x-api-key': apiKey,
     };
 
-    const response = await fetch(url, { headers });
+    // Proxy fix for localhost CORS
+    const targetUrl = apiBaseUrl.includes('localhost') && url.startsWith(apiBaseUrl)
+      ? `/api/proxy${url.replace(apiBaseUrl, '')}`
+      : url;
+
+    const response = await fetch(targetUrl, { headers });
     return response;
   };
 
@@ -84,7 +90,8 @@ export default function WorkMainPage() {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 15000);
 
-        const projectsResponse = await fetch(`${apiBaseUrl}/api/projects`, {
+        const projTargetUrl = apiBaseUrl.includes('localhost') ? '/api/proxy/api/projects' : `${apiBaseUrl}/api/projects`;
+        const projectsResponse = await fetch(projTargetUrl, {
           headers: { 'x-api-key': apiKey },
           signal: controller.signal
         });
@@ -180,10 +187,10 @@ export default function WorkMainPage() {
   }
 
   return (
-    <div className="px-4 md:px-16 py-20 bg-white case-studies-section relative">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl md:text-[60px] font-[700] mt-10">Case Studies</h1>
-        <p className="md:text-[30px] font-[400] mt-4">See how RapidTechPro has helped its clients...</p>
+    <div className="bg-white case-studies-section relative">
+      <div className="px-4 md:px-16 pt-20 max-w-6xl mx-auto pt-10">
+        <h1 className="text-4xl md:text-[48px] font-[800] tracking-tight text-gray-900 leading-tight">Case Studies</h1>
+        <p className="text-xl md:text-[24px] font-[500] mt-2 text-gray-600">See how RapidTechPro has helped its clients...</p>
 
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-6">
@@ -265,9 +272,9 @@ export default function WorkMainPage() {
           </div>
         </div>
 
-        <div className="flex flex-wrap md:space-y-16 md:mt-10 md:max-w-6xl mx-auto">
+        <div className="flex flex-wrap md:mt-10 md:max-w-6xl mx-auto items-start">
           {filteredStories.length > 0 ? (
-            filteredStories.map((story, index) => (
+            filteredStories.slice(0, visibleCount).map((story, index) => (
               <InViewCard key={story.id} index={index} story={story} />
             ))
           ) : (
@@ -277,9 +284,12 @@ export default function WorkMainPage() {
           )}
         </div>
 
-        {filteredStories.length > 0 && (
+        {filteredStories.length > visibleCount && (
           <div className="w-full flex justify-center mt-6 md:mt-10">
-            <button className="px-4 py-2 rounded-full bg-black text-white hover:bg-white hover:border-black border hover:text-black">
+            <button
+              onClick={() => setVisibleCount(prev => prev + 6)}
+              className="px-10 py-3 rounded-full bg-black text-white hover:bg-white hover:border-black border hover:text-black font-bold transition-all"
+            >
               See More
             </button>
           </div>
@@ -288,36 +298,39 @@ export default function WorkMainPage() {
 
       <RealTimeProjectMap apiBaseUrl={apiBaseUrl} />
 
-      <AnimatePresence>
-        {showPopup && (
-          <motion.div
-            className="fixed bottom-4 right-4 bg-pink-500 text-white p-4 rounded-lg shadow-lg z-10"
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={popupVariants}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="flex md:flex-row flex-col space-y-4 md:space-y-0 md:space-x-4 text-xs md:text-base">
-              <div className="bg-white rounded-md p-2 text-black text-center">
-                <img src="/business/google.png" className="w-16 h-6 mx-auto object-cover" alt="Google"></img>
-                <p>4.9</p>
-                <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
+      <div className="px-4 md:px-16">
+
+        <AnimatePresence>
+          {showPopup && (
+            <motion.div
+              className="fixed bottom-4 right-4 bg-pink-500 text-white p-4 rounded-lg shadow-lg z-10"
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={popupVariants}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="flex md:flex-row flex-col space-y-4 md:space-y-0 md:space-x-4 text-xs md:text-base">
+                <div className="bg-white rounded-md p-2 text-black text-center">
+                  <img src="/business/google.png" className="w-16 h-6 mx-auto object-cover" alt="Google"></img>
+                  <p>4.9</p>
+                  <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div className="bg-white rounded-md p-2 text-black text-center">
+                  <img src="/business/trustpilot.png" className="w-20 h-6 mx-auto object-cover" alt="Trustpilot"></img>
+                  <p>4.8</p>
+                  <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div className="bg-white rounded-md p-2 text-black text-center">
+                  <img src="/business/clutch.png" className="w-16 h-6 mx-auto object-cover" alt="Clutch"></img>
+                  <p>5</p>
+                  <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
+                </div>
               </div>
-              <div className="bg-white rounded-md p-2 text-black text-center">
-                <img src="/business/trustpilot.png" className="w-20 h-6 mx-auto object-cover" alt="Trustpilot"></img>
-                <p>4.8</p>
-                <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
-              </div>
-              <div className="bg-white rounded-md p-2 text-black text-center">
-                <img src="/business/clutch.png" className="w-16 h-6 mx-auto object-cover" alt="Clutch"></img>
-                <p>5</p>
-                <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
@@ -361,7 +374,7 @@ function InViewCard({ story, index }) {
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
       animate={controls}
-      className={`w-full md:w-1/2 md:px-12 mt-8 md:mb-16 ${index % 2 === 1 ? 'md:mt-[80px]' : ''}`}
+      className={`w-full md:w-1/2 px-4 md:px-8 mb-12 md:mb-24 ${index % 2 === 1 ? 'md:mt-32' : ''}`}
     >
       <Link href={`/Work/${story.id}`} className="block h-full group">
         <div className="bg-transparent flex flex-col h-full group-hover:-translate-y-2 transition-transform duration-500">

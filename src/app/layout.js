@@ -1,9 +1,8 @@
-// import localFont from "next/font/local";
-'use client'
 import "./globals.css";
-import { Provider } from "react-redux";
-// import store from "@/store/store";
-import { store } from "@/store";
+import StoreProvider from "@/components/StoreProvider";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import FooterReveal from "@/components/FooterReveal";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -28,10 +27,12 @@ export default function RootLayout({ children }) {
         className="font-manrope antialiased text-gray-900 min-h-screen overflow-x-hidden"
         suppressHydrationWarning
       >
-        <Provider store={store}>
-          {children}
-
-        </Provider>
+        <StoreProvider>
+          <FooterReveal footer={<Footer />}>
+            <Header />
+            {children}
+          </FooterReveal>
+        </StoreProvider>
 
       </body>
     </html>
