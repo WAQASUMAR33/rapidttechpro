@@ -16,6 +16,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import DarkAwardsSection from "@/components/DarkAwardsSection";
 import HighlightsSection from "@/components/HighlightsSection";
 import SuccessStories from "@/components/OurSuccessStories";
+import TeamSection from "@/components/TeamSection";
 
 export default function Home() {
   const successStoriesRef = useRef(null);
@@ -43,6 +44,7 @@ export default function Home() {
       <Industries />
       <DarkAwardsSection />
       <HighlightsSection />
+      <TeamSection />
       <div className=" w-full overflow-hidden">
         <Autoplayslider companyNames={companyNames} />
       </div>

@@ -9,6 +9,7 @@ import UserLayout from '../../UserLayout';
 import CallToAction from '@/components/CallToAction';
 import DottedWorldMap from '@/components/DottedWorldMap';
 
+
 export default function ProjectDetailPage() {
   const params = useParams();
   const projectId = params.id;
@@ -29,7 +30,16 @@ export default function ProjectDetailPage() {
     offset: ["start start", "end end"]
   });
 
-  const cardsY = useTransform(processProgress, [0, 1], ["0%", "-78%"]);
+  const fadeIn = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
+  const stagger = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+  };
+
 
   const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
   const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
@@ -230,7 +240,7 @@ export default function ProjectDetailPage() {
                 <img src={p.projectIcon} className="h-12 w-auto object-contain" alt="Logo" />
               )}
             </div>
-            <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-[1.1] tracking-tight">
+            <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-900 leading-[1.1] tracking-tight">
               {p.title}
             </h1>
             <div className="pt-2">
@@ -250,7 +260,7 @@ export default function ProjectDetailPage() {
         <section className="h-screen w-full flex items-center px-6 md:px-16 max-w-7xl mx-auto border-b border-gray-900/10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20 w-full items-center text-gray-900 relative">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-10 z-10">
-              <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter">About the client</h2>
+              <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tighter">About the client</h2>
               <p className="text-lg md:text-xl leading-relaxed font-bold">
                 {p.aboutText}
               </p>
@@ -281,18 +291,34 @@ export default function ProjectDetailPage() {
 
         {/* 4. INNOVATION SECTION */}
         <section className="pt-32 pb-16 px-6 md:px-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-start text-gray-900">
-          <div className="space-y-10">
-            <h2 className="text-3xl md:text-4xl font-bold leading-tight uppercase tracking-tighter">Innovation {p.title}</h2>
-            <p className="text-base md:text-lg leading-relaxed">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="space-y-10"
+          >
+            <motion.h2 variants={fadeIn} className="text-2xl md:text-3xl font-bold leading-tight uppercase tracking-tighter">Innovation {p.title}</motion.h2>
+            <motion.p variants={fadeIn} className="text-base md:text-lg leading-relaxed">
               {p.description || "We developed a comprehensive ecosystem that bridges the gap between complex backend data and a fluid, user-centric mobile experience."}
-            </p>
-          </div>
-          <div className="space-y-10">
+            </motion.p>
+          </motion.div>
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="space-y-10"
+          >
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest mb-6 px-1 opacity-50">Tech Stack:</p>
+              <motion.p variants={fadeIn} className="text-xs font-bold uppercase tracking-widest mb-6 px-1 opacity-50">Tech Stack:</motion.p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {p.technologies.slice(0, 4).map((tech, i) => (
-                  <div key={i} className="flex items-center gap-4 px-8 py-5 bg-gray-50 rounded-full border-2 border-transparent hover:border-bluish transition-all shadow-sm">
+                  <motion.div
+                    key={i}
+                    variants={fadeIn}
+                    className="flex items-center gap-4 px-8 py-5 bg-gray-50 rounded-full border-2 border-transparent hover:border-bluish transition-all shadow-sm"
+                  >
                     <div className="w-10 h-10 flex items-center justify-center shrink-0">
                       {tech.icon ? (
                         <img src={tech.icon} className="w-full h-full object-contain" alt={tech.name} />
@@ -301,27 +327,33 @@ export default function ProjectDetailPage() {
                       )}
                     </div>
                     <span className="text-xl font-bold tracking-tight">{tech.name}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-            <div className="pt-4">
+            <motion.div variants={fadeIn} className="pt-4">
               <p className="text-xs font-bold uppercase tracking-widest mb-2 px-1 opacity-50">Duration:</p>
               <p className="text-2xl font-bold px-1">{p.duration}</p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* 5. OUR CHALLENGE */}
         <section className="pt-16 md:pt-20 pb-20 md:pb-40 px-6 md:px-16 max-w-7xl mx-auto flex flex-col gap-16 md:gap-24">
 
           {/* Top Row: Text Description */}
-          <div className="max-w-3xl">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tighter">Our challenge</h2>
-            <p className="text-xl md:text-2xl text-gray-900 leading-relaxed font-bold opacity-80">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="max-w-3xl"
+          >
+            <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tighter uppercase">Our challenge</motion.h2>
+            <motion.p variants={fadeIn} className="text-xl md:text-2xl text-gray-900 leading-relaxed font-bold opacity-80">
               {p.challengeText}
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           {/* Bottom Row: 3 Staggered Mobile Mockups */}
           <div className="w-full flex flex-col md:flex-row items-center justify-between gap-10 md:gap-6 lg:gap-10">
@@ -365,7 +397,7 @@ export default function ProjectDetailPage() {
         <section className="px-6 md:px-16 max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-32 lg:gap-48 items-start relative py-20 md:py-40">
           {/* Left Column: Sticky Static Heading */}
           <div className="md:sticky md:top-40 w-full md:w-1/3">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight tracking-tighter">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight tracking-tighter uppercase">
               The <br className="hidden md:block" /> process
             </h2>
           </div>
@@ -373,15 +405,22 @@ export default function ProjectDetailPage() {
           {/* Right Column: Scrolling Cards */}
           <div className="w-full md:w-2/3 space-y-8 md:space-y-12">
             {p.processSteps.map((step, idx) => (
-              <div key={idx} className="bg-[#f2f2f2] p-8 md:p-14 rounded-[30px] md:rounded-[40px] border border-gray-200 group hover:shadow-xl transition-all">
+              <motion.div
+                key={idx}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeIn}
+                className="bg-[#f2f2f2] p-8 md:p-14 rounded-[30px] md:rounded-[40px] border border-gray-200 group hover:shadow-xl transition-all"
+              >
                 <div className="space-y-4">
                   <span className="text-4xl md:text-5xl font-bold text-gray-900 leading-none">0{idx + 1}</span>
-                  <h3 className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tight leading-tight">{step.title}</h3>
+                  <h3 className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tight leading-tight uppercase">{step.title}</h3>
                   <p className="text-lg md:text-xl text-gray-900 leading-relaxed font-medium opacity-70">
                     {step.desc}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
@@ -390,7 +429,7 @@ export default function ProjectDetailPage() {
         <section className="bg-black pt-16 md:pt-24 pb-16 md:pb-24 relative z-10">
           <div className="max-w-7xl mx-auto px-6 md:px-16 flex flex-col items-start text-left">
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="space-y-6">
-              <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tighter leading-tight max-w-4xl">
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tighter leading-tight max-w-4xl">
                 {p.blendingHeading.split('<br />').length > 1 ? (
                   <>
                     {p.blendingHeading.split('<br />')[0]} <br /> {p.blendingHeading.split('<br />')[1]}
@@ -441,18 +480,32 @@ export default function ProjectDetailPage() {
         {/* 9. HANDLING GROWTH */}
         <section className="bg-white text-gray-900 relative z-20">
           <div className="max-w-7xl mx-auto space-y-16 pt-10 md:pt-16 pb-32 px-6 md:px-16">
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold max-w-4xl uppercase tracking-tighter leading-tight">{p.growthHeading}</h2>
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeIn}
+              className="text-4xl md:text-[48px] font-bold max-w-4xl uppercase tracking-tighter leading-tight"
+            >
+              {p.growthHeading}
+            </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-              <div className="space-y-8">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={stagger}
+                className="space-y-8"
+              >
                 {p.growthStats.map(stat => (
-                  <div key={stat} className="flex items-center gap-6 group">
+                  <motion.div key={stat} variants={fadeIn} className="flex items-center gap-6 group">
                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-bluish flex items-center justify-center shrink-0 shadow-[0_0_30px_rgba(15,181,183,0.3)]">
                       <svg className="w-5 h-5 md:w-6 md:h-6 text-black" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" /></svg>
                     </div>
                     <span className="text-lg md:text-xl font-bold group-hover:text-bluish transition-all tracking-tight">{stat}</span>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
               <div className="rounded-[40px] md:rounded-[80px] bg-gray-100 p-2 md:p-5 h-[400px] md:h-[600px] shadow-inner overflow-hidden border-2 border-gray-200">
                 <img src={p.gallery[4 % p.gallery.length] || p.imageUrl} className="w-full h-full object-cover rounded-[30px] md:rounded-[60px]" alt="Growth Visual" />
               </div>
@@ -463,17 +516,23 @@ export default function ProjectDetailPage() {
         {/* 9. ADAPTABLE DESIGN & AR FEATURES */}
         <section className="bg-white py-32 md:py-48 px-6 md:px-16 overflow-hidden">
           <div className="max-w-7xl mx-auto flex flex-col items-start">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="space-y-6 mb-24 max-w-4xl">
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tighter leading-tight">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={stagger}
+              className="space-y-6 mb-24 max-w-4xl"
+            >
+              <motion.h2 variants={fadeIn} className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tighter leading-tight uppercase">
                 {p.arHeading.split('<br />').length > 1 ? (
                   <>
                     {p.arHeading.split('<br />')[0]} <br /> {p.arHeading.split('<br />')[1]}
                   </>
                 ) : p.arHeading}
-              </h2>
-              <p className="text-base md:text-lg text-gray-500 font-medium leading-relaxed max-w-3xl">
+              </motion.h2>
+              <motion.p variants={fadeIn} className="text-base md:text-lg text-gray-500 font-medium leading-relaxed max-w-3xl">
                 {p.arDescription}
-              </p>
+              </motion.p>
             </motion.div>
 
             {/* Staggered Mobile Mockups */}
@@ -517,18 +576,24 @@ export default function ProjectDetailPage() {
         {/* 10. STATIC BRAND NARRATIVE (Generalized) */}
         <section className="bg-white py-24 md:py-32 px-6 md:px-16 overflow-hidden border-t border-gray-100">
           <div className="max-w-7xl mx-auto flex flex-col items-start text-left">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="space-y-10 max-w-5xl">
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tighter leading-tight">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={stagger}
+              className="space-y-10 max-w-5xl"
+            >
+              <motion.h2 variants={fadeIn} className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tighter leading-tight uppercase">
                 Fostering digital excellence <br /> and innovation for {p.title}
-              </h2>
-              <div className="space-y-8">
-                <p className="text-lg md:text-xl text-gray-600 font-medium leading-relaxed">
+              </motion.h2>
+              <motion.div variants={stagger} className="space-y-8">
+                <motion.p variants={fadeIn} className="text-lg md:text-xl text-gray-600 font-medium leading-relaxed">
                   {p.title} emerged as a trailblazing solution precisely developed to meet the evolving needs of its users. This innovative platform allows for enhanced engagement and streamlined management, giving users the freedom to connect, collaborate, and thrive within their specific industry.
-                </p>
-                <p className="text-lg md:text-xl text-gray-600 font-medium leading-relaxed">
+                </motion.p>
+                <motion.p variants={fadeIn} className="text-lg md:text-xl text-gray-600 font-medium leading-relaxed">
                   The design and development of this project by the RapidTechPro team involved a strategic blend of creativity and technical expertise. The result is a vibrant, interactive network that brings together diverse functionalities into a common platform that is not only visually stunning but also technically robust, ensuring a seamless experience for all daily operational needs.
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
             </motion.div>
           </div>
         </section>
@@ -553,7 +618,7 @@ export default function ProjectDetailPage() {
         {p.gallery?.length > 0 && (
           <section className="pt-24 md:pt-32 pb-0 bg-gray-50 overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 md:px-16 mb-16 md:mb-24 text-center">
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 tracking-tighter uppercase mb-6">Project Showcase</h2>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tighter uppercase mb-6">Project Showcase</h2>
               <p className="text-xl md:text-2xl text-gray-500 font-medium">A closer look at the project's visual journey and interface design.</p>
             </div>
 
@@ -604,12 +669,24 @@ export default function ProjectDetailPage() {
             </div>
 
             <div className="flex-grow space-y-16">
-              <h2 className="text-4xl md:text-6xl font-bold text-gray-900 tracking-tighter leading-tight uppercase">
+              <motion.h2
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeIn}
+                className="text-4xl md:text-[48px] font-bold text-gray-900 tracking-tighter leading-tight uppercase"
+              >
                 {p.resultsHeading}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-12">
+              </motion.h2>
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={stagger}
+                className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-12"
+              >
                 {p.resultsList.map((item, i) => (
-                  <div key={i} className="flex items-center gap-6 group">
+                  <motion.div key={i} variants={fadeIn} className="flex items-center gap-6 group">
                     <div className="w-8 h-8 rounded-full bg-bluish flex items-center justify-center shrink-0">
                       <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -618,9 +695,9 @@ export default function ProjectDetailPage() {
                     <span className="text-lg md:text-2xl font-bold text-gray-900 tracking-tight leading-tight">
                       {item}
                     </span>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
