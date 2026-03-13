@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { FaLinkedin, FaFacebook, FaYoutube, FaGlobe } from 'react-icons/fa';
+import { FaLinkedin, FaFacebook, FaYoutube, FaGlobe, FaTiktok, FaInstagram } from 'react-icons/fa';
 import { RiTwitterXFill } from 'react-icons/ri';
 import Link from 'next/link';
 
@@ -116,92 +116,66 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="w-full border-t border-gray-800 mb-6 opacity-30"></div>
+        <div className="w-full border-t border-gray-800 mb-8 opacity-20"></div>
 
         {/* Locations Section */}
-        <div className="mb-8">
-          <div className="flex items-center gap-1.5 mb-6">
-            <div className="w-1 h-1 rounded-full bg-bluish"></div>
-            <h3 className="text-[9px] uppercase tracking-[0.2em] text-gray-500 font-bold">Locations</h3>
+        <div className="mb-12">
+          <div className="flex items-center gap-1.5 mb-8">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#0FB5B7]"></div>
+            <h3 className="text-[10px] uppercase tracking-[0.2em] text-[#0FB5B7] font-bold">Locations</h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
-              <h4 className="text-lg font-bold mb-2">West Palm Beach</h4>
-              <p className="text-gray-500 text-[11px] leading-relaxed max-w-[180px]">
-                550 Village Blvd., Suite 120 #3, <br />
-                West Palm Beach, FL 33409, <br />
-                United States
-              </p>
-            </div>
-            <div>
-              <h4 className="text-lg font-bold mb-2">Manchester</h4>
-              <p className="text-gray-500 text-[11px] leading-relaxed max-w-[180px]">
-                73 Meadway, Bramhall <br />
-                Stockport, Manchester - SK7 1LX, <br />
-                United Kingdom
-              </p>
-            </div>
-            <div>
-              <h4 className="text-lg font-bold mb-2">Dubai</h4>
-              <p className="text-gray-500 text-[11px] leading-relaxed max-w-[180px]">
-                IFZA Business Park, <br />
-                Dubai Silicon Oasis, DXB-75900, <br />
+              <h4 className="text-xl font-bold mb-4">Dubai</h4>
+              <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+                Building 11, Level 7, Bay Square, <br />
+                Business Bay, Dubai - 23304, <br />
                 United Arab Emirates
               </p>
             </div>
             <div>
-              <h4 className="text-lg font-bold mb-2">Karachi</h4>
-              <p className="text-gray-500 text-[11px] leading-relaxed max-w-[180px]">
-                54C, Kashmir Road, Block 2, <br />
-                PECHS, Karachi, Sindh - 75400, <br />
+              <h4 className="text-xl font-bold mb-4">Mandi Bahauddin</h4>
+              <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+                54C, Phalia Road, Punjab Center, <br />
+                Mandi Bahauddin - 75400, <br />
                 Pakistan
               </p>
             </div>
           </div>
         </div>
 
-        <div className="w-full border-t border-gray-800 mb-6 opacity-30"></div>
+        <div className="w-full border-t border-gray-800 mb-10 opacity-20"></div>
 
         {/* Contact and Bottom Bar */}
-        <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-8 pt-2">
+        <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-10 pt-4">
           {/* Contact Left */}
           <div className="w-full md:w-auto flex flex-col items-center md:items-start text-center md:text-left">
-            <div className="flex items-center gap-1.5 mb-4">
-              <div className="w-1 h-1 rounded-full bg-bluish"></div>
-              <h3 className="text-[9px] uppercase tracking-[0.2em] text-gray-500 font-bold">Contact</h3>
-            </div>
-            <a href="tel:8669782220" className="text-xl md:text-2xl font-bold block mb-1 hover:text-bluish transition-colors tracking-tighter leading-none">866-978-2220</a>
-            <a href="mailto:info@rapidtechpro.com" className="text-sm font-bold text-gray-500 hover:text-bluish transition-colors">info@rapidtechpro.com</a>
+            <a href="tel:+923403051059" className="text-2xl md:text-3xl font-bold block mb-2 hover:text-[#0FB5B7] transition-colors tracking-tighter leading-none">+92 340 3051059</a>
+            <a href="mailto:info@rapidtechpro.com" className="text-lg text-gray-400 hover:text-[#0FB5B7] transition-colors">info@rapidtechpro.com</a>
           </div>
 
           {/* Logo Center */}
           <div className="flex flex-col items-center">
-            <div className="text-xl font-black tracking-tighter mb-2 flex items-baseline leading-none">
-              rapidtechpro<span className="text-bluish text-2xl leading-[0]">.</span>
+            <div className="text-2xl font-bold tracking-tighter mb-2 flex items-baseline leading-none">
+              <span className="text-white">RapidTech</span><span className="text-[#0FB5B7]">Pro</span>
             </div>
-            <p className="text-gray-600 text-[8px] uppercase tracking-[0.2em] font-bold">© 2026 RapidTechPro. All Rights Reserved</p>
-            <div className="mt-4 flex items-center gap-2 opacity-30 scale-75">
-              <div className="flex items-center gap-1 border border-bluish px-1.5 py-0.5 rounded">
-                <span className="text-bluish text-[6px] font-black uppercase tracking-tighter">DMCA</span>
-                <span className="text-white text-[6px] font-black uppercase tracking-tighter">Protected</span>
-              </div>
-            </div>
+            <p className="text-gray-500 text-[11px] font-medium">© 2024 RapidTechPro All Rights Reserved</p>
           </div>
 
           {/* Socials Right */}
-          <div className="flex flex-col items-center md:items-end gap-3">
-            <div className="flex gap-4 text-base">
-              <a href="#" className="text-gray-600 hover:text-bluish transition-all"><FaLinkedin /></a>
-              <a href="#" className="text-gray-600 hover:text-bluish transition-all"><RiTwitterXFill /></a>
-              <a href="#" className="text-gray-600 hover:text-bluish transition-all"><FaFacebook /></a>
-              <a href="#" className="text-gray-600 hover:text-bluish transition-all"><FaGlobe /></a>
-              <a href="#" className="text-gray-600 hover:text-bluish transition-all"><FaYoutube /></a>
+          <div className="flex flex-col items-center md:items-end gap-5">
+            <div className="flex gap-5 text-xl">
+              <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><FaLinkedin /></a>
+              <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><FaTiktok /></a>
+              <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><RiTwitterXFill /></a>
+              <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><FaFacebook /></a>
+              <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><FaInstagram /></a>
+              <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><FaYoutube /></a>
             </div>
-            <div className="flex items-center gap-2 text-[7px] uppercase tracking-widest text-gray-700 font-black">
-              <a href="/Company/Privacy-Policy" className="hover:text-white transition-colors">Privacy Policy</a>
-              <span className="opacity-20">|</span>
-              <a href="/Company/Terms-Of-Service" className="hover:text-white transition-colors">Terms & Conditions</a>
+            <div className="flex items-center gap-6 text-[12px] font-semibold text-gray-400">
+              <a href="/Company/Privacy-Policy" className="hover:text-[#0FB5B7] transition-colors">Privacy Policy</a>
+              <a href="/Company/Terms-Of-Service" className="hover:text-[#0FB5B7] transition-colors">Terms Of Service</a>
             </div>
           </div>
         </div>
