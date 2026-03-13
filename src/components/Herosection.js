@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect, useRef } from "react";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaPlay } from "react-icons/fa";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { openPopup } from "@/store/popupSlice";
@@ -60,18 +60,29 @@ export default function HeroSection() {
             />
             <div className="relative flex flex-col justify-center items-center h-full w-full pt-32 bg-black bg-opacity-50">
                 <div className="w-full max-w-2xl lg:max-w-5xl px-4 sm:px-12 text-left flex flex-col items-start">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-white">
-                        Your Trusted Custom <span className="text-bluish">Software Development</span>
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-[1.1] tracking-tight">
+                        Your Trusted <span className="text-bluish">Custom Software</span>
                         <br />
-                        Company.
+                        Development Partner.
                     </h1>
-                    <p className="max-w-2xl text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl tracking-wide text-white mt-4">
-                        Are you struggling with manual processes?
-                        At RapidTechPro, we specialize in creating custom software solutions that automate your workflows, allowing you to break free from tedious, time-consuming tasks and focus on what truly matters.
+                    <p className="max-w-2xl text-base md:text-lg lg:text-xl text-white/90 mt-6 leading-relaxed">
+                        Struggling with manual processes? We specialize in custom software solutions that automate your workflows — freeing you to focus on what truly matters.
                     </p>
-                    <div className="md:hidden flex justify-start mt-8 w-full">
-                        <button className="bg-bluish text-white px-6 py-3 rounded-full text-sm font-medium" onClick={() => dispatch(openPopup())}>
-                            Let's Talk About Your Project
+
+                    <div className="flex flex-wrap gap-4 mt-10">
+                        <button
+                            onClick={() => dispatch(openPopup())}
+                            className="group bg-bluish text-white px-6 py-3.5 md:px-8 md:py-4 rounded-full flex items-center gap-2 text-sm md:text-base font-bold hover:bg-[#0da0a2] transition-all shadow-lg shadow-bluish/20"
+                        >
+                            Book Free Consultancy <FaArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
+                        </button>
+                        <button
+                            className="group border border-white/30 bg-white/5 backdrop-blur-md text-white px-6 py-3.5 md:px-8 md:py-4 rounded-full flex items-center gap-2 text-sm md:text-base font-bold hover:bg-white/10 transition-all"
+                        >
+                            <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-white/10 flex items-center justify-center">
+                                <FaPlay className="text-[10px] md:text-[8px] ml-0.5" />
+                            </div>
+                            See Our Work
                         </button>
                     </div>
                 </div>
