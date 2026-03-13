@@ -59,8 +59,8 @@ export default function HeroSection() {
                 playsInline
             />
             <div className="relative flex flex-col justify-center items-center h-full w-full pt-32 bg-black bg-opacity-50">
-                <div className="w-full max-w-2xl lg:max-w-5xl px-4 sm:px-12 text-left flex flex-col items-start">
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-[1.1] tracking-tight">
+                <div className="w-full max-w-2xl lg:max-w-4xl px-4 sm:px-12 text-left flex flex-col items-start">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] tracking-tight">
                         Your Trusted <span className="text-bluish">Custom Software</span>
                         <br />
                         Development Partner.
