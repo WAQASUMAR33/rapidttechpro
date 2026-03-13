@@ -407,16 +407,16 @@ export default function ProjectDetailPage() {
             {p.processSteps.map((step, idx) => (
               <motion.div
                 key={idx}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-20%" }}
-                variants={fadeIn}
-                className="bg-[#f2f2f2] p-8 md:p-14 rounded-[30px] md:rounded-[40px] border border-gray-200 group hover:shadow-xl transition-all"
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+                className="bg-[#f2f2f2] p-6 md:p-10 rounded-[30px] md:rounded-[40px] border border-gray-200 group hover:shadow-xl transition-all"
               >
                 <div className="space-y-4">
-                  <span className="text-5xl md:text-6xl font-bold text-gray-900 leading-none">0{idx + 1}</span>
-                  <h3 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight leading-tight">{step.title}</h3>
-                  <p className="text-lg md:text-xl text-gray-900 leading-relaxed font-medium opacity-80">
+                  <span className="text-4xl md:text-5xl font-bold text-gray-900 leading-none">0{idx + 1}</span>
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight leading-tight">{step.title}</h3>
+                  <p className="text-base md:text-lg text-gray-900 leading-relaxed font-medium opacity-80">
                     {step.desc}
                   </p>
                 </div>
