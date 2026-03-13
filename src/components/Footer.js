@@ -35,7 +35,7 @@ export default function Footer() {
         }
 
         if (servicesData.length > 0) {
-          setFooterServices(servicesData.map((svc) => ({
+          setFooterServices(servicesData.slice(0, 6).map((svc) => ({
             title: svc.title || svc.name,
             slug: svc.slug || (svc.title || svc.name)?.replace(/\s+/g, '-'),
           })));
@@ -49,17 +49,17 @@ export default function Footer() {
 
   return (
     <footer className="bg-black text-white w-full relative z-0 min-h-screen flex flex-col justify-center">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-8 pb-6 md:pt-10 md:pb-8">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-12 pb-6">
 
         {/* Main Links Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6 mb-6">
           {/* Company */}
           <div>
-            <div className="flex items-center gap-1.5 mb-4">
-              <div className="w-1 h-1 rounded-full bg-bluish"></div>
-              <h3 className="text-[9px] uppercase tracking-[0.2em] text-gray-500 font-bold">Company</h3>
+            <div className="flex items-center gap-1.5 mb-2">
+              <div className="w-1 h-1 rounded-full bg-[#0FB5B7]"></div>
+              <h3 className="text-[9px] uppercase tracking-[0.2em] text-[#0FB5B7] font-bold">Company</h3>
             </div>
-            <ul className="flex flex-col gap-2 text-white">
+            <ul className="flex flex-col gap-1 text-white">
               <li><a href="/AboutUs" className="text-lg md:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">About Us</a></li>
               <li><a href="/Company/Testimonials" className="text-lg md:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Testimonials</a></li>
               <li><a href="/Company/Process" className="text-lg md:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Process</a></li>
@@ -69,11 +69,11 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <div className="flex items-center gap-1.5 mb-4">
-              <div className="w-1 h-1 rounded-full bg-bluish"></div>
-              <h3 className="text-[9px] uppercase tracking-[0.2em] text-gray-500 font-bold">Resources</h3>
+            <div className="flex items-center gap-1.5 mb-2">
+              <div className="w-1 h-1 rounded-full bg-[#0FB5B7]"></div>
+              <h3 className="text-[9px] uppercase tracking-[0.2em] text-[#0FB5B7] font-bold">Resources</h3>
             </div>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-1">
               <li><a href="/blog" className="text-lg md:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Blog</a></li>
               <li><a href="/Company/Events" className="text-lg md:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Events</a></li>
               <li><a href="/Company/Press-Release" className="text-lg md:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Press Release</a></li>
@@ -83,11 +83,11 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <div className="flex items-center gap-1.5 mb-4">
-              <div className="w-1 h-1 rounded-full bg-bluish"></div>
-              <h3 className="text-[9px] uppercase tracking-[0.2em] text-gray-500 font-bold">Services</h3>
+            <div className="flex items-center gap-1.5 mb-2">
+              <div className="w-1 h-1 rounded-full bg-[#0FB5B7]"></div>
+              <h3 className="text-[9px] uppercase tracking-[0.2em] text-[#0FB5B7] font-bold">Services</h3>
             </div>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-1">
               {footerServices.map((svc) => (
                 <li key={svc.slug}>
                   <Link
@@ -103,11 +103,11 @@ export default function Footer() {
 
           {/* Insights */}
           <div>
-            <div className="flex items-center gap-1.5 mb-4">
-              <div className="w-1 h-1 rounded-full bg-bluish"></div>
-              <h3 className="text-[9px] uppercase tracking-[0.2em] text-gray-500 font-bold">Insights</h3>
+            <div className="flex items-center gap-1.5 mb-2">
+              <div className="w-1 h-1 rounded-full bg-[#0FB5B7]"></div>
+              <h3 className="text-[9px] uppercase tracking-[0.2em] text-[#0FB5B7] font-bold">Insights</h3>
             </div>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-1">
               <li><a href="/University" className="text-lg md:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">University</a></li>
               <li><a href="/Company/Careers" className="text-lg md:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Careers</a></li>
               <li><a href="/Company/Manifesto" className="text-lg md:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Manifesto</a></li>
@@ -116,18 +116,18 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="w-full border-t border-gray-800 mb-8 opacity-20"></div>
+        <div className="w-full border-t border-gray-800 mb-6 opacity-20"></div>
 
         {/* Locations Section */}
-        <div className="mb-12">
-          <div className="flex items-center gap-1.5 mb-8">
+        <div className="mb-8">
+          <div className="flex items-center gap-1.5 mb-6">
             <div className="w-1.5 h-1.5 rounded-full bg-[#0FB5B7]"></div>
             <h3 className="text-[10px] uppercase tracking-[0.2em] text-[#0FB5B7] font-bold">Locations</h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <h4 className="text-xl font-bold mb-4">Dubai</h4>
+              <h4 className="text-xl font-bold mb-2">Dubai</h4>
               <p className="text-gray-400 text-sm md:text-base leading-relaxed">
                 Building 11, Level 7, Bay Square, <br />
                 Business Bay, Dubai - 23304, <br />
@@ -135,7 +135,7 @@ export default function Footer() {
               </p>
             </div>
             <div>
-              <h4 className="text-xl font-bold mb-4">Mandi Bahauddin</h4>
+              <h4 className="text-xl font-bold mb-2">Mandi Bahauddin</h4>
               <p className="text-gray-400 text-sm md:text-base leading-relaxed">
                 54C, Phalia Road, Punjab Center, <br />
                 Mandi Bahauddin - 75400, <br />
