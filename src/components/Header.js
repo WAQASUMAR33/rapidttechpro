@@ -106,109 +106,110 @@ export default function Header() {
     return (
         <>
             <header
-                className={`fixed top-0 left-0 z-50 w-full h-20 flex items-center justify-between px-6 sm:px-12 lg:px-20 transition-all duration-300 ${isVisible ? "translate-y-0" : "-translate-y-20"
+                className={`fixed top-0 left-0 z-50 w-full h-20 flex items-center transition-all duration-300 ${isVisible ? "translate-y-0" : "-translate-y-20"
                     } ${isScrolled ? "bg-white text-black shadow-md border-b border-gray-100" : (isLightPage ? "bg-transparent text-black" : "bg-transparent text-white")}`}
             >
-                {/* Logo */}
-                <Link href="/" className="text-xl md:text-[23px] font-bold flex items-center gap-2.5 tracking-tighter group">
-                    {!logoError ? (
-                        <img
-                            src="/company/logo.png"
-                            alt="RapidTechPro Logo"
-                            className={`h-8 w-auto object-contain transition-all duration-300 ${isScrolled || isLightPage ? "" : "brightness-0 invert"}`}
-                            onError={() => setLogoError(true)}
-                        />
-                    ) : (
-                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-black text-white ${isScrolled || isLightPage ? "bg-[#0FB5B7]" : "bg-white/20"}`}>R</div>
-                    )}
-                    <span className={`transition-colors duration-300 ${isScrolled || isLightPage ? "text-black group-hover:text-[#0FB5B7]" : "text-white group-hover:text-white/80"}`}>
-                        Rapid<span className="text-[#0FB5B7]">TechPro</span>.
-                    </span>
-                </Link>
+                <div className="w-full max-w-[1400px] mx-auto flex items-center justify-between px-6 sm:px-12 lg:px-16 2xl:px-24">
+                    {/* Logo */}
+                    <Link href="/" className="text-xl md:text-[23px] font-bold flex items-center gap-2.5 tracking-tighter group">
+                        {!logoError ? (
+                            <img
+                                src="/company/logo.png"
+                                alt="RapidTechPro Logo"
+                                className={`h-8 w-auto object-contain transition-all duration-300 ${isScrolled || isLightPage ? "" : "brightness-0 invert"}`}
+                                onError={() => setLogoError(true)}
+                            />
+                        ) : (
+                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-black text-white ${isScrolled || isLightPage ? "bg-[#0FB5B7]" : "bg-white/20"}`}>R</div>
+                        )}
+                        <span className={`transition-colors duration-300 ${isScrolled || isLightPage ? "text-black group-hover:text-[#0FB5B7]" : "text-white group-hover:text-white/80"}`}>
+                            Rapid<span className="text-[#0FB5B7]">TechPro</span>.
+                        </span>
+                    </Link>
 
-                {/* Desktop Nav Links */}
-                <nav className="hidden xl:flex items-center space-x-8 lg:space-x-12 text-[14px] tracking-tight">
-                    <div
-                        className="relative"
-                        onMouseEnter={() => setIsSolutionsOpen(true)}
-                        onMouseLeave={() => setIsSolutionsOpen(false)}
-                    >
-                        <Link href="/Services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Services</Link>
-                        {/* Full-Screen Mega Menu */}
-                        {isSolutionsOpen && (
-                            <div
-                                className="fixed top-[80px] inset-x-0 bg-white hidden md:flex justify-center z-40 max-h-[calc(100vh-80px)] overflow-y-auto shadow-2xl border-t border-gray-100"
-                                onClick={closeMegaMenu}
-                            >
+                    {/* Desktop Nav Links */}
+                    <nav className="hidden xl:flex items-center space-x-8 lg:space-x-12 text-[14px] tracking-tight">
+                        <div
+                            className="relative"
+                            onMouseEnter={() => setIsSolutionsOpen(true)}
+                            onMouseLeave={() => setIsSolutionsOpen(false)}
+                        >
+                            <Link href="/Services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Services</Link>
+                            {/* Full-Screen Mega Menu */}
+                            {isSolutionsOpen && (
                                 <div
-                                    className="w-full max-w-7xl mx-auto p-12 lg:p-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 text-black bg-white"
-                                    onClick={(e) => e.stopPropagation()}
+                                    className="fixed top-[80px] inset-x-0 bg-white hidden md:flex justify-center z-40 max-h-[calc(100vh-80px)] overflow-y-auto shadow-2xl border-t border-gray-100"
+                                    onClick={closeMegaMenu}
                                 >
-                                    <div className="flex">
-                                        <div className="px-4 w-full">
-                                            <h1 className="text-xl md:text-3xl font-bold flex justify-between w-full">Solutions <FaArrowRight className="text-[#0FB5B7]" /></h1>
-                                        </div>
-                                        <div className="h-24 border-r border-gray-200"></div>
-                                    </div>
-                                    {/* Dynamic service columns */}
-                                    {Array.from({ length: Math.ceil(navServices.length / 2) }, (_, i) => navServices.slice(i * 2, i * 2 + 2)).map((chunk, colIdx) => (
-                                        <div key={colIdx} className="flex justify-between">
-                                            <div className="flex flex-col gap-4">
-                                                {chunk.map((svc) => (
-                                                    <Link
-                                                        key={svc.slug}
-                                                        href={`/Services/${svc.slug}`}
-                                                        className="text-gray-800 hover:text-[#0FB5B7] font-semibold text-base transition-colors"
-                                                        onClick={closeMegaMenu}
-                                                    >
-                                                        {svc.title}
-                                                    </Link>
-                                                ))}
+                                    <div
+                                        className="w-full max-w-7xl mx-auto p-12 lg:p-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 text-black bg-white"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <div className="flex">
+                                            <div className="px-4 w-full">
+                                                <h1 className="text-xl md:text-3xl font-bold flex justify-between w-full">Solutions <FaArrowRight className="text-[#0FB5B7]" /></h1>
                                             </div>
                                             <div className="h-24 border-r border-gray-200"></div>
                                         </div>
-                                    ))}
+                                        {/* Dynamic service columns */}
+                                        {Array.from({ length: Math.ceil(navServices.length / 2) }, (_, i) => navServices.slice(i * 2, i * 2 + 2)).map((chunk, colIdx) => (
+                                            <div key={colIdx} className="flex justify-between">
+                                                <div className="flex flex-col gap-4">
+                                                    {chunk.map((svc) => (
+                                                        <Link
+                                                            key={svc.slug}
+                                                            href={`/Services/${svc.slug}`}
+                                                            className="text-gray-800 hover:text-[#0FB5B7] font-semibold text-base transition-colors"
+                                                            onClick={closeMegaMenu}
+                                                        >
+                                                            {svc.title}
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                                <div className="h-24 border-r border-gray-200"></div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                    </div>
-                    <Link href="/" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Industries</Link>
-                    <div
-                        className="relative"
-                        onMouseEnter={() => setIsSolutionsOpen(true)}
-                        onMouseLeave={() => setIsSolutionsOpen(false)}
-                    >
-                        <Link href="/Services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Solutions</Link>
-                    </div>
-                    <Link href="/Work" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Work</Link>
-                    <Link href="/Company" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Company</Link>
-                    <Link href="/ContactUs" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Contact</Link>
-                </nav>
+                            )}
+                        </div>
+                        <div
+                            className="relative"
+                            onMouseEnter={() => setIsSolutionsOpen(true)}
+                            onMouseLeave={() => setIsSolutionsOpen(false)}
+                        >
+                            <Link href="/Services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Solutions</Link>
+                        </div>
+                        <Link href="/Work" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Work</Link>
+                        <Link href="/Company" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Company</Link>
+                        <Link href="/ContactUs" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Contact</Link>
+                    </nav>
 
-                {/* Contact & Button - Desktop Only */}
-                <div className="hidden md:flex items-center space-x-6">
-                    <Link href="tel:8669782220" className={`flex items-center gap-2 text-sm lg:text-base font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>
-                        <BsTelephone className="text-sm" />
-                        <span className="hidden lg:inline">866-978-2220</span>
-                    </Link>
-                    <button
-                        className="px-8 py-3 rounded-full font-bold bg-black text-white hover:bg-black/90 transition-all text-sm tracking-tight shadow-md"
-                        onClick={() => dispatch(openPopup())}
-                    >
-                        Get in Touch
+                    {/* Contact & Button - Desktop Only */}
+                    <div className="hidden md:flex items-center space-x-6">
+                        <Link href="tel:8669782220" className={`flex items-center gap-2 text-sm lg:text-base font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>
+                            <BsTelephone className="text-sm" />
+                            <span className="hidden lg:inline">866-978-2220</span>
+                        </Link>
+                        <button
+                            className="px-8 py-3 rounded-full font-bold bg-black text-white hover:bg-black/90 transition-all text-sm tracking-tight shadow-md"
+                            onClick={() => dispatch(openPopup())}
+                        >
+                            Get in Touch
+                        </button>
+                    </div>
+
+                    {/* Toggle Button - Mobile Only */}
+                    <button className="md:hidden text-2xl" onClick={toggleSidebar}>
+                        {isSidebarOpen ? <FaTimes /> : <FaBars />}
                     </button>
                 </div>
-
-                {/* Toggle Button - Mobile Only */}
-                <button className="md:hidden text-2xl" onClick={toggleSidebar}>
-                    {isSidebarOpen ? <FaTimes /> : <FaBars />}
-                </button>
             </header>
 
             {/* Sidebar - Mobile Only */}
             <aside
                 className={`fixed top-0 right-0 w-full sm:w-80 h-full bg-black/95 text-white transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
-                    } transition-transform duration-300 ease-in-out z-40 shadow-2xl overflow-y-auto`}
+                    } transition-transform duration-300 ease-in-out z-[60] shadow-2xl overflow-y-auto`}
             >
                 <div className="flex flex-col items-start p-6 space-y-6">
                     {/* Logo in Sidebar */}
@@ -217,11 +218,11 @@ export default function Header() {
                     </Link>
 
                     {/* Navigation Links */}
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-4 w-full">
                         <Link href="/Services" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                             Services
                         </Link>
-                        <div className="flex flex-col gap-2 pl-3 border-l border-gray-600">
+                        <div className="flex flex-col gap-2 pl-3 border-l border-gray-600 mb-2">
                             {navServices.map((svc) => (
                                 <Link
                                     key={svc.slug}
@@ -233,25 +234,22 @@ export default function Header() {
                                 </Link>
                             ))}
                         </div>
+                        <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                            Solutions
+                        </Link>
+                        <Link href="/Work" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                            Work
+                        </Link>
+                        <Link href="/Company" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                            Company
+                        </Link>
+                        <Link href="/ContactUs" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                            Contact
+                        </Link>
                     </div>
-                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
-                        Industries
-                    </Link>
-                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
-                        Solutions
-                    </Link>
-                    <Link href="/Work" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
-                        Work
-                    </Link>
-                    <Link href="/Company" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
-                        Company
-                    </Link>
-                    <Link href="/ContactUs" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
-                        Contact
-                    </Link>
 
                     {/* Contact Info & Button */}
-                    <div className="flex flex-col items-start space-y-3 mt-6">
+                    <div className="flex flex-col items-start space-y-3 mt-6 w-full">
                         <Link href="tel:8669782220" className="flex items-center gap-2 text-base sm:text-lg">
                             <BsTelephone />
                             866-978-2220
@@ -264,9 +262,13 @@ export default function Header() {
             </aside>
 
             {isOpenGetinTouch && (
-                <div className="fixed md:right-0 z-50 flex items-center justify-center">
-                    <div className="text-white p-6 max-w-2xl h-full w-full relative" style={{ background: 'linear-gradient(160deg, #0a1628 0%, #0d2235 100%)', borderLeft: '1px solid rgba(15,181,183,0.2)' }}>
-                        <button onClick={() => dispatch(closePopup())} className="absolute top-4 right-4 text-black text-2xl bg-white w-10 h-10 rounded-full flex justify-center items-center font-bold hover:bg-gray-100 transition-colors">&times;</button>
+                <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
+                    <div
+                        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                        onClick={() => dispatch(closePopup())}
+                    ></div>
+                    <div className="text-white p-6 sm:p-10 max-w-2xl w-full relative h-[90vh] overflow-y-auto rounded-2xl shadow-2xl" style={{ background: 'linear-gradient(160deg, #0a1628 0%, #0d2235 100%)', border: '1px solid rgba(15,181,183,0.2)' }}>
+                        <button onClick={() => dispatch(closePopup())} className="absolute top-4 right-4 text-black text-2xl bg-white w-10 h-10 rounded-full flex justify-center items-center font-bold hover:bg-gray-100 transition-colors z-10">&times;</button>
 
                         {/* Teal glow */}
                         <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] pointer-events-none opacity-20" style={{ background: '#0FB5B7', transform: 'translate(30%, -30%)' }} />
@@ -294,7 +296,7 @@ export default function Header() {
                             ))}
                         </div>
 
-                        <form className="space-y-3">
+                        <form className="space-y-4">
                             <input
                                 type="text"
                                 placeholder="Full Name"
@@ -303,7 +305,7 @@ export default function Header() {
                                 onFocus={e => e.target.style.borderColor = '#0FB5B7'}
                                 onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
                             />
-                            <div className="flex gap-3">
+                            <div className="flex flex-col sm:flex-row gap-3">
                                 <input
                                     type="email"
                                     placeholder="Email"
@@ -324,13 +326,13 @@ export default function Header() {
                             <textarea
                                 placeholder="Project details / Message"
                                 className="w-full p-3 rounded-xl text-white text-sm outline-none resize-none placeholder-gray-500"
-                                rows="3"
+                                rows="4"
                                 style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
                                 onFocus={e => e.target.style.borderColor = '#0FB5B7'}
                                 onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
                             />
 
-                            <div className="flex flex-wrap justify-between text-xs text-gray-500 py-1">
+                            <div className="flex flex-wrap justify-between text-[10px] uppercase tracking-widest font-bold text-gray-500 py-2">
                                 {['Free Consultancy', 'Road Map', 'Collaboration', 'Execution'].map(b => (
                                     <span key={b} className="flex items-center gap-1">
                                         <svg className="w-3 h-3" fill="#0FB5B7" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
@@ -341,14 +343,14 @@ export default function Header() {
 
                             <button
                                 type="submit"
-                                className="w-full mt-2 p-3 rounded-xl text-white font-bold text-base transition-all hover:opacity-90"
+                                className="w-full p-4 rounded-xl text-white font-bold text-base transition-all hover:opacity-90 active:scale-[0.98]"
                                 style={{ background: 'linear-gradient(135deg, #0FB5B7, #0a8e90)', boxShadow: '0 8px 25px rgba(15,181,183,0.3)' }}
                             >
                                 Send Message
                             </button>
                         </form>
 
-                        <p className="text-xs text-gray-500 mt-4">
+                        <p className="text-[10px] text-gray-500 mt-6 text-center">
                             We'll keep your information in our CRM. See our{' '}
                             <a href="#" style={{ color: '#0FB5B7' }} className="hover:underline">privacy policy</a>.
                         </p>
@@ -359,7 +361,7 @@ export default function Header() {
             {/* Overlay - Close Sidebar when clicking outside */}
             {isSidebarOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 z-30"
+                    className="fixed inset-0 bg-black/50 z-50 backdrop-blur-sm"
                     onClick={toggleSidebar}
                 />
             )}

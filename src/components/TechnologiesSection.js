@@ -70,7 +70,7 @@ export default function TechnologiesSection() {
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6">
                         Technologies we use
                     </h2>
-                    <p className="text-lg md:text-xl text-gray-600 max-w-4xl leading-relaxed">
+                    <p className="text-lg md:text-xl text-black max-w-4xl leading-relaxed">
                         Hire from our pool of 350+ specialized experts in web, mobile, and software engineering, specializing in the latest technologies and frameworks, ready to scale your development teams effortlessly.
                     </p>
                 </div>
@@ -85,7 +85,7 @@ export default function TechnologiesSection() {
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`text-left px-2 lg:px-8 pt-2 pb-1 lg:py-5 lg:rounded-full text-lg md:text-2xl font-bold transition-all duration-300 whitespace-nowrap flex-shrink-0 ${activeTab === tab.id
                                     ? 'border-b-[3px] border-[#0FB5B7] lg:border-none lg:bg-gradient-to-r lg:from-[#DFF7F5] lg:to-white text-black lg:shadow-sm'
-                                    : 'border-b-[3px] border-transparent text-gray-500 hover:text-black lg:hover:bg-gray-50'
+                                    : 'border-b-[3px] border-transparent text-black hover:bg-gray-50'
                                     }`}
                             >
                                 {tab.title}
@@ -129,7 +129,7 @@ export default function TechnologiesSection() {
                                                                 onError={(e) => { e.target.style.display = 'none'; }}
                                                             />
                                                         </div>
-                                                        <span className="chip-text text-gray-900 font-semibold text-sm md:text-base transition-colors duration-300">{item.name}</span>
+                                                        <span className="chip-text text-black font-semibold text-sm md:text-base transition-colors duration-300">{item.name}</span>
                                                     </motion.div>
                                                 ))}
                                             </div>
@@ -147,19 +147,20 @@ export default function TechnologiesSection() {
                 </div>
 
                 {/* Bottom Banner */}
-                <div className="mt-20 md:mt-32">
-                    <div className="bg-[#0FB5B7]/5 rounded-[40px] px-8 md:px-16 py-10 md:py-12 flex flex-col md:flex-row items-center justify-between gap-8 border border-[#0FB5B7]/10">
-                        <h3 className="text-2xl md:text-4xl font-extrabold text-black leading-tight max-w-xl">
+                <div className="mt-16 md:mt-24">
+                    <div className="bg-gray-100 rounded-full px-8 md:px-12 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+                        <h3 className="text-base md:text-lg font-semibold text-black leading-tight whitespace-nowrap">
                             Create a software development <span className="text-[#0FB5B7]">Team</span> with us
                         </h3>
                         <button
-                            className="bg-black text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-[#0FB5B7] hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-[#0FB5B7]/20 shrink-0"
+                            className="bg-black text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-[#0FB5B7] transition-all duration-300 shrink-0"
                             onClick={() => dispatch(openPopup())}
                         >
                             Get a Quote
                         </button>
                     </div>
                 </div>
+
             </div>
         </section>
     );

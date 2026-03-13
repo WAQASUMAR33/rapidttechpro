@@ -140,7 +140,7 @@ const SuccessStories = forwardRef((props, ref) => {
 
   return (
     <section ref={ref} className="py-16 md:py-24 bg-white relative overflow-hidden h-full">
-      <div className="w-full px-4 sm:px-12">
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-12 lg:px-16 2xl:px-24">
         <div className="flex justify-between items-end mb-12 md:mb-16">
           <h2
             ref={headingRef}
@@ -167,7 +167,7 @@ const SuccessStories = forwardRef((props, ref) => {
               >
                 <div className="bg-white group">
                   <Link href={`/Work/${story.id}`}>
-                    <div className="overflow-hidden rounded-xl h-[400px] md:h-[500px] lg:h-[650px] bg-gray-50">
+                    <div className="overflow-hidden rounded-xl h-[500px] md:h-[650px] lg:h-[800px] bg-gray-50">
                       <img
                         src={resolveImage(story.mainImage || story.image)}
                         alt={story.title}
@@ -186,12 +186,12 @@ const SuccessStories = forwardRef((props, ref) => {
 
                     <div className="flex flex-col gap-2">
                       <Link href={`/Work/${story.id}`}>
-                        <h3 className="text-lg md:text-xl font-bold text-gray-900 leading-tight hover:text-bluish transition-colors">
+                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight hover:text-bluish transition-colors">
                           {story.title}
                         </h3>
                       </Link>
 
-                      <p className="text-gray-500 mt-1 text-xs md:text-sm leading-relaxed max-w-lg">
+                      <p className="text-gray-500 mt-2 text-sm md:text-base lg:text-lg leading-relaxed max-w-xl">
                         {(() => {
                           const desc = (typeof story.shortDescription === 'string' ? story.shortDescription : '') || (typeof story.description === 'string' ? story.description : '');
                           const firstSentence = desc.split('.')[0];

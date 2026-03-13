@@ -44,7 +44,7 @@ const TeamSection = () => {
                     className="text-center mb-10"
                 >
                     <h2 className="text-3xl md:text-5xl font-bold text-black mb-2">Meet Our Experts</h2>
-                    <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+                    <p className="text-base md:text-lg text-black max-w-2xl mx-auto">
                         The talented minds behind our innovative solutions, dedicated to your success.
                     </p>
                 </motion.div>
@@ -54,7 +54,7 @@ const TeamSection = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.1 }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12"
+                    className="flex flex-wrap justify-center gap-8 md:gap-24"
                 >
                     {teamMembers.map((member, index) => (
                         <motion.div
@@ -83,7 +83,7 @@ const TeamSection = () => {
                             <h3 className="text-2xl font-bold text-black group-hover:text-[#25CBA1] transition-colors duration-300">
                                 {member.name}
                             </h3>
-                            <p className="text-gray-500 font-medium mb-3">{member.position}</p>
+                            <p className="text-black font-medium mb-3">{member.position}</p>
 
                             {member.link && (
                                 <Link

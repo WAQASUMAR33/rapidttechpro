@@ -107,20 +107,20 @@ export default function RealTimeProjectMap() {
     });
 
     return (
-        <section className="bg-black text-white w-full py-20 px-4 md:px-12">
-            <div className="max-w-[1400px] mx-auto">
+        <section className="bg-black text-white w-full py-20">
+            <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-12 lg:px-16 2xl:px-24">
                 <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-8">
                     <span style={{ color: '#0FB5B7' }}>Real-time </span>
                     <span className="text-white">project map</span>
                 </h2>
 
                 {/* Categories Pills */}
-                <div className="flex flex-wrap gap-3 mb-12">
+                <div className="flex flex-nowrap overflow-x-auto gap-3 mb-12 pb-1 scrollbar-hide items-center">
                     {categories.map((cat) => (
                         <button
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
-                            className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-colors ${activeCategory === cat
+                            className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-medium border transition-colors ${activeCategory === cat
                                 ? 'bg-white text-black border-white'
                                 : 'bg-transparent text-gray-300 border-gray-600 hover:border-white hover:text-white'
                                 }`}
@@ -128,7 +128,7 @@ export default function RealTimeProjectMap() {
                             {cat}
                         </button>
                     ))}
-                    <button className="px-4 py-1.5 rounded-full text-sm font-medium border border-[#0FB5B7] text-[#0FB5B7] hover:bg-[#0FB5B7]/10 ml-auto flex items-center gap-1 transition-colors">
+                    <button className="flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-medium border border-[#0FB5B7] text-[#0FB5B7] hover:bg-[#0FB5B7]/10 ml-2 flex items-center gap-1 transition-colors">
                         + See more
                     </button>
                 </div>

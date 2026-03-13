@@ -107,7 +107,7 @@ export default function TestimonialsSection() {
                 </div>
 
                 {/* Testimonials List */}
-                <div className="space-y-8 max-w-4xl mx-auto">
+                <div className="space-y-12 max-w-6xl mx-auto">
                     {loading ? (
                         // Skeleton loading
                         [...Array(3)].map((_, i) => (
@@ -125,11 +125,11 @@ export default function TestimonialsSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                                className="bg-[#050505] border border-gray-800/50 rounded-[28px] p-8 md:p-10 flex flex-col gap-6 hover:border-[#0FB5B7]/30 transition-all duration-300 group shadow-2xl relative overflow-hidden"
+                                className="bg-[#050505] border border-gray-800/50 rounded-[64px] p-10 md:p-16 flex flex-col gap-10 hover:border-[#0FB5B7]/30 transition-all duration-300 group shadow-2xl relative overflow-hidden"
                             >
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#0FB5B7]/5 blur-[60px] rounded-full pointer-events-none group-hover:bg-[#0FB5B7]/10 transition-colors"></div>
 
-                                <p className="text-lg md:text-xl text-gray-200 leading-relaxed font-normal tracking-tight">
+                                <p className="text-xl md:text-3xl text-gray-200 leading-relaxed font-normal tracking-tight">
                                     &ldquo;{item.review}&rdquo;
                                 </p>
 

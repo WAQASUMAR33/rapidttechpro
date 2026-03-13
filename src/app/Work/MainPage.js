@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -9,6 +9,116 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// --- Custom Filterable Dropdown (Combobox-style) ---
+function FilterDropdown({ label, options, value, onChange }) {
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  const inputRef = useRef(null);
+  const ref = useRef(null);
+
+  const filtered = options.filter((o) =>
+    o.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Close on outside click
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setOpen(false);
+        setSearch('');
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  const openDropdown = () => {
+    setOpen(true);
+    setSearch('');
+    setTimeout(() => inputRef.current?.focus(), 50);
+  };
+
+  const select = (option) => {
+    onChange(option);
+    setOpen(false);
+    setSearch('');
+  };
+
+  return (
+    <div ref={ref} className="relative">
+      <label className="block text-sm font-semibold text-black mb-2 pl-1">{label}</label>
+
+      {/* Trigger / Search Input */}
+      <div
+        className={`w-full flex items-center justify-between px-5 py-4 border rounded-2xl bg-white text-gray-800 text-base font-medium transition-all duration-200 cursor-pointer ${
+          open ? 'border-[#0FB5B7] ring-1 ring-[#0FB5B7]' : 'border-gray-200 hover:border-gray-300'
+        }`}
+        onClick={!open ? openDropdown : undefined}
+      >
+        {open ? (
+          <input
+            ref={inputRef}
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder={`Search ${label.toLowerCase()}...`}
+            className="flex-1 bg-transparent text-gray-800 placeholder-gray-400 outline-none text-base"
+          />
+        ) : (
+          <span className="text-black">{value}</span>
+        )}
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); open ? (setOpen(false), setSearch('')) : openDropdown(); }}
+          className="ml-2 flex-shrink-0"
+        >
+          <svg
+            className={`h-5 w-5 text-gray-400 transition-transform duration-200 ${open ? 'rotate-180 text-[#0FB5B7]' : ''}`}
+            fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Dropdown panel */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.15 }}
+            className="absolute z-50 mt-2 w-full bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden"
+          >
+            <div className="max-h-60 overflow-y-auto py-2">
+              {filtered.length > 0 ? (
+                filtered.map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onMouseDown={(e) => { e.preventDefault(); select(option); }}
+                    className={`w-full text-left px-5 py-2.5 text-sm font-medium transition-colors ${
+                      value === option
+                        ? 'bg-[#0FB5B7]/10 text-[#0FB5B7]'
+                        : 'text-black hover:bg-gray-50'
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))
+              ) : (
+                <p className="text-sm text-gray-400 text-center py-4">No results found</p>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 
 export default function WorkMainPage() {
   const [stories, setStories] = useState([]);
@@ -178,8 +288,8 @@ export default function WorkMainPage() {
 
   if (loading) {
     return (
-      <div className="px-4 md:px-16 py-20 bg-white case-studies-section relative">
-        <div className="max-w-6xl mx-auto">
+      <div className="bg-white case-studies-section relative">
+        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-12 lg:px-16 2xl:px-24 py-20">
           <p className="text-center text-gray-600">Loading case studies...</p>
         </div>
       </div>
@@ -188,9 +298,9 @@ export default function WorkMainPage() {
 
   return (
     <div className="bg-white case-studies-section relative">
-      <div className="px-4 md:px-16 pt-20 max-w-6xl mx-auto pt-10">
-        <h1 className="text-4xl md:text-[48px] font-[800] tracking-tight text-gray-900 leading-tight">Case Studies</h1>
-        <p className="text-xl md:text-[24px] font-[500] mt-2 text-gray-600">See how RapidTechPro has helped its clients...</p>
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-12 lg:px-16 2xl:px-24 pt-20">
+        <h1 className="text-4xl md:text-[48px] font-[800] tracking-tight text-black leading-tight">Case Studies</h1>
+        <p className="text-xl md:text-[24px] font-[500] mt-2 text-black">See how RapidTechPro has helped its clients...</p>
 
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-6">
@@ -201,78 +311,28 @@ export default function WorkMainPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-16 max-w-6xl mx-auto">
-          {/* Services Filter */}
-          <div className="relative group">
-            <label className="block text-sm font-semibold text-gray-500 mb-2 pl-1 transition-colors group-hover:text-gray-900">Services</label>
-            <div className="relative">
-              <select
-                value={selectedService}
-                onChange={(e) => handleFilterChange('service', e.target.value)}
-                className="w-full px-5 py-4 border border-gray-200 rounded-2xl bg-white text-gray-800 text-base font-medium appearance-none cursor-pointer transition-all duration-300 hover:border-gray-300 hover:shadow-sm focus:outline-none focus:border-[#0FB5B7] focus:ring-1 focus:ring-[#0FB5B7]"
-              >
-                {services.map((service) => (
-                  <option key={service} value={service} className="py-2 text-gray-700 bg-white">
-                    {service}
-                  </option>
-                ))}
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-5 text-gray-400 group-hover:text-[#0FB5B7] transition-colors">
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          {/* Categories Filter */}
-          <div className="relative group">
-            <label className="block text-sm font-semibold text-gray-500 mb-2 pl-1 transition-colors group-hover:text-gray-900">Categories</label>
-            <div className="relative">
-              <select
-                value={selectedCategory}
-                onChange={(e) => handleFilterChange('category', e.target.value)}
-                className="w-full px-5 py-4 border border-gray-200 rounded-2xl bg-white text-gray-800 text-base font-medium appearance-none cursor-pointer transition-all duration-300 hover:border-gray-300 hover:shadow-sm focus:outline-none focus:border-[#0FB5B7] focus:ring-1 focus:ring-[#0FB5B7]"
-              >
-                {categories.map((category) => (
-                  <option key={category} value={category} className="py-2 text-gray-700 bg-white">
-                    {category}
-                  </option>
-                ))}
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-5 text-gray-400 group-hover:text-[#0FB5B7] transition-colors">
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-          {/* Technology Filter */}
-          <div className="relative group">
-            <label className="block text-sm font-semibold text-gray-500 mb-2 pl-1 transition-colors group-hover:text-gray-900">Technology</label>
-            <div className="relative">
-              <select
-                value={selectedTechnology}
-                onChange={(e) => handleFilterChange('technology', e.target.value)}
-                className="w-full px-5 py-4 border border-gray-200 rounded-2xl bg-white text-gray-800 text-base font-medium appearance-none cursor-pointer transition-all duration-300 hover:border-gray-300 hover:shadow-sm focus:outline-none focus:border-[#0FB5B7] focus:ring-1 focus:ring-[#0FB5B7]"
-              >
-                {technologies.map((technology) => (
-                  <option key={technology} value={technology} className="py-2 text-gray-700 bg-white">
-                    {technology}
-                  </option>
-                ))}
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-5 text-gray-400 group-hover:text-[#0FB5B7] transition-colors">
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-16">
+          <FilterDropdown
+            label="Services"
+            options={services}
+            value={selectedService}
+            onChange={(val) => handleFilterChange('service', val)}
+          />
+          <FilterDropdown
+            label="Categories"
+            options={categories}
+            value={selectedCategory}
+            onChange={(val) => handleFilterChange('category', val)}
+          />
+          <FilterDropdown
+            label="Technology"
+            options={technologies}
+            value={selectedTechnology}
+            onChange={(val) => handleFilterChange('technology', val)}
+          />
         </div>
 
-        <div className="flex flex-wrap md:mt-10 md:max-w-6xl mx-auto items-start">
+        <div className="flex flex-wrap md:mt-10 items-start">
           {filteredStories.length > 0 ? (
             filteredStories.slice(0, visibleCount).map((story, index) => (
               <InViewCard key={story.id} index={index} story={story} />
@@ -298,39 +358,37 @@ export default function WorkMainPage() {
 
       <RealTimeProjectMap apiBaseUrl={apiBaseUrl} />
 
-      <div className="px-4 md:px-16">
 
-        <AnimatePresence>
-          {showPopup && (
-            <motion.div
-              className="fixed bottom-4 right-4 bg-pink-500 text-white p-4 rounded-lg shadow-lg z-10"
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={popupVariants}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="flex md:flex-row flex-col space-y-4 md:space-y-0 md:space-x-4 text-xs md:text-base">
-                <div className="bg-white rounded-md p-2 text-black text-center">
-                  <img src="/business/google.png" className="w-16 h-6 mx-auto object-cover" alt="Google"></img>
-                  <p>4.9</p>
-                  <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
-                </div>
-                <div className="bg-white rounded-md p-2 text-black text-center">
-                  <img src="/business/trustpilot.png" className="w-20 h-6 mx-auto object-cover" alt="Trustpilot"></img>
-                  <p>4.8</p>
-                  <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
-                </div>
-                <div className="bg-white rounded-md p-2 text-black text-center">
-                  <img src="/business/clutch.png" className="w-16 h-6 mx-auto object-cover" alt="Clutch"></img>
-                  <p>5</p>
-                  <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
-                </div>
+      <AnimatePresence>
+        {showPopup && (
+          <motion.div
+            className="fixed bottom-4 right-4 bg-pink-500 text-white p-4 rounded-lg shadow-lg z-10"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={popupVariants}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex md:flex-row flex-col space-y-4 md:space-y-0 md:space-x-4 text-xs md:text-base">
+              <div className="bg-white rounded-md p-2 text-black text-center">
+                <img src="/business/google.png" className="w-16 h-6 mx-auto object-cover" alt="Google"></img>
+                <p>4.9</p>
+                <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+              <div className="bg-white rounded-md p-2 text-black text-center">
+                <img src="/business/trustpilot.png" className="w-20 h-6 mx-auto object-cover" alt="Trustpilot"></img>
+                <p>4.8</p>
+                <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
+              </div>
+              <div className="bg-white rounded-md p-2 text-black text-center">
+                <img src="/business/clutch.png" className="w-16 h-6 mx-auto object-cover" alt="Clutch"></img>
+                <p>5</p>
+                <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -378,35 +436,37 @@ function InViewCard({ story, index }) {
     >
       <Link href={`/Work/${story.id}`} className="block h-full group">
         <div className="bg-transparent flex flex-col h-full group-hover:-translate-y-2 transition-transform duration-500">
-          {/* Image Section */}
-          <div className="aspect-[4/3] w-full overflow-hidden rounded-[32px] bg-gray-50 flex-shrink-0">
+          {/* Image Section - Premium Vertical Capsule Style */}
+          <div className="w-full max-w-[560px] h-[760px] mx-auto overflow-hidden rounded-full bg-gray-50 flex-shrink-0 relative group-hover:shadow-[0_20px_50px_rgba(15,181,183,0.3)] transition-all duration-700">
             <img
               src={projectImage}
               alt={story.title}
-              className="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+              className="h-full w-full object-cover group-hover:scale-[1.08] transition-transform duration-1000 ease-out"
             />
+            {/* Subtle premium overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
           </div>
 
           {/* Content Section */}
           <div className="pt-8 pb-4 flex flex-col flex-grow">
-            {/* Logo */}
+            {/* Logo above title */}
             {story.logo && (
-              <div className="mb-4">
+              <div className="mb-3">
                 <img
                   src={resolveImage(story.logo)}
                   alt={`${story.title} logo`}
-                  className="h-10 w-auto object-contain object-left"
+                  className="h-8 w-auto object-contain object-left"
                 />
               </div>
             )}
 
             {/* Title */}
-            <h2 className="text-2xl sm:text-[28px] font-bold text-gray-900 mb-4 leading-[1.2] tracking-tight">
+            <h2 className="text-3xl sm:text-[32px] font-bold text-black mb-3 leading-[1.2] tracking-tight">
               {story.title}
             </h2>
 
             {/* Description */}
-            <p className="text-base text-gray-600 line-clamp-3 leading-relaxed mb-8 flex-grow">
+            <p className="text-lg text-black line-clamp-3 leading-relaxed mb-8 flex-grow">
               {projectDesc}
             </p>
 
@@ -418,7 +478,7 @@ function InViewCard({ story, index }) {
                 </span>
               )}
               {projectTech && (
-                <span className="inline-block bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full hover:bg-gray-200 transition-colors">
+                <span className="inline-block bg-gray-100 text-black text-sm font-medium px-4 py-1.5 rounded-full hover:bg-gray-200 transition-colors">
                   {projectTech}
                 </span>
               )}

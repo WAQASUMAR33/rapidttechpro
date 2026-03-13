@@ -54,8 +54,8 @@ export default function OurJourney() {
     }, [isVisible]);
 
     return (
-        <section ref={ref} className="bg-white py-12 md:py-24 lg:py-32 px-6 md:px-12 lg:px-24 rounded-[30px] md:rounded-none">
-            <div className="max-w-7xl mx-auto flex flex-col gap-12 md:gap-24">
+        <section ref={ref} className="w-full bg-white py-12 md:py-24 lg:py-32">
+            <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-12 lg:px-16 2xl:px-24 flex flex-col gap-12 md:gap-24">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}

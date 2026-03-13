@@ -43,12 +43,12 @@ export default function Industries() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6">
             Industries we serve
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+          <p className="text-base md:text-lg text-black leading-relaxed">
             With a wide range of services and proven experience across major industries, we understand your challenges and deliver tailored solutions that overcome them and drive meaningful impact.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {industryData.map((item, index) => (
             <motion.div
               key={index}
@@ -56,17 +56,12 @@ export default function Industries() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className={`p-8 md:p-10 rounded-[32px] border-2 transition-all duration-300 flex flex-col h-full cursor-pointer group ${item.highlight
-                ? 'border-bluish shadow-lg shadow-bluish/10'
-                : 'border-gray-100 hover:border-bluish bg-white hover:shadow-xl hover:shadow-bluish/5'
-                }`}
+              className="p-8 rounded-[24px] border border-gray-200 bg-white flex flex-col h-full cursor-pointer hover:border-gray-400 transition-all duration-300"
             >
-              <h3 className={`text-2xl md:text-3xl font-bold mb-6 transition-colors duration-300 ${item.highlight ? 'text-bluish' : 'text-black group-hover:text-bluish'
-                }`}>
+              <h3 className="text-2xl font-bold text-black mb-4">
                 {item.name}
               </h3>
-              <p className="text-gray-600 text-lg leading-relaxed flex-grow">
+              <p className="text-black text-base leading-relaxed flex-grow">
                 {item.description}
               </p>
             </motion.div>
@@ -76,3 +71,4 @@ export default function Industries() {
     </section>
   );
 }
+

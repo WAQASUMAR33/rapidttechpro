@@ -58,22 +58,22 @@ export default function HeroSection() {
                 muted
                 playsInline
             />
-            <div className="relative flex flex-col justify-center items-center h-full mx-auto w-full px-4 md:px-0 pt-32 bg-black bg-opacity-50 text-center">
-                <h1 className="max-w-2xl lg:max-w-4xl mx-auto text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-white">
-                    Your Trusted Custom <span className="text-bluish">Software Development</span>
-                    <br />
-                    Company.
-                </h1>
-                <p className="max-w-2xl lg:max-w-4xl mx-auto text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl tracking-wide text-white mt-4">
-                    Are you struggling with manual processes?
-                    {/* <br></br> */}
-                    At RapidTag Pro, we specialize in creating custom software solutions that automate your workflows, allowing you to break free from tedious, time-consuming tasks and focus on what truly matters.
-
-                </p>
-                <div className="md:hidden flex justify-center mt-8 w-full">
-                    <button className="bg-bluish text-white px-6 py-3 rounded-full text-sm font-medium" onClick={() => dispatch(openPopup())}>
-                        Let's Talk About Your Project
-                    </button>
+            <div className="relative flex flex-col justify-center items-center h-full w-full pt-32 bg-black bg-opacity-50">
+                <div className="w-full max-w-2xl lg:max-w-5xl px-4 sm:px-12 text-left flex flex-col items-start">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-white">
+                        Your Trusted Custom <span className="text-bluish">Software Development</span>
+                        <br />
+                        Company.
+                    </h1>
+                    <p className="max-w-2xl text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl tracking-wide text-white mt-4">
+                        Are you struggling with manual processes?
+                        At RapidTechPro, we specialize in creating custom software solutions that automate your workflows, allowing you to break free from tedious, time-consuming tasks and focus on what truly matters.
+                    </p>
+                    <div className="md:hidden flex justify-start mt-8 w-full">
+                        <button className="bg-bluish text-white px-6 py-3 rounded-full text-sm font-medium" onClick={() => dispatch(openPopup())}>
+                            Let's Talk About Your Project
+                        </button>
+                    </div>
                 </div>
             </div>
 

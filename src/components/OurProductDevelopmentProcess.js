@@ -6,9 +6,9 @@ import { FaArrowRight } from "react-icons/fa";
 const OurProductDevelopmentProcess = () => {
     return (
         <div className="bg-black">
-            <div className="md:h-60 md:pl-20 md:pt-20 font-semibold text-3xl py-10 px-2 md:text-6xl">
+            <div className="md:h-52 md:pl-20 md:pt-16 font-semibold text-2xl py-8 px-4 md:text-5xl">
                 <h1 className="text-white">Our Product</h1>
-                <h1 className="text-bluish">Development Process</h1>
+                <h1 style={{ color: '#0FB5B7' }}>Development Process</h1>
                 <p className="flex text-white text-sm md:text-xl font-medium items-center gap-2 mt-4">
                     View More <FaArrowRight />
                 </p>
@@ -65,25 +65,25 @@ const Card = ({ card }) => {
         <motion.div
             className="relative w-full md:w-screen md:h-screen flex items-center bg-black group overflow-hidden"
             whileInView={{ opacity: 1, scale: 1 }}
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
         >
             <div className="grid grid-cols-1 md:gap-0 gap-3 md:grid-cols-2 w-full ">
                 <div className="flex flex-col text-left md:p-16 ">
-                    <p className="text-xl md:text-2xl text-white mb-4">{card.date}</p>
-                    <h1 className="text-4xl md:text-7xl text-bluish font-bold">{card.title}</h1>
-                    <p className="mt-4 text-sm md:text-2xl text-white md:max-w-2xl">{card.description}</p>
+                    <p className="text-xl md:text-2xl font-mono text-white mb-4">0{card.id}/06</p>
+                    <h1 className="text-4xl md:text-6xl font-bold italic tracking-tighter" style={{ color: '#0FB5B7' }}>{card.title}</h1>
+                    <p className="mt-8 text-lg md:text-3xl text-white/100 md:max-w-2xl leading-relaxed font-medium">{card.description}</p>
                 </div>
                 <div className="w-full h-full flex justify-center items-center">
                     <motion.div
-                        className="border-2 border-white md:w-[420px] md:h-[570px] w-[200px] h-[200px] rounded-full overflow-hidden md:p-2"
+                        className="border-2 border-white md:w-[540px] md:h-[740px] w-[200px] h-[200px] rounded-full overflow-hidden md:p-2"
                         whileHover={{ scale: 1.05, rotate: 5 }}
                         transition={{ type: "spring", stiffness: 300 }}
                     >
                         <img
                             src={card.url}
                             alt={card.title}
-                            className="md:w-[400px] md:h-[550px] w-full h-full object-cover md:object-cover rounded-full"
+                            className="md:w-[520px] md:h-[720px] w-full h-full object-cover md:object-cover rounded-full"
                         />
                     </motion.div>
                 </div>
@@ -96,14 +96,14 @@ const CustomSlide = ({ card }) => (
     <motion.div
         className="relative w-screen h-screen flex items-center bg-black group overflow-hidden"
         whileInView={{ opacity: 1, scale: 1 }}
-        initial={{ opacity: 0, scale: 0.8 }}
+        initial={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
     >
         <div className="grid grid-cols-1 w-full">
-        <div className="flex flex-col text-left md:p-16 ">
-                    <p className="text-xl md:text-2xl text-white mb-4">{card.date}</p>
-                    <h1 className="text-4xl md:text-7xl text-bluish font-bold">{card.title}</h1>
-                    <p className="mt-4 text-sm md:text-2xl text-white md:max-w-2xl">{card.description}</p>
+                <div className="flex flex-col text-left md:p-16 ">
+                    <p className="text-xl md:text-2xl font-mono text-white mb-4">06/06</p>
+                    <h1 className="text-4xl md:text-6xl font-bold italic tracking-tighter" style={{ color: '#0FB5B7' }}>{card.title}</h1>
+                    <p className="mt-8 text-lg md:text-3xl text-white/100 md:max-w-2xl leading-relaxed font-medium">{card.description}</p>
                 </div>
             <div className="w-full h-full flex flex-col md:flex-row justify-start p-6 items-center md:p-16">
                 <motion.div
@@ -139,10 +139,9 @@ const CustomSlide = ({ card }) => (
 export default OurProductDevelopmentProcess;
 
 const supports = [
-    { duration: "15 Days", type: "Support" },
-    { duration: "30 Days", type: "Support" },
-    { duration: "03 Months", type: "Support" },
-    { duration: "06 Months", type: "Support" },
+    { duration: "1 Month", type: "Support" },
+    { duration: "3 Months", type: "Support" },
+    { duration: "6 Months", type: "Support" },
 ];
 const cards = [
     {

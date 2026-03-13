@@ -96,104 +96,101 @@ export default function Header() {
     return (
         <>
             <header
-                className={`fixed z-50 w-full h-16 flex items-center justify-between px-4 sm:px-12 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-16"
+                className={`fixed z-50 w-full h-16 flex items-center transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-16"
                     } ${isScrolled ? "bg-white shadow-md text-black border-b" : "bg-transparent text-white"}`}
             >
-                {/* Logo */}
-                <Link href="/" className="text-xl md:text-[30px] font-bold italic flex justify-center items-center">
-                    <img src="/company/logo.png" className="md:h-[60px] md:w-[60px] h-[40px] w-[40px]" />
-                    Rapid<span className={"text-bluish"}>TechPro</span>
-
-                </Link>
-
-                {/* Desktop Nav Links */}
-                <nav className="hidden md:flex md:space-x-4 lg:space-x-8 xl:space-x-12 text-sm lg:text-base relative items-center">
-
-                    <div
-                        className="relative"
-                        onMouseEnter={() => setIsSolutionsOpen(true)}
-                        onMouseLeave={() => setIsSolutionsOpen(false)}
-                    >
-                        <Link href="/Services" className="py-2 font-bold whitespace-nowrap">Services</Link>
-                        {/* Full-Screen Mega Menu */}
-                        {isSolutionsOpen && (
-                            <div
-                                className="fixed top-[64px] inset-x-0 bg-white hidden md:flex justify-center z-40 max-h-[calc(100vh-64px)] overflow-y-auto"
-                                onClick={closeMegaMenu}
-                            >
-                                <div
-                                    className="w-full max-w-7xl mx-auto p-6 md:p-8 lg:p-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 text-black bg-white"
-                                    onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside menu
-                                >
-                                    <div className=" flex ">
-                                        <div className="px-4 w-full">
-                                            <h1 className="text-xl md:text-3xl flex justify-between  w-full tracking-tighter font-bold">Solutions <FaArrowRight className="text-bluish" /></h1>
-                                        </div>
-                                        <div className="h-24 border-r-2 "></div>
-                                    </div>
-
-                                    {/* Dynamic columns */}
-                                    {Array.from({ length: Math.ceil(navServices.length / 2) }, (_, i) => navServices.slice(i * 2, i * 2 + 2)).map((chunk, colIdx) => (
-                                        <div key={colIdx} className="flex justify-between">
-                                            <div className="flex flex-col gap-4">
-                                                {chunk.map((svc) => (
-                                                    <Link
-                                                        key={svc.slug}
-                                                        href={`/Services/${svc.slug}`}
-                                                        className="text-gray-800 hover:text-bluish font-bold text-sm md:text-base transition-colors"
-                                                        onClick={closeMegaMenu}
-                                                    >
-                                                        {svc.title}
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                            {colIdx < 3 && <div className="h-24 border-r-2 "></div>}
-                                        </div>
-                                    ))}
-
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                    <Link href="/Industries" className="font-bold whitespace-nowrap">Industries</Link>
-                    <div
-                        className="relative"
-                        onMouseEnter={() => setIsSolutionsOpen(true)}
-                        onMouseLeave={() => setIsSolutionsOpen(false)}
-                    >
-                        <Link href="/Services" className="py-2 font-bold whitespace-nowrap">Solutions</Link>
-                    </div>
-                    <Link href="/Work" className="font-bold whitespace-nowrap">Work</Link>
-                    <Link href="/Company" className="font-bold whitespace-nowrap">Company</Link>
-                    {/* <Link href="/ContactUs">Contact</Link> */}
-                    <Link href="/Help" className="font-bold whitespace-nowrap">Help</Link>
-                    <Link href="/AboutUs" className="font-bold whitespace-nowrap">Our Team</Link>
-                </nav>
-
-                {/* Contact & Button - Desktop Only */}
-                <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
-                    <Link href="/" className="flex items-center gap-1 text-sm lg:text-base whitespace-nowrap">
-                        <BsTelephone />
-                        <span className="hidden lg:inline">+92 340 3051059</span>
+                <div className="w-full max-w-[1400px] mx-auto flex items-center justify-between px-4 sm:px-12 lg:px-16 2xl:px-24">
+                    {/* Logo */}
+                    <Link href="/" className="text-xl md:text-[30px] font-bold italic flex justify-center items-center">
+                        <img src="/company/logo.png" className="md:h-[60px] md:w-[60px] h-[40px] w-[40px]" />
+                        Rapid<span className={"text-bluish"}>TechPro</span>
                     </Link>
-                    <button
-                        className="w-24 lg:w-28 h-8 rounded-full font-medium border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black text-xs lg:text-sm transition-all"
-                        onClick={() => dispatch(openPopup())}
-                    >
-                        Get in touch
+
+                    {/* Desktop Nav Links */}
+                    <nav className="hidden md:flex md:space-x-4 lg:space-x-8 xl:space-x-12 text-sm lg:text-base relative items-center">
+                        <div
+                            className="relative"
+                            onMouseEnter={() => setIsSolutionsOpen(true)}
+                            onMouseLeave={() => setIsSolutionsOpen(false)}
+                        >
+                            <Link href="/Services" className="py-2 font-bold whitespace-nowrap">Services</Link>
+                            {/* Full-Screen Mega Menu */}
+                            {isSolutionsOpen && (
+                                <div
+                                    className="fixed top-[64px] inset-x-0 bg-white hidden md:flex justify-center z-40 max-h-[calc(100vh-64px)] overflow-y-auto"
+                                    onClick={closeMegaMenu}
+                                >
+                                    <div
+                                        className="w-full max-w-7xl mx-auto p-6 md:p-8 lg:p-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 text-black bg-white"
+                                        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside menu
+                                    >
+                                        <div className=" flex ">
+                                            <div className="px-4 w-full">
+                                                <h1 className="text-xl md:text-3xl flex justify-between  w-full tracking-tighter font-bold">Solutions <FaArrowRight className="text-bluish" /></h1>
+                                            </div>
+                                            <div className="h-24 border-r-2 "></div>
+                                        </div>
+
+                                        {/* Dynamic columns */}
+                                        {Array.from({ length: Math.ceil(navServices.length / 2) }, (_, i) => navServices.slice(i * 2, i * 2 + 2)).map((chunk, colIdx) => (
+                                            <div key={colIdx} className="flex justify-between">
+                                                <div className="flex flex-col gap-4">
+                                                    {chunk.map((svc) => (
+                                                        <Link
+                                                            key={svc.slug}
+                                                            href={`/Services/${svc.slug}`}
+                                                            className="text-gray-800 hover:text-bluish font-bold text-sm md:text-base transition-colors"
+                                                            onClick={closeMegaMenu}
+                                                        >
+                                                            {svc.title}
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                                {colIdx < 3 && <div className="h-24 border-r-2 "></div>}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        <div
+                            className="relative"
+                            onMouseEnter={() => setIsSolutionsOpen(true)}
+                            onMouseLeave={() => setIsSolutionsOpen(false)}
+                        >
+                            <Link href="/Services" className="py-2 font-bold whitespace-nowrap">Solutions</Link>
+                        </div>
+                        <Link href="/Work" className="font-bold whitespace-nowrap">Work</Link>
+                        <Link href="/Company" className="font-bold whitespace-nowrap">Company</Link>
+                        <Link href="/Help" className="font-bold whitespace-nowrap">Help</Link>
+                        <Link href="/AboutUs" className="font-bold whitespace-nowrap">Our Team</Link>
+                    </nav>
+
+                    {/* Contact & Button - Desktop Only */}
+                    <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
+                        <Link href="/" className="flex items-center gap-1 text-sm lg:text-base whitespace-nowrap">
+                            <BsTelephone />
+                            <span className="hidden lg:inline">+92 340 3051059</span>
+                        </Link>
+                        <button
+                            className="w-24 lg:w-28 h-8 rounded-full font-medium border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black text-xs lg:text-sm transition-all"
+                            onClick={() => dispatch(openPopup())}
+                        >
+                            Get in touch
+                        </button>
+                    </div>
+
+                    {/* Toggle Button - Mobile Only */}
+                    <button className="md:hidden text-2xl" onClick={toggleSidebar}>
+                        {isSidebarOpen ? <FaTimes /> : <FaBars />}
                     </button>
                 </div>
-
-                {/* Toggle Button - Mobile Only */}
-                <button className="md:hidden text-2xl" onClick={toggleSidebar}>
-                    {isSidebarOpen ? <FaTimes /> : <FaBars />}
-                </button>
             </header>
 
             {/* Sidebar - Mobile Only */}
             <aside
                 className={`fixed top-0 right-0 w-full sm:w-80 h-full bg-black/95 text-white transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
-                    } transition-transform duration-300 ease-in-out z-40 shadow-2xl overflow-y-auto`}
+                    } transition-transform duration-300 ease-in-out z-[60] shadow-2xl overflow-y-auto`}
             >
                 <div className="flex flex-col items-start p-6 space-y-6">
                     {/* Logo in Sidebar */}
@@ -202,24 +199,38 @@ export default function Header() {
                     </Link>
 
                     {/* Navigation Links */}
-                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
-                        Services
-                    </Link>
-                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
-                        Solutions
-                    </Link>
-                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
-                        Work
-                    </Link>
-                    <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
-                        Company
-                    </Link>
-                    <Link href="/ContactUs" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
-                        Contact
-                    </Link>
+                    <div className="flex flex-col gap-4 w-full">
+                        <Link href="/Services" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                            Services
+                        </Link>
+                        <div className="flex flex-col gap-2 pl-3 border-l border-gray-600 mb-2">
+                            {navServices.map((svc) => (
+                                <Link
+                                    key={svc.slug}
+                                    href={`/Services/${svc.slug}`}
+                                    onClick={toggleSidebar}
+                                    className="text-sm text-gray-300 hover:text-[#0FB5B7] font-bold"
+                                >
+                                    {svc.title}
+                                </Link>
+                            ))}
+                        </div>
+                        <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                            Solutions
+                        </Link>
+                        <Link href="/Work" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                            Work
+                        </Link>
+                        <Link href="/Company" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                            Company
+                        </Link>
+                        <Link href="/ContactUs" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                            Contact
+                        </Link>
+                    </div>
 
                     {/* Contact Info & Button */}
-                    <div className="flex flex-col items-start space-y-3 mt-6">
+                    <div className="flex flex-col items-start space-y-3 mt-6 w-full">
                         <Link href="/" className="flex items-center gap-2 text-base sm:text-lg">
                             <BsTelephone />
                             +92 340 3051059
@@ -233,7 +244,7 @@ export default function Header() {
 
             {/* Get in Touch Form */}
             {isOpenGetinTouch && (
-                <div className="fixed inset-0 z-[60] flex justify-end">
+                <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
                     {/* Overlay */}
                     <div
                         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
@@ -241,7 +252,7 @@ export default function Header() {
                     ></div>
 
                     {/* Form Container */}
-                    <div className="bg-[#0a0b14] text-white w-full sm:w-[400px] md:w-[500px] h-full overflow-y-auto relative shadow-2xl border-l border-white/10 no-scrollbar">
+                    <div className="bg-[#0a0b14] text-white w-full sm:w-[450px] md:w-[500px] h-full sm:h-[90vh] overflow-y-auto relative shadow-2xl border border-white/10 no-scrollbar rounded-2xl">
                         <div className="p-6 md:p-10 min-h-full flex flex-col">
                             <button
                                 onClick={() => dispatch(closePopup())}
@@ -323,7 +334,7 @@ export default function Header() {
             {/* Overlay - Close Sidebar when clicking outside */}
             {isSidebarOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 z-30"
+                    className="fixed inset-0 bg-black/50 z-50 backdrop-blur-sm"
                     onClick={toggleSidebar}
                 />
             )}
