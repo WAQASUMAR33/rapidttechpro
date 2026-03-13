@@ -393,30 +393,30 @@ export default function ProjectDetailPage() {
 
           </div>
         </section>
-        {/* 6. THE PROCESS (Sticky Heading + Scrolling Cards) */}
-        <section className="px-6 md:px-16 max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-32 lg:gap-48 items-start relative py-20 md:py-40">
+        {/* 6. THE PROCESS (Sticky Heading + Global Scroll) */}
+        <section className="px-6 md:px-16 max-w-7xl mx-auto flex flex-col md:flex-row gap-10 md:gap-12 items-start relative min-h-screen">
           {/* Left Column: Sticky Static Heading */}
-          <div className="md:sticky md:top-40 w-full md:w-1/3">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight tracking-tighter uppercase">
-              The <br className="hidden md:block" /> process
+          <div className="md:sticky md:top-32 w-full md:w-1/3 pt-12 md:pt-24 pb-12 md:pb-24 self-start">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium text-gray-900 leading-tight tracking-tighter">
+              The process
             </h2>
           </div>
 
-          {/* Right Column: Scrolling Cards */}
-          <div className="w-full md:w-2/3 space-y-8 md:space-y-12">
+          {/* Right Column: Global Scrolling Cards */}
+          <div className="w-full md:w-2/3 space-y-8 md:space-y-12 pt-12 md:pt-24 pb-20 md:pb-40">
             {p.processSteps.map((step, idx) => (
               <motion.div
                 key={idx}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-20%" }}
                 variants={fadeIn}
                 className="bg-[#f2f2f2] p-8 md:p-14 rounded-[30px] md:rounded-[40px] border border-gray-200 group hover:shadow-xl transition-all"
               >
                 <div className="space-y-4">
-                  <span className="text-4xl md:text-5xl font-bold text-gray-900 leading-none">0{idx + 1}</span>
-                  <h3 className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tight leading-tight uppercase">{step.title}</h3>
-                  <p className="text-lg md:text-xl text-gray-900 leading-relaxed font-medium opacity-70">
+                  <span className="text-5xl md:text-6xl font-bold text-gray-900 leading-none">0{idx + 1}</span>
+                  <h3 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight leading-tight">{step.title}</h3>
+                  <p className="text-lg md:text-xl text-gray-900 leading-relaxed font-medium opacity-80">
                     {step.desc}
                   </p>
                 </div>
