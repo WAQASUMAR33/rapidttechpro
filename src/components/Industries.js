@@ -41,7 +41,7 @@ export default function Industries() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 max-w-4xl">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6">
-            Industries we serve
+            Industries We <span className="text-[#0FB5B7]">Serve</span>
           </h2>
           <p className="text-base md:text-lg text-black leading-relaxed">
             With a wide range of services and proven experience across major industries, we understand your challenges and deliver tailored solutions that overcome them and drive meaningful impact.
