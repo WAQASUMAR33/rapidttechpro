@@ -56,7 +56,7 @@ export default function Industries() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-8 rounded-[24px] border border-gray-200 bg-white flex flex-col h-full cursor-pointer hover:border-gray-400 transition-all duration-300"
+              className="p-8 rounded-[24px] border border-gray-100 bg-white flex flex-col h-full cursor-pointer hover:border-[#0FB5B7] transition-all duration-300"
             >
               <h3 className="text-2xl font-bold text-black mb-4">
                 {item.name}
