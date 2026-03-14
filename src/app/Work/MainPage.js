@@ -436,8 +436,8 @@ function InViewCard({ story, index }) {
     >
       <Link href={`/Work/${story.id}`} className="block h-full group">
         <div className="bg-transparent flex flex-col h-full group-hover:-translate-y-2 transition-transform duration-500">
-          {/* Image Section - Premium Vertical Capsule Style */}
-          <div className="w-full max-w-[560px] h-[760px] mx-auto overflow-hidden rounded-full bg-gray-50 flex-shrink-0 relative group-hover:shadow-[0_20px_50px_rgba(15,181,183,0.3)] transition-all duration-700">
+          {/* Image Section */}
+          <div className="w-full h-[400px] md:h-[550px] lg:h-[650px] mx-auto overflow-hidden rounded-3xl bg-gray-50 flex-shrink-0 relative group-hover:shadow-[0_20px_50px_rgba(15,181,183,0.3)] transition-all duration-700">
             <img
               src={projectImage}
               alt={story.title}
