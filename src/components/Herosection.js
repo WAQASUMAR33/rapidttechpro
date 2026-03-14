@@ -59,8 +59,8 @@ export default function HeroSection() {
                 playsInline
             />
             <div className="relative flex flex-col justify-center items-center h-full w-full pt-32 bg-black bg-opacity-50">
-                <div className="w-full max-w-2xl lg:max-w-4xl px-4 sm:px-12 text-left flex flex-col items-start">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1.1] tracking-tight">
+                <div className="w-full max-w-2xl lg:max-w-4xl px-4 sm:px-12 text-left flex flex-col items-start pb-20 md:pb-32">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.1] tracking-tight">
                         Your Trusted <span className="text-bluish">Custom Software</span>
                         <br />
                         Development Partner.
@@ -69,7 +69,7 @@ export default function HeroSection() {
                         Struggling with manual processes? We specialize in custom software solutions that automate your workflows — freeing you to focus on what truly matters.
                     </p>
 
-                    <div className="flex flex-wrap gap-4 mt-10">
+                    <div className="flex flex-wrap gap-4 mt-10 mb-16 md:mb-20">
                         <button
                             onClick={() => dispatch(openPopup())}
                             className="group bg-bluish text-white px-6 py-3.5 md:px-8 md:py-4 rounded-full flex items-center gap-2 text-sm md:text-base font-bold hover:bg-[#0da0a2] transition-all shadow-lg shadow-bluish/20"
@@ -84,6 +84,21 @@ export default function HeroSection() {
                             </div>
                             See Our Work
                         </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-16 mt-4">
+                        <div className="flex flex-col">
+                            <span className="text-3xl md:text-4xl font-bold text-bluish">599+</span>
+                            <span className="text-[10px] md:text-[11px] uppercase tracking-widest text-gray-400 font-bold mt-1">Projects Completed</span>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-3xl md:text-4xl font-bold text-bluish">200+</span>
+                            <span className="text-[10px] md:text-[11px] uppercase tracking-widest text-gray-400 font-bold mt-1">Happy Clients</span>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-3xl md:text-4xl font-bold text-bluish">20+</span>
+                            <span className="text-[10px] md:text-[11px] uppercase tracking-widest text-gray-400 font-bold mt-1">Expert Team</span>
+                        </div>
                     </div>
                 </div>
             </div>

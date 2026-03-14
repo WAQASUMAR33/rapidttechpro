@@ -261,102 +261,117 @@ export default function Header() {
                 </div>
             </aside>
 
-            {isOpenGetinTouch && (
-                <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
-                    <div
-                        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-                        onClick={() => dispatch(closePopup())}
-                    ></div>
-                    <div className="text-white p-6 sm:p-10 max-w-2xl w-full relative h-[90vh] overflow-y-auto rounded-2xl shadow-2xl" style={{ background: 'linear-gradient(160deg, #0a1628 0%, #0d2235 100%)', border: '1px solid rgba(15,181,183,0.2)' }}>
-                        <button onClick={() => dispatch(closePopup())} className="absolute top-4 right-4 text-black text-2xl bg-white w-10 h-10 rounded-full flex justify-center items-center font-bold hover:bg-gray-100 transition-colors z-10">&times;</button>
-
-                        {/* Teal glow */}
-                        <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] pointer-events-none opacity-20" style={{ background: '#0FB5B7', transform: 'translate(30%, -30%)' }} />
-
-                        <h2 className="text-2xl sm:text-3xl font-bold mt-6">
-                            Got a <span className="text-bluish">Project?</span>
-                        </h2>
-                        <p className="text-sm sm:text-base text-gray-400 mt-2">
-                            Share the details — scope, timeframes, or business challenges. We'll respond promptly.
-                        </p>
-
-                        <p className="text-sm mt-5 mb-3 font-semibold text-gray-300">I'm interested in</p>
-                        <div className="flex flex-wrap gap-2 mb-5">
-                            {(navServices.length > 0 ? navServices.map(s => s.title) : ['Custom Software', 'Mobile App', 'UX/UI', 'Web Development']).map((interest) => (
+            {/* Contact Drawer */}
+            <AnimatePresence>
+                {isOpenGetinTouch && (
+                    <div className="fixed inset-0 z-[70]">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                            onClick={() => dispatch(closePopup())}
+                        ></motion.div>
+                        <motion.div
+                            initial={{ x: "100%" }}
+                            animate={{ x: 0 }}
+                            exit={{ x: "100%" }}
+                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                            className="absolute top-0 right-0 h-full w-full md:w-[600px] lg:w-[650px] bg-[#0d1b2a] shadow-2xl overflow-y-auto"
+                            style={{ background: 'linear-gradient(160deg, #0d1b2a 0%, #08121d 100%)' }}
+                        >
+                            <div className="relative p-8 md:p-12 min-h-full flex flex-col">
                                 <button
-                                    key={interest}
-                                    onClick={() => handleInterestClick(interest)}
-                                    className="px-4 py-2 rounded-full text-sm font-medium transition-all"
-                                    style={interests.includes(interest)
-                                        ? { background: '#0FB5B7', color: '#fff', border: '1px solid #0FB5B7' }
-                                        : { background: 'transparent', color: '#9ca3af', border: '1px solid rgba(255,255,255,0.2)' }}
+                                    onClick={() => dispatch(closePopup())}
+                                    className="absolute top-6 right-6 text-black bg-white w-10 h-10 rounded-full flex justify-center items-center font-bold hover:bg-gray-100 transition-colors z-10 shadow-lg"
                                 >
-                                    {interest}
+                                    &times;
                                 </button>
-                            ))}
-                        </div>
 
-                        <form className="space-y-4">
-                            <input
-                                type="text"
-                                placeholder="Full Name"
-                                className="w-full p-3 rounded-xl text-white text-sm outline-none transition-all placeholder-gray-500"
-                                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
-                                onFocus={e => e.target.style.borderColor = '#0FB5B7'}
-                                onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
-                            />
-                            <div className="flex flex-col sm:flex-row gap-3">
-                                <input
-                                    type="email"
-                                    placeholder="Email"
-                                    className="w-full p-3 rounded-xl text-white text-sm outline-none transition-all placeholder-gray-500"
-                                    style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
-                                    onFocus={e => e.target.style.borderColor = '#0FB5B7'}
-                                    onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
-                                />
-                                <input
-                                    type="tel"
-                                    placeholder="WhatsApp Number"
-                                    className="w-full p-3 rounded-xl text-white text-sm outline-none transition-all placeholder-gray-500"
-                                    style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
-                                    onFocus={e => e.target.style.borderColor = '#0FB5B7'}
-                                    onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
-                                />
+                                {/* Teal glow decoration */}
+                                <div className="absolute top-0 right-0 w-80 h-80 rounded-full blur-[100px] pointer-events-none opacity-10" style={{ background: '#0FB5B7', transform: 'translate(40%, -40%)' }} />
+
+                                <div className="mt-8">
+                                    <h2 className="text-3xl md:text-4xl font-bold text-white">
+                                        Got a <span className="text-bluish">Project?</span>
+                                    </h2>
+                                    <p className="text-gray-400 mt-4 leading-relaxed">
+                                        Share the details of your project – like scope, timeframes, or business challenges. Our team will thoroughly review the materials and respond to you promptly.
+                                    </p>
+                                </div>
+
+                                <div className="mt-10">
+                                    <p className="text-sm font-semibold text-gray-300 mb-4 tracking-wide">I'm interested in</p>
+                                    <div className="flex flex-wrap gap-2.5">
+                                        {['Custom Software', 'Mobile App', 'UX/UI', 'Web Development'].map((interest) => (
+                                            <button
+                                                key={interest}
+                                                onClick={() => handleInterestClick(interest)}
+                                                className="px-5 py-2.5 rounded-full text-sm font-semibold transition-all border"
+                                                style={interests.includes(interest)
+                                                    ? { background: '#0FB5B7', color: '#fff', borderColor: '#0FB5B7' }
+                                                    : { background: 'rgba(255,255,255,0.03)', color: '#9ca3af', borderColor: 'rgba(255,255,255,0.1)' }}
+                                            >
+                                                {interest}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <form className="mt-10 space-y-5 flex-grow">
+                                    <div className="space-y-4">
+                                        <input
+                                            type="text"
+                                            placeholder="Name"
+                                            className="w-full p-4 rounded-xl text-white text-base outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
+                                        />
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <input
+                                                type="email"
+                                                placeholder="Email"
+                                                className="w-full p-4 rounded-xl text-white text-base outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
+                                            />
+                                            <input
+                                                type="tel"
+                                                placeholder="Whatsapp Number"
+                                                className="w-full p-4 rounded-xl text-white text-base outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
+                                            />
+                                        </div>
+                                        <textarea
+                                            placeholder="Message"
+                                            className="w-full p-4 rounded-xl text-white text-base outline-none resize-none placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
+                                            rows="5"
+                                        />
+                                    </div>
+
+                                    <div className="flex flex-wrap gap-4 text-[11px] uppercase tracking-widest font-bold text-gray-500 py-4 border-t border-white/5">
+                                        {['Free Consultancy', 'Road Map Execution', 'Collaboration', 'Execution Guidance'].map(item => (
+                                            <span key={item} className="flex items-center gap-1.5">
+                                                <div className="w-1 h-1 rounded-full bg-[#0FB5B7]"></div>
+                                                {item}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        className="w-full p-5 rounded-xl text-white font-bold text-lg transition-all hover:brightness-110 active:scale-[0.98] shadow-2xl shadow-blue-600/20"
+                                        style={{ background: 'linear-gradient(135deg, #3b82f6, #0FB5B7)' }}
+                                    >
+                                        Send Message
+                                    </button>
+                                </form>
+
+                                <div className="mt-12 text-center">
+                                    <p className="text-xs text-gray-500 leading-relaxed max-w-sm mx-auto">
+                                        We'll keep your information in our CRM to respond to your request. For more details, see our <a href="#" className="text-[#0FB5B7] hover:underline">privacy policy</a>.
+                                    </p>
+                                </div>
                             </div>
-                            <textarea
-                                placeholder="Project details / Message"
-                                className="w-full p-3 rounded-xl text-white text-sm outline-none resize-none placeholder-gray-500"
-                                rows="4"
-                                style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
-                                onFocus={e => e.target.style.borderColor = '#0FB5B7'}
-                                onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.12)'}
-                            />
-
-                            <div className="flex flex-wrap justify-between text-[10px] uppercase tracking-widest font-bold text-gray-500 py-2">
-                                {['Free Consultancy', 'Road Map', 'Collaboration', 'Execution'].map(b => (
-                                    <span key={b} className="flex items-center gap-1">
-                                        <svg className="w-3 h-3" fill="#0FB5B7" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                                        {b}
-                                    </span>
-                                ))}
-                            </div>
-
-                            <button
-                                type="submit"
-                                className="w-full p-4 rounded-xl text-white font-bold text-base transition-all hover:opacity-90 active:scale-[0.98]"
-                                style={{ background: 'linear-gradient(135deg, #0FB5B7, #0a8e90)', boxShadow: '0 8px 25px rgba(15,181,183,0.3)' }}
-                            >
-                                Send Message
-                            </button>
-                        </form>
-
-                        <p className="text-[10px] text-gray-500 mt-6 text-center">
-                            We'll keep your information in our CRM. See our{' '}
-                            <a href="#" style={{ color: '#0FB5B7' }} className="hover:underline">privacy policy</a>.
-                        </p>
+                        </motion.div>
                     </div>
-                </div>
-            )}
+                )}
+            </AnimatePresence>
 
             {/* Overlay - Close Sidebar when clicking outside */}
             {isSidebarOpen && (
