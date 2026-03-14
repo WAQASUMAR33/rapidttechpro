@@ -85,21 +85,6 @@ export default function HeroSection() {
                             See Our Work
                         </button>
                     </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-16 mt-4">
-                        <div className="flex flex-col">
-                            <span className="text-3xl md:text-4xl font-bold text-bluish">599+</span>
-                            <span className="text-[10px] md:text-[11px] uppercase tracking-widest text-gray-400 font-bold mt-1">Projects Completed</span>
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-3xl md:text-4xl font-bold text-bluish">200+</span>
-                            <span className="text-[10px] md:text-[11px] uppercase tracking-widest text-gray-400 font-bold mt-1">Happy Clients</span>
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-3xl md:text-4xl font-bold text-bluish">20+</span>
-                            <span className="text-[10px] md:text-[11px] uppercase tracking-widest text-gray-400 font-bold mt-1">Expert Team</span>
-                        </div>
-                    </div>
                 </div>
             </div>
 
