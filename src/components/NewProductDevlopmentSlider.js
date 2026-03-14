@@ -102,7 +102,7 @@ export default function ProductProcess() {
         <div className="md:pt-10 font-bold text-3xl py-10 md:text-5xl lg:text-7xl tracking-tighter">
           <h2 className="text-white leading-tight">Our Product</h2>
           <h2 className="text-[#0FB5B7] leading-tight">Development Journey</h2>
-          <p className="flex text-white text-sm md:text-lg font-medium items-center gap-2 mt-6 opacity-80">
+          <p className="flex text-white text-sm md:text-lg font-medium items-center gap-2 mt-6 opacity-80 tracking-normal">
             Bringing Your Vision to Life, Step by Step
             <FaArrowRight className='rotate-90' />
           </p>
@@ -111,7 +111,7 @@ export default function ProductProcess() {
         {/* Main Content */}
         <div ref={containerRef} className="flex bg-black text-white relative pt-20">
           {/* Left Progress Line */}
-          <div className="hidden md:flex flex-col items-center w-[1px] mr-12 lg:mr-20 relative flex-shrink-0">
+          <div className="hidden lg:flex flex-col items-center w-[1px] mr-12 lg:mr-20 relative flex-shrink-0">
             {/* Background line */}
             <div className="absolute top-0 left-0 w-full h-full bg-white/5" />
             {/* Animated fill line */}
@@ -142,15 +142,15 @@ export default function ProductProcess() {
                 </div>
 
                 <div className="flex flex-col text-left lg:py-16 lg:pr-12 transition-all duration-700 ease-in-out z-20 px-2 lg:px-0">
-                  <p className={`text-sm md:text-base mb-2 font-mono tracking-widest transition-colors duration-500 uppercase ${activeStep === index ? 'text-white' : 'text-white/20'
+                  <p className={`text-sm md:text-base mb-2 font-mono tracking-widest transition-colors duration-500 uppercase ${activeStep === index ? 'text-white' : 'text-white lg:text-white/20'
                     }`}>
                     {String(index + 1).padStart(2, '0')}/06
                   </p>
-                  <h3 className={`text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight transition-colors duration-500 ${activeStep === index ? 'text-[#0FB5B7]' : 'text-white/20'
+                  <h3 className={`text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight transition-colors duration-500 ${activeStep === index ? 'text-[#0FB5B7]' : 'text-[#0FB5B7] lg:text-white/20'
                     }`}>
                     {step.title}
                   </h3>
-                  <p className={`mt-6 text-base md:text-lg lg:text-xl font-normal leading-relaxed max-w-xl transition-colors duration-500 ${activeStep === index ? 'text-white/90' : 'text-white/10'
+                  <p className={`mt-6 text-base md:text-lg lg:text-xl font-normal leading-relaxed max-w-xl transition-colors duration-500 ${activeStep === index ? 'text-white/90' : 'text-white/90 lg:text-white/10'
                     }`}>
                     {step.description}
                   </p>
