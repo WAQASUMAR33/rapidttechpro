@@ -68,11 +68,11 @@ const Card = ({ card }) => {
             initial={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
         >
-            <div className="grid grid-cols-1 md:gap-0 gap-3 md:grid-cols-2 w-full ">
-                <div className="flex flex-col text-left md:p-16 ">
-                    <p className="text-xl md:text-2xl font-mono text-white mb-4">0{card.id}/06</p>
-                    <h1 className="text-4xl md:text-6xl font-bold italic tracking-tighter" style={{ color: '#0FB5B7' }}>{card.title}</h1>
-                    <p className="mt-8 text-lg md:text-3xl text-white/100 md:max-w-2xl leading-relaxed font-medium">{card.description}</p>
+            <div className="grid grid-cols-1 md:gap-0 gap-3 md:grid-cols-2 w-full relative z-10">
+                <div className="flex flex-col text-left px-6 py-4 md:p-16 w-full">
+                    <p className="text-xl md:text-2xl font-mono text-white mb-2 md:mb-4 opacity-100">0{card.id}/06</p>
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold italic tracking-tighter" style={{ color: '#0FB5B7' }}>{card.title}</h1>
+                    <p className="mt-4 md:mt-8 text-base sm:text-lg md:text-3xl text-white md:max-w-2xl leading-relaxed font-medium opacity-100">{card.description}</p>
                 </div>
                 <div className="w-full h-full flex justify-center items-center">
                     <motion.div
@@ -99,11 +99,11 @@ const CustomSlide = ({ card }) => (
         initial={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
     >
-        <div className="grid grid-cols-1 w-full">
-                <div className="flex flex-col text-left md:p-16 ">
-                    <p className="text-xl md:text-2xl font-mono text-white mb-4">06/06</p>
-                    <h1 className="text-4xl md:text-6xl font-bold italic tracking-tighter" style={{ color: '#0FB5B7' }}>{card.title}</h1>
-                    <p className="mt-8 text-lg md:text-3xl text-white/100 md:max-w-2xl leading-relaxed font-medium">{card.description}</p>
+        <div className="grid grid-cols-1 w-full relative z-10">
+                <div className="flex flex-col text-left px-6 py-4 md:p-16 w-full">
+                    <p className="text-xl md:text-2xl font-mono text-white mb-2 md:mb-4 opacity-100">06/06</p>
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold italic tracking-tighter" style={{ color: '#0FB5B7' }}>{card.title}</h1>
+                    <p className="mt-4 md:mt-8 text-base sm:text-lg md:text-3xl text-white md:max-w-2xl leading-relaxed font-medium opacity-100">{card.description}</p>
                 </div>
             <div className="w-full h-full flex flex-col md:flex-row justify-start p-6 items-center md:p-16">
                 <motion.div
