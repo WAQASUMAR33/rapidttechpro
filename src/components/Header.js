@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { BsTelephone } from "react-icons/bs";
 import { FaArrowRight, FaBars, FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { openPopup, closePopup } from "@/store/popupSlice";
 
