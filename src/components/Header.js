@@ -212,9 +212,16 @@ export default function Header() {
                 className={`fixed top-0 right-0 w-full sm:w-80 h-full bg-black/95 text-white transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
                     } transition-transform duration-300 ease-in-out z-[60] shadow-2xl overflow-y-auto`}
             >
-                <div className="flex flex-col items-start p-6 space-y-6">
+                {/* Close Button Inside Sidebar */}
+                <button
+                    onClick={toggleSidebar}
+                    className="absolute top-6 right-6 text-white text-2xl hover:text-[#0FB5B7] transition-colors z-10"
+                >
+                    <FaTimes />
+                </button>
+                <div className="flex flex-col items-start p-6 space-y-6 relative">
                     {/* Logo in Sidebar */}
-                    <Link href="/" className="text-2xl sm:text-3xl font-bold mb-6">
+                    <Link href="/" className="text-2xl sm:text-3xl font-bold mb-6 pr-10">
                         Rapid <span className="text-bluish">TechPro.</span>
                     </Link>
 
