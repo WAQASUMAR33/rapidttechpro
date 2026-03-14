@@ -4,6 +4,7 @@ import { FaArrowRight, FaPlay } from "react-icons/fa";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { openPopup } from "@/store/popupSlice";
+import Link from "next/link";
 export default function HeroSection() {
     const dispatch = useDispatch();
     const [isMouseInside, setIsMouseInside] = useState(false);
@@ -76,14 +77,14 @@ export default function HeroSection() {
                         >
                             Book Free Consultancy <FaArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
                         </button>
-                        <button
+                        <Link href="/Work"
                             className="group border border-white/30 bg-white/5 backdrop-blur-md text-white px-6 py-2.5 md:px-8 md:py-3 rounded-full flex items-center gap-3 text-sm md:text-base font-bold hover:bg-white/10 transition-all"
                         >
                             <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center -ml-1">
                                 <FaPlay className="text-[10px] ml-0.5" />
                             </div>
                             See Our Work
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

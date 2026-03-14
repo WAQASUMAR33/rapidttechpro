@@ -281,10 +281,10 @@ export default function Header() {
                             className="absolute top-0 right-0 h-full w-full md:w-[600px] lg:w-[650px] bg-[#0d1b2a] shadow-2xl overflow-y-auto"
                             style={{ background: 'linear-gradient(160deg, #0d1b2a 0%, #08121d 100%)' }}
                         >
-                            <div className="relative p-8 md:p-12 min-h-full flex flex-col">
+                            <div className="relative p-6 md:p-8 min-h-full flex flex-col justify-center">
                                 <button
                                     onClick={() => dispatch(closePopup())}
-                                    className="absolute top-6 right-6 text-black bg-white w-10 h-10 rounded-full flex justify-center items-center font-bold hover:bg-gray-100 transition-colors z-10 shadow-lg"
+                                    className="absolute top-4 right-4 text-black bg-white w-8 h-8 rounded-full flex justify-center items-center font-bold hover:bg-gray-100 transition-colors z-10 shadow-lg"
                                 >
                                     &times;
                                 </button>
@@ -292,23 +292,23 @@ export default function Header() {
                                 {/* Teal glow decoration */}
                                 <div className="absolute top-0 right-0 w-80 h-80 rounded-full blur-[100px] pointer-events-none opacity-10" style={{ background: '#0FB5B7', transform: 'translate(40%, -40%)' }} />
 
-                                <div className="mt-8">
-                                    <h2 className="text-3xl md:text-4xl font-bold text-white">
+                                <div className="mt-2">
+                                    <h2 className="text-xl md:text-2xl font-bold text-white">
                                         Got a <span className="text-bluish">Project?</span>
                                     </h2>
-                                    <p className="text-gray-400 mt-4 leading-relaxed">
+                                    <p className="text-xs text-gray-400 mt-1.5 leading-relaxed">
                                         Share the details of your project – like scope, timeframes, or business challenges. Our team will thoroughly review the materials and respond to you promptly.
                                     </p>
                                 </div>
 
-                                <div className="mt-10">
-                                    <p className="text-sm font-semibold text-gray-300 mb-4 tracking-wide">I'm interested in</p>
-                                    <div className="flex flex-wrap gap-2.5">
+                                <div className="mt-4">
+                                    <p className="text-[11px] font-semibold text-gray-300 mb-2 tracking-wide">I'm interested in</p>
+                                    <div className="flex flex-wrap gap-1.5">
                                         {['Custom Software', 'Mobile App', 'UX/UI', 'Web Development'].map((interest) => (
                                             <button
                                                 key={interest}
                                                 onClick={() => handleInterestClick(interest)}
-                                                className="px-5 py-2.5 rounded-full text-sm font-semibold transition-all border"
+                                                className="px-3.5 py-1.5 rounded-full text-[11px] font-semibold transition-all border"
                                                 style={interests.includes(interest)
                                                     ? { background: '#0FB5B7', color: '#fff', borderColor: '#0FB5B7' }
                                                     : { background: 'rgba(255,255,255,0.03)', color: '#9ca3af', borderColor: 'rgba(255,255,255,0.1)' }}
@@ -319,33 +319,33 @@ export default function Header() {
                                     </div>
                                 </div>
 
-                                <form className="mt-10 space-y-5 flex-grow">
-                                    <div className="space-y-4">
+                                <form className="mt-5 space-y-2.5 flex-grow">
+                                    <div className="space-y-2.5">
                                         <input
                                             type="text"
                                             placeholder="Name"
-                                            className="w-full p-4 rounded-xl text-white text-base outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
+                                            className="w-full p-2.5 rounded-lg text-white text-[13px] outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
                                         />
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                                             <input
                                                 type="email"
                                                 placeholder="Email"
-                                                className="w-full p-4 rounded-xl text-white text-base outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
+                                                className="w-full p-2.5 rounded-lg text-white text-[13px] outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
                                             />
                                             <input
                                                 type="tel"
                                                 placeholder="Whatsapp Number"
-                                                className="w-full p-4 rounded-xl text-white text-base outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
+                                                className="w-full p-2.5 rounded-lg text-white text-[13px] outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
                                             />
                                         </div>
                                         <textarea
                                             placeholder="Message"
-                                            className="w-full p-4 rounded-xl text-white text-base outline-none resize-none placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
-                                            rows="5"
+                                            className="w-full p-2.5 rounded-lg text-white text-[13px] outline-none resize-none placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
+                                            rows="3"
                                         />
                                     </div>
 
-                                    <div className="flex flex-wrap gap-4 text-[11px] uppercase tracking-widest font-bold text-gray-500 py-4 border-t border-white/5">
+                                    <div className="flex flex-wrap gap-4 text-[10px] uppercase tracking-widest font-bold text-gray-500 py-3 border-t border-white/5">
                                         {['Free Consultancy', 'Road Map Execution', 'Collaboration', 'Execution Guidance'].map(item => (
                                             <span key={item} className="flex items-center gap-1.5">
                                                 <div className="w-1 h-1 rounded-full bg-[#0FB5B7]"></div>
@@ -356,15 +356,15 @@ export default function Header() {
 
                                     <button
                                         type="submit"
-                                        className="w-full p-5 rounded-xl text-white font-bold text-lg transition-all hover:brightness-110 active:scale-[0.98] shadow-2xl shadow-blue-600/20"
+                                        className="w-full p-2.5 rounded-lg text-white font-bold text-[13px] transition-all hover:brightness-110 active:scale-[0.98] shadow-2xl shadow-blue-600/20"
                                         style={{ background: 'linear-gradient(135deg, #3b82f6, #0FB5B7)' }}
                                     >
                                         Send Message
                                     </button>
                                 </form>
 
-                                <div className="mt-12 text-center">
-                                    <p className="text-xs text-gray-500 leading-relaxed max-w-sm mx-auto">
+                                <div className="mt-4 text-center pb-2">
+                                    <p className="text-[10px] text-gray-500 leading-relaxed max-w-sm mx-auto">
                                         We'll keep your information in our CRM to respond to your request. For more details, see our <a href="#" className="text-[#0FB5B7] hover:underline">privacy policy</a>.
                                     </p>
                                 </div>
