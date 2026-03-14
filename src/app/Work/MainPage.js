@@ -47,12 +47,12 @@ function FilterDropdown({ label, options, value, onChange }) {
 
   return (
     <div ref={ref} className="relative">
-      <label className="block text-sm font-semibold text-black mb-2 pl-1">{label}</label>
+      <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 pl-1">{label}</label>
 
       {/* Trigger / Search Input */}
       <div
-        className={`w-full flex items-center justify-between px-5 py-4 border rounded-2xl bg-white text-gray-800 text-base font-medium transition-all duration-200 cursor-pointer ${
-          open ? 'border-[#0FB5B7] ring-1 ring-[#0FB5B7]' : 'border-gray-200 hover:border-gray-300'
+        className={`w-full flex items-center justify-between px-4 py-2.5 border rounded-xl bg-white text-gray-800 text-sm font-semibold transition-all duration-200 cursor-pointer ${
+          open ? 'border-[#0FB5B7] ring-1 ring-[#0FB5B7]' : 'border-gray-200 hover:border-gray-300 shadow-sm'
         }`}
         onClick={!open ? openDropdown : undefined}
       >
@@ -63,7 +63,7 @@ function FilterDropdown({ label, options, value, onChange }) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={`Search ${label.toLowerCase()}...`}
-            className="flex-1 bg-transparent text-gray-800 placeholder-gray-400 outline-none text-base"
+            className="flex-1 bg-transparent text-gray-800 placeholder-gray-400 outline-none text-sm"
           />
         ) : (
           <span className="text-black">{value}</span>
@@ -74,7 +74,7 @@ function FilterDropdown({ label, options, value, onChange }) {
           className="ml-2 flex-shrink-0"
         >
           <svg
-            className={`h-5 w-5 text-gray-400 transition-transform duration-200 ${open ? 'rotate-180 text-[#0FB5B7]' : ''}`}
+            className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${open ? 'rotate-180 text-[#0FB5B7]' : ''}`}
             fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -90,16 +90,16 @@ function FilterDropdown({ label, options, value, onChange }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.15 }}
-            className="absolute z-50 mt-2 w-full bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden"
+            className="absolute z-50 mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-2xl overflow-hidden"
           >
-            <div className="max-h-60 overflow-y-auto py-2">
+            <div className="max-h-60 overflow-y-auto py-1">
               {filtered.length > 0 ? (
                 filtered.map((option) => (
                   <button
                     key={option}
                     type="button"
                     onMouseDown={(e) => { e.preventDefault(); select(option); }}
-                    className={`w-full text-left px-5 py-2.5 text-sm font-medium transition-colors ${
+                    className={`w-full text-left px-5 py-2 text-sm font-medium transition-colors ${
                       value === option
                         ? 'bg-[#0FB5B7]/10 text-[#0FB5B7]'
                         : 'text-black hover:bg-gray-50'
@@ -109,7 +109,7 @@ function FilterDropdown({ label, options, value, onChange }) {
                   </button>
                 ))
               ) : (
-                <p className="text-sm text-gray-400 text-center py-4">No results found</p>
+                <p className="text-xs text-gray-400 text-center py-4">No results found</p>
               )}
             </div>
           </motion.div>
