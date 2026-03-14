@@ -40,6 +40,7 @@ export default function Home() {
       <SuccessStories ref={successStoriesRef} />
       <TwoColumnSection />
       <TechnologiesSection />
+      <AutoImagePlayCarousel />
       <TestimonialsSection />
       <Industries />
       <DarkAwardsSection />

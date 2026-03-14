@@ -146,21 +146,6 @@ export default function TechnologiesSection() {
                     </div>
                 </div>
 
-                {/* Bottom Banner */}
-                <div className="mt-16 md:mt-24">
-                    <div className="bg-gray-100 rounded-full px-8 md:px-12 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
-                        <h3 className="text-base md:text-lg font-semibold text-black leading-tight whitespace-nowrap">
-                            Create a software development <span className="text-[#0FB5B7]">Team</span> with us
-                        </h3>
-                        <button
-                            className="bg-black text-white px-6 py-3 rounded-full font-semibold text-sm hover:bg-[#0FB5B7] transition-all duration-300 shrink-0"
-                            onClick={() => dispatch(openPopup())}
-                        >
-                            Get a Quote
-                        </button>
-                    </div>
-                </div>
-
             </div>
         </section>
     );
