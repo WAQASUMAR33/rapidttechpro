@@ -34,7 +34,7 @@ const AutoImagePlayCarousel = () => {
   const extendedImages = [...images, ...images, ...images, ...images]; // Clone for looping effect
 
   return (
-    <div className="relative bg-white overflow-hidden mt-2">
+    <div className="relative bg-white overflow-hidden h-[80px] flex items-center shadow-xl z-20 w-full">
       <div ref={containerRef} className="flex whitespace-nowrap">
         <ul className="flex list-none p-0">
           {extendedImages.map((src, index) => (
@@ -42,7 +42,7 @@ const AutoImagePlayCarousel = () => {
               <img
                 src={src}
                 alt={`Carousel image ${index + 1}`}
-                className="w-auto h-20 object-contain"
+                className="w-auto h-[50px] object-contain"
               />
             </li>
           ))}

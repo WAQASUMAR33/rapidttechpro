@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <>
       <ChatWithWhatsapp />
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col h-[100dvh] w-full overflow-hidden">
         <Herosection />
         <AutoImagePlayCarousel />
       </div>
