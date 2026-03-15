@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { openPopup } from '@/store/popupSlice';
-import { SiFlutter, SiReact, SiUnity, SiUnrealengine, SiGodotengine, SiMongodb, SiMysql, SiMicrosoftsqlserver, SiPostgresql, SiRedis, SiElasticsearch, SiNginx, SiDocker, SiKubernetes, SiJenkins, SiGooglecloud, SiMicrosoftazure, SiFirebase, SiHeroku, SiOracle, SiLinode, SiAppium, SiGradle, SiRxjs, SiDart } from "react-icons/si";
-import { FaServer, FaAws } from "react-icons/fa";
+import { SiFlutter, SiReact, SiUnity, SiUnrealengine, SiGodotengine, SiMongodb, SiMysql, SiMicrosoftsqlserver, SiPostgresql, SiRedis, SiElasticsearch, SiNginx, SiDocker, SiKubernetes, SiJenkins, SiGooglecloud, SiMicrosoftazure, SiFirebase, SiHeroku, SiOracle, SiRxjs, SiDart } from "react-icons/si";
+import { FaServer, FaAws, FaCloud, FaMobileAlt, FaTools } from "react-icons/fa";
 
 const techData = [
     {
@@ -135,7 +135,7 @@ const techData = [
                     { name: 'Nginx', icon: null, iconComponent: <SiNginx className="w-5 h-5 text-[#009639]" /> },
                     { name: 'Docker', icon: null, iconComponent: <SiDocker className="w-5 h-5 text-[#2496ED]" /> },
                     { name: 'Kubernetes', icon: null, iconComponent: <SiKubernetes className="w-5 h-5 text-[#326CE5]" /> },
-                    { name: 'Gradle', icon: null, iconComponent: <SiGradle className="w-5 h-5" /> },
+                    { name: 'Gradle', icon: null, iconComponent: <FaTools className="w-5 h-5 opacity-50" /> },
                     { name: 'Jenkins', icon: null, iconComponent: <SiJenkins className="w-5 h-5 text-[#D24939]" /> },
                 ]
             },
@@ -143,10 +143,10 @@ const techData = [
                 name: 'Cloud',
                 items: [
                     { name: 'Aws', icon: null, iconComponent: <FaAws className="w-5 h-5 text-[#FF9900]" /> },
-                    { name: 'Appium', icon: null, iconComponent: <SiAppium className="w-5 h-5" /> },
+                    { name: 'Appium', icon: null, iconComponent: <FaMobileAlt className="w-5 h-5 text-[#58595B]" /> },
                     { name: 'Azure', icon: null, iconComponent: <SiMicrosoftazure className="w-5 h-5 text-[#0078D4]" /> },
                     { name: 'Rackspace', icon: null, iconComponent: <FaServer className="w-5 h-5 opacity-30" /> },
-                    { name: 'Linode', icon: null, iconComponent: <SiLinode className="w-5 h-5 text-[#00A91C]" /> },
+                    { name: 'Linode', icon: null, iconComponent: <FaCloud className="w-5 h-5 text-[#00A91C]" /> },
                     { name: 'Firebase', icon: null, iconComponent: <SiFirebase className="w-5 h-5 text-[#FFCA28]" /> },
                     { name: 'Oracle Cloud', icon: null, iconComponent: <SiOracle className="w-5 h-5 text-[#F80000]" /> },
                     { name: 'Heroku', icon: null, iconComponent: <SiHeroku className="w-5 h-5 text-[#430098]" /> },
