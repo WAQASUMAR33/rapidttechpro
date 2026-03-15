@@ -5,9 +5,11 @@ import { IoMdLaptop } from 'react-icons/io';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './TabsSection.module.css'
 import Link from 'next/link';
-import { MdOutlineBookOnline, MdOutlineDesignServices, MdOutlinePointOfSale, MdSmartphone } from 'react-icons/md';
+import { MdOutlineBookOnline, MdOutlineDesignServices, MdOutlinePointOfSale, MdSmartphone, MdOutlineCloudDone, MdOutlineVideogameAsset } from 'react-icons/md';
 import { CgWebsite } from "react-icons/cg";
-import { GrSystem } from "react-icons/gr";
+import { GrSystem, GrStorage } from "react-icons/gr";
+import { SiFlutter, SiReact, SiUnity, SiUnrealengine, SiGodotengine, SiMongodb, SiMysql, SiMicrosoftsqlserver, SiPostgresql, SiRedis, SiElasticsearch, SiNginx, SiDocker, SiKubernetes, SiJenkins, SiAmazonaws, SiGooglecloud, SiMicrosoftazure, SiFirebase, SiHeroku } from "react-icons/si";
+import { FaLayerGroup, FaServer } from "react-icons/fa";
 
 const LazyImage = ({ src, alt, className }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -76,8 +78,8 @@ const tabData = [{
   },
 },
 {
-  name: 'webApplications',
-  title: 'Web Applications',
+  name: 'webPlatforms',
+  title: 'Web Platforms',
   icons: { tabicon: <CgWebsite className='text-4xl ' />, platformicon: <FaStore /> },
   content: {
     Backend: [
@@ -97,108 +99,84 @@ const tabData = [{
       { name: 'JQuery', icons: '/tabsimages/jquery.png' },
       { name: 'Nextjs', icons: '/tabsimages/nextjs.png' },
     ],
-
   },
 },
 {
-  name: 'cms',
-  title: 'CMS',
-  icons: { tabicon: <GrSystem className='text-4xl ' />, platformicon: <FaStore /> },
+  name: 'crossPlatforms',
+  title: 'Cross Platforms',
+  icons: { tabicon: <FaLayerGroup className='text-4xl ' />, platformicon: <FaStore /> },
   content: {
-    Editors: [
-      { name: 'Magento', icons: '/tabsimages/magento.png' },
-      { name: 'Shopify', icons: '/tabsimages/shopify.png' },
-      { name: 'Wix', icons: '/tabsimages/wix.png' },
-      { name: 'WordPress', icons: '/tabsimages/wordpress.png' },
+    React: [
+      { name: 'Redux', icons: '/tabsimages/react.png' },
+      { name: 'Mobx', icons: null, reactIcon: <SiReact className="w-10 h-10 text-[#61DAFB]" /> },
+      { name: 'RxJS', icons: null, reactIcon: <SiReact className="w-10 h-10 text-[#61DAFB]" /> },
+      { name: 'Redux Thunk', icons: '/tabsimages/react.png' },
     ],
-  },
-},
-{
-  name: 'mobileApps',
-  title: 'Mobile Apps',
-  icons: { tabicon: <MdSmartphone className='text-4xl ' />, platformicon: <FaStore /> },
-  content: {
-    Hybrid: [
-      { name: "Flutter", icons: '/tabsimages/flutter.png' },
-      { name: "React Native", icons: '/tabsimages/react.png' },
-    ],
-    iOS: [
-      { name: "Swift", icons: '/tabsimages/swift.png' },
-      { name: "UI Kit", icons: '/tabsimages/uikit.png' },
-      { name: "RxSwift", icons: '/tabsimages/rxswift.png' },
-
-    ],
-    android: [
-      { name: 'Java', icons: '/tabsimages/java.png' },
-      { name: 'Kotlin', icons: '/tabsimages/kotlin.png' },
-
-      { name: 'RxJava', icons: '/tabsimages/rxjava.png' },
-
-    ],
-  },
-},
-
-
-{
-  name: 'hr',
-  title: 'HR Solutions',
-  icons: { tabicon: <IoMdLaptop className='text-4xl ' />, platformicon: <FaStore /> },
-  content: {
-    'Features': [
-      { name: 'Employee ', icons: '/tabsimages/employee.png' },
-      { name: 'Recruitment', icons: '/tabsimages/recruitment.png' },
-      { name: 'Talent ', icons: '/tabsimages/talent.png' },
-      { name: 'Payroll', icons: '/tabsimages/payroll.png' },
-      { name: 'Attendence', icons: '/tabsimages/attendence.png' },
-      { name: 'Training', icons: '/tabsimages/training.png' },
-      { name: 'Development', icons: '/tabsimages/development.png' },
-      { name: 'Benefit', icons: '/tabsimages/benefits.png' },
-      { name: 'Analytics', icons: '/tabsimages/analytics.png' },
-      { name: 'Portal', icons: '/tabsimages/custom.png' },
+    Flutter: [
+      { name: 'Bloc', icons: '/tabsimages/flutter.png' },
+      { name: 'Dart', icons: null, reactIcon: <SiFlutter className="w-10 h-10 text-[#02569B]" /> },
+      { name: 'MVVM', icons: null, reactIcon: <SiFlutter className="w-10 h-10 text-[#02569B]" /> },
+      { name: 'Rx Dart', icons: '/tabsimages/flutter.png' },
     ],
   },
 },
 {
-  name: 'crm',
-  title: 'Point of Sale System',
-  icons: { tabicon: <MdOutlinePointOfSale className='text-4xl ' />, platformicon: <FaStore /> },
+  name: 'games',
+  title: 'Games',
+  icons: { tabicon: <MdOutlineVideogameAsset className='text-4xl ' />, platformicon: <FaStore /> },
   content: {
-    'Features': [
-      { name: 'Inventory', icons: '/tabsimages/inventory.png' },
-      { name: 'Sales ', icons: '/tabsimages/sales.png' },
-      { name: 'Transaction', icons: '/tabsimages/transaction.png' },
-      { name: 'Customer', icons: '/tabsimages/customer.png' },
-      { name: 'Employee', icons: '/tabsimages/employee.png' },
-      { name: 'Analytics', icons: '/tabsimages/analytics.png' },
-      { name: 'Discount', icons: '/tabsimages/discount.png' },
-      { name: 'Receipt', icons: '/tabsimages/receipt.png' },
-      { name: 'Purchase ', icons: '/tabsimages/purchase.png' },
-      { name: 'Multi Store', icons: '/tabsimages/multistore.png' },
-      { name: 'Cash ', icons: '/tabsimages/cash.png' },
-      { name: 'Security', icons: '/tabsimages/security.png' },
-      { name: 'Permissions', icons: '/tabsimages/permission.png' },
-      { name: 'Returns', icons: '/tabsimages/return.png' },
-      { name: 'Tax ', icons: '/tabsimages/tax.png' },
-      { name: 'Offline ', icons: '/tabsimages/offline.png' },
-      { name: 'Online', icons: '/tabsimages/online.png' },
+    Engines: [
+      { name: 'Unreal', icons: null, reactIcon: <SiUnrealengine className="w-10 h-10" /> },
+      { name: 'Unity', icons: null, reactIcon: <SiUnity className="w-10 h-10" /> },
+      { name: 'Godot', icons: null, reactIcon: <SiGodotengine className="w-10 h-10" /> },
+      { name: 'Cryengine', icons: null, reactIcon: <SiUnrealengine className="w-10 h-10 opacity-50" /> },
+    ],
+    Servers: [
+      { name: 'Nakama', icons: null, reactIcon: <FaServer className="w-10 h-10" /> },
+      { name: 'Photon', icons: null, reactIcon: <FaServer className="w-10 h-10" /> },
+      { name: 'AWS', icons: null, reactIcon: <SiAmazonaws className="w-10 h-10" /> },
+      { name: 'Jenkins', icons: null, reactIcon: <SiJenkins className="w-10 h-10 text-[#D24939]" /> },
     ],
   },
 },
 {
-  name: 'uiux',
-  title: 'UI/UX - Figma',
-  icons: { tabicon: <MdOutlineDesignServices className='text-4xl ' />, platformicon: <FaStore /> },
+  name: 'database',
+  title: 'Database',
+  icons: { tabicon: <GrStorage className='text-4xl ' />, platformicon: <FaStore /> },
   content: {
-    'Features': [
-      { name: 'Wireframes', icons: '/tabsimages/wireframe.png' },
-      { name: 'Mockups ', icons: '/tabsimages/mockups.png' },
-      { name: 'Usability Testing', icons: '/tabsimages/usability testing.jpg' },
-      { name: 'A/B Testing', icons: '/tabsimages/abtesting.jpg' },
-      { name: 'Analysis', icons: '/tabsimages/analysis.png' },
-      { name: 'Prototyping', icons: '/tabsimages/prototyping.png' },
-      { name: 'Strategy', icons: '/tabsimages/strategy.png' },
-      { name: 'Reports', icons: '/tabsimages/reports.png' },
-      { name: 'Recommendations ', icons: '/tabsimages/recommendations.jpg' },
+    Database: [
+      { name: 'Mongodb', icons: null, reactIcon: <SiMongodb className="w-10 h-10 text-[#47A248]" /> },
+      { name: 'MySQL', icons: null, reactIcon: <SiMysql className="w-10 h-10 text-[#4479A1]" /> },
+      { name: 'MsSQL', icons: null, reactIcon: <SiMicrosoftsqlserver className="w-10 h-10 text-[#CC2927]" /> },
+      { name: 'Dynamodb', icons: null, reactIcon: <SiAmazonaws className="w-10 h-10" /> },
+      { name: 'PostgreSQL', icons: null, reactIcon: <SiPostgresql className="w-10 h-10 text-[#4169E1]" /> },
+      { name: 'IBM', icons: null, reactIcon: <GrStorage className="w-10 h-10" /> },
+      { name: 'Redis', icons: null, reactIcon: <SiRedis className="w-10 h-10 text-[#DC382D]" /> },
+      { name: 'Elasticsearch', icons: null, reactIcon: <SiElasticsearch className="w-10 h-10 text-[#005571]" /> },
+    ],
+  },
+},
+{
+  name: 'cloudDevops',
+  title: 'Cloud & DevOps',
+  icons: { tabicon: <MdOutlineCloudDone className='text-4xl ' />, platformicon: <FaStore /> },
+  content: {
+    DevOps: [
+      { name: 'Nginx', icons: null, reactIcon: <SiNginx className="w-10 h-10 text-[#009639]" /> },
+      { name: 'Docker', icons: null, reactIcon: <SiDocker className="w-10 h-10 text-[#2496ED]" /> },
+      { name: 'Kubernetes', icons: null, reactIcon: <SiKubernetes className="w-10 h-10 text-[#326CE5]" /> },
+      { name: 'Gradle', icons: null, reactIcon: <SiJenkins className="w-10 h-10 opacity-50" /> },
+      { name: 'Jenkins', icons: null, reactIcon: <SiJenkins className="w-10 h-10 text-[#D24939]" /> },
+    ],
+    Cloud: [
+      { name: 'Aws', icons: null, reactIcon: <SiAmazonaws className="w-10 h-10" /> },
+      { name: 'Appium', icons: null, reactIcon: <SiGooglecloud className="w-10 h-10" /> },
+      { name: 'Azure', icons: null, reactIcon: <SiMicrosoftazure className="w-10 h-10 text-[#0078D4]" /> },
+      { name: 'Rackspace', icons: null, reactIcon: <SiAmazonaws className="w-10 h-10 opacity-30" /> },
+      { name: 'Linode', icons: null, reactIcon: <SiGooglecloud className="w-10 h-10 opacity-30" /> },
+      { name: 'Firebase', icons: null, reactIcon: <SiFirebase className="w-10 h-10 text-[#FFCA28]" /> },
+      { name: 'Oracle Cloud', icons: null, reactIcon: <SiGooglecloud className="w-10 h-10 opacity-20" /> },
+      { name: 'Heroku', icons: null, reactIcon: <SiHeroku className="w-10 h-10 text-[#430098]" /> },
     ],
   },
 },
@@ -308,13 +286,17 @@ const TabsSection = ({ successStoriesRef }) => {
                     key={index}
                     className={`${styles['link-container']} bg-gray-100 hover:bg-[#25CBA1] group hover:text-white text-center rounded-full md:px-2 px-2 py-2 md:py-2 text-sm md:text-[18px] flex items-center justify-start gap-3 overflow-hidden`}
                   >
-                    {item.icons && (
+                    {item.icons ? (
                       <LazyImage
                         src={item.icons}
                         alt={item.name}
                         className="w-10 h-10 object-contain group-hover:bg-white rounded-full"
                       />
-                    )}
+                    ) : item.reactIcon ? (
+                      <div className="w-10 h-10 flex items-center justify-center bg-white rounded-full flex-shrink-0 group-hover:scale-110 transition-transform">
+                        {item.reactIcon}
+                      </div>
+                    ) : null}
                     <div className='flex flex-col w-auto h-8 overflow-hidden text-[15px]'>
                       <span className={styles['item-name']}>{item.name || item}</span>
                       <span className={styles['item-name-hover']}>{item.name || item}</span>
