@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { openPopup } from '@/store/popupSlice';
-import { SiFlutter, SiReact, SiUnity, SiUnrealengine, SiGodotengine, SiMongodb, SiMysql, SiMicrosoftsqlserver, SiPostgresql, SiRedis, SiElasticsearch, SiNginx, SiDocker, SiKubernetes, SiJenkins, SiGooglecloud, SiMicrosoftazure, SiFirebase, SiHeroku, SiOracle, SiRxjs, SiDart } from "react-icons/si";
-import { FaServer, FaAws, FaCloud, FaMobileAlt, FaTools } from "react-icons/fa";
+import { SiFlutter, SiReact, SiUnity, SiUnrealengine, SiGodotengine, SiMongodb, SiMysql, SiPostgresql, SiRedis, SiNginx, SiDocker, SiKubernetes, SiJenkins, SiFirebase, SiHeroku, SiOracle, SiRxjs, SiDart } from "react-icons/si";
+import { FaServer, FaAws, FaCloud, FaMobileAlt, FaTools, FaDatabase, FaGoogle, FaWindows, FaSearch } from "react-icons/fa";
 
 const techData = [
     {
@@ -115,12 +115,12 @@ const techData = [
                 items: [
                     { name: 'Mongodb', icon: null, iconComponent: <SiMongodb className="w-5 h-5 text-[#47A248]" /> },
                     { name: 'MySQL', icon: null, iconComponent: <SiMysql className="w-5 h-5 text-[#4479A1]" /> },
-                    { name: 'MsSQL', icon: null, iconComponent: <SiMicrosoftsqlserver className="w-5 h-5 text-[#CC2927]" /> },
+                    { name: 'MsSQL', icon: null, iconComponent: <FaDatabase className="w-5 h-5 text-[#CC2927]" /> },
                     { name: 'Dynamodb', icon: null, iconComponent: <FaAws className="w-5 h-5 text-[#FF9900]" /> },
                     { name: 'PostgreSQL', icon: null, iconComponent: <SiPostgresql className="w-5 h-5 text-[#4169E1]" /> },
                     { name: 'IBM', icon: null, iconComponent: <GrStorage className="w-5 h-5" /> },
                     { name: 'Redis', icon: null, iconComponent: <SiRedis className="w-5 h-5 text-[#DC382D]" /> },
-                    { name: 'Elasticsearch', icon: null, iconComponent: <SiElasticsearch className="w-5 h-5 text-[#005571]" /> },
+                    { name: 'Elasticsearch', icon: null, iconComponent: <FaSearch className="w-5 h-5 text-[#005571]" /> },
                 ]
             }
         ]
@@ -144,7 +144,7 @@ const techData = [
                 items: [
                     { name: 'Aws', icon: null, iconComponent: <FaAws className="w-5 h-5 text-[#FF9900]" /> },
                     { name: 'Appium', icon: null, iconComponent: <FaMobileAlt className="w-5 h-5 text-[#58595B]" /> },
-                    { name: 'Azure', icon: null, iconComponent: <SiMicrosoftazure className="w-5 h-5 text-[#0078D4]" /> },
+                    { name: 'Azure', icon: null, iconComponent: <FaWindows className="w-5 h-5 text-[#0078D4]" /> },
                     { name: 'Rackspace', icon: null, iconComponent: <FaServer className="w-5 h-5 opacity-30" /> },
                     { name: 'Linode', icon: null, iconComponent: <FaCloud className="w-5 h-5 text-[#00A91C]" /> },
                     { name: 'Firebase', icon: null, iconComponent: <SiFirebase className="w-5 h-5 text-[#FFCA28]" /> },
