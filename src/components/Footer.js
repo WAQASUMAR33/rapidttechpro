@@ -60,10 +60,10 @@ export default function Footer() {
               <h3 className="text-[10px] sm:text-[9px] uppercase tracking-[0.2em] text-[#0FB5B7] font-bold">Company</h3>
             </div>
             <ul className="flex flex-col gap-2 sm:gap-1 text-white">
-              <li><a href="/AboutUs" className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">About Us</a></li>
-              <li><a href="/Company/Testimonials" className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Testimonials</a></li>
-              <li><a href="/Company/Process" className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Process</a></li>
-              <li><a href="/Help" className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Contact</a></li>
+              <li><a href="/AboutUs" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">About Us</a></li>
+              <li><a href="/Company/Testimonials" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Testimonials</a></li>
+              <li><a href="/Company/Process" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Process</a></li>
+              <li><a href="/Help" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Contact</a></li>
             </ul>
           </div>
 
@@ -74,10 +74,10 @@ export default function Footer() {
               <h3 className="text-[10px] sm:text-[9px] uppercase tracking-[0.2em] text-[#0FB5B7] font-bold">Resources</h3>
             </div>
             <ul className="flex flex-col gap-2 sm:gap-1">
-              <li><a href="/blog" className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Blog</a></li>
-              <li><a href="/Company/Events" className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Events</a></li>
-              <li><a href="/Company/Press-Release" className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Press Release</a></li>
-              <li><a href="/Work" className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Work</a></li>
+              <li><a href="/blog" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Blog</a></li>
+              <li><a href="/Company/Events" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Events</a></li>
+              <li><a href="/Company/Press-Release" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Press Release</a></li>
+              <li><a href="/Work" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Work</a></li>
             </ul>
           </div>
 
@@ -92,7 +92,7 @@ export default function Footer() {
                 <li key={svc.slug}>
                   <Link
                     href={`/Services/${svc.slug}`}
-                    className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight"
+                    className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight"
                   >
                     {svc.title}
                   </Link>
@@ -108,10 +108,10 @@ export default function Footer() {
               <h3 className="text-[10px] sm:text-[9px] uppercase tracking-[0.2em] text-[#0FB5B7] font-bold">Insights</h3>
             </div>
             <ul className="flex flex-col gap-2 sm:gap-1">
-              <li><a href="/University" className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">University</a></li>
-              <li><a href="/Company/Careers" className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Careers</a></li>
-              <li><a href="/Company/Manifesto" className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Manifesto</a></li>
-              <li><a href="/Company/Culture-Book" className="text-base md:text-lg lg:text-[20px] font-bold hover:text-bluish transition-colors leading-tight">Culture Book</a></li>
+              <li><a href="/University" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">University</a></li>
+              <li><a href="/Company/Careers" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Careers</a></li>
+              <li><a href="/Company/Manifesto" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Manifesto</a></li>
+              <li><a href="/Company/Culture-Book" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Culture Book</a></li>
             </ul>
           </div>
         </div>
@@ -127,16 +127,16 @@ export default function Footer() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <h4 className="text-lg sm:text-xl font-bold mb-2">Dubai</h4>
-              <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+              <h4 className="text-base sm:text-lg font-bold mb-2">Dubai</h4>
+              <p className="text-gray-400 text-xs md:text-sm leading-relaxed">
                 Building 11, Level 7, Bay Square, <br />
                 Business Bay, Dubai - 23304, <br />
                 United Arab Emirates
               </p>
             </div>
             <div>
-              <h4 className="text-lg sm:text-xl font-bold mb-2">Mandi Bahauddin</h4>
-              <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+              <h4 className="text-base sm:text-lg font-bold mb-2">Mandi Bahauddin</h4>
+              <p className="text-gray-400 text-xs md:text-sm leading-relaxed">
                 54C, Phalia Road, Punjab Center, <br />
                 Mandi Bahauddin - 75400, <br />
                 Pakistan
@@ -151,13 +151,13 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-10 pt-4">
           {/* Contact Left */}
           <div className="w-full lg:w-auto flex flex-col items-center lg:items-start text-center lg:text-left">
-            <a href="tel:+923403051059" className="text-2xl sm:text-3xl font-bold block mb-2 hover:text-[#0FB5B7] transition-colors tracking-tighter leading-none">+92 340 3051059</a>
-            <a href="mailto:info@rapidtechpro.com" className="text-base sm:text-lg text-gray-400 hover:text-[#0FB5B7] transition-colors">info@rapidtechpro.com</a>
+            <a href="tel:+923403051059" className="text-xl sm:text-2xl font-bold block mb-2 hover:text-[#0FB5B7] transition-colors tracking-tighter leading-none">+92 340 3051059</a>
+            <a href="mailto:info@rapidtechpro.com" className="text-sm sm:text-base text-gray-400 hover:text-[#0FB5B7] transition-colors">info@rapidtechpro.com</a>
           </div>
 
           {/* Logo Center */}
           <div className="flex flex-col items-center">
-            <div className="text-2xl sm:text-3xl font-bold tracking-tighter mb-2 flex items-baseline leading-none">
+            <div className="text-lg sm:text-xl font-bold tracking-tighter mb-2 flex items-baseline leading-none">
               <span className="text-white">RapidTech</span><span className="text-[#0FB5B7]">Pro</span>
             </div>
             <p className="text-gray-500 text-[10px] sm:text-[11px] font-medium text-center max-w-[200px] sm:max-w-none leading-relaxed">© 2024 RapidTechPro All Rights Reserved</p>
