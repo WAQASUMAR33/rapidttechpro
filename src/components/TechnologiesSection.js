@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { openPopup } from '@/store/popupSlice';
-import { SiFlutter, SiReact, SiUnity, SiUnrealengine, SiGodotengine, SiMongodb, SiMysql, SiPostgresql, SiRedis, SiNginx, SiDocker, SiKubernetes, SiJenkins, SiFirebase, SiHeroku, SiOracle, SiRxjs, SiDart } from "react-icons/si";
-import { FaServer, FaAws, FaCloud, FaMobileAlt, FaTools, FaDatabase, FaGoogle, FaWindows, FaSearch } from "react-icons/fa";
+import { SiReact, SiUnity, SiUnrealengine, SiGodotengine, SiMongodb, SiMysql, SiPostgresql, SiRedis, SiNginx, SiDocker, SiKubernetes, SiJenkins, SiFirebase, SiHeroku } from "react-icons/si";
+import { FaServer, FaAws, FaCloud, FaMobileAlt, FaTools, FaDatabase, FaGoogle, FaWindows, FaSearch, FaCode, FaCodeBranch } from "react-icons/fa";
+import { GrStorage } from "react-icons/gr";
+import { RiFlutterFill } from "react-icons/ri";
 
 const techData = [
     {
@@ -67,7 +69,7 @@ const techData = [
                 items: [
                     { name: 'Redux', icon: '/tabsimages/react.png' },
                     { name: 'Mobx', icon: null, iconComponent: <SiReact className="w-5 h-5 text-[#61DAFB]" /> },
-                    { name: 'RxJS', icon: null, iconComponent: <SiRxjs className="w-5 h-5 text-[#B7178C]" /> },
+                    { name: 'RxJS', icon: null, iconComponent: <FaCode className="w-5 h-5 text-[#B7178C]" /> },
                     { name: 'Redux Thunk', icon: '/tabsimages/react.png' },
                 ]
             },
@@ -75,8 +77,8 @@ const techData = [
                 name: 'Flutter',
                 items: [
                     { name: 'Bloc', icon: '/tabsimages/flutter.png' },
-                    { name: 'Dart', icon: null, iconComponent: <SiDart className="w-5 h-5 text-[#0175C2]" /> },
-                    { name: 'MVVM', icon: null, iconComponent: <SiFlutter className="w-5 h-5 text-[#02569B]" /> },
+                    { name: 'Dart', icon: null, iconComponent: <FaCodeBranch className="w-5 h-5 text-[#0175C2]" /> },
+                    { name: 'MVVM', icon: null, iconComponent: <RiFlutterFill className="w-5 h-5 text-[#02569B]" /> },
                     { name: 'Rx Dart', icon: '/tabsimages/flutter.png' },
                 ]
             }
@@ -148,7 +150,7 @@ const techData = [
                     { name: 'Rackspace', icon: null, iconComponent: <FaServer className="w-5 h-5 opacity-30" /> },
                     { name: 'Linode', icon: null, iconComponent: <FaCloud className="w-5 h-5 text-[#00A91C]" /> },
                     { name: 'Firebase', icon: null, iconComponent: <SiFirebase className="w-5 h-5 text-[#FFCA28]" /> },
-                    { name: 'Oracle Cloud', icon: null, iconComponent: <SiOracle className="w-5 h-5 text-[#F80000]" /> },
+                    { name: 'Oracle Cloud', icon: null, iconComponent: <FaDatabase className="w-5 h-5 text-[#F80000]" /> },
                     { name: 'Heroku', icon: null, iconComponent: <SiHeroku className="w-5 h-5 text-[#430098]" /> },
                 ]
             }
