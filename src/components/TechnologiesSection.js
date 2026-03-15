@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { openPopup } from '@/store/popupSlice';
+import { SiFlutter, SiReact, SiUnity, SiUnrealengine, SiGodotengine, SiMongodb, SiMysql, SiMicrosoftsqlserver, SiPostgresql, SiRedis, SiElasticsearch, SiNginx, SiDocker, SiKubernetes, SiJenkins, SiAmazonaws, SiGooglecloud, SiMicrosoftazure, SiFirebase, SiHeroku, SiIbm, SiOracle, SiLinode, SiAppium, SiGradle, SiRxjs, SiDart } from "react-icons/si";
+import { FaServer } from "react-icons/fa";
 
 const techData = [
     {
@@ -38,22 +40,120 @@ const techData = [
                     { name: 'Node.js', icon: '/tabsimages/nodejs.png' },
                     { name: 'Django', icon: '/tabsimages/django.png' },
                     { name: 'Spring Boot', icon: '/tabsimages/springboot.png' },
+                    { name: 'ASP.NET', icon: '/tabsimages/aspnet.png' },
+                    { name: 'NestJS', icon: '/tabsimages/nextjs.png' },
                 ]
             },
             {
                 name: 'Frontend',
                 items: [
-                    { name: 'React', icon: '/tabsimages/react.png' },
-                    { name: 'Next.js', icon: '/tabsimages/nextjs.png' },
+                    { name: 'HTML', icon: '/tabsimages/htmllogo.png' },
+                    { name: 'CSS', icon: '/tabsimages/css.png' },
+                    { name: 'Bootstrap', icon: '/tabsimages/bootstrap.png' },
                     { name: 'Tailwind', icon: '/tabsimages/tailwind.png' },
+                    { name: 'React', icon: '/tabsimages/react.png' },
+                    { name: 'JQuery', icon: '/tabsimages/jquery.png' },
+                    { name: 'Next.js', icon: '/tabsimages/nextjs.png' },
                 ]
             }
         ]
     },
-    { id: 'cross-platforms', title: 'Cross Platforms', categories: [] },
-    { id: 'games', title: 'Games', categories: [] },
-    { id: 'database', title: 'Database', categories: [] },
-    { id: 'cloud-devops', title: 'Cloud & DevOps', categories: [] },
+    {
+        id: 'cross-platforms',
+        title: 'Cross Platforms',
+        categories: [
+            {
+                name: 'React',
+                items: [
+                    { name: 'Redux', icon: '/tabsimages/react.png' },
+                    { name: 'Mobx', icon: null, iconComponent: <SiReact className="w-5 h-5 text-[#61DAFB]" /> },
+                    { name: 'RxJS', icon: null, iconComponent: <SiRxjs className="w-5 h-5 text-[#B7178C]" /> },
+                    { name: 'Redux Thunk', icon: '/tabsimages/react.png' },
+                ]
+            },
+            {
+                name: 'Flutter',
+                items: [
+                    { name: 'Bloc', icon: '/tabsimages/flutter.png' },
+                    { name: 'Dart', icon: null, iconComponent: <SiDart className="w-5 h-5 text-[#0175C2]" /> },
+                    { name: 'MVVM', icon: null, iconComponent: <SiFlutter className="w-5 h-5 text-[#02569B]" /> },
+                    { name: 'Rx Dart', icon: '/tabsimages/flutter.png' },
+                ]
+            }
+        ]
+    },
+    {
+        id: 'games',
+        title: 'Games',
+        categories: [
+            {
+                name: 'Engines',
+                items: [
+                    { name: 'Unreal', icon: null, iconComponent: <SiUnrealengine className="w-5 h-5" /> },
+                    { name: 'Unity', icon: null, iconComponent: <SiUnity className="w-5 h-5" /> },
+                    { name: 'Godot', icon: null, iconComponent: <SiGodotengine className="w-5 h-5" /> },
+                    { name: 'Cryengine', icon: null, iconComponent: <SiUnrealengine className="w-5 h-5 opacity-50" /> },
+                ]
+            },
+            {
+                name: 'Servers',
+                items: [
+                    { name: 'Nakama', icon: null, iconComponent: <FaServer className="w-5 h-5" /> },
+                    { name: 'Photon', icon: null, iconComponent: <FaServer className="w-5 h-5" /> },
+                    { name: 'AWS', icon: null, iconComponent: <SiAmazonaws className="w-5 h-5" /> },
+                    { name: 'Jenkins', icon: null, iconComponent: <SiJenkins className="w-5 h-5 text-[#D24939]" /> },
+                ]
+            }
+        ]
+    },
+    {
+        id: 'database',
+        title: 'Database',
+        categories: [
+            {
+                name: 'Database',
+                items: [
+                    { name: 'Mongodb', icon: null, iconComponent: <SiMongodb className="w-5 h-5 text-[#47A248]" /> },
+                    { name: 'MySQL', icon: null, iconComponent: <SiMysql className="w-5 h-5 text-[#4479A1]" /> },
+                    { name: 'MsSQL', icon: null, iconComponent: <SiMicrosoftsqlserver className="w-5 h-5 text-[#CC2927]" /> },
+                    { name: 'Dynamodb', icon: null, iconComponent: <SiAmazonaws className="w-5 h-5" /> },
+                    { name: 'PostgreSQL', icon: null, iconComponent: <SiPostgresql className="w-5 h-5 text-[#4169E1]" /> },
+                    { name: 'IBM', icon: null, iconComponent: <SiIbm className="w-5 h-5 text-[#054ADA]" /> },
+                    { name: 'Redis', icon: null, iconComponent: <SiRedis className="w-5 h-5 text-[#DC382D]" /> },
+                    { name: 'Elasticsearch', icon: null, iconComponent: <SiElasticsearch className="w-5 h-5 text-[#005571]" /> },
+                ]
+            }
+        ]
+    },
+    {
+        id: 'cloud-devops',
+        title: 'Cloud & DevOps',
+        categories: [
+            {
+                name: 'DevOps',
+                items: [
+                    { name: 'Nginx', icon: null, iconComponent: <SiNginx className="w-5 h-5 text-[#009639]" /> },
+                    { name: 'Docker', icon: null, iconComponent: <SiDocker className="w-5 h-5 text-[#2496ED]" /> },
+                    { name: 'Kubernetes', icon: null, iconComponent: <SiKubernetes className="w-5 h-5 text-[#326CE5]" /> },
+                    { name: 'Gradle', icon: null, iconComponent: <SiGradle className="w-5 h-5" /> },
+                    { name: 'Jenkins', icon: null, iconComponent: <SiJenkins className="w-5 h-5 text-[#D24939]" /> },
+                ]
+            },
+            {
+                name: 'Cloud',
+                items: [
+                    { name: 'Aws', icon: null, iconComponent: <SiAmazonaws className="w-5 h-5" /> },
+                    { name: 'Appium', icon: null, iconComponent: <SiAppium className="w-5 h-5" /> },
+                    { name: 'Azure', icon: null, iconComponent: <SiMicrosoftazure className="w-5 h-5 text-[#0078D4]" /> },
+                    { name: 'Rackspace', icon: null, iconComponent: <FaServer className="w-5 h-5 opacity-30" /> },
+                    { name: 'Linode', icon: null, iconComponent: <SiLinode className="w-5 h-5 text-[#00A91C]" /> },
+                    { name: 'Firebase', icon: null, iconComponent: <SiFirebase className="w-5 h-5 text-[#FFCA28]" /> },
+                    { name: 'Oracle Cloud', icon: null, iconComponent: <SiOracle className="w-5 h-5 text-[#F80000]" /> },
+                    { name: 'Heroku', icon: null, iconComponent: <SiHeroku className="w-5 h-5 text-[#430098]" /> },
+                ]
+            }
+        ]
+    },
 ];
 
 export default function TechnologiesSection() {
@@ -122,12 +222,16 @@ export default function TechnologiesSection() {
                                                         onMouseLeave={e => { e.currentTarget.style.background = '#F5F5F5'; e.currentTarget.querySelectorAll('.chip-text').forEach(el => { el.style.color = ''; }); }}
                                                     >
                                                         <div className="w-9 h-9 flex items-center justify-center flex-shrink-0 bg-white rounded-full shadow-sm">
-                                                            <img
-                                                                src={item.icon}
-                                                                alt={item.name}
-                                                                className="w-5 h-5 object-contain"
-                                                                onError={(e) => { e.target.style.display = 'none'; }}
-                                                            />
+                                                            {item.icon ? (
+                                                                <img
+                                                                    src={item.icon}
+                                                                    alt={item.name}
+                                                                    className="w-5 h-5 object-contain"
+                                                                    onError={(e) => { e.target.style.display = 'none'; }}
+                                                                />
+                                                            ) : item.iconComponent ? (
+                                                                item.iconComponent
+                                                            ) : null}
                                                         </div>
                                                         <span className="chip-text text-black font-semibold text-sm md:text-base transition-colors duration-300">{item.name}</span>
                                                     </motion.div>
