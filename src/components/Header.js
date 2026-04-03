@@ -135,7 +135,7 @@ export default function Header() {
                             onMouseEnter={() => setIsSolutionsOpen(true)}
                             onMouseLeave={() => setIsSolutionsOpen(false)}
                         >
-                            <Link href="/Services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Services</Link>
+                            <Link href="/services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Services</Link>
                             {/* Full-Screen Mega Menu */}
                             {isSolutionsOpen && (
                                 <div
@@ -159,7 +159,7 @@ export default function Header() {
                                                     {chunk.map((svc) => (
                                                         <Link
                                                             key={svc.slug}
-                                                            href={`/Services/${svc.slug}`}
+                                                            href={`/services/${svc.slug}`}
                                                             className="text-gray-800 hover:text-[#0FB5B7] font-semibold text-base transition-colors"
                                                             onClick={closeMegaMenu}
                                                         >
@@ -179,11 +179,11 @@ export default function Header() {
                             onMouseEnter={() => setIsSolutionsOpen(true)}
                             onMouseLeave={() => setIsSolutionsOpen(false)}
                         >
-                            <Link href="/Services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Solutions</Link>
+                            <Link href="/services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Solutions</Link>
                         </div>
-                        <Link href="/Work" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Work</Link>
-                        <Link href="/Company" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Company</Link>
-                        <Link href="/ContactUs" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Contact</Link>
+                        <Link href="/work" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Work</Link>
+                        <Link href="/company" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Company</Link>
+                        <Link href="/contact-us" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Contact</Link>
                     </nav>
 
                     {/* Contact & Button - Desktop Only */}
@@ -227,14 +227,14 @@ export default function Header() {
 
                     {/* Navigation Links */}
                     <div className="flex flex-col gap-4 w-full">
-                        <Link href="/Services" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                        <Link href="/services" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                             Services
                         </Link>
                         <div className="flex flex-col gap-2 pl-3 border-l border-gray-600 mb-2">
                             {navServices.map((svc) => (
                                 <Link
                                     key={svc.slug}
-                                    href={`/Services/${svc.slug}`}
+                                    href={`/services/${svc.slug}`}
                                     onClick={toggleSidebar}
                                     className="text-sm text-gray-300 hover:text-[#0FB5B7] font-bold"
                                 >
@@ -245,13 +245,13 @@ export default function Header() {
                         <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                             Solutions
                         </Link>
-                        <Link href="/Work" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                        <Link href="/work" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                             Work
                         </Link>
-                        <Link href="/Company" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                        <Link href="/company" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                             Company
                         </Link>
-                        <Link href="/ContactUs" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
+                        <Link href="/contact-us" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                             Contact
                         </Link>
                     </div>

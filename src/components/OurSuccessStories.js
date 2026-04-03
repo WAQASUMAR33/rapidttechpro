@@ -148,7 +148,7 @@ const SuccessStories = forwardRef((props, ref) => {
           >
             Our success stories
           </h2>
-          <Link href="/Work" className="hidden md:flex items-center gap-2 text-gray-500 hover:text-black transition-colors font-medium">
+          <Link href="/work" className="hidden md:flex items-center gap-2 text-gray-500 hover:text-black transition-colors font-medium">
             More case studies <FaArrowRight className="text-sm" />
           </Link>
         </div>
@@ -166,7 +166,7 @@ const SuccessStories = forwardRef((props, ref) => {
                 ref={(el) => (cardRefs.current[index] = el)}
               >
                 <div className="bg-white group">
-                  <Link href={`/Work/${story.id}`}>
+                  <Link href={`/work/${story.id}`}>
                     <div className="overflow-hidden rounded-xl h-[500px] md:h-[650px] lg:h-[800px] bg-gray-50">
                       <img
                         src={resolveImage(story.mainImage || story.image)}
@@ -185,7 +185,7 @@ const SuccessStories = forwardRef((props, ref) => {
                     )}
 
                     <div className="flex flex-col gap-2">
-                      <Link href={`/Work/${story.id}`}>
+                      <Link href={`/work/${story.id}`}>
                         <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight hover:text-bluish transition-colors">
                           {story.title}
                         </h3>
@@ -207,7 +207,7 @@ const SuccessStories = forwardRef((props, ref) => {
         )}
 
         <div className="md:hidden w-full flex justify-center items-center mt-8">
-          <Link href="/Work" className="px-8 h-12 flex justify-center items-center rounded-full border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black transition-all font-semibold">
+          <Link href="/work" className="px-8 h-12 flex justify-center items-center rounded-full border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black transition-all font-semibold">
             Explore All Work
           </Link>
         </div>

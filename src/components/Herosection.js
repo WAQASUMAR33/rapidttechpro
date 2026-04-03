@@ -77,7 +77,7 @@ export default function HeroSection() {
                         >
                             Book Free Consultancy <FaArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
                         </button>
-                        <Link href="/Work"
+                        <Link href="/work"
                             className="group border border-white/30 bg-white/5 backdrop-blur-md text-white px-6 py-2.5 md:px-8 md:py-3 rounded-full flex items-center gap-3 text-sm md:text-base font-bold hover:bg-white/10 transition-all"
                         >
                             <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center -ml-1">

@@ -60,10 +60,10 @@ export default function Footer() {
               <h3 className="text-[10px] sm:text-[9px] uppercase tracking-[0.2em] text-[#0FB5B7] font-bold">Company</h3>
             </div>
             <ul className="flex flex-col gap-2 sm:gap-1 text-white">
-              <li><a href="/AboutUs" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">About Us</a></li>
-              <li><a href="/Company/Testimonials" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Testimonials</a></li>
-              <li><a href="/Company/Process" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Process</a></li>
-              <li><a href="/Help" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Contact</a></li>
+              <li><a href="/about-us" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">About Us</a></li>
+              <li><a href="/company/testimonials" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Testimonials</a></li>
+              <li><a href="/company/process" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Process</a></li>
+              <li><a href="/help" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Contact</a></li>
             </ul>
           </div>
 
@@ -75,9 +75,9 @@ export default function Footer() {
             </div>
             <ul className="flex flex-col gap-2 sm:gap-1">
               <li><a href="/blog" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Blog</a></li>
-              <li><a href="/Company/Events" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Events</a></li>
-              <li><a href="/Company/Press-Release" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Press Release</a></li>
-              <li><a href="/Work" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Work</a></li>
+              <li><a href="/company/events" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Events</a></li>
+              <li><a href="/company/press-release" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Press Release</a></li>
+              <li><a href="/work" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Work</a></li>
             </ul>
           </div>
 
@@ -91,7 +91,7 @@ export default function Footer() {
               {footerServices.map((svc) => (
                 <li key={svc.slug}>
                   <Link
-                    href={`/Services/${svc.slug}`}
+                    href={`/services/${svc.slug}`}
                     className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight"
                   >
                     {svc.title}
@@ -109,9 +109,9 @@ export default function Footer() {
             </div>
             <ul className="flex flex-col gap-2 sm:gap-1">
               <li><a href="/University" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">University</a></li>
-              <li><a href="/Company/Careers" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Careers</a></li>
-              <li><a href="/Company/Manifesto" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Manifesto</a></li>
-              <li><a href="/Company/Culture-Book" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Culture Book</a></li>
+              <li><a href="/company/careers" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Careers</a></li>
+              <li><a href="/company/manifesto" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Manifesto</a></li>
+              <li><a href="/company/culture-book" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Culture Book</a></li>
             </ul>
           </div>
         </div>
@@ -174,8 +174,8 @@ export default function Footer() {
               <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><FaYoutube /></a>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-[11px] sm:text-[12px] font-semibold text-gray-400">
-              <a href="/Company/Privacy-Policy" className="hover:text-[#0FB5B7] transition-colors">Privacy Policy</a>
-              <a href="/Company/Terms-Of-Service" className="hover:text-[#0FB5B7] transition-colors">Terms Of Service</a>
+              <a href="/company/privacy-policy" className="hover:text-[#0FB5B7] transition-colors">Privacy Policy</a>
+              <a href="/company/terms-of-service" className="hover:text-[#0FB5B7] transition-colors">Terms Of Service</a>
             </div>
           </div>
         </div>
