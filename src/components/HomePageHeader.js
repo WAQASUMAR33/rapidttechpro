@@ -102,7 +102,7 @@ export default function Header() {
                 <div className="w-full max-w-[1400px] mx-auto flex items-center justify-between px-4 sm:px-12 lg:px-16 2xl:px-24">
                     {/* Logo */}
                     <Link href="/" className="text-xl md:text-[30px] font-bold italic flex justify-center items-center">
-                        <img src="/company/logo.png" className="md:h-[60px] md:w-[60px] h-[40px] w-[40px]" />
+                        <img src="/company/logo.png" alt="RapidTechPro Logo" className="md:h-[60px] md:w-[60px] h-[40px] w-[40px]" />
                         Rapid<span className={"text-bluish"}>TechPro</span>
                     </Link>
 
@@ -181,7 +181,7 @@ export default function Header() {
                     </div>
 
                     {/* Toggle Button - Mobile Only */}
-                    <button className="md:hidden text-2xl" onClick={toggleSidebar}>
+                    <button className="md:hidden text-2xl" onClick={toggleSidebar} aria-label={isSidebarOpen ? "Close menu" : "Open menu"}>
                         {isSidebarOpen ? <FaTimes /> : <FaBars />}
                     </button>
                 </div>

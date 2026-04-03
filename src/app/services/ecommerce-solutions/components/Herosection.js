@@ -44,7 +44,7 @@ export default function EcommerceHero(){
                         <p className="text-xs md:text-base text-center md:text-left">With RapidTechPro, you’ll gain a partner who understands your unique needs and provides cutting-edge solutions to dominate the eCommerce landscape. Let’s build your path to online success today!</p>
                     </div>
                     <div ref={heroimg} className="flex flex-col justify-center items-center">
-                        <img className=" w-full h-full rounded-xl object-cover" src="/subpageshero/ecommerce hero2.jpg" ></img>
+                        <img className=" w-full h-full rounded-xl object-cover" src="/subpageshero/ecommerce hero2.jpg" alt="E-commerce Solutions"></img>
                     </div>
                 </div>
         </>

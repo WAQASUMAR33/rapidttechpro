@@ -31,7 +31,7 @@ export default function EcommerceHero(){
                         <p className="text-xl md:text-2xl mt-4 text-center md:text-left">From startup stores to enterprise-level platforms, we provide tailored e-commerce solutions that deliver results</p>
                     </div>
                     <div ref={heroimg} className="p-8 flex flex-col justify-center items-center">
-                        <img className=" w-[50vw] h-[50vh] rounded-xl object-cover" src="/subpageshero/website.jpg" ></img>
+                        <img className=" w-[50vw] h-[50vh] rounded-xl object-cover" src="/subpageshero/website.jpg" alt="Web Development Services"></img>
                     </div>
                 </div>
         </>

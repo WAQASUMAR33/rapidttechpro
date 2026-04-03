@@ -226,19 +226,19 @@ const SuccessStories = forwardRef((props, ref) => {
           >
             <div className="flex md:flex-row flex-col space-y-3 md:space-y-0 md:space-x-3 text-xs md:text-sm font-bold">
               <div className="bg-white rounded-md p-2 text-black text-center">
-                <img src='/business/google.png' className='w-16 h-6 mx-auto object-cover'></img>
+                <img src='/business/google.png' alt='Google Reviews' className='w-16 h-6 mx-auto object-cover'></img>
                 {/* <p>Google</p> */}
                 <p>4.9 </p>
                 <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
               </div>
               <div className="bg-white rounded-md p-2 text-black text-center">
-                <img src='/business/trustpilot.png' className='w-20 h-6 mx-auto object-cover'></img>
+                <img src='/business/trustpilot.png' alt='Trustpilot Reviews' className='w-20 h-6 mx-auto object-cover'></img>
                 {/* <p>Trustpilot</p> */}
                 <p>4.8</p>
                 <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
               </div>
               <div className="bg-white rounded-md p-2 text-black text-center">
-                <img src='/business/clutch.png' className='w-16 h-6 mx-auto object-cover '></img>
+                <img src='/business/clutch.png' alt='Clutch Reviews' className='w-16 h-6 mx-auto object-cover '></img>
                 {/* <p>Clutch</p> */}
                 <p>5</p>
                 <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>

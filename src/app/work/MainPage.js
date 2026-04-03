@@ -63,6 +63,7 @@ function FilterDropdown({ label, options, value, onChange }) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={`Search ${label.toLowerCase()}...`}
+            aria-label={`Search ${label.toLowerCase()}`}
             className="flex-1 bg-transparent text-gray-800 placeholder-gray-400 outline-none text-sm"
           />
         ) : (

@@ -31,7 +31,7 @@ const NewBlogCategorySlider = () => {
 
   return (
     <div className="relative max-w-6xl mx-auto px-3 text-white">
-      <button className="absolute left-0 z-10 top-1/2 -translate-y-1/2" onClick={() => scroll('left')}>
+      <button className="absolute left-0 z-10 top-1/2 -translate-y-1/2" onClick={() => scroll('left')} aria-label="Scroll left">
         <MdChevronLeft size={30} />
       </button>
       <div className="overflow-hidden" ref={sliderRef}>
@@ -48,7 +48,7 @@ const NewBlogCategorySlider = () => {
           ))}
         </div>
       </div>
-      <button className="absolute right-0 z-10 top-1/2 -translate-y-1/2" onClick={() => scroll('right')}>
+      <button className="absolute right-0 z-10 top-1/2 -translate-y-1/2" onClick={() => scroll('right')} aria-label="Scroll right">
         <MdChevronRight size={30} />
       </button>
     </div>

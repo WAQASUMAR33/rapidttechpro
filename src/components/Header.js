@@ -201,7 +201,7 @@ export default function Header() {
                     </div>
 
                     {/* Toggle Button - Mobile Only */}
-                    <button className="md:hidden text-2xl" onClick={toggleSidebar}>
+                    <button className="md:hidden text-2xl" onClick={toggleSidebar} aria-label={isSidebarOpen ? "Close menu" : "Open menu"}>
                         {isSidebarOpen ? <FaTimes /> : <FaBars />}
                     </button>
                 </div>

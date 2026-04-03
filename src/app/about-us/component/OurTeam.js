@@ -23,7 +23,7 @@ export default function OurTeam() {
                             <div key={index} className="p-4">
                                 <div className=" group border transition-all duration-500 border-gray-200 hover:border hover:border-gray-800 rounded-lg py-4 shadow-lg">
                                     <div className="h-[250px] w-full flex justify-center items-center ">
-                                        <img src={member.image} className="object-cover border-[2px] border-bluish  rounded-full w-[250px] mx-auto h-[250px]"></img>
+                                        <img src={member.image} alt={member.name} className="object-cover border-[2px] border-bluish  rounded-full w-[250px] mx-auto h-[250px]"></img>
                                     </div>
                                     <div className=" text-black h-32 w-full flex flex-col gap-1 justify-center items-center">
                                         <h1 className="text-3xl font-[700]">{member.name}</h1>
