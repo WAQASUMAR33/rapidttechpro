@@ -23,6 +23,11 @@ const nextConfig = {
                 destination: 'https://rapidtechpro.com/:path*',
                 permanent: true,
             },
+            {
+                source: '/index.html',
+                destination: '/',
+                permanent: true,
+            },
         ];
     },
     async rewrites() {
