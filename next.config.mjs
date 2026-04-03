@@ -15,6 +15,16 @@ const nextConfig = {
             },
         ],
     },
+    async redirects() {
+        return [
+            {
+                source: '/:path*',
+                has: [{ type: 'host', value: 'www.rapidtechpro.com' }],
+                destination: 'https://rapidtechpro.com/:path*',
+                permanent: true,
+            },
+        ];
+    },
     async rewrites() {
         return [
             {
