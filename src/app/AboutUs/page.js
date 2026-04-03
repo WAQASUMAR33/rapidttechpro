@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "About Us | RapidTechPro",
+  description: "Learn about RapidTechPro — our story, mission, and the team behind our innovative technology solutions.",
+  alternates: {
+    canonical: "https://rapidtechpro.com/AboutUs",
+  },
+};
+
 import OurJourney from "@/components/OurJourney";
 import UserLayout from "../UserLayout";
 import HerosectionAboutus from "./component/herosection";

@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "UI/UX Design & Figma | RapidTechPro",
+  description: "Professional UI/UX design services using Figma — crafting intuitive and visually stunning digital experiences.",
+  alternates: {
+    canonical: "https://rapidtechpro.com/Services/UIUX-Figma",
+  },
+};
+
 import UserLayout from "@/app/UserLayout";
 import EcommerceHero from "./components/Herosection";
 import EcommerceSellingSection from "./components/SellingSection";

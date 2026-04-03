@@ -16,10 +16,14 @@ import FooterReveal from "@/components/FooterReveal";
 // });
 
 export const metadata = {
+  metadataBase: new URL("https://rapidtechpro.com"),
   title: "RapidTechPro",
   description: "Advanced solutions for your business needs.",
   icons: {
     icon: "/company/logo.png",
+  },
+  alternates: {
+    canonical: "https://rapidtechpro.com",
   },
 };
 

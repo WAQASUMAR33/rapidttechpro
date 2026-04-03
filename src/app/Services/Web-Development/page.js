@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "Web Development | RapidTechPro",
+  description: "High-performance web development services by RapidTechPro — from landing pages to complex web applications.",
+  alternates: {
+    canonical: "https://rapidtechpro.com/Services/Web-Development",
+  },
+};
+
 import UserLayout from "@/app/UserLayout";
 import EcommerceHero from "./components/Herosection";
 import EcommerceSellingSection from "./components/SellingSection";

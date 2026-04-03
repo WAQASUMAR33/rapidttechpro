@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "Help & Support | RapidTechPro",
+  description: "Get answers to your questions and find support resources at RapidTechPro's help center.",
+  alternates: {
+    canonical: "https://rapidtechpro.com/Help",
+  },
+};
+
 import HeroSection from "./components/herosection";
 import UserLayout from "../UserLayout";
 import FaqSection from "./components/faqsection";

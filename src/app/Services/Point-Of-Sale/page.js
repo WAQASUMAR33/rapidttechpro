@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "Point of Sale System | RapidTechPro",
+  description: "Modern POS solutions by RapidTechPro — fast, reliable, and tailored for retail and hospitality businesses.",
+  alternates: {
+    canonical: "https://rapidtechpro.com/Services/Point-Of-Sale",
+  },
+};
+
 import UserLayout from "@/app/UserLayout";
 import EcommerceHero from "./components/Herosection";
 import EcommerceSellingSection from "./components/SellingSection";

@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "E-commerce Solutions | RapidTechPro",
+  description: "Build powerful online stores with RapidTechPro's end-to-end e-commerce development solutions.",
+  alternates: {
+    canonical: "https://rapidtechpro.com/Services/Ecommerce-Solutions",
+  },
+};
+
 import UserLayout from "@/app/UserLayout";
 import EcommerceHero from "./components/Herosection";
 import EcommerceSellingSection from "./components/SellingSection";

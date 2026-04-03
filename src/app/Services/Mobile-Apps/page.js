@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "Mobile App Development | RapidTechPro",
+  description: "Custom iOS and Android mobile app development services by RapidTechPro — built for performance and scale.",
+  alternates: {
+    canonical: "https://rapidtechpro.com/Services/Mobile-Apps",
+  },
+};
+
 import UserLayout from "@/app/UserLayout";
 import EcommerceHero from "./components/Herosection";
 import EcommerceSellingSection from "./components/SellingSection";

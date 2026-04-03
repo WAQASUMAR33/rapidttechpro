@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "HR Solution | RapidTechPro",
+  description: "Streamline your human resources with RapidTechPro's comprehensive HR management software solutions.",
+  alternates: {
+    canonical: "https://rapidtechpro.com/Services/HR-Solution",
+  },
+};
+
 import UserLayout from "@/app/UserLayout";
 import EcommerceHero from "./components/Herosection";
 import EcommerceSellingSection from "./components/SellingSection";

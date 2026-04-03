@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "Terms and Conditions | RapidTechPro",
+  description: "Review the terms and conditions governing the use of RapidTechPro's website and services.",
+  alternates: {
+    canonical: "https://rapidtechpro.com/TermsAndConditions",
+  },
+};
+
 // pages/terms-and-conditions.js
 import React from 'react';
 import UserLayout from '../UserLayout';
