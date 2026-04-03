@@ -1,8 +1,18 @@
 export const metadata = {
-  title: "About Us | RapidTechPro",
+  title: "About Us",
   description: "Learn about RapidTechPro — our story, mission, and the team behind our innovative technology solutions.",
-  alternates: {
-    canonical: "https://rapidtechpro.com/about-us",
+  alternates: { canonical: "https://rapidtechpro.com/about-us" },
+  openGraph: {
+    title: "About Us | RapidTechPro",
+    description: "Learn about RapidTechPro — our story, mission, and the team behind our innovative technology solutions.",
+    url: "https://rapidtechpro.com/about-us",
+    images: [{ url: "/company/logo.png", width: 1200, height: 630, alt: "About RapidTechPro" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | RapidTechPro",
+    description: "Learn about RapidTechPro — our story, mission, and the team behind us.",
   },
 };
 
