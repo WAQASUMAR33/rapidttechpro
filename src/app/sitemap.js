@@ -17,7 +17,6 @@ export default function sitemap() {
     "/company/testimonials",
     "/contact-us",
     "/help",
-    "/privacy-policy",
     "/services",
     "/services/ecommerce-solutions",
     "/services/hr-solution",
@@ -25,7 +24,6 @@ export default function sitemap() {
     "/services/point-of-sale",
     "/services/uiux-figma",
     "/services/web-development",
-    "/terms-and-conditions",
     "/work",
   ];
 

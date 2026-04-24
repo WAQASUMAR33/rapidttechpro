@@ -32,12 +32,12 @@ export default function Header() {
     const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
     const [interests, setInterests] = useState([]);
     const [navServices, setNavServices] = useState([
-        { title: 'Ecommerce Solutions', slug: 'Ecommerce-Solutions' },
-        { title: 'HR Solutions', slug: 'HR-Solution' },
-        { title: 'Mobile App Solutions', slug: 'Mobile-Apps' },
-        { title: 'UI/UX - Figma Solutions', slug: 'UIUX-Figma' },
-        { title: 'Website Development Solutions', slug: 'Web-Development' },
-        { title: 'Point Of Sale Solutions', slug: 'Point-Of-Sale' },
+        { title: 'Ecommerce Solutions', slug: 'ecommerce-solutions' },
+        { title: 'HR Solutions', slug: 'hr-solution' },
+        { title: 'Mobile App Solutions', slug: 'mobile-apps' },
+        { title: 'UI/UX - Figma Solutions', slug: 'uiux-figma' },
+        { title: 'Website Development Solutions', slug: 'web-development' },
+        { title: 'Point Of Sale Solutions', slug: 'point-of-sale' },
     ]);
 
     const [logoError, setLogoError] = useState(false);
@@ -148,7 +148,7 @@ export default function Header() {
                                     >
                                         <div className="flex">
                                             <div className="px-4 w-full">
-                                                <h1 className="text-xl md:text-3xl font-bold flex justify-between w-full">Solutions <FaArrowRight className="text-[#0FB5B7]" /></h1>
+                                                <p className="text-xl md:text-3xl font-bold flex justify-between w-full">Solutions <FaArrowRight className="text-[#0FB5B7]" /></p>
                                             </div>
                                             <div className="h-24 border-r border-gray-200"></div>
                                         </div>
@@ -188,13 +188,14 @@ export default function Header() {
 
                     {/* Contact & Button - Desktop Only */}
                     <div className="hidden md:flex items-center space-x-6">
-                        <Link href="tel:8669782220" className={`flex items-center gap-2 text-sm lg:text-base font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>
-                            <BsTelephone className="text-sm" />
+                        <Link href="tel:8669782220" aria-label="Call 866-978-2220" className={`flex items-center gap-2 text-sm lg:text-base font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>
+                            <BsTelephone className="text-sm" aria-hidden="true" />
                             <span className="hidden lg:inline">866-978-2220</span>
                         </Link>
                         <button
                             className="px-8 py-3 rounded-full font-bold bg-black text-white hover:bg-black/90 transition-all text-sm tracking-tight shadow-md"
                             onClick={() => dispatch(openPopup())}
+                            aria-label="Open get in touch form"
                         >
                             Get in Touch
                         </button>
@@ -215,9 +216,10 @@ export default function Header() {
                 {/* Close Button Inside Sidebar */}
                 <button
                     onClick={toggleSidebar}
+                    aria-label="Close navigation menu"
                     className="absolute top-6 right-6 text-white text-2xl hover:text-[#0FB5B7] transition-colors z-10"
                 >
-                    <FaTimes />
+                    <FaTimes aria-hidden="true" />
                 </button>
                 <div className="flex flex-col items-start p-6 space-y-6 relative">
                     {/* Logo in Sidebar */}
@@ -291,9 +293,10 @@ export default function Header() {
                             <div className="relative p-6 md:p-8 min-h-full flex flex-col justify-center">
                                 <button
                                     onClick={() => dispatch(closePopup())}
+                                    aria-label="Close contact form"
                                     className="absolute top-4 right-4 text-black bg-white w-8 h-8 rounded-full flex justify-center items-center font-bold hover:bg-gray-100 transition-colors z-10 shadow-lg"
                                 >
-                                    &times;
+                                    <span aria-hidden="true">&times;</span>
                                 </button>
 
                                 {/* Teal glow decoration */}
@@ -372,7 +375,7 @@ export default function Header() {
 
                                 <div className="mt-4 text-center pb-2">
                                     <p className="text-[10px] text-gray-500 leading-relaxed max-w-sm mx-auto">
-                                        We'll keep your information in our CRM to respond to your request. For more details, see our <a href="#" className="text-[#0FB5B7] hover:underline">privacy policy</a>.
+                                        We'll keep your information in our CRM to respond to your request. For more details, see our <a href="/company/privacy-policy" className="text-[#0FB5B7] hover:underline">privacy policy</a>.
                                     </p>
                                 </div>
                             </div>

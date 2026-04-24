@@ -1,6 +1,7 @@
 'use client';
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function EcommerceHero() {
     const herosection = useRef();
@@ -36,10 +37,13 @@ export default function EcommerceHero() {
 
                 {/* Image Section */}
                 <div ref={heroimg} className="p-8 flex flex-col justify-center items-center">
-                    <img 
-                        className="w-[50vw] h-[50vh] rounded-xl object-cover" 
-                        src="/subpageshero/hr hero 2.jpg" 
-                        alt="HR Solutions" 
+                    <Image
+                        src="/subpageshero/hr%20hero%202.jpg"
+                        alt="HR Solutions"
+                        width={800}
+                        height={600}
+                        className="w-full max-w-[50vw] h-auto rounded-xl object-cover"
+                        priority
                     />
                 </div>
             </div>

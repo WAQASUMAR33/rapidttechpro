@@ -40,14 +40,14 @@ const Overview = () => {
         <h2 className="text-3xl md:text-5xl font-bold text-center mb-12">Our Services</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <button
+            <div
               key={index}
-              ref={(el) => (cardsRef.current[index] = el)} // Add each card to refs
-              className="p-6 rounded-lg  bg-white/10 hover:bg-white/20 shadow-[0_0_8px_white] border-white border text-center"
+              ref={(el) => (cardsRef.current[index] = el)}
+              className="p-6 rounded-lg bg-white/10 hover:bg-white/20 shadow-[0_0_8px_white] border-white border text-center"
             >
               <h3 className="text-xl font-bold">{service.title}</h3>
               <p className="mt-4 text-white">{service.description}</p>
-            </button>
+            </div>
           ))}
         </div>
       </div>

@@ -59,7 +59,7 @@ export default function ServiceDetailPage() {
                 <div className="flex flex-col items-center justify-center min-h-screen gap-4">
                     <h1 className="text-3xl font-bold text-gray-800">Service Not Found</h1>
                     <p className="text-gray-500">{error || 'This service page is not available.'}</p>
-                    <Link href="/Services" className="px-6 py-3 bg-black text-white rounded-full hover:bg-[#0FB5B7] transition-all">
+                    <Link href="/services" className="px-6 py-3 bg-black text-white rounded-full hover:bg-[#0FB5B7] transition-all">
                         Back to Services
                     </Link>
                 </div>
@@ -98,10 +98,10 @@ export default function ServiceDetailPage() {
                                     <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-xl">{service.description}</p>
                                 )}
                                 <div className="flex flex-wrap gap-4 mt-8">
-                                    <Link href="/ContactUs" className="px-8 py-4 bg-black text-white hover:bg-[#0FB5B7] transition-all rounded-full font-bold text-lg shadow-xl">
+                                    <Link href="/contact-us" className="px-8 py-4 bg-black text-white hover:bg-[#0FB5B7] transition-all rounded-full font-bold text-lg shadow-xl">
                                         Get A Consultation
                                     </Link>
-                                    <Link href="/Work" className="px-8 py-4 border-2 border-black text-black hover:bg-black hover:text-white transition-all rounded-full font-bold text-lg">
+                                    <Link href="/work" className="px-8 py-4 border-2 border-black text-black hover:bg-black hover:text-white transition-all rounded-full font-bold text-lg">
                                         Our Work
                                     </Link>
                                 </div>
@@ -294,7 +294,7 @@ export default function ServiceDetailPage() {
                             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-16">Success Stories</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                                 {caseStudies.map((cs, i) => (
-                                    <Link key={i} href={`/Work/${cs.id || cs.projectId || '#'}`} className="group block">
+                                    <Link key={i} href={`/work/${cs.id || cs.projectId || '#'}`} className="group block">
                                         <div className="rounded-3xl overflow-hidden bg-gray-50 hover:shadow-xl transition-all duration-300">
                                             {cs.image && (
                                                 <div className="h-64 overflow-hidden">
