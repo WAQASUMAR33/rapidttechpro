@@ -14,7 +14,7 @@ export default function CallToAction() {
           Let’s bring your <br className="hidden md:block" /> ideas to life
         </h2>
         <Link
-          href="/Contact"
+          href="/contact-us"
           className="bg-black text-white font-bold py-3.5 px-10 rounded-full hover:bg-black/90 transition-all duration-300 text-xs md:text-[13px] uppercase tracking-widest cursor-pointer shadow-xl"
         >
           GET STARTED

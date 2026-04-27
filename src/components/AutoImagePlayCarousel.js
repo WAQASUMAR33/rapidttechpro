@@ -17,6 +17,7 @@ const AutoImagePlayCarousel = () => {
 
   useGSAP(() => {
     const container = containerRef.current;
+    if (!container) return;
 
     const totalWidth = container.scrollWidth / 4 + 10;
 

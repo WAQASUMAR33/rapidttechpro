@@ -8,6 +8,7 @@ const Autoplayslider = ({ companyNames }) => {
 
   useGSAP(() => {
     const container = containerRef.current;
+    if (!container) return;
 
     // Duplicate the items for seamless scrolling
     const totalWidth = container.scrollWidth / 4; // Quarter of the extended width
