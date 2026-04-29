@@ -135,8 +135,8 @@ export default function ProductProcess() {
                   <Image
                     src={step.image}
                     alt={step.title}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: 'cover' }}
                     className="transition-transform duration-500"
                   />
                 </div>
@@ -173,8 +173,8 @@ export default function ProductProcess() {
                   <Image
                     src={step.image}
                     alt={step.title}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: 'cover' }}
                   />
                 </div>
               ))}
