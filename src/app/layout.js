@@ -13,6 +13,9 @@ export const metadata = {
   },
   description: "RapidTechPro delivers advanced technology solutions — web development, mobile apps, UI/UX design, e-commerce, POS, and HR software for businesses worldwide.",
   icons: { icon: "/company/logo.png" },
+  verification: {
+    google: "F3pugG7B7EPPApfvVTW2QiaSfjwb17DZ4xYPEVHZOjs",
+  },
   openGraph: {
     title: "RapidTechPro — Advanced Technology Solutions",
     description: "RapidTechPro delivers advanced technology solutions — web development, mobile apps, UI/UX design, e-commerce, POS, and HR software for businesses worldwide.",
