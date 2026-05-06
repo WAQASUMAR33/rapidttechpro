@@ -77,49 +77,45 @@ const SuccessStories = forwardRef((props, ref) => {
   useEffect(() => {
     if (loading || stories.length === 0) return;
 
-    // Set up GSAP animations for each card after they are rendered
-    cardRefs.current.forEach((card, index) => {
-      if (!card) return;
-      gsap.fromTo(
-        card,
-        { opacity: 0, y: 100 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 90%',
-            toggleActions: 'play none none reverse',
-          },
-          delay: index * 0.2,
-        }
-      );
+    const ctx = gsap.context(() => {
+      cardRefs.current.forEach((card, index) => {
+        if (!card) return;
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 100 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              toggleActions: 'play none none reverse',
+            },
+            delay: index * 0.2,
+          }
+        );
+      });
+
+      const showPopupWithAnimation = () => setShowPopup(true);
+      const hidePopupWithDelay = () => setShowPopup(false);
+
+      if (ref.current) {
+        ScrollTrigger.create({
+          trigger: ref.current,
+          start: 'top 90%',
+          end: 'bottom 30%',
+          onEnter: showPopupWithAnimation,
+          onEnterBack: showPopupWithAnimation,
+          onLeave: hidePopupWithDelay,
+          onLeaveBack: hidePopupWithDelay,
+          once: false,
+        });
+      }
     });
 
-    const showPopupWithAnimation = () => setShowPopup(true);
-
-    const hidePopupWithDelay = () => {
-      setShowPopup(false);
-    };
-
-    if (ref.current) {
-      ScrollTrigger.create({
-        trigger: ref.current,
-        start: 'top 90%',
-        end: 'bottom 30%',
-        onEnter: showPopupWithAnimation,
-        onEnterBack: showPopupWithAnimation,
-        onLeave: hidePopupWithDelay,
-        onLeaveBack: hidePopupWithDelay,
-        once: false,
-      });
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
+    return () => ctx.revert();
   }, [loading, stories, ref]);
 
   const popupVariants = {

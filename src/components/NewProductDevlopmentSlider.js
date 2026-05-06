@@ -62,37 +62,34 @@ export default function ProductProcess() {
   const totalSteps = cards.length;
 
   useEffect(() => {
-    // ScrollTrigger for each section to track active step
-    sectionRefs.current.forEach((section, index) => {
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top 50%',
-        end: 'bottom 50%',
-        onEnter: () => setActiveStep(index),
-        onEnterBack: () => setActiveStep(index),
-      });
-    });
-
-    // Animate the progress line
-    if (progressLineRef.current && containerRef.current) {
-      gsap.to(progressLineRef.current, {
-        scaleY: 1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: containerRef.current,
+    const ctx = gsap.context(() => {
+      sectionRefs.current.forEach((section, index) => {
+        ScrollTrigger.create({
+          trigger: section,
           start: 'top 50%',
           end: 'bottom 50%',
-          scrub: true,
-        },
+          onEnter: () => setActiveStep(index),
+          onEnterBack: () => setActiveStep(index),
+        });
       });
-    }
 
-    // Ensure the first image is handled by state
+      if (progressLineRef.current && containerRef.current) {
+        gsap.to(progressLineRef.current, {
+          scaleY: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top 50%',
+            end: 'bottom 50%',
+            scrub: true,
+          },
+        });
+      }
+    });
+
     setActiveStep(0);
 
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
+    return () => ctx.revert();
   }, []);
 
   return (

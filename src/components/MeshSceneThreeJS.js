@@ -1,4 +1,5 @@
 // components/SoftwareWireframeScene.js
+'use client';
 
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
@@ -92,7 +93,9 @@ const SoftwareWireframeScene = () => {
 
     // Clean up on component unmount
     return () => {
-      mountRef.current.removeChild(renderer.domElement);
+      if (mountRef.current && renderer.domElement.parentNode === mountRef.current) {
+        mountRef.current.removeChild(renderer.domElement);
+      }
       window.removeEventListener('resize', handleResize);
       renderer.dispose();
     };
