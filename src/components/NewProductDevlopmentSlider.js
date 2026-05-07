@@ -139,15 +139,15 @@ export default function ProductProcess() {
                 </div>
 
                 <div className="flex flex-col text-left lg:py-16 lg:pr-12 transition-all duration-700 ease-in-out z-20 px-2 lg:px-0">
-                  <p className={`text-sm md:text-base mb-2 font-mono tracking-widest transition-colors duration-500 uppercase ${activeStep === index ? 'text-white' : 'text-white lg:text-white/20'
+                  <p className={`text-sm md:text-base mb-2 font-mono tracking-widest transition-colors duration-500 uppercase ${activeStep === index ? 'text-white' : 'text-white lg:text-white/50'
                     }`}>
                     {String(index + 1).padStart(2, '0')}/06
                   </p>
-                  <h3 className={`text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight transition-colors duration-500 ${activeStep === index ? 'text-[#0FB5B7]' : 'text-[#0FB5B7] lg:text-white/20'
+                  <h3 className={`text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight transition-colors duration-500 ${activeStep === index ? 'text-[#0FB5B7]' : 'text-[#0FB5B7] lg:text-white/60'
                     }`}>
                     {step.title}
                   </h3>
-                  <p className={`mt-6 text-base md:text-lg lg:text-xl font-normal leading-relaxed max-w-xl transition-colors duration-500 ${activeStep === index ? 'text-white/90' : 'text-white/90 lg:text-white/10'
+                  <p className={`mt-6 text-base md:text-lg lg:text-xl font-normal leading-relaxed max-w-xl transition-colors duration-500 ${activeStep === index ? 'text-white/90' : 'text-white/90 lg:text-white/50'
                     }`}>
                     {step.description}
                   </p>
