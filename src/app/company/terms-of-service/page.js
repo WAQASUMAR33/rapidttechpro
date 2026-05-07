@@ -14,21 +14,18 @@ export default function TermsOfService() {
       termsSections.current.filter(Boolean).forEach((section, index) => {
         gsap.fromTo(
           section,
-          { opacity: 0, y: 50, scaleX: 0.8 },
+          { opacity: 0, y: 40 },
           {
             opacity: 1,
             y: 0,
-            scaleX: 1,
             ease: 'power2.out',
-            duration: 0.5,
+            duration: 0.6,
+            delay: index * 0.05,
             scrollTrigger: {
               trigger: section,
-              start: 'top 90%',
-              end: 'bottom 10%',
-              scrub: 1,
-              toggleActions: 'play reverse play reverse',
+              start: 'top 92%',
+              toggleActions: 'play none none none',
             },
-            delay: index * 0.2,
           }
         );
       });
