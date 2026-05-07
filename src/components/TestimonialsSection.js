@@ -53,9 +53,15 @@ export default function TestimonialsSection() {
     const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
 
     useEffect(() => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
+
         const fetchTestimonials = async () => {
             try {
-                const res = await fetch('/api/testimonials', { cache: 'no-store' });
+                const res = await fetch('/api/testimonials', {
+                    cache: 'no-store',
+                    signal: controller.signal,
+                });
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
                 let items = [];
@@ -66,10 +72,15 @@ export default function TestimonialsSection() {
             } catch (err) {
                 // Silently fall back to static data
             } finally {
+                clearTimeout(timeoutId);
                 setLoading(false);
             }
         };
         fetchTestimonials();
+        return () => {
+            controller.abort();
+            clearTimeout(timeoutId);
+        };
     }, []);
 
     return (

@@ -128,7 +128,7 @@ export default function ProductProcess() {
                 className="step min-w-[85vw] md:min-w-0 lg:min-h-[70vh] flex flex-col justify-start lg:justify-center snap-center lg:snap-align-none"
               >
                 {/* Mobile Image */}
-                <div className="lg:hidden w-[75vw] sm:w-[350px] aspect-[3/4] mx-auto relative rounded-full overflow-hidden mb-8 mt-6 bg-gray-900/10">
+                <div className="lg:hidden w-[75vw] sm:w-[350px] aspect-[3/4] mx-auto relative rounded-full overflow-hidden mb-8 mt-6 bg-white">
                   <Image
                     src={step.image}
                     alt={step.title}
@@ -158,7 +158,7 @@ export default function ProductProcess() {
 
           {/* Right Sticky Image Area */}
           <div className="lg:flex w-1/2 sticky top-0 h-screen items-center justify-center hidden">
-            <div className="relative w-[280px] xl:w-[380px] aspect-[1/1.4] rounded-full overflow-hidden bg-gray-900/10 shadow-2xl transition-all duration-700">
+            <div className="relative w-[280px] xl:w-[380px] aspect-[1/1.4] rounded-full overflow-hidden bg-white shadow-2xl transition-all duration-700">
               {cards.map((step, index) => (
                 <div
                   key={index}

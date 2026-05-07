@@ -3,13 +3,17 @@ const API_KEY = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_k
 
 export async function GET(request) {
     try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
         const res = await fetch(`${BACKEND_URL}/api/testimonials`, {
             headers: {
                 'x-api-key': API_KEY,
                 'Content-Type': 'application/json',
             },
             cache: 'no-store',
+            signal: controller.signal,
         });
+        clearTimeout(timeoutId);
 
         if (!res.ok) {
             return new Response(JSON.stringify({ error: `Backend error: ${res.status}` }), {
