@@ -2,7 +2,7 @@ export const metadata = {
   title: "Help & Support | RapidTechPro",
   description: "Get answers to your questions and find support resources at RapidTechPro's help center.",
   alternates: {
-    canonical: "https://rapidtechpro.com/help",
+    canonical: "/help",
   },
 };
 

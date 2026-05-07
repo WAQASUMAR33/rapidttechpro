@@ -38,7 +38,7 @@ const organizationSchema = {
   "@type": "Organization",
   name: "RapidTechPro",
   url: "https://rapidtechpro.com",
-  logo: "https://rapidtechpro.com/company/logo.png",
+  logo: "/company/logo.png",
   description: "Advanced technology solutions for businesses worldwide.",
   telephone: "+923403051059",
   email: "info@rapidtechpro.com",

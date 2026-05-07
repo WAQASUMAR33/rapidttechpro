@@ -1,11 +1,11 @@
 export const metadata = {
   title: "Services",
   description: "Explore RapidTechPro's full range of technology services — web development, mobile apps, UI/UX, e-commerce, and more.",
-  alternates: { canonical: "https://rapidtechpro.com/services" },
+  alternates: { canonical: "/services" },
   openGraph: {
     title: "Services | RapidTechPro",
     description: "Explore RapidTechPro's full range of technology services — web development, mobile apps, UI/UX, e-commerce, and more.",
-    url: "https://rapidtechpro.com/services",
+    url: "/services",
     images: [{ url: "/company/logo.png", width: 1200, height: 630, alt: "RapidTechPro Services" }],
     type: "website",
   },
@@ -20,14 +20,14 @@ const servicesSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   name: "RapidTechPro Services",
-  url: "https://rapidtechpro.com/services",
+  url: "/services",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Web Development", url: "https://rapidtechpro.com/services/web-development" },
-    { "@type": "ListItem", position: 2, name: "Mobile App Development", url: "https://rapidtechpro.com/services/mobile-apps" },
-    { "@type": "ListItem", position: 3, name: "UI/UX Design", url: "https://rapidtechpro.com/services/uiux-figma" },
-    { "@type": "ListItem", position: 4, name: "E-commerce Solutions", url: "https://rapidtechpro.com/services/ecommerce-solutions" },
-    { "@type": "ListItem", position: 5, name: "Point of Sale", url: "https://rapidtechpro.com/services/point-of-sale" },
-    { "@type": "ListItem", position: 6, name: "HR Solution", url: "https://rapidtechpro.com/services/hr-solution" },
+    { "@type": "ListItem", position: 1, name: "Web Development", url: "/services/web-development" },
+    { "@type": "ListItem", position: 2, name: "Mobile App Development", url: "/services/mobile-apps" },
+    { "@type": "ListItem", position: 3, name: "UI/UX Design", url: "/services/uiux-figma" },
+    { "@type": "ListItem", position: 4, name: "E-commerce Solutions", url: "/services/ecommerce-solutions" },
+    { "@type": "ListItem", position: 5, name: "Point of Sale", url: "/services/point-of-sale" },
+    { "@type": "ListItem", position: 6, name: "HR Solution", url: "/services/hr-solution" },
   ],
 };
 

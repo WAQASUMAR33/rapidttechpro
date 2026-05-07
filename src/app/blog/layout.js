@@ -1,11 +1,11 @@
 export const metadata = {
   title: "Blog",
   description: "Stay updated with the latest insights, news, and technology trends from the RapidTechPro team.",
-  alternates: { canonical: "https://rapidtechpro.com/blog" },
+  alternates: { canonical: "/blog" },
   openGraph: {
     title: "Blog | RapidTechPro",
     description: "Stay updated with the latest insights, news, and technology trends from the RapidTechPro team.",
-    url: "https://rapidtechpro.com/blog",
+    url: "/blog",
     images: [{ url: "/company/logo.png", width: 1200, height: 630, alt: "RapidTechPro Blog" }],
     type: "website",
   },

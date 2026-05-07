@@ -2,7 +2,7 @@ export const metadata = {
   title: "Terms and Conditions | RapidTechPro",
   description: "Review the terms and conditions governing the use of RapidTechPro's website and services.",
   alternates: {
-    canonical: "https://rapidtechpro.com/terms-and-conditions",
+    canonical: "/terms-and-conditions",
   },
 };
 

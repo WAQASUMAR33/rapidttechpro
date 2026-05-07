@@ -1,11 +1,11 @@
 export const metadata = {
   title: "Our Work",
   description: "Browse RapidTechPro's portfolio of successful projects spanning web, mobile, and enterprise technology solutions.",
-  alternates: { canonical: "https://rapidtechpro.com/work" },
+  alternates: { canonical: "/work" },
   openGraph: {
     title: "Our Work | RapidTechPro",
     description: "Browse RapidTechPro's portfolio of successful projects spanning web, mobile, and enterprise technology solutions.",
-    url: "https://rapidtechpro.com/work",
+    url: "/work",
     images: [{ url: "/company/logo.png", width: 1200, height: 630, alt: "RapidTechPro Portfolio" }],
     type: "website",
   },
@@ -21,7 +21,7 @@ const workSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   name: "Our Work — RapidTechPro Portfolio",
-  url: "https://rapidtechpro.com/work",
+  url: "/work",
   description: "A collection of successful technology projects delivered by RapidTechPro.",
   publisher: { "@type": "Organization", name: "RapidTechPro", url: "https://rapidtechpro.com" },
 };
