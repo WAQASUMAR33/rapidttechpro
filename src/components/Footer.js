@@ -174,8 +174,8 @@ export default function Footer() {
               <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><FaYoutube /></a>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-[11px] sm:text-[12px] font-semibold text-gray-400">
-              <a href="/company/privacy-policy" className="hover:text-[#0FB5B7] transition-colors">Privacy Policy</a>
-              <a href="/company/terms-of-service" className="hover:text-[#0FB5B7] transition-colors">Terms Of Service</a>
+              <Link href="/company/privacy-policy" className="hover:text-[#0FB5B7] transition-colors">Privacy Policy</Link>
+              <Link href="/company/terms-of-service" className="hover:text-[#0FB5B7] transition-colors">Terms Of Service</Link>
             </div>
           </div>
         </div>
