@@ -10,27 +10,30 @@ export default function PrivacyPolicy() {
   const privacySections = useRef([]);
 
   useEffect(() => {
-    privacySections.current.forEach((section, index) => {
-      gsap.fromTo(
-        section,
-        { opacity: 0, y: 50, scaleX: 0.8 },
-        {
-          opacity: 1,
-          y: 0,
-          scaleX: 1,
-          ease: 'power2.out',
-          duration: 0.5,
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 90%',
-            end: 'top 90%',
-            scrub: 1,
-            toggleActions: 'play reverse play reverse',
-          },
-          delay: index * 0.2, // Staggered delay for animation
-        }
-      );
+    const ctx = gsap.context(() => {
+      privacySections.current.filter(Boolean).forEach((section, index) => {
+        gsap.fromTo(
+          section,
+          { opacity: 0, y: 50, scaleX: 0.8 },
+          {
+            opacity: 1,
+            y: 0,
+            scaleX: 1,
+            ease: 'power2.out',
+            duration: 0.5,
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 90%',
+              end: 'bottom 10%',
+              scrub: 1,
+              toggleActions: 'play reverse play reverse',
+            },
+            delay: index * 0.2,
+          }
+        );
+      });
     });
+    return () => ctx.revert();
   }, []);
 
   return (
