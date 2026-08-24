@@ -2,19 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 
-const FALLBACK_TEAM = [
-    { name: "Waqas Umar", image: "/team/waqas.png", designation: "CEO, Co-founder" },
-    { name: "Kashif", image: "/team/kashif.jpg", designation: "Co-founder, Sales Manager" },
-    { name: "Ali Iftikhar", image: "/team/ali.png", designation: "Senior Developer" },
-    { name: "Usama Aslam", image: "/team/usama.png", designation: "UI/UX Designer" },
-    { name: "Zofia", image: "/team/nabiya.jpg", designation: "SQA, Project Manager" },
-    { name: "Nabiya", image: "/team/nabiya.jpg", designation: "SEO Content Writer" },
-    { name: "Azzam Kashif", image: "/team/ali.png", designation: "Junior Developer" },
-    { name: "Wasiq Saqlain", image: "/team/wasiq.png", designation: "UI/UX Designer" },
-];
-
 export default function OurTeam() {
-    const [teamMembers, setTeamMembers] = useState(FALLBACK_TEAM);
+    const [teamMembers, setTeamMembers] = useState([]);
 
     useEffect(() => {
         const fetchTeamMembers = async () => {

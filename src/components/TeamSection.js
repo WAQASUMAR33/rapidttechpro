@@ -4,20 +4,8 @@ import Link from 'next/link';
 import { FaArrowRight, FaLinkedin } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
-const ALL_TEAM_MEMBERS = [
-    { name: "Muhammad Waqas Umar", position: "CEO & Co-founder", image: "/team/waqas.png", link: 'https://www.linkedin.com/in/waqas-umar-5b0678196/' },
-    { name: "Kashif Rasheed", position: "Co-founder & Sales Manager", image: "/team/kashif.jpg", link: 'https://www.linkedin.com/in/kashif-rasheed-seo/' },
-    { name: "Hannan Khan", position: "Backend Developer", image: "/team/hannan.png", link: '#' },
-    { name: "Ali Iftikhar", position: "Senior Developer", image: "/team/ali.png", link: '#' },
-    { name: "Usama Aslam", position: "UI/UX Designer", image: "/team/usama.png", link: '#' },
-    { name: "Zofia", position: "SQA & Project Manager", image: "/team/nabiya.jpg", link: '#' },
-    { name: "Nabiya", position: "SEO Content Writer", image: "/team/nabiya.jpg", link: '#' },
-    { name: "Azzam Kashif", position: "Junior Developer", image: "/team/ali.png", link: '#' },
-    { name: "Wasiq Saqlain", position: "UI/UX Designer", image: "/team/wasiq.png", link: '#' },
-];
-
 const TeamSection = () => {
-    const [teamMembers, setTeamMembers] = useState(ALL_TEAM_MEMBERS);
+    const [teamMembers, setTeamMembers] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
@@ -58,28 +46,15 @@ const TeamSection = () => {
                 const validApiList = apiList.filter((m) => m && (m.name || m.full_name || m.title)?.trim());
 
                 if (validApiList.length > 0) {
-                    const formattedApiMembers = validApiList.map((m, idx) => ({
-                        id: m.id || `api-${idx}`,
-                        name: (m.name || m.full_name || m.title || '').trim(),
-                        position: (m.position || m.designation || m.role || '').trim(),
-                        image: resolveImage(m.image || m.image_url || m.avatar || m.photo),
-                        link: m.link || m.linkedin || m.linkedin_url || m.profile_url || '',
-                    }));
-
-                    // Normalize names for comparison
-                    const apiNames = new Set(
-                        formattedApiMembers.map((m) => m.name.toLowerCase().replace(/[^a-z]/g, ''))
+                    setTeamMembers(
+                        validApiList.map((m, idx) => ({
+                            id: m.id || `api-${idx}`,
+                            name: (m.name || m.full_name || m.title || '').trim(),
+                            position: (m.position || m.designation || m.role || '').trim(),
+                            image: resolveImage(m.image || m.image_url || m.avatar || m.photo),
+                            link: m.link || m.linkedin || m.linkedin_url || m.profile_url || '',
+                        }))
                     );
-
-                    // Combine: API members first, followed by default members not yet in API
-                    const remainingDefaults = ALL_TEAM_MEMBERS.filter((def) => {
-                        const defNorm = def.name.toLowerCase().replace(/[^a-z]/g, '');
-                        return !Array.from(apiNames).some(
-                            (aName) => aName === defNorm || (aName.length > 5 && defNorm.length > 5 && (aName.includes(defNorm) || defNorm.includes(aName)))
-                        );
-                    });
-
-                    setTeamMembers([...formattedApiMembers, ...remainingDefaults]);
                 }
             } catch (err) {
                 console.error('Error fetching team members:', err);
