@@ -7,6 +7,9 @@ const ContactUsForm = () => {
         email: '',
         message: ''
     });
+    const [loading, setLoading] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -16,72 +19,104 @@ const ContactUsForm = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
+        setLoading(true);
+        setError('');
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+            const data = await res.json();
+            if (data && data.success) {
+                setSubmitted(true);
+            } else {
+                setError(data?.message || 'Failed to send message. Please try again.');
+            }
+        } catch (err) {
+            console.error('Help form submission error:', err);
+            setError('Something went wrong. Please try again or email info@rapidtechpro.com.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <div className=" relative  bg-black mx-auto px-4   ">
-            {/* Background Video */}
-            {/* <video
-                className="absolute inset-0 w-full h-full object-cover"
-                src="/video/wireframe.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-            /> */}
             {/* Optional Overlay */}
             <div className="absolute inset-0  opacity-40 "></div>
 
             <div className="relative flex flex-col-reverse gap-4  md:flex-row-reverse space-y-8 md:space-y-0 md:space-x-8 px-2 py-16 md:px-12 md:py-20">
                 {/* Left Side: Contact Form */}
                 <div className="flex flex-col w-full md:w-1/2 rounded-2xl p-6 md:p-8 bg-black/70 backdrop-blur-lg">
-                    <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-                        <div>
-                            <label htmlFor="name" className="block text-sm md:text-lg font-medium text-white">Name</label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                                className="w-full p-3 mt-2 border text-white border-gray-300 bg-white/10 rounded-xl focus:ring-indigo-500 focus:border-indigo-500"
-                            />
+                    {submitted ? (
+                        <div className="flex flex-col items-center justify-center py-12 text-center text-white">
+                            <div className="w-16 h-16 rounded-full bg-[#0FB5B7]/20 text-[#0FB5B7] flex items-center justify-center text-2xl font-bold mb-4">
+                                ✓
+                            </div>
+                            <h3 className="text-2xl font-bold mb-2">Message Received!</h3>
+                            <p className="text-gray-400 text-sm max-w-sm">Thank you for getting in touch. Our team will review your message and reply promptly.</p>
+                            <button
+                                onClick={() => { setSubmitted(false); setFormData({ name: '', email: '', message: '' }); }}
+                                className="mt-6 px-6 py-2.5 rounded-xl bg-[#0FB5B7] text-white font-bold text-sm hover:bg-[#0FB5B7]/80 transition"
+                            >
+                                Send Another
+                            </button>
                         </div>
-                        <div>
-                            <label htmlFor="email" className="block text-sm md:text-lg font-medium text-white">Email</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                                className="w-full p-3 mt-2 border text-white bg-white/10 border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="message" className="block text-sm md:text-lg font-medium text-white">Message</label>
-                            <textarea
-                                id="message"
-                                name="message"
-                                value={formData.message}
-                                onChange={handleChange}
-                                required
-                                rows="4"
-                                className="w-full p-3 mt-2 border text-white bg-white/10 border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500"
-                            ></textarea>
-                        </div>
-                        <button
-                            type="submit"
-                            className="w-full bg-white text-black hover:text-white py-3 rounded-xl hover:bg-black border-black hover:border-white transition duration-300"
-                        >
-                            Send Message
-                        </button>
-                    </form>
+                    ) : (
+                        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                            {error && (
+                                <div className="p-3 rounded-xl bg-red-500/20 border border-red-500/40 text-red-300 text-xs text-center font-medium">
+                                    {error}
+                                </div>
+                            )}
+                            <div>
+                                <label htmlFor="name" className="block text-sm md:text-lg font-medium text-white">Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full p-3 mt-2 border text-white border-gray-300 bg-white/10 rounded-xl focus:ring-indigo-500 focus:border-indigo-500"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="email" className="block text-sm md:text-lg font-medium text-white">Email</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full p-3 mt-2 border text-white bg-white/10 border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="message" className="block text-sm md:text-lg font-medium text-white">Message</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    required
+                                    rows="4"
+                                    className="w-full p-3 mt-2 border text-white bg-white/10 border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500"
+                                ></textarea>
+                            </div>
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="w-full bg-[#0FB5B7] text-white hover:bg-[#0a8e90] py-3.5 rounded-xl font-bold transition duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
+                            >
+                                {loading ? 'Sending Message...' : 'Send Message'}
+                            </button>
+                        </form>
+                    )}
                 </div>
 
                 {/* Right Side: Content */}

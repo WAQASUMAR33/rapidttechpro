@@ -32,6 +32,10 @@ export default function Header() {
     // const [isOpenGetinTouch, setisOpenGetinTouch] = useState(false);
     const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
     const [interests, setInterests] = useState([]);
+    const [drawerForm, setDrawerForm] = useState({ name: '', email: '', phone: '', message: '' });
+    const [drawerLoading, setDrawerLoading] = useState(false);
+    const [drawerSubmitted, setDrawerSubmitted] = useState(false);
+    const [drawerError, setDrawerError] = useState('');
     const [navServices, setNavServices] = useState([
         { title: 'Ecommerce Solutions', slug: 'ecommerce-solutions' },
         { title: 'HR Solutions', slug: 'hr-solution' },
@@ -56,6 +60,30 @@ export default function Header() {
                 return [...prevInterests, interest];
             }
         });
+    };
+
+    const handleDrawerSubmit = async (e) => {
+        e.preventDefault();
+        setDrawerLoading(true);
+        setDrawerError('');
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...drawerForm, interests }),
+            });
+            const data = await res.json();
+            if (data && data.success) {
+                setDrawerSubmitted(true);
+            } else {
+                setDrawerError(data?.message || 'Failed to send inquiry. Please try again.');
+            }
+        } catch (err) {
+            console.error('Drawer submit error:', err);
+            setDrawerError('Something went wrong. Please try again or email info@rapidtechpro.com.');
+        } finally {
+            setDrawerLoading(false);
+        }
     };
 
     const handleScroll = () => {
@@ -325,49 +353,93 @@ export default function Header() {
                                     </div>
                                 </div>
 
-                                <form className="mt-5 space-y-2.5 flex-grow">
-                                    <div className="space-y-2.5">
-                                        <input
-                                            type="text"
-                                            placeholder="Name"
-                                            className="w-full p-2.5 rounded-lg text-white text-[13px] outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
-                                        />
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                                {drawerSubmitted ? (
+                                    <div className="flex flex-col items-center justify-center py-10 text-center text-white flex-grow">
+                                        <div className="w-14 h-14 rounded-full bg-[#0FB5B7]/20 text-[#0FB5B7] flex items-center justify-center text-2xl font-bold mb-3">
+                                            ✓
+                                        </div>
+                                        <h3 className="text-xl font-bold mb-2">Message Sent!</h3>
+                                        <p className="text-xs text-gray-400 max-w-xs mb-6">
+                                            Thank you for reaching out. Our team will review your project requirements and contact you shortly.
+                                        </p>
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                setDrawerSubmitted(false);
+                                                setDrawerForm({ name: '', email: '', phone: '', message: '' });
+                                                setInterests([]);
+                                            }}
+                                            className="px-5 py-2 rounded-lg bg-[#0FB5B7] text-white text-xs font-bold hover:bg-[#0FB5B7]/80 transition"
+                                        >
+                                            Send Another Request
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <form onSubmit={handleDrawerSubmit} className="mt-5 space-y-2.5 flex-grow">
+                                        {drawerError && (
+                                            <div className="p-2.5 rounded-lg bg-red-500/20 border border-red-500/40 text-red-300 text-xs text-center font-medium">
+                                                {drawerError}
+                                            </div>
+                                        )}
+                                        <div className="space-y-2.5">
                                             <input
-                                                type="email"
-                                                placeholder="Email"
+                                                type="text"
+                                                name="name"
+                                                required
+                                                value={drawerForm.name}
+                                                onChange={(e) => setDrawerForm({ ...drawerForm, name: e.target.value })}
+                                                placeholder="Name"
                                                 className="w-full p-2.5 rounded-lg text-white text-[13px] outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
                                             />
-                                            <input
-                                                type="tel"
-                                                placeholder="Whatsapp Number"
-                                                className="w-full p-2.5 rounded-lg text-white text-[13px] outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    required
+                                                    value={drawerForm.email}
+                                                    onChange={(e) => setDrawerForm({ ...drawerForm, email: e.target.value })}
+                                                    placeholder="Email"
+                                                    className="w-full p-2.5 rounded-lg text-white text-[13px] outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
+                                                />
+                                                <input
+                                                    type="tel"
+                                                    name="phone"
+                                                    value={drawerForm.phone}
+                                                    onChange={(e) => setDrawerForm({ ...drawerForm, phone: e.target.value })}
+                                                    placeholder="Whatsapp / Phone"
+                                                    className="w-full p-2.5 rounded-lg text-white text-[13px] outline-none transition-all placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
+                                                />
+                                            </div>
+                                            <textarea
+                                                name="message"
+                                                required
+                                                value={drawerForm.message}
+                                                onChange={(e) => setDrawerForm({ ...drawerForm, message: e.target.value })}
+                                                placeholder="Message / Project Details"
+                                                className="w-full p-2.5 rounded-lg text-white text-[13px] outline-none resize-none placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
+                                                rows="3"
                                             />
                                         </div>
-                                        <textarea
-                                            placeholder="Message"
-                                            className="w-full p-2.5 rounded-lg text-white text-[13px] outline-none resize-none placeholder-gray-500 bg-white/5 border border-white/10 focus:border-[#0FB5B7]/50"
-                                            rows="3"
-                                        />
-                                    </div>
 
-                                    <div className="flex flex-wrap gap-4 text-[10px] uppercase tracking-widest font-bold text-gray-500 py-3 border-t border-white/5">
-                                        {['Free Consultancy', 'Road Map Execution', 'Collaboration', 'Execution Guidance'].map(item => (
-                                            <span key={item} className="flex items-center gap-1.5">
-                                                <div className="w-1 h-1 rounded-full bg-[#0FB5B7]"></div>
-                                                {item}
-                                            </span>
-                                        ))}
-                                    </div>
+                                        <div className="flex flex-wrap gap-4 text-[10px] uppercase tracking-widest font-bold text-gray-500 py-3 border-t border-white/5">
+                                            {['Free Consultancy', 'Road Map Execution', 'Collaboration', 'Execution Guidance'].map(item => (
+                                                <span key={item} className="flex items-center gap-1.5">
+                                                    <div className="w-1 h-1 rounded-full bg-[#0FB5B7]"></div>
+                                                    {item}
+                                                </span>
+                                            ))}
+                                        </div>
 
-                                    <button
-                                        type="submit"
-                                        className="w-full p-2.5 rounded-lg text-white font-bold text-[13px] transition-all hover:brightness-110 active:scale-[0.98] shadow-2xl shadow-blue-600/20"
-                                        style={{ background: 'linear-gradient(135deg, #3b82f6, #0FB5B7)' }}
-                                    >
-                                        Send Message
-                                    </button>
-                                </form>
+                                        <button
+                                            type="submit"
+                                            disabled={drawerLoading}
+                                            className="w-full p-2.5 rounded-lg text-white font-bold text-[13px] transition-all hover:brightness-110 active:scale-[0.98] shadow-2xl shadow-blue-600/20 disabled:opacity-50 flex items-center justify-center gap-2"
+                                            style={{ background: 'linear-gradient(135deg, #3b82f6, #0FB5B7)' }}
+                                        >
+                                            {drawerLoading ? 'Sending Inquiry...' : 'Send Message'}
+                                        </button>
+                                    </form>
+                                )}
 
                                 <div className="mt-4 text-center pb-2">
                                     <p className="text-[10px] text-gray-500 leading-relaxed max-w-sm mx-auto">
