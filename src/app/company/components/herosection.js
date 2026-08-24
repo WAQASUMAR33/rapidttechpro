@@ -1,7 +1,7 @@
 export default function CompanyHerosection(){
     return(
         <>
-        <div className="h-screen w-full  flex  justify-center items-center">
+        <div className="relative h-screen w-full flex justify-center items-center overflow-hidden">
         {/* [url('/images/bg-2.png')]  */}
         <video
           className="absolute inset-0 w-full h-full object-cover"

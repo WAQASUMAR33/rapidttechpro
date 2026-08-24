@@ -98,9 +98,8 @@ export default function ProjectDetailPage() {
     return (
       <UserLayout>
         <div className="min-h-screen flex items-center justify-center bg-white">
-          <div className="text-center">
-            <div className="w-16 h-16 border-4 border-black border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-gray-900 font-bold tracking-tight uppercase">Loading case study...</p>
+          <div className="text-center w-full">
+            <div className="flex justify-center items-center py-10 w-full"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0FB5B7]"></div></div>
           </div>
         </div>
       </UserLayout>

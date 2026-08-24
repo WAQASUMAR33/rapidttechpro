@@ -14,8 +14,9 @@ export default function Header() {
     const pathname = usePathname();
     const isOpenGetinTouch = useSelector((state) => state.popup.isOpen);
 
-    // Light-themed pages where header should be black even when not scrolled
-    const isLightPage = pathname?.startsWith('/Services') || pathname?.startsWith('/ContactUs') || pathname?.startsWith('/Work');
+    // Pages with dark hero backgrounds where header starts with crisp white text when not scrolled
+    const isDarkPage = pathname === '/' || pathname?.startsWith('/contact-us') || pathname?.startsWith('/about-us') || pathname?.startsWith('/blog');
+    const isLightPage = !isDarkPage;
 
     const togglePopup = () => {
         if (isOpenGetinTouch) {
@@ -117,7 +118,7 @@ export default function Header() {
                             <img
                                 src="/company/logo.png"
                                 alt="RapidTechPro Logo"
-                                className={`h-8 w-auto object-contain transition-all duration-300 ${isScrolled || isLightPage ? "" : "brightness-0 invert"}`}
+                                className={`h-8 w-auto object-contain transition-all duration-300 ${isScrolled || isLightPage ? "brightness-0" : "brightness-0 invert"}`}
                                 onError={() => setLogoError(true)}
                             />
                         ) : (
@@ -129,7 +130,7 @@ export default function Header() {
                     </Link>
 
                     {/* Desktop Nav Links */}
-                    <nav className="hidden xl:flex items-center space-x-8 lg:space-x-12 text-[14px] tracking-tight">
+                    <nav className="hidden lg:flex items-center space-x-6 lg:space-x-8 xl:space-x-12 text-[14px] tracking-tight">
                         <div
                             className="relative"
                             onMouseEnter={() => setIsSolutionsOpen(true)}
@@ -154,7 +155,7 @@ export default function Header() {
                                         </div>
                                         {/* Dynamic service columns */}
                                         {Array.from({ length: Math.ceil(navServices.length / 2) }, (_, i) => navServices.slice(i * 2, i * 2 + 2)).map((chunk, colIdx) => (
-                                            <div key={colIdx} className="flex justify-between">
+                                             <div key={colIdx} className="flex justify-between">
                                                 <div className="flex flex-col gap-4">
                                                     {chunk.map((svc) => (
                                                         <Link
@@ -174,13 +175,6 @@ export default function Header() {
                                 </div>
                             )}
                         </div>
-                        <div
-                            className="relative"
-                            onMouseEnter={() => setIsSolutionsOpen(true)}
-                            onMouseLeave={() => setIsSolutionsOpen(false)}
-                        >
-                            <Link href="/services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Solutions</Link>
-                        </div>
                         <Link href="/work" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Work</Link>
                         <Link href="/company" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Company</Link>
                         <Link href="/contact-us" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Contact</Link>
@@ -188,12 +182,16 @@ export default function Header() {
 
                     {/* Contact & Button - Desktop Only */}
                     <div className="hidden md:flex items-center space-x-6">
-                        <Link href="tel:8669782220" aria-label="Call 866-978-2220" className={`flex items-center gap-2 text-sm lg:text-base font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>
+                        <Link href="tel:+923403051059" aria-label="Call +92 340 3051059" className={`flex items-center gap-2 text-sm lg:text-base font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>
                             <BsTelephone className="text-sm" aria-hidden="true" />
-                            <span className="hidden lg:inline">866-978-2220</span>
+                            <span className="hidden lg:inline">+92 340 3051059</span>
                         </Link>
                         <button
-                            className="px-8 py-3 rounded-full font-bold bg-black text-white hover:bg-black/90 transition-all text-sm tracking-tight shadow-md"
+                            className={`px-8 py-3 rounded-full font-bold transition-all text-sm tracking-tight shadow-md ${
+                                isScrolled || isLightPage
+                                    ? "bg-black text-white hover:bg-black/90"
+                                    : "bg-white text-black hover:bg-white/90"
+                            }`}
                             onClick={() => dispatch(openPopup())}
                             aria-label="Open get in touch form"
                         >
@@ -202,7 +200,7 @@ export default function Header() {
                     </div>
 
                     {/* Toggle Button - Mobile Only */}
-                    <button className="md:hidden text-2xl" onClick={toggleSidebar} aria-label={isSidebarOpen ? "Close menu" : "Open menu"}>
+                    <button className="lg:hidden text-2xl" onClick={toggleSidebar} aria-label={isSidebarOpen ? "Close menu" : "Open menu"}>
                         {isSidebarOpen ? <FaTimes /> : <FaBars />}
                     </button>
                 </div>
@@ -244,9 +242,6 @@ export default function Header() {
                                 </Link>
                             ))}
                         </div>
-                        <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
-                            Solutions
-                        </Link>
                         <Link href="/work" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                             Work
                         </Link>
@@ -260,9 +255,9 @@ export default function Header() {
 
                     {/* Contact Info & Button */}
                     <div className="flex flex-col items-start space-y-3 mt-6 w-full">
-                        <Link href="tel:8669782220" className="flex items-center gap-2 text-base sm:text-lg">
+                        <Link href="tel:+923403051059" className="flex items-center gap-2 text-base sm:text-lg">
                             <BsTelephone />
-                            866-978-2220
+                            +92 340 3051059
                         </Link>
                         <button onClick={() => dispatch(openPopup())} className="w-full h-10 rounded-full bg-white text-black font-medium">
                             Get in Touch
@@ -287,7 +282,7 @@ export default function Header() {
                             animate={{ x: 0 }}
                             exit={{ x: "100%" }}
                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                            className="absolute top-0 right-0 h-full w-full md:w-[600px] lg:w-[650px] bg-[#0d1b2a] shadow-2xl overflow-y-auto"
+                            className="absolute top-0 right-0 h-full w-full max-w-[100vw] md:w-[600px] lg:w-[650px] bg-[#0d1b2a] shadow-2xl overflow-y-auto overflow-x-hidden"
                             style={{ background: 'linear-gradient(160deg, #0d1b2a 0%, #08121d 100%)' }}
                         >
                             <div className="relative p-6 md:p-8 min-h-full flex flex-col justify-center">

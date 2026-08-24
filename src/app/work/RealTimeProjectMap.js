@@ -143,7 +143,7 @@ export default function RealTimeProjectMap() {
                         {/* List */}
                         <div className="h-full overflow-y-auto pb-24 pr-4 space-y-8 custom-scrollbar">
                             {loading ? (
-                                <div className="text-gray-500 py-10">Loading real-time data...</div>
+                                <div className="flex justify-center items-center py-10 w-full"><div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#0FB5B7]"></div></div>
                             ) : filteredProjects.length > 0 ? (
                                 filteredProjects.map((proj) => (
                                     <motion.div

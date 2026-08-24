@@ -291,7 +291,7 @@ export default function WorkMainPage() {
     return (
       <div className="bg-white case-studies-section relative">
         <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-12 lg:px-16 2xl:px-24 py-20">
-          <p className="text-center text-gray-600">Loading case studies...</p>
+          <div className="flex justify-center items-center w-full py-10"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0FB5B7]"></div></div>
         </div>
       </div>
     );

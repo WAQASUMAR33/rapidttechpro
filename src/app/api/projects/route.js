@@ -32,7 +32,19 @@ export async function GET(request) {
             });
         }
 
-        return new Response(responseBody, {
+        let finalResponse = responseBody;
+        try {
+            const jsonBody = JSON.parse(responseBody);
+            if (jsonBody.success && Array.isArray(jsonBody.data)) {
+                // Filter out broken project (ID 1) and any projects containing leaked WhatsApp chats
+                jsonBody.data = jsonBody.data.filter(p => p.id !== 1 && !(p.shortDescription || '').includes('[5:35 PM'));
+                finalResponse = JSON.stringify(jsonBody);
+            }
+        } catch (e) {
+            console.error('[/api/projects] Failed to parse backend response for filtering:', e);
+        }
+
+        return new Response(finalResponse, {
             status: 200,
             headers: {
                 'Content-Type': 'application/json',

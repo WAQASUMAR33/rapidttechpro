@@ -5,9 +5,9 @@ import { FaArrowRight } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 export default function OurJourney() {
-    const [completedProjects, setCompletedProjects] = useState(0);
+    const [completedProjects, setCompletedProjects] = useState(400);
     const [talentedTeam, setTalentedTeam] = useState(0);
-    const [satisfiedClients, setSatisfiedClients] = useState(0);
+    const [satisfiedClients, setSatisfiedClients] = useState(100);
     const [isVisible, setIsVisible] = useState(false);
 
     const ref = useRef(null);

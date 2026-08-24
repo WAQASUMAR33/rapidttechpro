@@ -14,13 +14,13 @@ const Section = () => {
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-left md:text-center text-white px-4">
           <h1 className="text-2xl md:text-5xl md:font-bold mb-4 text-left">
-            The best way out for your business.
+            The right technology partner for your business.
           </h1>
           <h1 className="text-2xl md:text-5xl md:font-bold mb-4 text-left">
-            Let’s work together!
+            Let’s build something great together!
           </h1>
           <p className=" md:text-xl md:max-w-2xl mb-8 text-center">
-            Nowadays, businesses cannot do without an online presence. You have to offer them quality and engaging content.
+            In today's digital age, your business needs robust software to stay competitive. We deliver scalable and high-performance solutions.
           </p>
           <button className="bg-white text-black py-3 px-6 md:px-8 rounded-full md:text-lg font-[500] hover:bg-gray-300 transition">
             View our services &rarr;

@@ -90,7 +90,7 @@ export default function ServicesWeProvide() {
           <div className="w-full lg:w-1/2 order-1 lg:order-2 lg:mt-6">
             <div className="flex flex-col divide-y divide-gray-200">
               {loading ? (
-                <div className="py-10 text-gray-500 font-medium">Loading premium services...</div>
+                <div className="flex justify-center items-center py-10 w-full"><div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#0FB5B7]"></div></div>
               ) : (
                 services.map((service, index) => (
                   <div key={index} className="py-6 first:pt-0 group border-b border-gray-200 last:border-0">

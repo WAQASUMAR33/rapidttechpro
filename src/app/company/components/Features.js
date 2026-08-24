@@ -6,20 +6,20 @@ export default function Features() {
   const features = [
     {
       id: '01',
-      title: 'Strong admin',
-      description: 'Enjoy the process of setting up and managing the site without special tasks. Now even a beginner can easily create their own website.',
+      title: 'Custom Development',
+      description: 'We build scalable, robust software solutions tailored precisely to your business needs and operational goals.',
       icon: <BsChatDots />, // Replace with actual icon or SVG
     },
     {
       id: '02',
-      title: 'Clean design',
-      description: 'Use design for any business. You can create your own unique site. Simple and creative design that will impress you.',
+      title: 'UI/UX Design',
+      description: 'We create intuitive, engaging, and modern user interfaces that delight your customers and drive conversions.',
       icon: <MdOutlineDesignServices />, // Replace with actual icon or SVG
     },
     {
       id: '03',
-      title: 'Unique features',
-      description: 'Elegant, simple and functional design. Everyone who sees your site will be delighted and will most likely want to contact you.',
+      title: 'Dedicated Support',
+      description: 'Our partnership doesn’t end at launch. We provide ongoing maintenance and dedicated support to keep you growing.',
       icon: <div className="flex"><FaQuoteLeft /><FaQuoteRight /></div>, // Replace with actual icon or SVG
     },
   ];
@@ -27,9 +27,9 @@ export default function Features() {
   return (
     <div className="py-16 bg-white">
       <div className="max-w-6xl mx-auto px-6 text-left">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Modern design. Strong framework</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">Innovative solutions. Expert execution.</h2>
         <p className="text-gray-600 mb-12">
-          The changing media and technology landscape requires a new kind of creative agency with innovation and creativity at its core.
+          The rapidly evolving digital landscape requires a technical partner with deep expertise and creativity at its core.
         </p>
         <div className="grid md:grid-cols-3 gap-8 ">
           {features.map((feature) => (

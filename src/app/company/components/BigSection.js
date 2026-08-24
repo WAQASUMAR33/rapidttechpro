@@ -5,13 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const slides = [
   {
-    title: "We are the best agency to improve your deals. Great theme with great features!",
-    description: "An effective template for developing your website!",
+    title: "We are the best agency to accelerate your digital growth.",
+    description: "Custom software solutions tailored for your business!",
     image: "/team/waqas.png",
     name: "Waqas Umar",
     position: "CEO",
     content:
-      "Use your website for any financial business, corporation, company, agency, digital marketing, consulting, digital studio, mobile app software, start–up business and more.",
+      "Transform your vision into reality with our expert development team. We specialize in mobile apps, web platforms, enterprise software, and scalable digital solutions.",
   },
   {
     title: "Take your business to the next level with our cutting-edge solutions!",

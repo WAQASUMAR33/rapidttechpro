@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { FaFacebook } from 'react-icons/fa';
 
 const FALLBACK = [
     {
@@ -101,14 +102,14 @@ export default function TestimonialsSection() {
                     {/* Rating Badges */}
                     <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
                         <div className="flex items-center gap-4">
-                            <span className="text-white font-bold text-2xl">C</span>
+                            <img src="/business/clutch.png" alt="Clutch" className="h-6 w-auto object-contain brightness-0 invert" />
                             <div className="text-left">
                                 <div className="flex text-red-600 text-sm">★★★★★</div>
                                 <div className="text-[10px] text-white font-bold uppercase tracking-widest">52 Reviews</div>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
-                            <span className="text-white font-bold text-2xl font-serif">f</span>
+                            <FaFacebook className="w-8 h-8 text-blue-500" />
                             <div className="text-left">
                                 <div className="flex text-blue-600 text-sm">★★★★★</div>
                                 <div className="text-[10px] text-white font-bold uppercase tracking-widest">32 Reviews</div>

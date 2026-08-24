@@ -125,7 +125,7 @@ export default function ProductProcess() {
               <div
                 key={index}
                 ref={(el) => (sectionRefs.current[index] = el)}
-                className="step min-w-[85vw] md:min-w-0 lg:min-h-[70vh] flex flex-col justify-start lg:justify-center snap-center lg:snap-align-none"
+                className="step min-w-[85vw] md:min-w-[60vw] lg:min-w-0 shrink-0 lg:shrink lg:min-h-[70vh] flex flex-col justify-start lg:justify-center snap-center lg:snap-align-none"
               >
                 {/* Mobile Image */}
                 <div className="lg:hidden w-[75vw] sm:w-[350px] aspect-[3/4] mx-auto relative rounded-full overflow-hidden mb-8 mt-6 bg-white">

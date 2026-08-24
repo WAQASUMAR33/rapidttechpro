@@ -160,7 +160,7 @@ export default function Footer() {
             <div className="text-lg sm:text-xl font-bold tracking-tighter mb-2 flex items-baseline leading-none">
               <span className="text-white">RapidTech</span><span className="text-[#0FB5B7]">Pro</span>
             </div>
-            <p className="text-gray-500 text-[10px] sm:text-[11px] font-medium text-center max-w-[200px] sm:max-w-none leading-relaxed">© 2024 RapidTechPro All Rights Reserved</p>
+            <p className="text-gray-500 text-[10px] sm:text-[11px] font-medium text-center max-w-[200px] sm:max-w-none leading-relaxed">© 2026 RapidTechPro All Rights Reserved</p>
           </div>
 
           {/* Socials Right */}

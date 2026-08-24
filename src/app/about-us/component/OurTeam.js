@@ -1,16 +1,61 @@
-import { Facebook, Instagram, Linkedin } from "lucide-react"
+'use client';
+import React, { useState, useEffect } from "react";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
+
+const FALLBACK_TEAM = [
+    { name: "Waqas Umar", image: "/team/waqas.png", designation: "CEO, Co-founder" },
+    { name: "Kashif", image: "/team/kashif.jpg", designation: "Co-founder, Sales Manager" },
+    { name: "Ali Iftikhar", image: "/team/ali.png", designation: "Senior Developer" },
+    { name: "Usama Aslam", image: "/team/usama.png", designation: "UI/UX Designer" },
+    { name: "Zofia", image: "/team/nabiya.jpg", designation: "SQA, Project Manager" },
+    { name: "Nabiya", image: "/team/nabiya.jpg", designation: "SEO Content Writer" },
+    { name: "Azzam Kashif", image: "/team/ali.png", designation: "Junior Developer" },
+    { name: "Wasiq Saqlain", image: "/team/wasiq.png", designation: "UI/UX Designer" },
+];
 
 export default function OurTeam() {
-    const TeamMembers = [
-        { name: "Waqas Umar", image: "/team/waqas.png", designation: "CEO, Co-founder" },
-        { name: "Kashif", image: "/team/kashif.jpg", designation: "Co-founder, Sales Manager" },
-        { name: "Ali Iftikhar", image: "/team/ali.png", designation: "Senior Developer" },
-        { name: "Usama Aslam", image: "/team/usama.png", designation: "UI/UX Designer" },
-        { name: "Zofia", image: "/team/nabiya.jpg", designation: "SQA, Project Manager" },
-        { name: "Nabiya", image: "/team/nabiya.jpg", designation: "SEO Content Writer" },
-        { name: "Azzam Kashif", image: "/team/ali.png", designation: "Junior Developer" },
-        { name: "Wasiq Saqlain", image: "/team/wasiq.png", designation: "UI/UX Designer" },
-    ]
+    const [teamMembers, setTeamMembers] = useState(FALLBACK_TEAM);
+
+    useEffect(() => {
+        const fetchTeamMembers = async () => {
+            try {
+                const response = await fetch('/api/teams', {
+                    method: 'GET',
+                    headers: {
+                        'x-api-key': process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026',
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!response.ok) return;
+                const data = await response.json();
+
+                let list = [];
+                if (data && data.success && Array.isArray(data.data)) {
+                    list = data.data;
+                } else if (Array.isArray(data)) {
+                    list = data;
+                } else if (data && Array.isArray(data.teams)) {
+                    list = data.teams;
+                } else if (data && Array.isArray(data.data)) {
+                    list = data.data;
+                }
+
+                if (list.length > 0) {
+                    setTeamMembers(list.map((m, idx) => ({
+                        id: m.id || idx,
+                        name: m.name || m.full_name || 'Team Member',
+                        designation: m.position || m.designation || m.role || '',
+                        image: m.image || m.image_url || m.avatar || m.photo || '/team/waqas.png',
+                    })));
+                }
+            } catch (err) {
+                console.error('Error fetching team members:', err);
+            }
+        };
+
+        fetchTeamMembers();
+    }, []);
     return (
         <>
             <div className="w-full h-full ">
@@ -18,7 +63,7 @@ export default function OurTeam() {
                     <h1 className="text-5xl font-[800] text-center">Our Team</h1>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {TeamMembers.map((member, index) => {
+                    {teamMembers.map((member, index) => {
                         return (
                             <div key={index} className="p-4">
                                 <div className=" group border transition-all duration-500 border-gray-200 hover:border hover:border-gray-800 rounded-lg py-4 shadow-lg">

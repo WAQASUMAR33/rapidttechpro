@@ -153,12 +153,6 @@ export default function Header() {
                                 </div>
                             )}
                         </div>
-                        <div
-                            className="relative"
-                            onMouseEnter={() => setIsSolutionsOpen(true)}
-                            onMouseLeave={() => setIsSolutionsOpen(false)}
-                        >
-                            <Link href="/services" className="py-2 font-bold whitespace-nowrap">Solutions</Link>
                         </div>
                         <Link href="/work" className="font-bold whitespace-nowrap">Work</Link>
                         <Link href="/company" className="font-bold whitespace-nowrap">Company</Link>
@@ -181,7 +175,7 @@ export default function Header() {
                     </div>
 
                     {/* Toggle Button - Mobile Only */}
-                    <button className="md:hidden text-2xl" onClick={toggleSidebar} aria-label={isSidebarOpen ? "Close menu" : "Open menu"}>
+                    <button className="xl:hidden text-2xl" onClick={toggleSidebar} aria-label={isSidebarOpen ? "Close menu" : "Open menu"}>
                         {isSidebarOpen ? <FaTimes /> : <FaBars />}
                     </button>
                 </div>
@@ -215,9 +209,6 @@ export default function Header() {
                                 </Link>
                             ))}
                         </div>
-                        <Link href="/" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
-                            Solutions
-                        </Link>
                         <Link href="/work" onClick={toggleSidebar} className="text-base sm:text-lg font-bold">
                             Work
                         </Link>
@@ -252,7 +243,7 @@ export default function Header() {
                     ></div>
 
                     {/* Form Container */}
-                    <div className="bg-[#0a0b14] text-white w-full sm:w-[450px] md:w-[500px] h-full sm:h-[90vh] overflow-y-auto relative shadow-2xl border border-white/10 no-scrollbar rounded-2xl">
+                    <div className="bg-[#0a0b14] text-white w-full max-w-[100vw] sm:w-[450px] md:w-[500px] h-full sm:h-[90vh] overflow-y-auto overflow-x-hidden relative shadow-2xl border border-white/10 no-scrollbar rounded-2xl">
                         <div className="p-6 md:p-10 min-h-full flex flex-col">
                             <button
                                 onClick={() => dispatch(closePopup())}

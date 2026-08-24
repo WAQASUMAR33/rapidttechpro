@@ -180,7 +180,7 @@ export default function TechnologiesSection() {
                 {/* Main Tabs Container */}
                 <div className="flex flex-col lg:flex-row gap-12 min-h-[500px] border-t border-gray-100 pt-12">
                     {/* Sidebar Buttons */}
-                    <div className="lg:w-1/4 flex overflow-x-auto lg:overflow-visible flex-row lg:flex-col gap-6 lg:gap-1 border-b border-gray-200 lg:border-none mb-8 lg:mb-0 pb-0 lg:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                    <div className="lg:w-1/4 flex overflow-x-auto lg:overflow-visible flex-row lg:flex-col gap-6 lg:gap-1 border-b border-gray-200 lg:border-none mb-8 lg:mb-0 pb-2 lg:pb-0 scroll-smooth custom-scrollbar">
                         {techData.map((tab) => (
                             <button
                                 key={tab.id}
