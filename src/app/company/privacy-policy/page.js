@@ -1,163 +1,239 @@
-'use client';
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+export const metadata = {
+  title: "Privacy Policy | RapidTechPro",
+  description: "Learn how RapidTechPro collects, protects, and handles your personal information, project assets, and data.",
+  alternates: {
+    canonical: "/company/privacy-policy",
+  },
+};
+
+import React from 'react';
 import UserLayout from '@/app/UserLayout';
+import Link from 'next/link';
+import { FaShieldAlt, FaLock, FaUserCheck, FaServer, FaGlobe, FaEnvelope } from 'react-icons/fa';
 
-gsap.registerPlugin(ScrollTrigger);
+export default function PrivacyPolicyPage() {
+  const lastUpdated = "August 2026";
 
-export default function PrivacyPolicy() {
-  const privacySections = useRef([]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      privacySections.current.filter(Boolean).forEach((section, index) => {
-        gsap.fromTo(
-          section,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            ease: 'power2.out',
-            duration: 0.6,
-            delay: index * 0.05,
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 92%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      });
-    });
-    return () => ctx.revert();
-  }, []);
+  const sections = [
+    {
+      id: "introduction",
+      title: "1. Introduction & Overview",
+      icon: FaShieldAlt,
+      content: (
+        <>
+          <p className="mb-4">
+            Welcome to <strong>RapidTechPro</strong> (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We are a global software engineering, mobile application, AI, and digital transformation agency operating from Dubai, United Arab Emirates and Pakistan.
+          </p>
+          <p>
+            We are dedicated to safeguarding the privacy, confidentiality, and security of our clients, prospective partners, and website visitors. This Privacy Policy details how we collect, process, store, and protect your personal information and project data when you use our website (<Link href="/" className="text-[#0FB5B7] hover:underline font-semibold">www.rapidtechpro.com</Link>) or engage our development and consulting services.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "information-collected",
+      title: "2. Information We Collect",
+      icon: FaUserCheck,
+      content: (
+        <>
+          <p className="mb-4">We collect information strictly necessary to provide, manage, and scale your technology solutions:</p>
+          <ul className="space-y-3 list-disc pl-6 text-gray-600">
+            <li>
+              <strong className="text-gray-900">Personal & Contact Information:</strong> Your full name, corporate email address, phone/WhatsApp number, company name, job title, and billing details provided when submitting contact forms or during onboarding.
+            </li>
+            <li>
+              <strong className="text-gray-900">Project Specifications & Data:</strong> Project briefs, technical requirements, wireframes, user personas, third-party API credentials, and development assets shared for solution delivery.
+            </li>
+            <li>
+              <strong className="text-gray-900">Technical & Device Telemetry:</strong> IP addresses, browser types, operating systems, geographic location, referring URLs, and website navigation patterns collected via standard analytics.
+            </li>
+            <li>
+              <strong className="text-gray-900">Communication Records:</strong> Transcripts of emails, meetings, and support requests to ensure high-quality project execution.
+            </li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      id: "use-of-information",
+      title: "3. How We Use Your Information",
+      icon: FaServer,
+      content: (
+        <>
+          <p className="mb-4">We process information based on legitimate business interests and contract execution:</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+            <div className="p-4 rounded-xl bg-gray-50 border border-gray-100">
+              <h4 className="font-bold text-gray-900 mb-1">Service Execution</h4>
+              <p className="text-sm text-gray-600">Designing, programming, testing, deploying, and maintaining custom software, web, and mobile solutions.</p>
+            </div>
+            <div className="p-4 rounded-xl bg-gray-50 border border-gray-100">
+              <h4 className="font-bold text-gray-900 mb-1">Client Collaboration</h4>
+              <p className="text-sm text-gray-600">Providing milestone updates, sprint reviews, invoices, and ongoing technical support.</p>
+            </div>
+            <div className="p-4 rounded-xl bg-gray-50 border border-gray-100">
+              <h4 className="font-bold text-gray-900 mb-1">Security & Integrity</h4>
+              <p className="text-sm text-gray-600">Monitoring systems against malicious threats, unauthorized access, and fraud prevention.</p>
+            </div>
+            <div className="p-4 rounded-xl bg-gray-50 border border-gray-100">
+              <h4 className="font-bold text-gray-900 mb-1">Legal & Compliance</h4>
+              <p className="text-sm text-gray-600">Fulfilling corporate tax, accounting, and international legal compliance obligations.</p>
+            </div>
+          </div>
+        </>
+      ),
+    },
+    {
+      id: "nda-confidentiality",
+      title: "4. Confidentiality, NDA & Code Ownership",
+      icon: FaLock,
+      content: (
+        <>
+          <p className="mb-4">
+            Confidentiality is fundamental to our engineering partnerships. We routinely execute Non-Disclosure Agreements (NDAs) prior to project discovery.
+          </p>
+          <ul className="space-y-3 list-disc pl-6 text-gray-600">
+            <li>
+              <strong className="text-gray-900">Proprietary Source Code:</strong> All code, intellectual property, logic, and databases built specifically for your project remain strictly confidential.
+            </li>
+            <li>
+              <strong className="text-gray-900">Access Controls:</strong> Only engineers, project managers, and QA specialists assigned directly to your project have access to your codebase and credentials.
+            </li>
+            <li>
+              <strong className="text-gray-900">No Selling of Data:</strong> We never sell, rent, or monetize client data or code under any circumstance.
+            </li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      id: "data-sharing",
+      title: "5. Third-Party Services & Subprocessors",
+      icon: FaGlobe,
+      content: (
+        <>
+          <p className="mb-4">
+            We only share data with verified enterprise infrastructure partners necessary for development, deployment, and analytics:
+          </p>
+          <ul className="space-y-2 list-disc pl-6 text-gray-600">
+            <li><strong>Cloud & Hosting Infrastructure:</strong> Amazon Web Services (AWS), Google Cloud Platform (GCP), Vercel, and Cloudflare.</li>
+            <li><strong>Development & Collaboration:</strong> GitHub, GitLab, Jira, and Slack.</li>
+            <li><strong>Analytics & CRM:</strong> Google Analytics and privacy-compliant CRM platforms.</li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      id: "security",
+      title: "6. Data Security & Storage",
+      icon: FaShieldAlt,
+      content: (
+        <>
+          <p className="mb-4">
+            We implement stringent technical and organizational security measures to protect your information:
+          </p>
+          <ul className="space-y-2 list-disc pl-6 text-gray-600">
+            <li>End-to-end TLS/SSL encryption for all data in transit.</li>
+            <li>AES-256 encryption for data at rest and database records.</li>
+            <li>Multi-factor authentication (MFA) and least-privilege role-based access for all internal team accounts.</li>
+            <li>Periodic security audits and vulnerability patch management.</li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      id: "client-rights",
+      title: "7. Your Rights & Data Control (GDPR / CCPA)",
+      icon: FaUserCheck,
+      content: (
+        <>
+          <p className="mb-4">
+            Depending on your location (including the European Union and California), you have significant rights regarding your data:
+          </p>
+          <ul className="space-y-2 list-disc pl-6 text-gray-600">
+            <li><strong>Right to Access:</strong> Request a copy of the personal information we hold about you.</li>
+            <li><strong>Right to Rectification:</strong> Request correction of inaccurate or incomplete information.</li>
+            <li><strong>Right to Erasure:</strong> Request permanent deletion of your data (&quot;Right to be Forgotten&quot;).</li>
+            <li><strong>Right to Data Portability:</strong> Receive your data in a structured, machine-readable format.</li>
+            <li><strong>Opt-Out:</strong> Unsubscribe from marketing or promotional communications at any time.</li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      id: "contact",
+      title: "8. Contact Us",
+      icon: FaEnvelope,
+      content: (
+        <>
+          <p className="mb-4">
+            For questions, concerns, or data requests regarding this Privacy Policy, please reach out to our privacy compliance team:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 rounded-2xl bg-gray-50 border border-gray-200 mt-4">
+            <div>
+              <h4 className="font-bold text-gray-900 mb-1">Dubai Office (UAE)</h4>
+              <p className="text-sm text-gray-600">
+                Building 11, Level 7, Bay Square,<br />
+                Business Bay, Dubai - 23304, UAE
+              </p>
+            </div>
+            <div>
+              <h4 className="font-bold text-gray-900 mb-1">Direct Contact</h4>
+              <p className="text-sm text-gray-600">
+                Email: <a href="mailto:info@rapidtechpro.com" className="text-[#0FB5B7] font-semibold hover:underline">info@rapidtechpro.com</a><br />
+                Phone: <a href="tel:+923403051059" className="text-[#0FB5B7] font-semibold hover:underline">+92 340 3051059</a>
+              </p>
+            </div>
+          </div>
+        </>
+      ),
+    },
+  ];
 
   return (
-    <div className="h-full w-full flex flex-col">
-      <UserLayout>
-        <div className="bg-white min-h-screen flex flex-col items-center py-16 mt-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-8">Privacy Policy of RapidTechPro</h1>
-          <p className="text-center text-gray-600 mb-16 max-w-6xl">
-            At RapidTechPro, your privacy is of utmost importance to us. This Privacy Policy outlines how we collect, use, store, protect, and share your personal information when you interact with our website, services, and products. By accessing or using our website (www.rapidtechpro.com) or engaging with our software development services, you consent to the practices described in this policy.
+    <UserLayout>
+      <div className="bg-white min-h-screen pt-28 pb-20">
+        {/* Header Hero */}
+        <div className="max-w-5xl mx-auto px-6 text-center mb-16">
+          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-[#0FB5B7] bg-[#0FB5B7]/10 mb-4 border border-[#0FB5B7]/20">
+            Legal & Compliance
+          </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight mb-4">
+            Privacy Policy
+          </h1>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            How RapidTechPro protects, manages, and respects your data and intellectual property.
           </p>
-
-          <div className="max-w-4xl space-y-16 flex flex-col justify-center items-center">
-            <section
-              ref={(el) => (privacySections.current[0] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">1. Information We Collect</h2>
-              <p className="text-gray-600">
-                <strong>Personal Information:</strong> When you visit our website or engage with our services, we may collect personal details to deliver the best possible experience. This includes your name, email address, company name, phone number, billing address, and any other information you voluntarily provide when contacting us.
-              </p>
-              <p className="text-gray-600">
-                <strong>Project Information:</strong> To offer you the most tailored software development services, we collect project-specific details such as your requirements, objectives, timelines, and other relevant information when you initiate a project with us.
-              </p>
-              <p className="text-gray-600">
-                <strong>Device Information:</strong> When you visit our website, we automatically collect information about your device, such as the browser type, IP address, time zone, device model, and certain cookies installed on your device. We also gather information on how you interact with our website, including the pages you visit. This is referred to as "Device Information."
-              </p>
-              <p className="text-gray-600">
-                <strong>Account Information:</strong> If you create an account with RapidTechPro for ongoing support, updates, or collaboration, we collect your username, email address, and password to facilitate these interactions.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (privacySections.current[1] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">2. How We Use Your Information</h2>
-              <p className="text-gray-600">
-                We use the information we collect for the following purposes:
-                <ul className="list-disc pl-8 mt-4 text-gray-600">
-                  <li><strong>To Provide Services:</strong> We utilize your project information to deliver tailored software development solutions. This includes designing, coding, testing, deploying, and providing ongoing support for your custom software.</li>
-                  <li><strong>To Communicate with You:</strong> We may use your contact information to update you on project progress, provide customer support, send technical documentation, invoices, and other related communications.</li>
-                  <li><strong>To Improve Our Services:</strong> Device information helps us analyze user activity, improve website functionality, enhance user experience, and refine our marketing strategies.</li>
-                  <li><strong>To Screen for Security Risks:</strong> We may use your information to identify and mitigate potential security threats or fraudulent activities.</li>
-                </ul>
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (privacySections.current[2] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">3. Sharing Your Information</h2>
-              <p className="text-gray-600">
-                We may share your personal information with trusted third parties under specific circumstances, as outlined below:
-                <ul className="list-disc pl-8 mt-4 text-gray-600">
-                  <li><strong>Third-Party Service Providers:</strong> To provide our services effectively, we may share data with trusted partners such as cloud hosting providers, payment processors, email services, and project management platforms. We ensure that these third parties comply with confidentiality and data protection standards.</li>
-                  <li><strong>Analytics Tools:</strong> We use tools like Google Analytics to track website usage and improve our offerings. These third-party analytics tools may collect usage data, but they do not have access to your personal information unless you provide it.</li>
-                  <li><strong>Legal Requirements:</strong> We may disclose your information if required by law or when necessary to protect our rights, comply with legal obligations, or prevent illegal activity.</li>
-                </ul>
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (privacySections.current[3] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">4. Your Rights and Control Over Your Information</h2>
-              <p className="text-gray-600">
-                <ul className="list-disc pl-8 mt-4 text-gray-600">
-                  <li><strong>Access and Updates:</strong> If you are located in the European Union or other jurisdictions with data protection laws, you have the right to access the personal data we hold about you. You can also request updates, corrections, or deletions. Please contact us directly to exercise these rights.</li>
-                  <li><strong>Data Transfers:</strong> Please note that your personal data may be transferred and stored on servers located outside your country, including in countries like Canada and the United States.</li>
-                  <li><strong>Opt-Out:</strong> You have the right to opt out of receiving marketing communications. If you no longer wish to receive newsletters, promotional emails, or notifications, you can unsubscribe by following the instructions in the emails or by contacting us directly.</li>
-                </ul>
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (privacySections.current[4] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">5. Data Retention</h2>
-              <p className="text-gray-600">
-                We retain your personal data for as long as necessary to fulfill the purposes outlined in this policy, including for legal or accounting purposes. You may request the deletion of your data by reaching out to us, and we will comply unless we are obligated to retain it by law.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (privacySections.current[5] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">6. Data Security</h2>
-              <p className="text-gray-600">
-                We implement reasonable security measures to protect your personal information against unauthorized access, alteration, or destruction. While we strive to ensure the security of your data, please note that no online transmission or storage method can guarantee 100% security.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (privacySections.current[6] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">7. Changes to This Privacy Policy</h2>
-              <p className="text-gray-600">
-                We may update this Privacy Policy periodically to reflect changes in our practices, services, or legal obligations. Any changes will be posted on this page with an updated revision date.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (privacySections.current[7] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">8. Contact Us</h2>
-              <p className="text-gray-600">
-                If you have any questions about this Privacy Policy or wish to exercise your rights regarding your personal data, please contact us at:
-              </p>
-              <p className="text-gray-600 mt-4">
-                <strong>RapidTechPro</strong>
-                <br />
-                Akbar Plaza, Punjab Center, Phalia Road, Mandi Bahauddin, Punjab, Pakistan
-                <br />
-                <strong>Email:</strong> info@rapidtechpro.com
-                <br />
-                <strong>Phone:</strong> +92340 3051059
-              </p>
-            </section>
-          </div>
+          <p className="text-xs text-gray-400 font-semibold mt-3">
+            Last Updated: {lastUpdated}
+          </p>
         </div>
-      </UserLayout>
-    </div>
+
+        {/* Content Section */}
+        <div className="max-w-4xl mx-auto px-6 space-y-10">
+          {sections.map((sec) => {
+            const Icon = sec.icon;
+            return (
+              <div
+                key={sec.id}
+                id={sec.id}
+                className="p-8 md:p-10 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-[#0FB5B7]/10 flex items-center justify-center text-[#0FB5B7]">
+                    <Icon className="text-lg" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
+                    {sec.title}
+                  </h2>
+                </div>
+                <div className="text-gray-600 leading-relaxed text-base">
+                  {sec.content}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </UserLayout>
   );
 }

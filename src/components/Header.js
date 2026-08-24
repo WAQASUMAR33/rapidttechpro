@@ -60,15 +60,13 @@ export default function Header() {
 
     const handleScroll = () => {
         const currentScrollY = window.scrollY;
-        setIsVisible(currentScrollY < lastScrollY || currentScrollY < 100);
-        setLastScrollY(currentScrollY);
-        setIsScrolled(currentScrollY > 100);
+        setIsScrolled(currentScrollY > 20);
     };
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [lastScrollY]);
+    }, []);
 
     useEffect(() => {
         const fetchNavServices = async () => {
@@ -108,8 +106,11 @@ export default function Header() {
     return (
         <>
             <header
-                className={`fixed top-0 left-0 z-50 w-full h-20 flex items-center transition-all duration-300 ${isVisible ? "translate-y-0" : "-translate-y-20"
-                    } ${isScrolled ? "bg-white text-black shadow-md border-b border-gray-100" : (isLightPage ? "bg-transparent text-black" : "bg-transparent text-white")}`}
+                className={`fixed top-0 left-0 z-50 w-full h-20 flex items-center transition-all duration-300 ${
+                    isScrolled
+                        ? "bg-white/95 backdrop-blur-md text-black shadow-md border-b border-gray-100"
+                        : (isLightPage ? "bg-white/90 backdrop-blur-md text-black border-b border-gray-100/80" : "bg-transparent text-white")
+                }`}
             >
                 <div className="w-full max-w-[1400px] mx-auto flex items-center justify-between px-6 sm:px-12 lg:px-16 2xl:px-24">
                     {/* Logo */}

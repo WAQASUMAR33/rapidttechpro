@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { FaLinkedin, FaFacebook, FaYoutube, FaGlobe, FaTiktok, FaInstagram } from 'react-icons/fa';
+import { FaLinkedin, FaFacebook, FaGlobe, FaTiktok, FaInstagram } from 'react-icons/fa';
 import { RiTwitterXFill } from 'react-icons/ri';
 import Link from 'next/link';
 
@@ -166,12 +166,11 @@ export default function Footer() {
           {/* Socials Right */}
           <div className="flex flex-col items-center lg:items-end gap-6 sm:gap-5">
             <div className="flex flex-wrap justify-center gap-5 text-xl sm:text-2xl">
-              <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><FaLinkedin /></a>
-              <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><FaTiktok /></a>
-              <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><RiTwitterXFill /></a>
-              <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><FaFacebook /></a>
-              <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><FaInstagram /></a>
-              <a href="#" className="text-[#0FB5B7] hover:text-white transition-all"><FaYoutube /></a>
+              <a href="https://www.linkedin.com/company/rapidtechpro" target="_blank" rel="noopener noreferrer" aria-label="RapidTechPro on LinkedIn" className="text-[#0FB5B7] hover:text-white transition-all"><FaLinkedin /></a>
+              <a href="https://www.tiktok.com/@rapidtechpro" target="_blank" rel="noopener noreferrer" aria-label="RapidTechPro on TikTok" className="text-[#0FB5B7] hover:text-white transition-all"><FaTiktok /></a>
+              <a href="https://x.com/rapidtechpro" target="_blank" rel="noopener noreferrer" aria-label="RapidTechPro on X" className="text-[#0FB5B7] hover:text-white transition-all"><RiTwitterXFill /></a>
+              <a href="https://www.facebook.com/rapidtechpro" target="_blank" rel="noopener noreferrer" aria-label="RapidTechPro on Facebook" className="text-[#0FB5B7] hover:text-white transition-all"><FaFacebook /></a>
+              <a href="https://www.instagram.com/rapidtechpro" target="_blank" rel="noopener noreferrer" aria-label="RapidTechPro on Instagram" className="text-[#0FB5B7] hover:text-white transition-all"><FaInstagram /></a>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-[11px] sm:text-[12px] font-semibold text-gray-400">
               <Link href="/company/privacy-policy" className="hover:text-[#0FB5B7] transition-colors">Privacy Policy</Link>

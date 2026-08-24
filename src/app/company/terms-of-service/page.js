@@ -1,170 +1,227 @@
-'use client';
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+export const metadata = {
+  title: "Terms of Service | RapidTechPro",
+  description: "Read the Terms of Service governing the use of RapidTechPro's website, development engagements, and technological services.",
+  alternates: {
+    canonical: "/company/terms-of-service",
+  },
+};
+
+import React from 'react';
 import UserLayout from '@/app/UserLayout';
+import Link from 'next/link';
+import { FaFileContract, FaLaptopCode, FaHandshake, FaMoneyBillWave, FaShieldAlt, FaBalanceScale, FaBan, FaEnvelope } from 'react-icons/fa';
 
-gsap.registerPlugin(ScrollTrigger);
+export default function TermsOfServicePage() {
+  const lastUpdated = "August 2026";
 
-export default function TermsOfService() {
-  const termsSections = useRef([]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      termsSections.current.filter(Boolean).forEach((section, index) => {
-        gsap.fromTo(
-          section,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            ease: 'power2.out',
-            duration: 0.6,
-            delay: index * 0.05,
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 92%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      });
-    });
-    return () => ctx.revert();
-  }, []);
+  const terms = [
+    {
+      id: "agreement",
+      title: "1. Agreement to Terms",
+      icon: FaFileContract,
+      content: (
+        <>
+          <p className="mb-4">
+            These Terms of Service (&quot;Terms&quot;) constitute a legally binding agreement between you or the entity you represent (&quot;Client,&quot; &quot;you&quot;) and <strong>RapidTechPro</strong> (&quot;Company,&quot; &quot;we,&quot; &quot;us&quot;).
+          </p>
+          <p>
+            By accessing our website (<Link href="/" className="text-[#0FB5B7] hover:underline font-semibold">www.rapidtechpro.com</Link>), requesting a consultation, or entering into a Statement of Work (SOW) or development agreement, you acknowledge that you have read, understood, and agreed to be bound by these Terms.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "scope-of-services",
+      title: "2. Services & Engineering Engagements",
+      icon: FaLaptopCode,
+      content: (
+        <>
+          <p className="mb-4">
+            RapidTechPro provides enterprise and startup technology solutions, including but not limited to:
+          </p>
+          <ul className="space-y-2 list-disc pl-6 text-gray-600 mb-4">
+            <li>Custom Web Application & SaaS Development</li>
+            <li>iOS and Android Native / Cross-Platform Mobile Applications</li>
+            <li>Artificial Intelligence (AI), Machine Learning & Workflow Automation</li>
+            <li>UI/UX Design, Wireframing & Prototyping</li>
+            <li>E-Commerce Platforms & Custom POS Solutions</li>
+            <li>Cloud Architecture, DevOps & Ongoing System Maintenance</li>
+          </ul>
+          <p className="text-sm text-gray-500 italic">
+            Specific deliverables, timelines, milestones, and fees are defined individually in mutual Statements of Work (SOW) or project proposals.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "intellectual-property",
+      title: "3. Intellectual Property & Code Ownership",
+      icon: FaShieldAlt,
+      content: (
+        <>
+          <ul className="space-y-3 list-disc pl-6 text-gray-600">
+            <li>
+              <strong className="text-gray-900">Client Deliverables Ownership:</strong> Upon full receipt of agreed milestone payments, the Client obtains full ownership of all custom code, UI designs, and deliverables created specifically for the project.
+            </li>
+            <li>
+              <strong className="text-gray-900">Pre-Existing Tools & Libraries:</strong> RapidTechPro retains ownership of its pre-existing proprietary frameworks, open-source libraries, and reusable starter kits, granting the Client a perpetual, royalty-free license to use them as integrated in the final deliverable.
+            </li>
+            <li>
+              <strong className="text-gray-900">Portfolio Rights:</strong> Unless explicitly restricted by an NDA, RapidTechPro reserves the right to display non-sensitive project descriptions, mockups, and client logos in its portfolio and case studies.
+            </li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      id: "client-responsibilities",
+      title: "4. Client Obligations & Collaboration",
+      icon: FaHandshake,
+      content: (
+        <>
+          <p className="mb-4">To ensure seamless and timely execution, the Client agrees to:</p>
+          <ul className="space-y-2 list-disc pl-6 text-gray-600">
+            <li>Provide clear, timely feedback, asset approvals, and necessary credentials during development sprints.</li>
+            <li>Ensure all materials, assets, copy, and trademarks provided to RapidTechPro are legally licensed and free from third-party infringement.</li>
+            <li>Designate a primary project point of contact for sprint sign-offs and change requests.</li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      id: "payment-terms",
+      title: "5. Payment Terms & Invoicing",
+      icon: FaMoneyBillWave,
+      content: (
+        <>
+          <ul className="space-y-3 list-disc pl-6 text-gray-600">
+            <li>
+              <strong className="text-gray-900">Milestone-Based Billing:</strong> Projects are billed according to agreed milestone phases (e.g., discovery/design, frontend/backend sprint, final deployment).
+            </li>
+            <li>
+              <strong className="text-gray-900">Payment Schedules:</strong> Invoices are payable within the timeframe specified in the project agreement (typically Net-7 or Net-15 days).
+            </li>
+            <li>
+              <strong className="text-gray-900">Scope Variations:</strong> Features or requirements requested outside the agreed Statement of Work will be quoted separately as a Change Order.
+            </li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      id: "warranties",
+      title: "6. Quality Assurance & Bug-Fix Warranty",
+      icon: FaBalanceScale,
+      content: (
+        <>
+          <p className="mb-4">
+            RapidTechPro stands behind the quality of its engineering. Following project deployment, we provide a <strong>30-day complimentary bug-fix warranty period</strong> covering any reproducible defects or deviations from the agreed specifications.
+          </p>
+          <p className="text-sm text-gray-500">
+            Post-warranty support, feature additions, and infrastructure monitoring are available under ongoing Maintenance and Service Level Agreements (SLAs).
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "liability",
+      title: "7. Limitation of Liability",
+      icon: FaBan,
+      content: (
+        <>
+          <p className="mb-4 text-gray-600">
+            To the maximum extent permitted by applicable law, RapidTechPro shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or business interruption. In no event shall our total aggregate liability exceed the total fees paid by the Client for the specific service under dispute.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "governing-law",
+      title: "8. Governing Law & Dispute Resolution",
+      icon: FaBalanceScale,
+      content: (
+        <>
+          <p className="mb-4 text-gray-600">
+            These Terms and any project engagements shall be governed by and construed in accordance with the laws of Dubai, United Arab Emirates and Pakistan, without regard to conflict of law principles. Any dispute arising under these Terms shall be resolved through good-faith mutual negotiations before seeking formal legal arbitration.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "contact",
+      title: "9. Inquiries & Legal Notices",
+      icon: FaEnvelope,
+      content: (
+        <>
+          <p className="mb-4 text-gray-600">
+            For questions or legal notices regarding these Terms of Service, please contact our legal team:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 rounded-2xl bg-gray-50 border border-gray-200 mt-4">
+            <div>
+              <h4 className="font-bold text-gray-900 mb-1">Corporate Headquarters</h4>
+              <p className="text-sm text-gray-600">
+                Building 11, Level 7, Bay Square,<br />
+                Business Bay, Dubai - 23304, UAE
+              </p>
+            </div>
+            <div>
+              <h4 className="font-bold text-gray-900 mb-1">Direct Contact</h4>
+              <p className="text-sm text-gray-600">
+                Email: <a href="mailto:info@rapidtechpro.com" className="text-[#0FB5B7] font-semibold hover:underline">info@rapidtechpro.com</a><br />
+                Phone: <a href="tel:+923403051059" className="text-[#0FB5B7] font-semibold hover:underline">+92 340 3051059</a>
+              </p>
+            </div>
+          </div>
+        </>
+      ),
+    },
+  ];
 
   return (
-    <div className="h-full w-full flex flex-col">
-      <UserLayout>
-        <div className="bg-white min-h-screen flex flex-col items-center py-16 mt-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-8">Terms of Service of RapidTechPro</h1>
-          <p className="text-center text-gray-600 mb-16 max-w-6xl">
-            Welcome to RapidTechPro! These Terms of Service outline the terms and conditions governing your use of our website and services. By using our website and services, you agree to comply with and be bound by these terms. Please read them carefully.
+    <UserLayout>
+      <div className="bg-white min-h-screen pt-28 pb-20">
+        {/* Header Hero */}
+        <div className="max-w-5xl mx-auto px-6 text-center mb-16">
+          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-[#0FB5B7] bg-[#0FB5B7]/10 mb-4 border border-[#0FB5B7]/20">
+            Terms & Conditions
+          </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight mb-4">
+            Terms of Service
+          </h1>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            The standard terms and principles governing our engineering engagements and technology solutions.
           </p>
-
-          <div className="max-w-4xl space-y-16 flex flex-col justify-center items-center">
-            <section
-              ref={(el) => (termsSections.current[0] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">1. RapidTechPro Services</h2>
-              <p className="text-gray-600">
-                At RapidTechPro, we are passionate about empowering businesses with cutting-edge software solutions. From creating visually stunning websites to developing high-performance mobile applications, we offer a range of services that drive business growth and customer engagement. Our mission is to turn your vision into reality through innovative technology tailored to your unique business needs. Below are some of the services we provide:
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (termsSections.current[1] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">2. Web Development</h2>
-              <p className="text-gray-600">
-                In today’s digital landscape, your website is the cornerstone of your online presence. Our web development team builds responsive, secure, and scalable websites that not only captivate visitors but also foster long-term relationships with your audience. Whether you're looking to increase your brand visibility or boost customer retention, we craft websites designed to drive business results. From eCommerce platforms to corporate websites, we deliver tailored solutions that fit your business objectives and growth plans.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (termsSections.current[2] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">3. Artificial Intelligence Solutions</h2>
-              <p className="text-gray-600">
-                Unlock the power of Artificial Intelligence with our bespoke AI solutions designed to streamline operations, improve decision-making, and elevate your customer experience. At RapidTechPro, we leverage the latest advancements in machine learning, data analysis, and predictive analytics to provide businesses with tools that boost efficiency, scalability, and overall performance. Let us help you harness the potential of AI to stay ahead of the competition and make data-driven decisions with confidence.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (termsSections.current[3] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">4. Mobile Application Development</h2>
-              <p className="text-gray-600">
-                With millions of users turning to smartphones, having a dedicated mobile application is a powerful way to grow your business. Our mobile app development team specializes in creating intuitive, user-friendly mobile applications for both iOS and Android platforms. Whether you need an app to enhance brand engagement, streamline business operations, or reach new customers, we are here to help you capitalize on the digital age with tailored, high-quality apps that deliver real results.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (termsSections.current[4] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">5. Graphic Design Services</h2>
-              <p className="text-gray-600">
-                Your brand’s visual identity plays a critical role in how customers perceive your business. At RapidTechPro, our graphic design team excels in creating stunning visuals that captivate and engage. From logos to brochures to custom branding packages, we ensure that your brand stands out in a competitive market. Our designs are not only visually appealing but also serve the purpose of driving functionality and results.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (termsSections.current[5] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">6. Digital Marketing</h2>
-              <p className="text-gray-600">
-                In today’s online world, digital marketing is key to your business’s growth. Our digital marketing experts help businesses reach their target audience through effective SEO, social media campaigns, paid ads, and email marketing strategies. We merge creativity with data-driven insights to create marketing campaigns that convert leads into loyal customers. Whether you're building your online presence or looking to boost sales, our team can help you achieve measurable results.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (termsSections.current[6] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">7. CRM Software Development</h2>
-              <p className="text-gray-600">
-                Customer relationship management (CRM) is essential to any business looking to improve client interactions and drive growth. RapidTechPro specializes in building CRM software that helps you streamline client management, enhance communication, and boost sales. Our custom CRM solutions enable you to track leads, automate processes, and maintain strong relationships with your customers, ultimately leading to increased retention and profitability.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (termsSections.current[7] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">8. DevOps Solutions</h2>
-              <p className="text-gray-600">
-                Our DevOps services streamline your software development lifecycle, ensuring faster delivery and higher quality. We help businesses bridge the gap between development and operations, implementing automated testing, continuous integration, and efficient deployment pipelines. With RapidTechPro, you can optimize resources, reduce errors, and scale your business effectively. We integrate DevOps best practices to make your development processes more efficient, scalable, and cost-effective.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (termsSections.current[8] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">9. iOS Application Development</h2>
-              <p className="text-gray-600">
-                As mobile usage continues to rise, we help businesses tap into the vast iOS user base with custom iOS application development. From iPhone to iPad, we build apps that are intuitive, high-performing, and designed to meet the specific needs of your business. Whether you’re launching your first app or enhancing an existing one, our team ensures your app delivers a seamless user experience that drives engagement and meets business objectives.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (termsSections.current[9] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">10. Android Application Development</h2>
-              <p className="text-gray-600">
-                Android is one of the most widely used operating systems in the world, and RapidTechPro offers expert Android app development services to help your business reach this vast user base. Our team builds dynamic, feature-rich apps that are compatible across a range of Android devices. Whether you're looking to boost customer engagement, enhance your digital services, or create a new revenue stream, we have the expertise to bring your idea to life on the Android platform.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (termsSections.current[10] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">11. Book Free Consultancy</h2>
-              <p className="text-gray-600">
-                Ready to take your business to the next level with custom software solutions? RapidTechPro is here to help! Contact us today to get a free quote and learn how we can develop tailored software solutions that drive your business forward.
-              </p>
-            </section>
-
-            <section
-              ref={(el) => (termsSections.current[11] = el)}
-              className="bg-white border border-gray-800 rounded-lg p-8 transform transition-transform duration-300 origin-center"
-            >
-              <h2 className="text-2xl font-semibold text-gray-700 mb-4">Our Clients</h2>
-              <p className="text-gray-600">
-                We have had the privilege of working with a diverse range of clients, from startups to established enterprises, helping them achieve success through innovative technology solutions. Our portfolio speaks for itself, and we are committed to delivering results that exceed expectations.
-              </p>
-            </section>
-          </div>
+          <p className="text-xs text-gray-400 font-semibold mt-3">
+            Last Updated: {lastUpdated}
+          </p>
         </div>
-      </UserLayout>
-    </div>
+
+        {/* Content Section */}
+        <div className="max-w-4xl mx-auto px-6 space-y-10">
+          {terms.map((sec) => {
+            const Icon = sec.icon;
+            return (
+              <div
+                key={sec.id}
+                id={sec.id}
+                className="p-8 md:p-10 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-[#0FB5B7]/10 flex items-center justify-center text-[#0FB5B7]">
+                    <Icon className="text-lg" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
+                    {sec.title}
+                  </h2>
+                </div>
+                <div className="text-gray-600 leading-relaxed text-base">
+                  {sec.content}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </UserLayout>
   );
 }

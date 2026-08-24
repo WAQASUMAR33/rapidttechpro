@@ -1,5 +1,7 @@
-const BACKEND_URL = 'https://rapidtechpro-panel.vercel.app';
+const BACKEND_URL = process.env.RAPIDTECH_API_BASE_URL || process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || 'https://rapidtechpro-panel.vercel.app';
 const API_KEY = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
+
+const LOCAL_FALLBACK_URLS = ['http://localhost:3000', 'http://localhost:3001'];
 
 async function handler(request, { params }) {
     const { path } = await params;
@@ -13,7 +15,6 @@ async function handler(request, { params }) {
     try {
         const headers = {
             'x-api-key': API_KEY,
-            'Content-Type': 'application/json',
         };
 
         const fetchOptions = {
@@ -24,19 +25,37 @@ async function handler(request, { params }) {
 
         // Forward body for POST/PUT/PATCH
         if (['POST', 'PUT', 'PATCH'].includes(request.method)) {
+            headers['Content-Type'] = request.headers.get('Content-Type') || 'application/json';
             const body = await request.text();
             if (body) fetchOptions.body = body;
         }
 
-        const res = await fetch(targetUrl, fetchOptions);
+        let res = await fetch(targetUrl, fetchOptions);
 
-        const responseBody = await res.text();
+        // If upload image returns 404 from remote, try local dev servers
+        if (!res.ok && pathStr.startsWith('uploads/')) {
+            for (const localBase of LOCAL_FALLBACK_URLS) {
+                try {
+                    const localUrl = `${localBase}/${pathStr}${queryString ? `?${queryString}` : ''}`;
+                    const localRes = await fetch(localUrl, { cache: 'no-store' });
+                    if (localRes.ok) {
+                        res = localRes;
+                        break;
+                    }
+                } catch (e) {
+                    // Ignore local connection errors
+                }
+            }
+        }
 
-        return new Response(responseBody, {
+        const contentType = res.headers.get('Content-Type') || 'application/octet-stream';
+        const buffer = await res.arrayBuffer();
+
+        return new Response(buffer, {
             status: res.status,
             headers: {
-                'Content-Type': res.headers.get('Content-Type') || 'application/json',
-                'Cache-Control': 'public, s-maxage=30, stale-while-revalidate=60',
+                'Content-Type': contentType,
+                'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=120',
             },
         });
     } catch (err) {
