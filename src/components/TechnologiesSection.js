@@ -1,14 +1,44 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { openPopup } from '@/store/popupSlice';
 import { SiReact, SiUnity, SiUnrealengine, SiGodotengine, SiMongodb, SiMysql, SiPostgresql, SiRedis, SiNginx, SiDocker, SiKubernetes, SiJenkins, SiFirebase, SiHeroku } from "react-icons/si";
-import { FaServer, FaAws, FaCloud, FaMobileAlt, FaTools, FaDatabase, FaGoogle, FaWindows, FaSearch, FaCode, FaCodeBranch } from "react-icons/fa";
+import { FaServer, FaAws, FaCloud, FaMobileAlt, FaTools, FaDatabase, FaWindows, FaSearch, FaCode, FaCodeBranch, FaLayerGroup } from "react-icons/fa";
 import { GrStorage } from "react-icons/gr";
 import { RiFlutterFill } from "react-icons/ri";
 
-const techData = [
+const DEFAULT_TECH_DATA = [
+    {
+        id: 'web-platforms',
+        title: 'Web Platforms',
+        categories: [
+            {
+                name: 'Frontend & Frameworks',
+                items: [
+                    { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+                    { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+                    { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+                    { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original-wordmark.svg' },
+                    { name: 'HTML5', icon: '/tabsimages/htmllogo.png' },
+                    { name: 'CSS3', icon: '/tabsimages/css.png' },
+                    { name: 'Bootstrap', icon: '/tabsimages/bootstrap.png' },
+                ]
+            },
+            {
+                name: 'Backend & APIs',
+                items: [
+                    { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+                    { name: 'GraphQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg' },
+                    { name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
+                    { name: 'WordPress', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg' },
+                    { name: 'Laravel', icon: '/tabsimages/laravel.png' },
+                    { name: 'Django', icon: '/tabsimages/django.png' },
+                    { name: 'NestJS', icon: '/tabsimages/nextjs.png' },
+                ]
+            }
+        ]
+    },
     {
         id: 'mobile-apps',
         title: 'Mobile Apps',
@@ -32,78 +62,25 @@ const techData = [
         ]
     },
     {
-        id: 'web-platforms',
-        title: 'Web Platforms',
-        categories: [
-            {
-                name: 'Backend',
-                items: [
-                    { name: 'Laravel', icon: '/tabsimages/laravel.png' },
-                    { name: 'Node.js', icon: '/tabsimages/nodejs.png' },
-                    { name: 'Django', icon: '/tabsimages/django.png' },
-                    { name: 'Spring Boot', icon: '/tabsimages/springboot.png' },
-                    { name: 'ASP.NET', icon: '/tabsimages/aspnet.png' },
-                    { name: 'NestJS', icon: '/tabsimages/nextjs.png' },
-                ]
-            },
-            {
-                name: 'Frontend',
-                items: [
-                    { name: 'HTML', icon: '/tabsimages/htmllogo.png' },
-                    { name: 'CSS', icon: '/tabsimages/css.png' },
-                    { name: 'Bootstrap', icon: '/tabsimages/bootstrap.png' },
-                    { name: 'Tailwind', icon: '/tabsimages/tailwind.png' },
-                    { name: 'React', icon: '/tabsimages/react.png' },
-                    { name: 'JQuery', icon: '/tabsimages/jquery.png' },
-                    { name: 'Next.js', icon: '/tabsimages/nextjs.png' },
-                ]
-            }
-        ]
-    },
-    {
         id: 'cross-platforms',
         title: 'Cross Platforms',
         categories: [
             {
-                name: 'React',
+                name: 'React Native',
                 items: [
+                    { name: 'React Native', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
                     { name: 'Redux', icon: '/tabsimages/react.png' },
                     { name: 'Mobx', icon: null, iconComponent: <SiReact className="w-5 h-5 text-[#61DAFB]" /> },
                     { name: 'RxJS', icon: null, iconComponent: <FaCode className="w-5 h-5 text-[#B7178C]" /> },
-                    { name: 'Redux Thunk', icon: '/tabsimages/react.png' },
                 ]
             },
             {
-                name: 'Flutter',
+                name: 'Flutter & Dart',
                 items: [
-                    { name: 'Bloc', icon: '/tabsimages/flutter.png' },
+                    { name: 'Flutter', icon: '/tabsimages/flutter.png' },
                     { name: 'Dart', icon: null, iconComponent: <FaCodeBranch className="w-5 h-5 text-[#0175C2]" /> },
-                    { name: 'MVVM', icon: null, iconComponent: <RiFlutterFill className="w-5 h-5 text-[#02569B]" /> },
+                    { name: 'Bloc', icon: '/tabsimages/flutter.png' },
                     { name: 'Rx Dart', icon: '/tabsimages/flutter.png' },
-                ]
-            }
-        ]
-    },
-    {
-        id: 'games',
-        title: 'Games',
-        categories: [
-            {
-                name: 'Engines',
-                items: [
-                    { name: 'Unreal', icon: null, iconComponent: <SiUnrealengine className="w-5 h-5" /> },
-                    { name: 'Unity', icon: null, iconComponent: <SiUnity className="w-5 h-5" /> },
-                    { name: 'Godot', icon: null, iconComponent: <SiGodotengine className="w-5 h-5" /> },
-                    { name: 'Cryengine', icon: null, iconComponent: <SiUnrealengine className="w-5 h-5 opacity-50" /> },
-                ]
-            },
-            {
-                name: 'Servers',
-                items: [
-                    { name: 'Nakama', icon: null, iconComponent: <FaServer className="w-5 h-5" /> },
-                    { name: 'Photon', icon: null, iconComponent: <FaServer className="w-5 h-5" /> },
-                    { name: 'AWS', icon: null, iconComponent: <FaAws className="w-5 h-5 text-[#FF9900]" /> },
-                    { name: 'Jenkins', icon: null, iconComponent: <SiJenkins className="w-5 h-5 text-[#D24939]" /> },
                 ]
             }
         ]
@@ -113,15 +90,14 @@ const techData = [
         title: 'Database',
         categories: [
             {
-                name: 'Database',
+                name: 'Databases & ORMs',
                 items: [
-                    { name: 'Mongodb', icon: null, iconComponent: <SiMongodb className="w-5 h-5 text-[#47A248]" /> },
+                    { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+                    { name: 'Prisma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg' },
+                    { name: 'MongoDB', icon: null, iconComponent: <SiMongodb className="w-5 h-5 text-[#47A248]" /> },
                     { name: 'MySQL', icon: null, iconComponent: <SiMysql className="w-5 h-5 text-[#4479A1]" /> },
-                    { name: 'MsSQL', icon: null, iconComponent: <FaDatabase className="w-5 h-5 text-[#CC2927]" /> },
-                    { name: 'Dynamodb', icon: null, iconComponent: <FaAws className="w-5 h-5 text-[#FF9900]" /> },
-                    { name: 'PostgreSQL', icon: null, iconComponent: <SiPostgresql className="w-5 h-5 text-[#4169E1]" /> },
-                    { name: 'IBM', icon: null, iconComponent: <GrStorage className="w-5 h-5" /> },
                     { name: 'Redis', icon: null, iconComponent: <SiRedis className="w-5 h-5 text-[#DC382D]" /> },
+                    { name: 'DynamoDB', icon: null, iconComponent: <FaAws className="w-5 h-5 text-[#FF9900]" /> },
                     { name: 'Elasticsearch', icon: null, iconComponent: <FaSearch className="w-5 h-5 text-[#005571]" /> },
                 ]
             }
@@ -132,37 +108,223 @@ const techData = [
         title: 'Cloud & DevOps',
         categories: [
             {
-                name: 'DevOps',
+                name: 'Cloud Infrastructure',
                 items: [
-                    { name: 'Nginx', icon: null, iconComponent: <SiNginx className="w-5 h-5 text-[#009639]" /> },
-                    { name: 'Docker', icon: null, iconComponent: <SiDocker className="w-5 h-5 text-[#2496ED]" /> },
-                    { name: 'Kubernetes', icon: null, iconComponent: <SiKubernetes className="w-5 h-5 text-[#326CE5]" /> },
-                    { name: 'Gradle', icon: null, iconComponent: <FaTools className="w-5 h-5 opacity-50" /> },
-                    { name: 'Jenkins', icon: null, iconComponent: <SiJenkins className="w-5 h-5 text-[#D24939]" /> },
+                    { name: 'Vercel', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg' },
+                    { name: 'AWS', icon: null, iconComponent: <FaAws className="w-5 h-5 text-[#FF9900]" /> },
+                    { name: 'Azure', icon: null, iconComponent: <FaWindows className="w-5 h-5 text-[#0078D4]" /> },
+                    { name: 'Firebase', icon: null, iconComponent: <SiFirebase className="w-5 h-5 text-[#FFCA28]" /> },
+                    { name: 'Heroku', icon: null, iconComponent: <SiHeroku className="w-5 h-5 text-[#430098]" /> },
                 ]
             },
             {
-                name: 'Cloud',
+                name: 'DevOps & Containers',
                 items: [
-                    { name: 'Aws', icon: null, iconComponent: <FaAws className="w-5 h-5 text-[#FF9900]" /> },
-                    { name: 'Appium', icon: null, iconComponent: <FaMobileAlt className="w-5 h-5 text-[#58595B]" /> },
-                    { name: 'Azure', icon: null, iconComponent: <FaWindows className="w-5 h-5 text-[#0078D4]" /> },
-                    { name: 'Rackspace', icon: null, iconComponent: <FaServer className="w-5 h-5 opacity-30" /> },
-                    { name: 'Linode', icon: null, iconComponent: <FaCloud className="w-5 h-5 text-[#00A91C]" /> },
-                    { name: 'Firebase', icon: null, iconComponent: <SiFirebase className="w-5 h-5 text-[#FFCA28]" /> },
-                    { name: 'Oracle Cloud', icon: null, iconComponent: <FaDatabase className="w-5 h-5 text-[#F80000]" /> },
-                    { name: 'Heroku', icon: null, iconComponent: <SiHeroku className="w-5 h-5 text-[#430098]" /> },
+                    { name: 'Docker', icon: null, iconComponent: <SiDocker className="w-5 h-5 text-[#2496ED]" /> },
+                    { name: 'Kubernetes', icon: null, iconComponent: <SiKubernetes className="w-5 h-5 text-[#326CE5]" /> },
+                    { name: 'Nginx', icon: null, iconComponent: <SiNginx className="w-5 h-5 text-[#009639]" /> },
+                    { name: 'Jenkins', icon: null, iconComponent: <SiJenkins className="w-5 h-5 text-[#D24939]" /> },
+                ]
+            }
+        ]
+    },
+    {
+        id: 'games',
+        title: 'Games',
+        categories: [
+            {
+                name: 'Engines & 3D',
+                items: [
+                    { name: 'Unreal Engine', icon: null, iconComponent: <SiUnrealengine className="w-5 h-5" /> },
+                    { name: 'Unity', icon: null, iconComponent: <SiUnity className="w-5 h-5" /> },
+                    { name: 'Godot', icon: null, iconComponent: <SiGodotengine className="w-5 h-5" /> },
                 ]
             }
         ]
     },
 ];
 
-export default function TechnologiesSection() {
-    const dispatch = useDispatch();
-    const [activeTab, setActiveTab] = useState(techData[0].id);
+function buildTechCategories(apiTechnologies) {
+    if (!apiTechnologies || !Array.isArray(apiTechnologies) || apiTechnologies.length === 0) {
+        return DEFAULT_TECH_DATA;
+    }
 
-    const activeTech = techData.find(t => t.id === activeTab);
+    const formatItem = (t) => ({
+        id: t.id,
+        name: t.name || 'Technology',
+        icon: t.icon || null,
+        iconComponent: null,
+    });
+
+    const isMobile = (name) => /swift|ios|kotlin|android|uikit|rxswift|rxjava|java\b/i.test(name);
+    const isCross = (name) => /flutter|react native|dart|ionic|cordova|expo/i.test(name);
+    const isDatabase = (name) => /postgres|mongo|mysql|redis|prisma|dynamo|elastic|sql|database|supabase/i.test(name);
+    const isCloud = (name) => /vercel|aws|azure|cloud|docker|kubernetes|nginx|jenkins|firebase|heroku|devops/i.test(name);
+    const isGames = (name) => /unity|unreal|godot|game|cryengine/i.test(name);
+
+    // Dynamic categorizations
+    const webFrontend = [];
+    const webBackend = [];
+    const mobileIos = [];
+    const mobileAndroid = [];
+    const crossPlatform = [];
+    const databases = [];
+    const cloudDevops = [];
+    const games = [];
+    const others = [];
+
+    apiTechnologies.forEach((tech) => {
+        const item = formatItem(tech);
+        const name = item.name.toLowerCase();
+
+        if (isMobile(name)) {
+            if (/swift|ios|uikit|rxswift/i.test(name)) mobileIos.push(item);
+            else mobileAndroid.push(item);
+        } else if (isCross(name)) {
+            crossPlatform.push(item);
+        } else if (isDatabase(name)) {
+            databases.push(item);
+        } else if (isCloud(name)) {
+            cloudDevops.push(item);
+        } else if (isGames(name)) {
+            games.push(item);
+        } else if (/react|next|tailwind|html|css|bootstrap|typescript|javascript|vue|angular/i.test(name)) {
+            webFrontend.push(item);
+        } else if (/node|graphql|php|wordpress|laravel|django|nest|express|python|api/i.test(name)) {
+            webBackend.push(item);
+        } else {
+            others.push(item);
+        }
+    });
+
+    // Merge API data with default tabs to ensure a complete, rich list
+    const mergeItems = (apiItems, defaultItems) => {
+        const apiNames = new Set(apiItems.map(i => i.name.toLowerCase().replace(/[^a-z0-9]/g, '')));
+        const missingDefaults = defaultItems.filter(
+            d => !apiNames.has(d.name.toLowerCase().replace(/[^a-z0-9]/g, ''))
+        );
+        return [...apiItems, ...missingDefaults];
+    };
+
+    return [
+        {
+            id: 'web-platforms',
+            title: 'Web Platforms',
+            categories: [
+                {
+                    name: 'Frontend & Frameworks',
+                    items: mergeItems(webFrontend, DEFAULT_TECH_DATA[0].categories[0].items)
+                },
+                {
+                    name: 'Backend & APIs',
+                    items: mergeItems(webBackend, DEFAULT_TECH_DATA[0].categories[1].items)
+                },
+                ...(others.length > 0 ? [{ name: 'Additional Technologies', items: others }] : [])
+            ]
+        },
+        {
+            id: 'mobile-apps',
+            title: 'Mobile Apps',
+            categories: [
+                {
+                    name: 'iOS',
+                    items: mergeItems(mobileIos, DEFAULT_TECH_DATA[1].categories[0].items)
+                },
+                {
+                    name: 'Android',
+                    items: mergeItems(mobileAndroid, DEFAULT_TECH_DATA[1].categories[1].items)
+                }
+            ]
+        },
+        {
+            id: 'cross-platforms',
+            title: 'Cross Platforms',
+            categories: [
+                {
+                    name: 'Cross-Platform Frameworks',
+                    items: mergeItems(crossPlatform, [
+                        ...DEFAULT_TECH_DATA[2].categories[0].items,
+                        ...DEFAULT_TECH_DATA[2].categories[1].items
+                    ])
+                }
+            ]
+        },
+        {
+            id: 'database',
+            title: 'Database',
+            categories: [
+                {
+                    name: 'Databases & ORMs',
+                    items: mergeItems(databases, DEFAULT_TECH_DATA[3].categories[0].items)
+                }
+            ]
+        },
+        {
+            id: 'cloud-devops',
+            title: 'Cloud & DevOps',
+            categories: [
+                {
+                    name: 'Cloud & Infrastructure',
+                    items: mergeItems(cloudDevops, [
+                        ...DEFAULT_TECH_DATA[4].categories[0].items,
+                        ...DEFAULT_TECH_DATA[4].categories[1].items
+                    ])
+                }
+            ]
+        },
+        {
+            id: 'games',
+            title: 'Games',
+            categories: [
+                {
+                    name: 'Engines & 3D',
+                    items: mergeItems(games, DEFAULT_TECH_DATA[5].categories[0].items)
+                }
+            ]
+        }
+    ];
+}
+
+export default function TechnologiesSection() {
+    const [techList, setTechList] = useState(DEFAULT_TECH_DATA);
+    const [activeTab, setActiveTab] = useState(DEFAULT_TECH_DATA[0].id);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchTechnologies = async () => {
+            try {
+                const res = await fetch('/api/technologies', {
+                    headers: { 'Content-Type': 'application/json' },
+                });
+                if (!res.ok) return;
+                const data = await res.json();
+
+                let rawItems = [];
+                if (Array.isArray(data)) {
+                    rawItems = data;
+                } else if (data && data.success && Array.isArray(data.data)) {
+                    rawItems = data.data;
+                } else if (data && Array.isArray(data.technologies)) {
+                    rawItems = data.technologies;
+                } else if (data && Array.isArray(data.data)) {
+                    rawItems = data.data;
+                }
+
+                if (rawItems.length > 0) {
+                    const structured = buildTechCategories(rawItems);
+                    setTechList(structured);
+                }
+            } catch (err) {
+                console.error('Error fetching technologies from database:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchTechnologies();
+    }, []);
+
+    const activeTech = techList.find(t => t.id === activeTab) || techList[0];
 
     return (
         <section className="bg-white py-16 md:py-24 px-6 md:px-12 lg:px-24">
@@ -181,7 +343,7 @@ export default function TechnologiesSection() {
                 <div className="flex flex-col lg:flex-row gap-12 min-h-[500px] border-t border-gray-100 pt-12">
                     {/* Sidebar Buttons */}
                     <div className="lg:w-1/4 flex overflow-x-auto lg:overflow-visible flex-row lg:flex-col gap-6 lg:gap-1 border-b border-gray-200 lg:border-none mb-8 lg:mb-0 pb-2 lg:pb-0 scroll-smooth custom-scrollbar">
-                        {techData.map((tab) => (
+                        {techList.map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
@@ -206,7 +368,7 @@ export default function TechnologiesSection() {
                                 transition={{ duration: 0.4, ease: "easeOut" }}
                                 className="flex flex-col gap-12"
                             >
-                                {activeTech?.categories.length > 0 ? (
+                                {activeTech?.categories?.length > 0 ? (
                                     activeTech.categories.map((cat, idx) => (
                                         <div key={idx} className="space-y-6">
                                             <h3 className="text-2xl md:text-3xl font-bold text-black tracking-tight">
@@ -215,7 +377,7 @@ export default function TechnologiesSection() {
                                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                                                 {cat.items.map((item, i) => (
                                                     <motion.div
-                                                        key={i}
+                                                        key={item.id || i}
                                                         whileHover={{ y: -4 }}
                                                         transition={{ duration: 0.2, ease: 'easeOut' }}
                                                         className="group flex items-center gap-3 px-5 py-4 bg-[#F5F5F5] rounded-full cursor-pointer overflow-hidden relative"
@@ -233,7 +395,9 @@ export default function TechnologiesSection() {
                                                                 />
                                                             ) : item.iconComponent ? (
                                                                 item.iconComponent
-                                                            ) : null}
+                                                            ) : (
+                                                                <FaLayerGroup className="w-4 h-4 text-[#0FB5B7]" />
+                                                            )}
                                                         </div>
                                                         <span className="chip-text text-black font-semibold text-sm md:text-base transition-colors duration-300">{item.name}</span>
                                                     </motion.div>

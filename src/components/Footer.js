@@ -108,7 +108,6 @@ export default function Footer() {
               <h3 className="text-[10px] sm:text-[9px] uppercase tracking-[0.2em] text-[#0FB5B7] font-bold">Insights</h3>
             </div>
             <ul className="flex flex-col gap-2 sm:gap-1">
-              <li><a href="/blog" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Blog</a></li>
               <li><a href="/company/careers" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Careers</a></li>
               <li><a href="/company/manifesto" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Manifesto</a></li>
               <li><a href="/company/culture-book" className="text-xs md:text-sm lg:text-base font-bold hover:text-bluish transition-colors leading-tight">Culture Book</a></li>
