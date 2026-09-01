@@ -3,42 +3,8 @@
 import { useState } from 'react';
 
 export default function ServiceSection() {
-  // Dummy data for projects
-  const projects = [
-    {
-      id: 1,
-      title: 'Unleash Creativity With Maker4U',
-      description: 'Your all-in-one solution for creating magnetic promotional products.',
-      imageUrl: '/projects/maker4u3.png',
-      category: 'Marketing',
-      link: '#',
-    },
-    {
-      id: 2,
-      title: 'Welcome to Our Store2U',
-      description: 'Discover a variety of products at unbeatable prices.',
-      imageUrl: '/projects/maker4u3.png',
-      category: 'Retail',
-      link: '#',
-    },
-    {
-      id: 3,
-      title: 'Unleash Your Potential with SolveAndWins',
-      description: 'Join SolveAndWin: Compete, Solve Challenges, and Earn Rewards!',
-      imageUrl: '/projects/maker4u3.png',
-      category: 'Education',
-      link: '#',
-    },
-    {
-      id: 4,
-      title: 'AI Tools for Better Business Decisions',
-      description: 'Leverage AI tools to enhance your business strategies.',
-      imageUrl: '/projects/maker4u3.png',
-      category: 'Business',
-      link: '#',
-    },
-    // Add more projects as needed
-  ];
+  // Projects data
+  const projects = [];
 
   const categories = ['All Categories', 'Marketing', 'Retail', 'Education', 'Business'];
 

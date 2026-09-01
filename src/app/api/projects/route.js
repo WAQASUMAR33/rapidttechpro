@@ -36,8 +36,8 @@ export async function GET(request) {
         try {
             const jsonBody = JSON.parse(responseBody);
             if (jsonBody.success && Array.isArray(jsonBody.data)) {
-                // Filter out broken project (ID 1) and any projects containing leaked WhatsApp chats
-                jsonBody.data = jsonBody.data.filter(p => p.id !== 1 && !(p.shortDescription || '').includes('[5:35 PM'));
+                // Filter out broken project (ID 1)
+                jsonBody.data = jsonBody.data.filter(p => p.id !== 1);
                 finalResponse = JSON.stringify(jsonBody);
             }
         } catch (e) {

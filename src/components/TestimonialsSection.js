@@ -11,7 +11,7 @@ const FALLBACK = [
         role: "Founder",
         ratings: 5,
         image: null,
-        companyLogo: "/business/clutch.png" // Placeholder or dynamic
+        companyLogo: "/business/clutch.png"
     },
     {
         id: 2,

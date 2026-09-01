@@ -184,11 +184,6 @@ const tabData = [{
 ];
 
 
-const projectDataPlaceholder = [
-  { id: 1, category: "ecommerce", title: "Store2u", image: "/projects/Store2u 1.png", description: " This is an online shopping store. In this project I have used Nextjs, Tailwind CSS, MySQL." },
-  { id: 2, category: "webApplications", title: "Maker4u", image: "/projects/maker4u3.png", description: " This is an online editing website. From where user can create certificates, banners, ads ,resumes and much more content." },
-];
-
 const TabsSection = ({ successStoriesRef }) => {
   const [activeTab, setActiveTab] = useState(tabData[0].name);
   const [showOverlay, setShowOverlay] = useState(false);

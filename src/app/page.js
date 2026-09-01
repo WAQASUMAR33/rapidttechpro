@@ -12,7 +12,7 @@ import TwoColumnSection from "@/components/NewProductDevlopmentSlider";
 import TechnologiesSection from "@/components/TechnologiesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import DarkAwardsSection from "@/components/DarkAwardsSection";
-import HighlightsSection from "@/components/HighlightsSection";
+// import HighlightsSection from "@/components/HighlightsSection";
 import SuccessStories from "@/components/OurSuccessStories";
 import TeamSection from "@/components/TeamSection";
 
@@ -42,7 +42,8 @@ export default function Home() {
       <TestimonialsSection />
       <Industries />
       <DarkAwardsSection />
-      <HighlightsSection />
+      {/* TODO: re-enable once real highlight videos are prepared */}
+      {/* <HighlightsSection /> */}
       <TeamSection />
       <div className=" w-full overflow-hidden">
         <Autoplayslider companyNames={companyNames} />

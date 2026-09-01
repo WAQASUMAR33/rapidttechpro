@@ -4,9 +4,7 @@ import { motion } from 'framer-motion';
 const TEAL = '#0FB5B7';
 
 const offices = [
-    { city: 'Manchester', country: 'United Kingdom', address: '73 Meadway, Bramhall, Stockport, SK7 1LX', flag: '🇬🇧' },
-    { city: 'Dubai', country: 'United Arab Emirates', address: 'Business Bay, Sheikh Zayed Rd, Dubai', flag: '🇦🇪' },
-    { city: 'Lahore', country: 'Pakistan', address: 'DHA Phase 6, Main Boulevard, Lahore', flag: '🇵🇰' },
+    { city: 'Mandi Bahauddin', country: 'Pakistan', address: '54C, Phalia Road, Punjab Center, Mandi Bahauddin - 75400, Pakistan', flag: '🇵🇰' },
 ];
 
 export default function GlobalOffice() {
@@ -33,7 +31,14 @@ export default function GlobalOffice() {
                 </motion.div>
 
                 {/* Office cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div
+                    className={`grid grid-cols-1 gap-6 ${offices.length === 1
+                        ? 'max-w-md'
+                        : offices.length === 2
+                            ? 'md:grid-cols-2'
+                            : 'md:grid-cols-3'
+                        }`}
+                >
                     {offices.map((office, i) => (
                         <motion.div
                             key={i}

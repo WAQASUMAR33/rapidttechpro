@@ -19,7 +19,7 @@ export const metadata = {
 import OurJourney from "@/components/OurJourney";
 import UserLayout from "../UserLayout";
 import HerosectionAboutus from "./component/herosection";
-import OurTeam from "./component/OurTeam";
+import TeamSection from "@/components/TeamSection";
 
 export default function AboutUs() {
     return (
@@ -38,7 +38,7 @@ export default function AboutUs() {
                             </div>
                         </div>
                     </div>
-                    <OurTeam />
+                    <TeamSection title="Our Team" subtitle="" className="bg-white pt-4 pb-12 md:pb-16" />
                 </div>
 
             </UserLayout>
