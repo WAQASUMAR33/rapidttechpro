@@ -5,6 +5,6 @@ export default function robots() {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "/sitemap.xml",
+    sitemap: "https://rapidtechpro.com/sitemap.xml",
   };
 }
