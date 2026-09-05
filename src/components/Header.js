@@ -144,8 +144,7 @@ export default function Header() {
                     {/* Logo */}
                     <Link href="/" className="text-xl md:text-[23px] font-bold flex items-center gap-2.5 tracking-tighter group">
                         {!logoError ? (
-                            <img
-                                src="/company/logo.png"
+                            <img                                 src="/company/logo.png"
                                 alt="RapidTechPro Logo"
                                 className={`h-8 w-auto object-contain transition-all duration-300 ${isScrolled || isLightPage ? "brightness-0" : "brightness-0 invert"}`}
                                 onError={() => setLogoError(true)}

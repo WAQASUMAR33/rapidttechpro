@@ -79,11 +79,10 @@ const AwardsAndRecognitionsSection = () => {
             >
               <div className="flex justify-between items-start w-full">
                 <div className="flex justify-center items-center h-12 w-28 bg-white overflow-hidden">
-                  <img
-                    src={award.image}
+                  <img                     src={award.image}
                     alt={award.company}
                     className="object-contain max-h-full max-w-full transition-transform duration-300 group-hover:scale-110"
-                  />
+                   loading="lazy" />
                 </div>
                 <div className="flex items-center gap-1 bg-gray-50 px-2 py-1 rounded-lg">
                   <FaStar className="text-yellow-400 text-lg" />

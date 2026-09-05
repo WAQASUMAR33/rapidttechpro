@@ -108,7 +108,7 @@ export default function ServiceDetailPage() {
                             </motion.div>
                             {service.heroImage && (
                                 <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
-                                    <img src={resolveImage(service.heroImage)} alt={service.title} className="w-full h-auto rounded-3xl shadow-2xl" />
+                                    <img src={resolveImage(service.heroImage)} alt={service.title} className="w-full h-auto rounded-3xl shadow-2xl"  loading="lazy" />
                                 </motion.div>
                             )}
                         </div>
@@ -274,7 +274,7 @@ export default function ServiceDetailPage() {
                                     <div key={i} className="bg-gray-800 p-8 rounded-2xl border border-gray-700">
                                         <p className="text-gray-300 italic mb-6">"{t.quote || t.text}"</p>
                                         <div className="flex items-center gap-3">
-                                            {t.avatar && <img src={resolveImage(t.avatar)} alt={t.name} className="w-12 h-12 rounded-full object-cover" />}
+                                            {t.avatar && <img src={resolveImage(t.avatar)} alt={t.name} className="w-12 h-12 rounded-full object-cover"  loading="lazy" />}
                                             <div>
                                                 <p className="font-bold">{t.name}</p>
                                                 {t.role && <p className="text-gray-400 text-sm">{t.role}</p>}
@@ -298,7 +298,7 @@ export default function ServiceDetailPage() {
                                         <div className="rounded-3xl overflow-hidden bg-gray-50 hover:shadow-xl transition-all duration-300">
                                             {cs.image && (
                                                 <div className="h-64 overflow-hidden">
-                                                    <img src={resolveImage(cs.image)} alt={cs.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                                    <img src={resolveImage(cs.image)} alt={cs.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"  loading="lazy" />
                                                 </div>
                                             )}
                                             <div className="p-8">

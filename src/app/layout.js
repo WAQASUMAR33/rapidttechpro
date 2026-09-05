@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className="font-manrope antialiased text-gray-900 min-h-screen overflow-x-hidden"
+        className="font-manrope antialiased text-gray-900 min-h-screen overflow-x-clip"
         suppressHydrationWarning
       >
         <JsonLd data={organizationSchema} />

@@ -297,11 +297,10 @@ export default function BlogPage() {
                 onClick={() => setActiveArticle(featuredPost)}
               >
                 <div className="lg:col-span-7 relative h-72 lg:h-auto min-h-[320px] overflow-hidden">
-                  <img
-                    src={featuredPost.image}
+                  <img                     src={featuredPost.image}
                     alt={featuredPost.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
+                   loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-transparent to-transparent lg:hidden" />
                   <span className="absolute top-6 left-6 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider text-black bg-[#0FB5B7] shadow-lg">
                     Featured Insight
@@ -329,8 +328,7 @@ export default function BlogPage() {
 
                   <div className="pt-6 border-t border-white/10 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <img
-                        src={featuredPost.author.image}
+                      <img                         src={featuredPost.author.image}
                         alt={featuredPost.author.name}
                         className="w-10 h-10 rounded-full border-2 border-[#0FB5B7] object-cover"
                         onError={(e) => { e.currentTarget.src = '/team/waqas.png'; }}
@@ -392,11 +390,10 @@ export default function BlogPage() {
                     <div>
                       {/* Thumbnail */}
                       <div className="relative h-52 w-full overflow-hidden bg-gray-900">
-                        <img
-                          src={post.image}
+                        <img                           src={post.image}
                           alt={post.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
+                         loading="lazy" />
                         <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider text-black bg-[#0FB5B7] shadow-md">
                           {post.category}
                         </span>
@@ -432,8 +429,7 @@ export default function BlogPage() {
                     {/* Author Footer */}
                     <div className="px-6 pb-6 pt-4 border-t border-white/5 flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
-                        <img
-                          src={post.author.image}
+                        <img                           src={post.author.image}
                           alt={post.author.name}
                           className="w-8 h-8 rounded-full border border-[#0FB5B7]/50 object-cover"
                           onError={(e) => { e.currentTarget.src = '/team/waqas.png'; }}
@@ -528,8 +524,7 @@ export default function BlogPage() {
 
                   {/* Author Bar */}
                   <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
-                    <img
-                      src={activeArticle.author.image}
+                    <img                       src={activeArticle.author.image}
                       alt={activeArticle.author.name}
                       className="w-12 h-12 rounded-full border-2 border-[#0FB5B7] object-cover"
                       onError={(e) => { e.currentTarget.src = '/team/waqas.png'; }}
@@ -543,11 +538,10 @@ export default function BlogPage() {
 
                 {/* Cover Image */}
                 <div className="rounded-2xl overflow-hidden mb-8 max-h-[400px]">
-                  <img
-                    src={activeArticle.image}
+                  <img                     src={activeArticle.image}
                     alt={activeArticle.title}
                     className="w-full h-full object-cover"
-                  />
+                   loading="lazy" />
                 </div>
 
                 {/* Article Body */}

@@ -236,7 +236,7 @@ export default function ProjectDetailPage() {
           >
             <div>
               {p.projectIcon && (
-                <img src={p.projectIcon} className="h-12 w-auto object-contain" alt="Logo" />
+                <img src={p.projectIcon} className="h-12 w-auto object-contain" alt="Logo"  loading="lazy" />
               )}
             </div>
             <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-900 leading-[1.1] tracking-tight">
@@ -252,7 +252,7 @@ export default function ProjectDetailPage() {
 
         {/* 2. BANNER IMAGE SECTION (130vh) */}
         <section className="h-[130vh] w-full px-0 relative overflow-hidden">
-          <img src={p.bannerImage} className="w-full h-full object-cover" alt="Hero Banner" />
+          <img src={p.bannerImage} className="w-full h-full object-cover" alt="Hero Banner"  loading="lazy" />
         </section>
 
         {/* 3. ABOUT CLIENT SECTION (100vh) */}
@@ -320,7 +320,7 @@ export default function ProjectDetailPage() {
                   >
                     <div className="w-10 h-10 flex items-center justify-center shrink-0">
                       {tech.icon ? (
-                        <img src={tech.icon} className="w-full h-full object-contain" alt={tech.name} />
+                        <img src={tech.icon} className="w-full h-full object-contain" alt={tech.name}  loading="lazy" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-white rounded-lg font-bold text-xl border border-gray-200">{tech.name.charAt(0)}</div>
                       )}
@@ -365,7 +365,7 @@ export default function ProjectDetailPage() {
               transition={{ duration: 1, delay: 0.1 }}
               className="w-full md:w-[30%] aspect-[9/18] rounded-[40px] md:rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black bg-white"
             >
-              <img src={p.challengeImage1} className="w-full h-full object-cover" alt="Challenge Screen 1" />
+              <img src={p.challengeImage1} className="w-full h-full object-cover" alt="Challenge Screen 1"  loading="lazy" />
             </motion.div>
 
             {/* Screen 2 - Center (Raised & Slightly Larger) */}
@@ -376,7 +376,7 @@ export default function ProjectDetailPage() {
               transition={{ duration: 1, delay: 0.3 }}
               className="w-full md:w-[32%] aspect-[9/19] rounded-[45px] md:rounded-[55px] overflow-hidden shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2)] border-[10px] border-black z-10 bg-white"
             >
-              <img src={p.challengeImage2} className="w-full h-full object-cover" alt="Challenge Screen 2" />
+              <img src={p.challengeImage2} className="w-full h-full object-cover" alt="Challenge Screen 2"  loading="lazy" />
             </motion.div>
 
             {/* Screen 3 - Right (Lowered) */}
@@ -387,7 +387,7 @@ export default function ProjectDetailPage() {
               transition={{ duration: 1, delay: 0.5 }}
               className="w-full md:w-[30%] aspect-[9/18] rounded-[40px] md:rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black bg-white"
             >
-              <img src={p.challengeImage3} className="w-full h-full object-cover" alt="Challenge Screen 3" />
+              <img src={p.challengeImage3} className="w-full h-full object-cover" alt="Challenge Screen 3"  loading="lazy" />
             </motion.div>
 
           </div>
@@ -471,7 +471,7 @@ export default function ProjectDetailPage() {
               transition={{ duration: 1, ease: "easeOut" }}
               className="w-full h-auto rounded-[12px] md:rounded-[24px] overflow-hidden shadow-2xl bg-white border-2 border-gray-100"
             >
-              <img src={p.imageUrl} className="w-full h-auto object-cover" alt="Main Project Overview" />
+              <img src={p.imageUrl} className="w-full h-auto object-cover" alt="Main Project Overview"  loading="lazy" />
             </motion.div>
           </div>
         </section>
@@ -506,7 +506,7 @@ export default function ProjectDetailPage() {
                 ))}
               </motion.div>
               <div className="rounded-[40px] md:rounded-[80px] bg-gray-100 p-2 md:p-5 h-[400px] md:h-[600px] shadow-inner overflow-hidden border-2 border-gray-200">
-                <img src={p.gallery[4 % p.gallery.length] || p.imageUrl} className="w-full h-full object-cover rounded-[30px] md:rounded-[60px]" alt="Growth Visual" />
+                <img src={p.gallery[4 % p.gallery.length] || p.imageUrl} className="w-full h-full object-cover rounded-[30px] md:rounded-[60px]" alt="Growth Visual"  loading="lazy" />
               </div>
             </div>
           </div>
@@ -544,7 +544,7 @@ export default function ProjectDetailPage() {
                 transition={{ duration: 1, delay: 0.1 }}
                 className="w-full md:w-[30%] aspect-[9/18] rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black"
               >
-                <img src={p.adaptableImage1} className="w-full h-full object-cover" alt="App Screen 1" />
+                <img src={p.adaptableImage1} className="w-full h-full object-cover" alt="App Screen 1"  loading="lazy" />
               </motion.div>
 
               {/* Screen 2 - Center Main */}
@@ -555,7 +555,7 @@ export default function ProjectDetailPage() {
                 transition={{ duration: 1, delay: 0.3 }}
                 className="w-full md:w-[32%] aspect-[9/19] rounded-[55px] overflow-hidden shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2)] border-[10px] border-black z-10"
               >
-                <img src={p.adaptableImage2} className="w-full h-full object-cover" alt="App Screen 2" />
+                <img src={p.adaptableImage2} className="w-full h-full object-cover" alt="App Screen 2"  loading="lazy" />
               </motion.div>
 
               {/* Screen 3 - Right Staggered */}
@@ -566,7 +566,7 @@ export default function ProjectDetailPage() {
                 transition={{ duration: 1, delay: 0.5 }}
                 className="w-full md:w-[30%] aspect-[9/18] rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black"
               >
-                <img src={p.adaptableImage3} className="w-full h-full object-cover" alt="App Screen 3" />
+                <img src={p.adaptableImage3} className="w-full h-full object-cover" alt="App Screen 3"  loading="lazy" />
               </motion.div>
             </div>
           </div>
@@ -605,11 +605,10 @@ export default function ProjectDetailPage() {
             transition={{ duration: 1 }}
             className="w-full"
           >
-            <img
-              src={p.gallery[5 % p.gallery.length] || p.imageUrl}
+            <img               src={p.gallery[5 % p.gallery.length] || p.imageUrl}
               className="w-full h-auto object-cover"
               alt="Product Showcase"
-            />
+             loading="lazy" />
           </motion.div>
         </section>
 
@@ -632,7 +631,7 @@ export default function ProjectDetailPage() {
                 >
                   {[...p.gallery, ...p.gallery, ...p.gallery, ...p.gallery, ...p.gallery].map((img, i) => (
                     <div key={`row1-${i}`} className="w-[450px] md:w-[700px] lg:w-[1000px] shrink-0 rounded-[30px] md:rounded-[40px] overflow-hidden shadow-2xl bg-white border border-slate-700/50">
-                      <img src={img} className="w-full h-[200px] md:h-[300px] lg:h-[450px] object-cover" alt={`Showcase item row 1 - ${i}`} />
+                      <img src={img} className="w-full h-[200px] md:h-[300px] lg:h-[450px] object-cover" alt={`Showcase item row 1 - ${i}`}  loading="lazy" />
                     </div>
                   ))}
                 </motion.div>
@@ -648,7 +647,7 @@ export default function ProjectDetailPage() {
                   {/* Reversing the array to provide visual variation between rows */}
                   {[...p.gallery, ...p.gallery, ...p.gallery, ...p.gallery, ...p.gallery].reverse().map((img, i) => (
                     <div key={`row2-${i}`} className="w-[450px] md:w-[700px] lg:w-[1000px] shrink-0 rounded-[30px] md:rounded-[40px] overflow-hidden shadow-2xl bg-white border border-slate-700/50">
-                      <img src={img} className="w-full h-[200px] md:h-[300px] lg:h-[450px] object-cover" alt={`Showcase item row 2 - ${i}`} />
+                      <img src={img} className="w-full h-[200px] md:h-[300px] lg:h-[450px] object-cover" alt={`Showcase item row 2 - ${i}`}  loading="lazy" />
                     </div>
                   ))}
                 </motion.div>

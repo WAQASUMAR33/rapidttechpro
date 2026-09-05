@@ -99,11 +99,10 @@ const Card = ({ card }) => {
         </div>
         <div className="w-full h-full flex justify-center items-center">
           <div className="border-2 border-white md:w-[420px] md:h-[570px] w-[200px] h-[200px] rounded-full overflow-hidden md:p-2">
-            <img
-              src={card.url}
+            <img               src={card.url}
               alt={card.title}
               className="md:w-[400px] md:h-[550px] w-full h-full object-cover md:object-cover rounded-full"
-            />
+             loading="lazy" />
           </div>
         </div>
       </div>

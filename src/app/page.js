@@ -1,5 +1,4 @@
-'use client'
-import React, { useRef } from "react";
+import React from "react";
 
 import OurJourney from "@/components/OurJourney";
 import Herosection from "@/components/Herosection";
@@ -17,7 +16,6 @@ import SuccessStories from "@/components/OurSuccessStories";
 import TeamSection from "@/components/TeamSection";
 
 export default function Home() {
-  const successStoriesRef = useRef(null);
 
   const companyNames = [
     "Android",
@@ -35,7 +33,7 @@ export default function Home() {
         <AutoImagePlayCarousel />
       </div>
       <OurJourney />
-      <SuccessStories ref={successStoriesRef} />
+      <SuccessStories />
       <TwoColumnSection />
       <TechnologiesSection />
       <AutoImagePlayCarousel />

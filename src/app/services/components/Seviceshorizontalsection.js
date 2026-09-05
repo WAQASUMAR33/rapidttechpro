@@ -56,7 +56,7 @@ export default function ServiceSection() {
   className={`w-full md:w-1/2 md:px-12 md:mb-16 ${story.id % 2 === 1 ? 'md:mt-[20px]' : 'md:mt-[90px]'}`}
 >
             <div className="bg-white shadow-md rounded-md overflow-hidden">
-              <img src={story.imageUrl} alt={story.title} className="h-72 w-full object-cover" />
+              <img src={story.imageUrl} alt={story.title} className="h-72 w-full object-cover"  loading="lazy" />
               <div className="p-6">
                 <h2 className="text-xl font-semibold text-gray-800">{story.title}</h2>
                 <p className="text-sm text-gray-600 mt-2">{story.description}</p>

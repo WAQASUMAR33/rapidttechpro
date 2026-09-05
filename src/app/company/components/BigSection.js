@@ -94,11 +94,10 @@ export default function BigSectionCarousel() {
                 {slides[currentSlide].content}
               </p>
               <div className="flex items-center">
-                <img
-                  src={slides[currentSlide].image}
+                <img                   src={slides[currentSlide].image}
                   alt={slides[currentSlide].name}
                   className="w-12 h-12 rounded-full mr-4"
-                />
+                 loading="lazy" />
                 <div>
                   <h3 className="text-lg font-bold">{slides[currentSlide].name}</h3>
                   <p className="text-gray-400 text-sm">

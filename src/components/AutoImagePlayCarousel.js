@@ -40,11 +40,10 @@ const AutoImagePlayCarousel = () => {
         <ul className="flex list-none p-0">
           {extendedImages.map((src, index) => (
             <li key={index} className="inline-flex items-center mr-16 flex-shrink-0">
-              <img
-                src={src}
+              <img                 src={src}
                 alt={`Carousel image ${index + 1}`}
                 className="w-auto h-[50px] object-contain"
-              />
+               loading="lazy" />
             </li>
           ))}
         </ul>

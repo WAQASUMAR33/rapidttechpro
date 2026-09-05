@@ -155,11 +155,10 @@ export default function RealTimeProjectMap() {
                                     >
                                         <div className="w-[80px] h-[80px] md:w-[100px] md:h-[100px] bg-white rounded-[24px] flex-shrink-0 overflow-hidden shadow-lg border border-gray-800 p-1 group-hover:bg-gray-100 transition-colors">
                                             <div className="w-full h-full rounded-[20px] overflow-hidden bg-gray-100">
-                                                <img
-                                                    src={resolveImage(proj.mainImage || proj.projectIcon || proj.icon)}
+                                                <img                                                     src={resolveImage(proj.mainImage || proj.projectIcon || proj.icon)}
                                                     alt={proj.title}
                                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                                />
+                                                 loading="lazy" />
                                             </div>
                                         </div>
                                         <div className="flex-grow pt-1">

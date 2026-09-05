@@ -80,11 +80,10 @@ const Card = ({ card }) => {
                         whileHover={{ scale: 1.05, rotate: 5 }}
                         transition={{ type: "spring", stiffness: 300 }}
                     >
-                        <img
-                            src={card.url}
+                        <img                             src={card.url}
                             alt={card.title}
                             className="md:w-[520px] md:h-[720px] w-full h-full object-cover md:object-cover rounded-full"
-                        />
+                         loading="lazy" />
                     </motion.div>
                 </div>
             </div>

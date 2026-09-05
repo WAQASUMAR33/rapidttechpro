@@ -50,7 +50,7 @@ export default function HeroSection() {
     }, [x, y]);
 
     return (
-        <div className="relative flex-1 w-full overflow-hidden">
+        <section className="relative flex-1 w-full overflow-hidden" aria-label="Hero">
             <video
                 className="absolute inset-0 w-full h-full object-cover "
                 src="/video/temwork.mp4"
@@ -94,7 +94,7 @@ export default function HeroSection() {
                 Clients We've Served
             </div> */}
             {/* <div className="hidden md:flex absolute -bottom-5 opacity-90 right-8 h-[350px] w-[350px] z-30 rounded-full items-center justify-center">
-                <img src="/images/think.PNG"></img>
+                <img src="/images/think.PNG" loading="lazy"></img>
 
             </div> */}
 
@@ -125,6 +125,6 @@ export default function HeroSection() {
 
                 </button>
             </div>
-        </div>
+        </section>
     );
 }

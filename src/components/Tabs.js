@@ -51,13 +51,12 @@ const LazyImage = ({ src, alt, className }) => {
         </div>
       )}
       {isVisible && (
-        <img
-          src={src}
+        <img           src={src}
           alt={alt}
           className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'
             } transition-opacity duration-500`}
           onLoad={handleLoad}
-        />
+         loading="lazy" />
       )}
     </div>
   );
@@ -348,11 +347,10 @@ const TabsSection = ({ successStoriesRef }) => {
             onClick={() => projectcard(project)}
           >
             <div className="w-full aspect-video overflow-hidden">
-              <img
-                src={resolveImage(project.mainImage || project.image)}
+              <img                 src={resolveImage(project.mainImage || project.image)}
                 alt={project.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+               loading="lazy" />
             </div>
           </button>
         ))}
@@ -420,7 +418,7 @@ const TabsSection = ({ successStoriesRef }) => {
                   : 'text-gray-600 hover:bg-[#25CBA1]/5 hover:text-[#25CBA1]'
                 }`}
             >
-              {/* <img src={tab.icons.tabicon} className='w-16 h-16 object-contain'></img> */}
+              {/* <img src={tab.icons.tabicon} className='w-16 h-16 object-contain' loading="lazy"></img> */}
               {tab.icons.tabicon}
               {tab.title}
             </button>

@@ -387,8 +387,7 @@ export default function TechnologiesSection() {
                                                     >
                                                         <div className="w-9 h-9 flex items-center justify-center flex-shrink-0 bg-white rounded-full shadow-sm">
                                                             {item.icon ? (
-                                                                <img
-                                                                    src={item.icon}
+                                                                <img                                                                     src={item.icon}
                                                                     alt={item.name}
                                                                     className="w-5 h-5 object-contain"
                                                                     onError={(e) => { e.target.style.display = 'none'; }}

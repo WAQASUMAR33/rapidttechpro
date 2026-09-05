@@ -138,11 +138,10 @@ export default function CaseStudy() {
                 <Link href={`/work/${story.slug || story.id}`} key={idx} className="block group">
                   <div className="flex gap-5 p-5 rounded-2xl bg-[#111] border border-gray-800 hover:border-[#0FB5B7]/50 transition-colors duration-300">
                     <div className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 bg-white rounded-xl overflow-hidden shadow-sm flex items-center justify-center p-2">
-                      <img
-                        src={resolveImage(story.image || story.projectIcon || story.mainImage || story.bannerImage)}
+                      <img                         src={resolveImage(story.image || story.projectIcon || story.mainImage || story.bannerImage)}
                         alt={story.title}
                         className="w-full h-full object-contain"
-                      />
+                       loading="lazy" />
                     </div>
                     <div className="flex flex-col justify-center">
                       <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-[#0FB5B7] transition-colors leading-tight mb-1">

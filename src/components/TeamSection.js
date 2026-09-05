@@ -35,8 +35,7 @@ const MemberCard = ({ member, featured = false }) => (
     >
         <div className="relative mb-5">
             <div className="absolute inset-0 bg-[#0FB5B7] rounded-full scale-0 group-hover:scale-105 transition-transform duration-500 opacity-20"></div>
-            <img
-                src={member.image}
+            <img                 src={member.image}
                 className={`rounded-full border-4 border-white shadow-md object-cover relative z-10 transition-transform duration-500 group-hover:scale-105 ${
                     featured ? 'w-36 h-36 md:w-44 md:h-44 ring-4 ring-[#0FB5B7]/30' : 'w-28 h-28 md:w-32 md:h-32'
                 }`}

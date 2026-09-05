@@ -59,11 +59,10 @@ export default function MobileAppsHero() {
                         className="relative"
                     >
                         <div className="relative z-10">
-                            <img
-                                src="/images/mobile-hero.png"
+                            <img                                 src="/images/mobile-hero.png"
                                 alt="Mobile App Development Mockup"
                                 className="w-full h-auto drop-shadow-2xl"
-                            />
+                             loading="lazy" />
                         </div>
                         {/* Decorative background circle */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-50 rounded-full blur-3xl -z-1" />

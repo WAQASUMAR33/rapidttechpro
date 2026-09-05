@@ -229,11 +229,10 @@ export default function EcommerceSellingSection() {
                       ease: "easeInOut",
                     }}
                   >
-                    <img
-                      src={imageSrc}
+                    <img                       src={imageSrc}
                       alt={`Image ${index + 1}`}
                       className="w-full h-full object-cover"
-                    />
+                     loading="lazy" />
                   </motion.div>
                 ))}
               </AnimatePresence>

@@ -48,11 +48,10 @@ const ScrollableSlider = ({ data }) => {
             key={index}
             className="flex-shrink-0 w-screen h-screen flex flex-col justify-center items-center bg-gray-100 snap-center"
           >
-            <img
-              src={item.image}
+            <img               src={item.image}
               alt={item.title}
               className="w-80 h-60 object-cover mb-4 rounded-lg shadow-lg"
-            />
+             loading="lazy" />
             <div className="text-center">
               <h3 className="text-3xl font-semibold mb-2">{item.title}</h3>
               <p className="text-lg text-gray-600">{item.description}</p>

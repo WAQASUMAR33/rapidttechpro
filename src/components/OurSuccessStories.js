@@ -3,13 +3,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, AnimatePresence } from 'framer-motion';
-import { forwardRef } from 'react';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SuccessStories = forwardRef((props, ref) => {
+const SuccessStories = () => {
+  const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const cardRefs = useRef([]);
   const [showPopup, setShowPopup] = useState(false);
@@ -101,9 +101,9 @@ const SuccessStories = forwardRef((props, ref) => {
       const showPopupWithAnimation = () => setShowPopup(true);
       const hidePopupWithDelay = () => setShowPopup(false);
 
-      if (ref.current) {
+      if (sectionRef.current) {
         ScrollTrigger.create({
-          trigger: ref.current,
+          trigger: sectionRef.current,
           start: 'top 90%',
           end: 'bottom 30%',
           onEnter: showPopupWithAnimation,
@@ -116,7 +116,7 @@ const SuccessStories = forwardRef((props, ref) => {
     });
 
     return () => ctx.revert();
-  }, [loading, stories, ref]);
+  }, [loading, stories]);
 
   const popupVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -129,7 +129,7 @@ const SuccessStories = forwardRef((props, ref) => {
   }
 
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-white relative overflow-hidden h-full">
+    <section ref={sectionRef} className="py-16 md:py-24 bg-white relative overflow-hidden h-full">
       <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-12 lg:px-16 2xl:px-24">
         <div className="flex justify-between items-end mb-12 md:mb-16">
           <h2
@@ -158,20 +158,18 @@ const SuccessStories = forwardRef((props, ref) => {
                 <div className="bg-white group">
                   <Link href={`/work/${story.id}`}>
                     <div className="overflow-hidden rounded-xl h-[500px] md:h-[650px] lg:h-[800px] bg-gray-50">
-                      <img
-                        src={resolveImage(story.mainImage || story.image)}
+                      <img                         src={resolveImage(story.mainImage || story.image)}
                         alt={story.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+                       loading="lazy" />
                     </div>
                   </Link>
                   <div className="pt-6 flex flex-col items-start gap-4">
                     {(story.logo || story.projectIcon) && (
-                      <img
-                        src={resolveImage(story.logo || story.projectIcon)}
+                      <img                         src={resolveImage(story.logo || story.projectIcon)}
                         alt={`${story.title} logo`}
                         className="h-6 md:h-8 w-auto object-contain"
-                      />
+                       loading="lazy" />
                     )}
 
                     <div className="flex flex-col gap-2">
@@ -216,19 +214,19 @@ const SuccessStories = forwardRef((props, ref) => {
           >
             <div className="flex md:flex-row flex-col space-y-3 md:space-y-0 md:space-x-3 text-xs md:text-sm font-bold">
               <div className="bg-white rounded-md p-2 text-black text-center">
-                <img src='/business/google.png' alt='Google Reviews' className='w-16 h-6 mx-auto object-cover'></img>
+                <img src='/business/google.png' alt='Google Reviews' className='w-16 h-6 mx-auto object-cover' loading="lazy"></img>
                 {/* <p>Google</p> */}
                 <p>4.9 </p>
                 <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
               </div>
               <div className="bg-white rounded-md p-2 text-black text-center">
-                <img src='/business/trustpilot.png' alt='Trustpilot Reviews' className='w-20 h-6 mx-auto object-cover'></img>
+                <img src='/business/trustpilot.png' alt='Trustpilot Reviews' className='w-20 h-6 mx-auto object-cover' loading="lazy"></img>
                 {/* <p>Trustpilot</p> */}
                 <p>4.8</p>
                 <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
               </div>
               <div className="bg-white rounded-md p-2 text-black text-center">
-                <img src='/business/clutch.png' alt='Clutch Reviews' className='w-16 h-6 mx-auto object-cover '></img>
+                <img src='/business/clutch.png' alt='Clutch Reviews' className='w-16 h-6 mx-auto object-cover ' loading="lazy"></img>
                 {/* <p>Clutch</p> */}
                 <p>5</p>
                 <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
@@ -239,6 +237,6 @@ const SuccessStories = forwardRef((props, ref) => {
       </AnimatePresence>
     </section>
   );
-});
+};
 
 export default SuccessStories;

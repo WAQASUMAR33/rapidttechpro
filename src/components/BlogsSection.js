@@ -39,7 +39,7 @@ export default function BlogSection() {
         <div className="grid gap-8 lg:grid-cols-3 max-w-7xl mx-auto">
           {blogs.map((blog) => (
             <div key={blog.id} className="bg-white border h-[450px] border-gray-200 rounded-lg shadow-md overflow-hidden">
-              <img src={blog.imageUrl} alt={blog.title} className="w-full h-60 object-cover" />
+              <img src={blog.imageUrl} alt={blog.title} className="w-full h-60 object-cover"  loading="lazy" />
               <div className="p-4">
                 <p className="text-lg text-gray-500 mb-1">
                   {blog.category} • {blog.date}

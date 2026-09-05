@@ -40,7 +40,7 @@ export default function EcommerceHero() {
                         className="w-[50vw] h-[50vh] rounded-xl object-cover" 
                         src="/subpageshero/pos.jpg" 
                         alt="Point Of Sale" 
-                    />
+                     loading="lazy" />
                 </div>
             </div>
         </>

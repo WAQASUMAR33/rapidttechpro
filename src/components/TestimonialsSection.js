@@ -102,7 +102,7 @@ export default function TestimonialsSection() {
                     {/* Rating Badges */}
                     <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
                         <div className="flex items-center gap-4">
-                            <img src="/business/clutch.png" alt="Clutch" className="h-6 w-auto object-contain brightness-0 invert" />
+                            <img src="/business/clutch.png" alt="Clutch" className="h-6 w-auto object-contain brightness-0 invert"  loading="lazy" />
                             <div className="text-left">
                                 <div className="flex text-red-600 text-sm">★★★★★</div>
                                 <div className="text-[10px] text-white font-bold uppercase tracking-widest">52 Reviews</div>
@@ -149,8 +149,7 @@ export default function TestimonialsSection() {
                                     <div className="flex items-center gap-4">
                                         <div className="relative">
                                             {item.image ? (
-                                                <img
-                                                    src={item.image}
+                                                <img                                                     src={item.image}
                                                     alt={item.name}
                                                     className="w-14 h-14 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all border border-gray-800"
                                                     onError={e => { e.target.style.display = 'none'; }}
@@ -175,8 +174,7 @@ export default function TestimonialsSection() {
 
                                     {/* Company Logo on Right */}
                                     <div className="opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all">
-                                        <img
-                                            src={item.companyLogo || "/business/clutch.png"}
+                                        <img                                             src={item.companyLogo || "/business/clutch.png"}
                                             alt="Project Logo"
                                             className="h-6 md:h-8 w-auto object-contain"
                                             onError={e => { e.target.style.display = 'none'; }}

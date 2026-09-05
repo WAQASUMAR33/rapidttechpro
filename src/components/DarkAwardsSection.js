@@ -87,8 +87,7 @@ export default function DarkAwardsSection() {
                             <div className="flex justify-between items-start">
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 rounded-lg bg-gray-900 flex items-center justify-center overflow-hidden border border-gray-800">
-                                        <img
-                                            src={award.logo}
+                                        <img                                             src={award.logo}
                                             alt={award.company}
                                             className="w-7 h-7 object-contain brightness-0 invert"
                                             onError={(e) => { e.target.style.display = 'none'; }}

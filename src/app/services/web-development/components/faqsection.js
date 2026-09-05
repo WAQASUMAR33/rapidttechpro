@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'; // Using different icons
 import gsap from 'gsap';
+import JsonLdStructured from '@/components/JsonLdStructured';
 
 const faqData = [
     {
@@ -56,8 +57,22 @@ const FaqSection = () => {
         }
     };
 
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqData.map((faq) => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer,
+            }
+        }))
+    };
+
     return (
         <section className="py-10 bg-gray-50">
+            <JsonLdStructured schemas={[faqSchema]} />
             <div className="container mx-auto px-4">
                 <h2 className="text-4xl font-bold mb-12 text-center text-gray-800 leading-tight">Frequently Asked Questions</h2>
                 <div className="flex md:flex-row flex-col md:gap-4 max-w-7xl mx-auto">

@@ -42,7 +42,7 @@ const NewBlogCategorySlider = () => {
               ref={index === 0 ? firstCategoryRef : null}  // Set the ref to the first category card
             >
               <div className="rounded-lg p-2 flex justify-center items-center">
-                <img src={category.imageUrl} alt={category.title} className="h-28 w-28 rounded-full object-cover"/>
+                <img src={category.imageUrl} alt={category.title} className="h-28 w-28 rounded-full object-cover" loading="lazy" />
               </div>
               <h2 className='text-center'>{category.title}</h2>
             </div>

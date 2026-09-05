@@ -84,7 +84,7 @@ export default function HighlightsSection() {
                                 {/* Featured Video */}
                                 <div className="flex-1 group">
                                     <div className="relative aspect-video rounded-3xl overflow-hidden mb-4 border border-gray-800">
-                                        <img src={data.featured.thumbnail} alt={data.featured.title} className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500" />
+                                        <img src={data.featured.thumbnail} alt={data.featured.title} className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500"  loading="lazy" />
                                         <div className="absolute inset-0 flex items-center justify-center">
                                             <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform cursor-pointer">
                                                 <FaPlay className="text-white ml-1" />
@@ -101,7 +101,7 @@ export default function HighlightsSection() {
                                     {data.videos.map((vid) => (
                                         <div key={vid.id} className="flex gap-4 group cursor-pointer">
                                             <div className="relative w-32 md:w-40 aspect-video rounded-2xl overflow-hidden border border-gray-800 shrink-0">
-                                                <img src={vid.thumbnail} alt={vid.title} className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500" />
+                                                <img src={vid.thumbnail} alt={vid.title} className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500"  loading="lazy" />
                                                 <div className="absolute inset-0 flex items-center justify-center">
                                                     <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                                                         <FaPlay className="text-white text-xs ml-0.5" />

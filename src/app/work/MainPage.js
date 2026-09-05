@@ -372,17 +372,17 @@ export default function WorkMainPage() {
           >
             <div className="flex md:flex-row flex-col space-y-4 md:space-y-0 md:space-x-4 text-xs md:text-base">
               <div className="bg-white rounded-md p-2 text-black text-center">
-                <img src="/business/google.png" className="w-16 h-6 mx-auto object-cover" alt="Google"></img>
+                <img src="/business/google.png" className="w-16 h-6 mx-auto object-cover" alt="Google" loading="lazy"></img>
                 <p>4.9</p>
                 <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
               </div>
               <div className="bg-white rounded-md p-2 text-black text-center">
-                <img src="/business/trustpilot.png" className="w-20 h-6 mx-auto object-cover" alt="Trustpilot"></img>
+                <img src="/business/trustpilot.png" className="w-20 h-6 mx-auto object-cover" alt="Trustpilot" loading="lazy"></img>
                 <p>4.8</p>
                 <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
               </div>
               <div className="bg-white rounded-md p-2 text-black text-center">
-                <img src="/business/clutch.png" className="w-16 h-6 mx-auto object-cover" alt="Clutch"></img>
+                <img src="/business/clutch.png" className="w-16 h-6 mx-auto object-cover" alt="Clutch" loading="lazy"></img>
                 <p>5</p>
                 <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
               </div>
@@ -439,11 +439,10 @@ function InViewCard({ story, index }) {
         <div className="bg-transparent flex flex-col h-full group-hover:-translate-y-2 transition-transform duration-500">
           {/* Image Section */}
           <div className="w-full h-[400px] md:h-[550px] lg:h-[650px] mx-auto overflow-hidden rounded-3xl bg-gray-50 flex-shrink-0 relative group-hover:shadow-[0_20px_50px_rgba(15,181,183,0.3)] transition-all duration-700">
-            <img
-              src={projectImage}
+            <img               src={projectImage}
               alt={story.title}
               className="h-full w-full object-cover group-hover:scale-[1.08] transition-transform duration-1000 ease-out"
-            />
+             loading="lazy" />
             {/* Subtle premium overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
           </div>
@@ -453,11 +452,10 @@ function InViewCard({ story, index }) {
             {/* Logo above title */}
             {story.logo && (
               <div className="mb-3">
-                <img
-                  src={resolveImage(story.logo)}
+                <img                   src={resolveImage(story.logo)}
                   alt={`${story.title} logo`}
                   className="h-8 w-auto object-contain object-left"
-                />
+                 loading="lazy" />
               </div>
             )}
 

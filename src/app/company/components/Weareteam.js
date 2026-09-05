@@ -6,11 +6,10 @@ export default function FeatureSection() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6">
         {/* Left Image Section */}
         <div className="flex items-center justify-center">
-          <img
-            src="https://www.teambonding.com/wp-content/uploads/2019/02/communication.jpg" // Replace with actual image URL
+          <img             src="https://www.teambonding.com/wp-content/uploads/2019/02/communication.jpg" // Replace with actual image URL
             alt="Feature Image"
             className="rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-500"
-          />
+           loading="lazy" />
         </div>
 
         {/* Right Text Section */}

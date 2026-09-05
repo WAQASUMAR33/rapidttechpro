@@ -153,8 +153,7 @@ const PortfolioSection = () => {
                 ref={(el) => (cardsRef.current[index] = el)}
                 className="relative h-60 sm:h-80 group overflow-hidden rounded-xl shadow-lg border border-gray-100 bg-gray-50"
               >
-                <img
-                  src={story.imageUrl}
+                <img                   src={story.imageUrl}
                   alt={story.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   onError={(e) => {

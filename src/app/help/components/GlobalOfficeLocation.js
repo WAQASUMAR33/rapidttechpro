@@ -41,11 +41,10 @@ export default function GlobalOffice() {
                         className="card-1 rounded-xl flex flex-col h-full"
                     >
                         <div className="w-full h-80 rounded-xl">
-                            <img
-                                src="/images/herosection.png"
+                            <img                                 src="/images/herosection.png"
                                 alt={location}
                                 className="rounded-xl w-full h-full object-cover"
-                            />
+                             loading="lazy" />
                         </div>
                         <div className="h-40">
                             <h1 className="text-xl md:text-2xl font-bold mt-2">{location}</h1>
