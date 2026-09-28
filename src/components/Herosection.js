@@ -7,34 +7,29 @@ import { useDispatch } from "react-redux";
 import { openPopup } from "@/store/popupSlice";
 import Link from "next/link";
 
-// Primary client firms uploaded by user
-const clientFirmsRow1 = [
+// User-specified client firms with clean, transparent backgrounds and high-contrast white typography
+const clientFirms = [
     {
         name: "Punjab University of Technology Rasul",
-        src: "/companieslogo/put_white.png",
+        src: "/companieslogo/put_dark_to_white.png",
     },
     {
         name: "Spares on Wheels",
-        src: "/companieslogo/autsparepart_white.png",
+        src: "/companieslogo/autsparepart_dark_to_white.png",
     },
     {
         name: "Apple Legal Solutions",
-        src: "/companieslogo/applelegal_white.png",
+        src: "/companieslogo/applelegal_dark_to_white.png",
     },
-];
-
-const clientFirmsRow2 = [
     {
         name: "Maker4U",
-        src: "/companieslogo/maker4u_white.png",
+        src: "/companieslogo/maker4u_dark_to_white.png",
     },
     {
         name: "CouponRi",
-        src: "/companieslogo/couponri_white.png",
+        src: "/companieslogo/couponri_dark_to_white.png",
     },
 ];
-
-const allClientFirms = [...clientFirmsRow1, ...clientFirmsRow2];
 
 export default function HeroSection() {
     const dispatch = useDispatch();
@@ -52,7 +47,7 @@ export default function HeroSection() {
                 poster="/video/poster.jpg"
             />
             {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/60 to-black/90" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/65 to-black/90" />
 
             <div className="relative flex flex-col justify-end h-full w-full site-full-grid">
                 <div className="site-full-grid-inner pb-14 md:pb-20 lg:pb-24 pt-36 md:pt-44 lg:pt-52">
@@ -129,65 +124,45 @@ export default function HeroSection() {
                             transition={{ delay: 0.5, duration: 0.7 }}
                             className="lg:col-span-6 xl:col-span-6 flex flex-col lg:items-end justify-end pt-6 lg:pt-0"
                         >
-                            <p className="mb-4 sm:mb-6 text-left lg:text-right text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.14em] text-white/60">
+                            <p className="mb-4 sm:mb-5 text-left lg:text-right text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.14em] text-white/60">
                                 TRUSTED BY GLOBAL BRANDS, ACROSS EVERY INDUSTRY
                             </p>
 
-                            {/* Desktop / Tablet: 2 Rows */}
-                            <div className="hidden sm:flex flex-col gap-4 md:gap-5 w-full max-w-[620px] lg:ml-auto">
-                                {/* Row 1: 3 Firms */}
-                                <div className="grid grid-cols-3 gap-x-4 md:gap-x-6 items-center">
-                                    {clientFirmsRow1.map((firm, idx) => (
-                                        <div
-                                            key={idx}
-                                            className="flex h-11 md:h-13 lg:h-14 items-center justify-center cursor-pointer p-1.5 transition-all duration-300 hover:scale-105"
-                                            title={firm.name}
-                                        >
-                                            <Image
-                                                src={firm.src}
-                                                alt={firm.name}
-                                                width={160}
-                                                height={50}
-                                                className="pointer-events-none max-h-full w-auto max-w-[150px] object-contain opacity-80 hover:opacity-100 transition-opacity"
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* Row 2: 2 Firms Centered / Aligned */}
-                                <div className="grid grid-cols-2 gap-x-6 md:gap-x-8 items-center max-w-[400px] lg:mr-4 lg:ml-auto">
-                                    {clientFirmsRow2.map((firm, idx) => (
-                                        <div
-                                            key={idx}
-                                            className="flex h-11 md:h-13 lg:h-14 items-center justify-center cursor-pointer p-1.5 transition-all duration-300 hover:scale-105"
-                                            title={firm.name}
-                                        >
-                                            <Image
-                                                src={firm.src}
-                                                alt={firm.name}
-                                                width={160}
-                                                height={50}
-                                                className="pointer-events-none max-h-full w-auto max-w-[150px] object-contain opacity-80 hover:opacity-100 transition-opacity"
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Mobile Grid: 2 columns */}
-                            <div className="grid grid-cols-2 gap-4 sm:hidden w-full items-center">
-                                {allClientFirms.map((firm, idx) => (
+                            {/* Desktop & Tablet: Clean Frosted Glass Cards */}
+                            <div className="hidden sm:flex flex-wrap lg:justify-end gap-3 max-w-[620px] lg:ml-auto">
+                                {clientFirms.map((firm, idx) => (
                                     <div
                                         key={idx}
-                                        className={`flex h-10 items-center justify-center p-1 ${idx === 4 ? 'col-span-2 max-w-[160px] mx-auto' : ''}`}
+                                        className="flex h-[52px] md:h-[56px] items-center justify-center rounded-xl bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 hover:border-[#0FB5B7]/50 px-4 py-2 transition-all duration-300 hover:scale-105 shadow-md shadow-black/20 group backdrop-blur-sm"
                                         title={firm.name}
                                     >
                                         <Image
                                             src={firm.src}
                                             alt={firm.name}
-                                            width={140}
-                                            height={44}
-                                            className="pointer-events-none max-h-full w-auto max-w-[130px] object-contain opacity-80"
+                                            width={150}
+                                            height={40}
+                                            className="max-h-[32px] md:max-h-[36px] w-auto max-w-[130px] md:max-w-[145px] object-contain transition-transform duration-300 group-hover:scale-105"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Mobile Grid */}
+                            <div className="grid grid-cols-2 gap-2.5 sm:hidden w-full">
+                                {clientFirms.map((firm, idx) => (
+                                    <div
+                                        key={idx}
+                                        className={`flex h-[48px] items-center justify-center rounded-lg bg-white/[0.08] border border-white/15 px-3 py-1.5 shadow-sm backdrop-blur-sm ${
+                                            idx === 4 ? 'col-span-2 max-w-[200px] mx-auto w-full' : ''
+                                        }`}
+                                        title={firm.name}
+                                    >
+                                        <Image
+                                            src={firm.src}
+                                            alt={firm.name}
+                                            width={130}
+                                            height={34}
+                                            className="max-h-[28px] w-auto max-w-[120px] object-contain"
                                         />
                                     </div>
                                 ))}
