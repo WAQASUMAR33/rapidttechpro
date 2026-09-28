@@ -12,7 +12,7 @@ const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy
 const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
 const headers = { 'x-api-key': apiKey };
 
-const resolveImage = (path) => resolveImageUrl(path, null);
+const resolveImage = (path) => resolveImageUrl(path, '/subpageshero/service-image.jpg');
 
 export default function ServiceDetailPage() {
     const { slug } = useParams();
@@ -75,6 +75,9 @@ export default function ServiceDetailPage() {
     const caseStudies = tryParse(service.caseStudies);
     const maintenance = tryParse(service.maintenance);
 
+    const heroImageRaw = service.heroImage || service.icon || service.image || service.mainImage || service.bannerImage || '/subpageshero/service-image.jpg';
+    const resolvedHeroImage = resolveImage(heroImageRaw);
+
     return (
         <UserLayout>
             <div className="bg-white pt-16">
@@ -82,7 +85,7 @@ export default function ServiceDetailPage() {
                 {/* ===== HERO ===== */}
                 <section className="relative bg-white pt-16 pb-12 overflow-hidden">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className={`grid grid-cols-1 ${service.heroImage ? 'lg:grid-cols-2' : ''} gap-12 items-center`}>
+                        <div className={`grid grid-cols-1 ${resolvedHeroImage ? 'lg:grid-cols-2' : ''} gap-12 items-center`}>
                             <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
                                 <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 leading-tight mb-6 mt-6">
                                     {service.title}
@@ -102,9 +105,17 @@ export default function ServiceDetailPage() {
                                     </Link>
                                 </div>
                             </motion.div>
-                            {service.heroImage && (
-                                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
-                                    <img src={resolveImage(service.heroImage)} alt={service.title} className="w-full h-auto rounded-3xl shadow-2xl"  loading="lazy" />
+                            {resolvedHeroImage && (
+                                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="flex justify-center items-center">
+                                    <img
+                                        src={resolvedHeroImage}
+                                        alt={service.title}
+                                        className="w-full max-w-[550px] h-auto rounded-3xl shadow-2xl object-contain"
+                                        loading="lazy"
+                                        onError={(e) => {
+                                            e.currentTarget.src = '/subpageshero/service-image.jpg';
+                                        }}
+                                    />
                                 </motion.div>
                             )}
                         </div>
