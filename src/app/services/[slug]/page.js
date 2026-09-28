@@ -185,8 +185,9 @@ const DEFAULT_WEB_DEV_DATA = {
 export default function ServiceDetailPage() {
   const { slug } = useParams();
   const dispatch = useDispatch();
-  const [service, setService] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const initialTitle = slug ? slug.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ') : 'Web App Development';
+  const [service, setService] = useState({ title: initialTitle, slug });
+  const [loading, setLoading] = useState(false);
   const [activeTechTab, setActiveTechTab] = useState('Frontend Ecosystem');
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
 
