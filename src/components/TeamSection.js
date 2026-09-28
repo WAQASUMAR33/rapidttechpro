@@ -190,10 +190,10 @@ export default function TeamSection() {
                     </div>
                 )}
 
-                {/* Team Members Grid with Editorial Portrait Cards */}
+                {/* Team Members Grid with Editorial Portrait Cards (4 in a row on desktop) */}
                 <motion.div
                     layout
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6"
                 >
                     <AnimatePresence>
                         {filteredMembers.map((member, index) => {
@@ -217,7 +217,7 @@ export default function TeamSection() {
                                             ? 'border-2 border-[#0FB5B7]/30 hover:border-[#0FB5B7] hover:shadow-[#0FB5B7]/20'
                                             : 'border border-black/[0.08] hover:border-black/20 hover:shadow-black/10'
                                     }`}
-                                    style={{ height: '460px' }}
+                                    style={{ height: '420px' }}
                                 >
                                     {/* Member Image with Smooth Ken-Burns Zoom */}
                                     <div className="absolute inset-0 w-full h-full bg-[#11161d] overflow-hidden">
@@ -275,12 +275,12 @@ export default function TeamSection() {
                                     {/* Card Footer Information */}
                                     <div className="absolute bottom-0 inset-x-0 p-6 sm:p-7 z-10 flex flex-col justify-end">
                                         {/* Name */}
-                                        <h3 className="text-[22px] sm:text-[24px] font-bold text-white tracking-tight leading-tight group-hover:text-white transition-colors duration-200">
+                                        <h3 className="text-[19px] sm:text-[21px] font-bold text-white tracking-tight leading-tight group-hover:text-white transition-colors duration-200">
                                             {member.name}
                                         </h3>
 
                                         {/* Designation */}
-                                        <p className="text-[14px] sm:text-[15px] font-medium text-white/80 mt-1">
+                                        <p className="text-[13px] sm:text-[14px] font-medium text-white/80 mt-1 line-clamp-1">
                                             {member.designation}
                                         </p>
 
