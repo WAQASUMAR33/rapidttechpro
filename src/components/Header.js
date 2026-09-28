@@ -184,13 +184,13 @@ export default function Header() {
                         </Link>
 
                     {/* Desktop Nav Links */}
-                    <nav className="hidden lg:flex items-center h-full space-x-6 lg:space-x-8 xl:space-x-12 text-[14px] tracking-tight">
+                    <nav className="hidden lg:flex items-center h-full space-x-7 xl:space-x-9 text-[15px] font-semibold tracking-normal">
                         <div
                             className="relative h-full flex items-center"
                             onMouseEnter={handleMenuEnter}
                             onMouseLeave={handleMenuLeave}
                         >
-                            <Link href="/services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Services</Link>
+                            <Link href="/services" className={`py-2 whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Services</Link>
                             {/* Full-Screen Mega Menu */}
                             {isSolutionsOpen && (
                                 <div
@@ -231,35 +231,28 @@ export default function Header() {
                                 </div>
                             )}
                         </div>
-                        <Link href="/work" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Work</Link>
-                        <Link href="/company" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Company</Link>
-                        <Link href="/contact-us" className={`font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Contact</Link>
+                        <Link href="/#industries" className={`whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Industries</Link>
+                        <Link href="/work" className={`whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Work</Link>
+                        <Link href="/company" className={`whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Company</Link>
+                        <Link href="/contact-us" className={`whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Contact</Link>
                     </nav>
 
                     {/* Contact & Button - Desktop Only */}
-                    <div className="hidden md:flex items-center space-x-6">
-                        <Link href="tel:+923403051059" aria-label="Call +92 340 3051059" className={`flex items-center gap-2 text-sm lg:text-base font-bold whitespace-nowrap transition-colors ${isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>
+                    <div className="hidden md:flex items-center space-x-5 lg:space-x-6">
+                        <Link href="tel:+923403051059" aria-label="Call +92 340 3051059" className={`flex items-center gap-2 text-[14px] lg:text-[15px] font-semibold whitespace-nowrap transition-colors ${isScrolled && isLightPage ? "text-black hover:text-[#0FB5B7]" : (isLightPage ? "text-black hover:text-[#0FB5B7]" : "text-white hover:text-white/80")}`}>
                             <BsTelephone className="text-sm" aria-hidden="true" />
                             <span className="hidden lg:inline">+92 340 3051059</span>
                         </Link>
                         <button
-                            className={`group relative inline-flex items-center overflow-hidden rounded-full py-0.5 pl-0.5 font-semibold transition-all h-[42px] pr-5 text-[13px] border ${
-                                isLightPage
-                                    ? "border-black/15 bg-black/5 hover:bg-black/10 text-black"
-                                    : "border-white/20 bg-white/5 hover:bg-white/10 text-white"
-                            }`}
                             onClick={() => dispatch(openPopup())}
+                            className={`rounded-full px-5 py-2 text-[14px] font-semibold whitespace-nowrap transition-all duration-300 shadow-sm active:scale-95 ${
+                                isScrolled && isLightPage
+                                    ? "bg-black text-white hover:bg-black/85"
+                                    : "bg-white text-black hover:bg-white/90"
+                            }`}
                             aria-label="Open get in touch form"
                         >
-                            <span aria-hidden="true" className="absolute left-0.5 top-0.5 bottom-0.5 rounded-full transition-[width] duration-500 ease-out group-hover:w-[calc(100%-0.25rem)] w-[34px] bg-[#0FB5B7]" />
-                            <span className="relative z-10 flex items-center gap-2">
-                                <span className="flex shrink-0 items-center justify-center h-[34px] w-[34px]">
-                                    <FaArrowRight className="text-white text-xs -rotate-45 transition-transform duration-500 group-hover:rotate-0" />
-                                </span>
-                                <span className="whitespace-nowrap pl-0.5">
-                                    Estimate Project
-                                </span>
-                            </span>
+                            Get in Touch
                         </button>
                     </div>
 

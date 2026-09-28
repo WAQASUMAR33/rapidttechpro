@@ -46,8 +46,8 @@ export default function HeroSection() {
                 playsInline
                 poster="/video/poster.jpg"
             />
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/65 to-black/90" />
+            {/* Lighter Video Overlay for clear video visibility */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-black/65" />
 
             <div className="relative flex flex-col justify-end h-full w-full site-full-grid">
                 <div className="site-full-grid-inner pb-14 md:pb-20 lg:pb-24 pt-36 md:pt-44 lg:pt-52">
@@ -73,9 +73,9 @@ export default function HeroSection() {
                             transition={{ delay: 0.3, duration: 0.7 }}
                             className="lg:col-span-6 xl:col-span-6 flex flex-col gap-6"
                         >
-                            <h1 className="text-[34px] sm:text-[46px] md:text-[56px] lg:text-[62px] xl:text-[68px] font-bold leading-[1.08] tracking-tight text-white">
-                                <span className="text-white/70">Software, Apps &amp;</span>{" "}
-                                Systems — Built to Scale
+                            <h1 className="text-[34px] sm:text-[46px] md:text-[54px] lg:text-[60px] xl:text-[66px] font-bold leading-[1.08] tracking-tight text-white">
+                                <span className="text-white/70">Software, Mobile Apps &amp;</span>{" "}
+                                Enterprise Platforms — Driven by Innovation
                             </h1>
 
                             <p className="text-[15px] sm:text-[17px] font-normal leading-relaxed text-white/75 max-w-[560px]">

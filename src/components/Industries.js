@@ -45,7 +45,7 @@ export default function Industries() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <section className="bg-[#f3f4f6] text-black">
+    <section id="industries" className="bg-[#f3f4f6] text-black scroll-mt-20">
       <div className="site-full-grid py-14 md:py-24 lg:py-[152px]">
         <div className="site-full-grid-inner">
           {/* Eyebrow */}
