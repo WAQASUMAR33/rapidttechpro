@@ -170,12 +170,12 @@ const SuccessStories = () => {
               {stories.map((story, index) => (
                 <div
                   key={story.id}
-                  className={`w-full md:w-1/2 px-4 md:px-6 lg:px-8 mb-12 md:mb-24 ${index % 2 === 1 ? 'md:mt-32' : ''}`}
+                  className={`w-full md:w-1/2 px-4 md:px-6 lg:px-8 mb-12 md:mb-20 ${index % 2 === 1 ? 'md:mt-20' : ''}`}
                   ref={(el) => (cardRefs.current[index] = el)}
                 >
                   <div className="bg-white group">
                     <Link href={`/work/${story.id}`}>
-                      <div className="overflow-hidden rounded-[20px] h-[400px] md:h-[550px] lg:h-[700px] bg-gray-50">
+                      <div className="overflow-hidden rounded-[20px] aspect-[16/10] bg-gray-50 w-full relative">
                         <img
                           src={resolveImage(story.mainImage || story.image)}
                           alt={story.title}

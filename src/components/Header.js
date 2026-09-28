@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BsTelephone } from "react-icons/bs";
@@ -31,6 +31,7 @@ export default function Header() {
     const [lastScrollY, setLastScrollY] = useState(0);
     // const [isOpenGetinTouch, setisOpenGetinTouch] = useState(false);
     const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
+    const menuTimeoutRef = useRef(null);
     const [interests, setInterests] = useState([]);
     const [drawerForm, setDrawerForm] = useState({ name: '', email: '', phone: '', message: '' });
     const [drawerLoading, setDrawerLoading] = useState(false);
@@ -129,7 +130,30 @@ export default function Header() {
         fetchNavServices();
     }, [apiBaseUrl, apiKey]);
 
-    const closeMegaMenu = () => setIsSolutionsOpen(false);
+    const handleMenuEnter = () => {
+        if (menuTimeoutRef.current) {
+            clearTimeout(menuTimeoutRef.current);
+            menuTimeoutRef.current = null;
+        }
+        setIsSolutionsOpen(true);
+    };
+
+    const handleMenuLeave = () => {
+        if (menuTimeoutRef.current) {
+            clearTimeout(menuTimeoutRef.current);
+        }
+        menuTimeoutRef.current = setTimeout(() => {
+            setIsSolutionsOpen(false);
+        }, 250);
+    };
+
+    const closeMegaMenu = () => {
+        if (menuTimeoutRef.current) {
+            clearTimeout(menuTimeoutRef.current);
+            menuTimeoutRef.current = null;
+        }
+        setIsSolutionsOpen(false);
+    };
 
     return (
         <>
@@ -140,8 +164,8 @@ export default function Header() {
                         : (isLightPage ? "bg-white/90 backdrop-blur-md text-black border-b border-gray-100/80" : "bg-transparent text-white")
                 }`}
             >
-                <div className="w-full site-full-grid">
-                    <div className="site-full-grid-inner flex items-center justify-between">
+                <div className="w-full site-full-grid h-full">
+                    <div className="site-full-grid-inner flex items-center justify-between h-full">
                         {/* Logo */}
                         <Link href="/" className="text-xl md:text-[23px] font-bold flex items-center gap-2.5 tracking-tighter group">
                             {!logoError ? (
@@ -160,22 +184,24 @@ export default function Header() {
                         </Link>
 
                     {/* Desktop Nav Links */}
-                    <nav className="hidden lg:flex items-center space-x-6 lg:space-x-8 xl:space-x-12 text-[14px] tracking-tight">
+                    <nav className="hidden lg:flex items-center h-full space-x-6 lg:space-x-8 xl:space-x-12 text-[14px] tracking-tight">
                         <div
-                            className="relative"
-                            onMouseEnter={() => setIsSolutionsOpen(true)}
-                            onMouseLeave={() => setIsSolutionsOpen(false)}
+                            className="relative h-full flex items-center"
+                            onMouseEnter={handleMenuEnter}
+                            onMouseLeave={handleMenuLeave}
                         >
                             <Link href="/services" className={`py-2 font-bold whitespace-nowrap transition-colors ${isScrolled || isLightPage ? "hover:text-[#0FB5B7]" : "hover:text-white/70"}`}>Services</Link>
                             {/* Full-Screen Mega Menu */}
                             {isSolutionsOpen && (
                                 <div
-                                    className="fixed top-[80px] inset-x-0 bg-white hidden md:flex justify-center z-40 max-h-[calc(100vh-80px)] overflow-y-auto shadow-2xl border-t border-gray-100"
-                                    onClick={closeMegaMenu}
+                                    className="fixed top-[80px] inset-x-0 bg-white hidden md:flex justify-center z-50 max-h-[calc(100vh-80px)] overflow-y-auto shadow-2xl border-t border-gray-100"
+                                    onMouseEnter={handleMenuEnter}
+                                    onMouseLeave={handleMenuLeave}
                                 >
+                                    {/* Invisible hover bridge */}
+                                    <div className="absolute -top-3 inset-x-0 h-3" />
                                     <div
                                         className="w-full max-w-7xl mx-auto p-12 lg:p-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 text-black bg-white"
-                                        onClick={(e) => e.stopPropagation()}
                                     >
                                         <div className="flex">
                                             <div className="px-4 w-full">
