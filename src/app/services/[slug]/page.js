@@ -6,17 +6,13 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import UserLayout from '@/app/UserLayout';
 import CallToAction from '@/components/CallToAction';
+import { resolveImageUrl } from '@/utils/imageHelper';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
 const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
 const headers = { 'x-api-key': apiKey };
 
-const resolveImage = (path) => {
-    if (!path) return null;
-    if (path.startsWith('http')) return path;
-    if (path.startsWith('/uploads')) return `${apiBaseUrl}${path}`;
-    return path;
-};
+const resolveImage = (path) => resolveImageUrl(path, null);
 
 export default function ServiceDetailPage() {
     const { slug } = useParams();

@@ -7,6 +7,7 @@ import { useInView } from 'react-intersection-observer';
 import RealTimeProjectMap from './RealTimeProjectMap';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { resolveImageUrl } from '@/utils/imageHelper';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -401,14 +402,8 @@ function InViewCard({ story, index }) {
     threshold: 0.1,
   });
 
-  // Backend images are uploaded to localhost:3001/uploads/ — must prefix with backend URL
-  const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
-  const resolveImage = (path) => {
-    if (!path) return null;
-    if (path.startsWith('http')) return path;
-    if (path.startsWith('/uploads')) return `${apiBaseUrl}${path}`;
-    return path;
-  };
+  // Backend images are uploaded to files.rapidtechpro.com/uploads/
+  const resolveImage = (path) => resolveImageUrl(path, null);
 
   // Backend uses mainImage, shortDescription, categories[] (array of objects), technologies[] (array of objects)
   const projectImage = resolveImage(story.mainImage || story.imageUrl || story.image || story.projectIcon) || '/images/herosection.png';

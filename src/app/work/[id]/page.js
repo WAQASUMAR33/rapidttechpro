@@ -8,6 +8,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import UserLayout from '../../UserLayout';
 import CallToAction from '@/components/CallToAction';
 import DottedWorldMap from '@/components/DottedWorldMap';
+import { resolveImageUrl } from '@/utils/imageHelper';
 
 
 export default function ProjectDetailPage() {
@@ -117,12 +118,7 @@ export default function ProjectDetailPage() {
     );
   }
 
-  const resolveImage = (path) => {
-    if (!path) return null;
-    if (path.startsWith('http')) return path;
-    if (path.startsWith('/uploads')) return `${apiBaseUrl}${path}`;
-    return path;
-  };
+  const resolveImage = (path) => resolveImageUrl(path, null);
 
   // Named image fields from API
   const mainImage = resolveImage(project.mainImage) || resolveImage(project.imageUrl || project.image) || '/images/herosection.png';

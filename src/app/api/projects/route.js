@@ -1,6 +1,7 @@
 const BACKEND_URL = 'https://rapidtechpro-panel.vercel.app';
 const API_KEY = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
 
+export const dynamic = 'force-dynamic';
 export const revalidate = 300; // cache at the Next.js layer for 5 minutes
 
 export async function GET(request) {

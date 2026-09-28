@@ -1,3 +1,4 @@
+const FILES_BASE_URL = process.env.NEXT_PUBLIC_FILES_BASE_URL || 'https://files.rapidtechpro.com';
 const BACKEND_URL = process.env.RAPIDTECH_API_BASE_URL || process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || 'https://rapidtechpro-panel.vercel.app';
 const LOCAL_FALLBACK_URLS = ['http://localhost:3000', 'http://localhost:3001'];
 
@@ -10,6 +11,7 @@ export async function GET(request, { params }) {
     const queryString = searchParams.toString();
 
     const urlsToTry = [
+        `${FILES_BASE_URL}/${relativePath}${queryString ? `?${queryString}` : ''}`,
         `${BACKEND_URL}/${relativePath}${queryString ? `?${queryString}` : ''}`,
         ...LOCAL_FALLBACK_URLS.map((base) => `${base}/${relativePath}${queryString ? `?${queryString}` : ''}`),
     ];

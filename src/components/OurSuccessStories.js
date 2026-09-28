@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
+import { resolveImageUrl } from '@/utils/imageHelper';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,12 +21,7 @@ const SuccessStories = () => {
   const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
   const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
 
-  const resolveImage = (path) => {
-    if (!path) return '/projects/maker4u3.png'; // Fallback
-    if (path.startsWith('http')) return path;
-    if (path.startsWith('/uploads')) return `${apiBaseUrl}${path}`;
-    return path;
-  };
+  const resolveImage = (path) => resolveImageUrl(path, '/projects/maker4u3.png');
 
   useEffect(() => {
     const fetchStories = async () => {

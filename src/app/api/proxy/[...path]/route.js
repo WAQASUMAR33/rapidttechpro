@@ -32,18 +32,30 @@ async function handler(request, { params }) {
 
         let res = await fetch(targetUrl, fetchOptions);
 
-        // If upload image returns 404 from remote, try local dev servers
+        // If upload image returns 404 from remote, try files.rapidtechpro.com and local dev servers
         if (!res.ok && pathStr.startsWith('uploads/')) {
-            for (const localBase of LOCAL_FALLBACK_URLS) {
-                try {
-                    const localUrl = `${localBase}/${pathStr}${queryString ? `?${queryString}` : ''}`;
-                    const localRes = await fetch(localUrl, { cache: 'no-store' });
-                    if (localRes.ok) {
-                        res = localRes;
-                        break;
+            try {
+                const filesUrl = `https://files.rapidtechpro.com/${pathStr}${queryString ? `?${queryString}` : ''}`;
+                const filesRes = await fetch(filesUrl, { cache: 'no-store' });
+                if (filesRes.ok) {
+                    res = filesRes;
+                }
+            } catch (e) {
+                // Ignore
+            }
+
+            if (!res.ok) {
+                for (const localBase of LOCAL_FALLBACK_URLS) {
+                    try {
+                        const localUrl = `${localBase}/${pathStr}${queryString ? `?${queryString}` : ''}`;
+                        const localRes = await fetch(localUrl, { cache: 'no-store' });
+                        if (localRes.ok) {
+                            res = localRes;
+                            break;
+                        }
+                    } catch (e) {
+                        // Ignore local connection errors
                     }
-                } catch (e) {
-                    // Ignore local connection errors
                 }
             }
         }

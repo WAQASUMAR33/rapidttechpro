@@ -11,6 +11,16 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
+                hostname: 'files.rapidtechpro.com',
+                pathname: '/uploads/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'files.rapidtechpro.com',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
                 hostname: 'rapidtechpro-panel.vercel.app',
                 pathname: '/uploads/**',
             },
@@ -39,9 +49,9 @@ const nextConfig = {
                 destination: 'https://rapidtechpro-panel.vercel.app/api/:path*',
             },
             {
-                // Proxies /api/proxy/uploads/img.png -> https://rapidtechpro-panel.vercel.app/uploads/img.png
+                // Proxies /api/proxy/uploads/img.png -> https://files.rapidtechpro.com/uploads/img.png
                 source: '/api/proxy/uploads/:path*',
-                destination: 'https://rapidtechpro-panel.vercel.app/uploads/:path*',
+                destination: 'https://files.rapidtechpro.com/uploads/:path*',
             },
         ];
     },

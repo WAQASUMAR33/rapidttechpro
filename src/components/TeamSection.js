@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { resolveImageUrl } from '@/utils/imageHelper';
 
 const DEFAULT_AVATARS = {
     male: '/team/avatar-male.svg',
@@ -74,9 +75,7 @@ const TeamSection = ({
         if (!path) return '';
         if (path.includes('/defaults/avatar-female')) return DEFAULT_AVATARS.female;
         if (path.includes('/defaults/avatar-male')) return DEFAULT_AVATARS.male;
-        if (path.startsWith('http')) return path;
-        if (path.startsWith('/uploads')) return `${apiBaseUrl}${path}`;
-        return path;
+        return resolveImageUrl(path, '');
     };
 
     useEffect(() => {

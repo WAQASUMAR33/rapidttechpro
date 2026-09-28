@@ -5,16 +5,12 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import DottedWorldMap from '@/components/DottedWorldMap';
+import { resolveImageUrl } from '@/utils/imageHelper';
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
 const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
 
-const resolveImage = (path) => {
-  if (!path) return '/projects/maker4u3.png';
-  if (path.startsWith('http')) return path;
-  if (path.startsWith('/uploads')) return `${apiBaseUrl}${path}`;
-  return path;
-};
+const resolveImage = (path) => resolveImageUrl(path, '/projects/maker4u3.png');
 
 export default function CaseStudy() {
   const [stories, setStories] = useState([]);

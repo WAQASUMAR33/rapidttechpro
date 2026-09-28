@@ -10,6 +10,7 @@ import { CgWebsite } from "react-icons/cg";
 import { GrSystem, GrStorage } from "react-icons/gr";
 import { SiFlutter, SiReact, SiUnity, SiUnrealengine, SiGodotengine, SiMongodb, SiMysql, SiMicrosoftsqlserver, SiPostgresql, SiRedis, SiElasticsearch, SiNginx, SiDocker, SiKubernetes, SiJenkins, SiAmazonaws, SiGooglecloud, SiMicrosoftazure, SiFirebase, SiHeroku } from "react-icons/si";
 import { FaLayerGroup, FaServer } from "react-icons/fa";
+import { resolveImageUrl } from '@/utils/imageHelper';
 
 const LazyImage = ({ src, alt, className }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -194,12 +195,7 @@ const TabsSection = ({ successStoriesRef }) => {
   const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
   const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
 
-  const resolveImage = (path) => {
-    if (!path) return '/images/herosection.png';
-    if (path.startsWith('http')) return path;
-    if (path.startsWith('/uploads')) return `${apiBaseUrl}${path}`;
-    return path;
-  };
+  const resolveImage = (path) => resolveImageUrl(path, '/images/herosection.png');
 
   useEffect(() => {
     const fetchProjects = async () => {

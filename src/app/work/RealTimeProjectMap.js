@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { resolveImageUrl } from '@/utils/imageHelper';
 
 const FALLBACK_CATEGORIES = ['All', 'Food', 'E-Commerce', 'Automobiles', 'Marketplace', 'Education', 'Finance', 'Cryptocurrency'];
 
@@ -33,12 +34,7 @@ export default function RealTimeProjectMap() {
     const apiBaseUrl = process.env.NEXT_PUBLIC_RAPIDTECH_API_BASE_URL || '/api/proxy';
     const apiKey = process.env.NEXT_PUBLIC_RAPIDTECH_API_KEY || 'rapidtech_secret_key_2026';
 
-    const resolveImage = (path) => {
-        if (!path) return '/images/herosection.png';
-        if (path.startsWith('http')) return path;
-        if (path.startsWith('/uploads')) return `${apiBaseUrl}${path}`;
-        return path;
-    };
+    const resolveImage = (path) => resolveImageUrl(path, '/images/herosection.png');
 
     useEffect(() => {
         const fetchData = async () => {

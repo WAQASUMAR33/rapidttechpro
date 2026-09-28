@@ -377,7 +377,7 @@ export default function TechnologiesSection() {
                                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                                                 {cat.items.map((item, i) => (
                                                     <motion.div
-                                                        key={item.id || i}
+                                                        key={`${cat.name || idx}-${item.id || item.name || i}-${i}`}
                                                         whileHover={{ y: -4 }}
                                                         transition={{ duration: 0.2, ease: 'easeOut' }}
                                                         className="group flex items-center gap-3 px-5 py-4 bg-[#F5F5F5] rounded-full cursor-pointer overflow-hidden relative"
