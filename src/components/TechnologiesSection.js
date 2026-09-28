@@ -1,23 +1,27 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useDispatch } from 'react-redux';
+import { openPopup } from '@/store/popupSlice';
 import {
     SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiTailwindcss, SiVuedotjs, SiAngular, SiHtml5, SiCss, SiBootstrap,
-    SiNodedotjs, SiExpress, SiNestjs, SiPython, SiDjango, SiPhp, SiLaravel, SiGraphql,
+    SiNodedotjs, SiExpress, SiNestjs, SiPython, SiDjango, SiPhp, SiLaravel, SiGraphql, SiFastapi,
     SiSwift, SiKotlin, SiAndroid, SiApple,
     SiFlutter, SiDart, SiRedux, SiExpo, SiIonic,
     SiPostgresql, SiMongodb, SiMysql, SiRedis, SiPrisma, SiSupabase, SiElasticsearch, SiSqlite,
-    SiGooglecloud, SiVercel, SiFirebase, SiHeroku, SiDocker, SiKubernetes, SiNginx, SiJenkins, SiGithubactions, SiTerraform,
-    SiOpenai, SiTensorflow, SiPytorch, SiLangchain,
+    SiGooglecloud, SiVercel, SiFirebase, SiHeroku, SiDocker, SiKubernetes, SiNginx, SiJenkins, SiGithubactions, SiTerraform, SiLinux,
+    SiOpenai, SiTensorflow, SiPytorch, SiLangchain, SiHuggingface,
     SiUnity, SiUnrealengine, SiGodotengine, SiBlender, SiThreedotjs
 } from "react-icons/si";
-import { FaCode, FaServer, FaCloud, FaDatabase, FaMobileAlt, FaRobot, FaGamepad, FaLayerGroup, FaAws } from "react-icons/fa";
+import { FaCode, FaServer, FaCloud, FaDatabase, FaMobileAlt, FaRobot, FaGamepad, FaLayerGroup, FaAws, FaArrowRight } from "react-icons/fa";
 
 const TECH_CATEGORIES = [
     {
         id: 'mobile-apps',
         title: 'Mobile Apps',
-        icon: <FaMobileAlt className="text-base" />,
+        icon: <FaMobileAlt className="text-[15px]" />,
+        badge: 'iOS & Android',
+        description: 'Native and high-performance mobile application frameworks engineered for seamless UX and speed.',
         categories: [
             {
                 name: 'iOS Development',
@@ -47,7 +51,9 @@ const TECH_CATEGORIES = [
     {
         id: 'web-platforms',
         title: 'Web Platforms',
-        icon: <FaCode className="text-base" />,
+        icon: <FaCode className="text-[15px]" />,
+        badge: 'Frontend & Backend',
+        description: 'Scalable modern web architectures, component libraries, high-throughput APIs, and microservices.',
         categories: [
             {
                 name: 'Frontend & Frameworks',
@@ -72,10 +78,11 @@ const TECH_CATEGORIES = [
                     { name: 'NestJS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg', fallback: <SiNestjs className="w-5 h-5 text-[#E0234E]" /> },
                     { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', fallback: <SiPython className="w-5 h-5 text-[#3776AB]" /> },
                     { name: 'Django', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg', fallback: <SiDjango className="w-5 h-5 text-[#092E20]" /> },
+                    { name: 'FastAPI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg', fallback: <SiFastapi className="w-5 h-5 text-[#009688]" /> },
                     { name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg', fallback: <SiPhp className="w-5 h-5 text-[#777BB4]" /> },
                     { name: 'Laravel', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg', fallback: <SiLaravel className="w-5 h-5 text-[#FF2D20]" /> },
                     { name: 'GraphQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg', fallback: <SiGraphql className="w-5 h-5 text-[#E10098]" /> },
-                    { name: 'REST APIs', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg', fallback: <FaServer className="w-5 h-5 text-[#0FB5B7]" /> },
+                    { name: 'REST APIs', icon: null, fallback: <FaServer className="w-5 h-5 text-[#0FB5B7]" /> },
                 ]
             }
         ]
@@ -83,7 +90,9 @@ const TECH_CATEGORIES = [
     {
         id: 'cross-platforms',
         title: 'Cross Platforms',
-        icon: <FaLayerGroup className="text-base" />,
+        icon: <FaLayerGroup className="text-[15px]" />,
+        badge: 'Single Codebase',
+        description: 'Single-codebase frameworks reducing time-to-market while retaining 60fps native feel.',
         categories: [
             {
                 name: 'Multi-Platform Frameworks',
@@ -102,7 +111,9 @@ const TECH_CATEGORIES = [
     {
         id: 'database',
         title: 'Database & Cache',
-        icon: <FaDatabase className="text-base" />,
+        icon: <FaDatabase className="text-[15px]" />,
+        badge: 'SQL, NoSQL & Cache',
+        description: 'High-availability relational, document, graph, and in-memory databases engineered for zero data loss.',
         categories: [
             {
                 name: 'Relational, NoSQL & Caching',
@@ -123,10 +134,12 @@ const TECH_CATEGORIES = [
     {
         id: 'cloud-devops',
         title: 'Cloud & DevOps',
-        icon: <FaCloud className="text-base" />,
+        icon: <FaCloud className="text-[15px]" />,
+        badge: 'Infra & CI/CD',
+        description: 'Auto-scaling multi-cloud deployments, automated CI/CD pipelines, container orchestration, and serverless infrastructure.',
         categories: [
             {
-                name: 'Cloud Providers',
+                name: 'Cloud Infrastructure',
                 items: [
                     { name: 'AWS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg', fallback: <FaAws className="w-5 h-5 text-[#FF9900]" /> },
                     { name: 'Google Cloud', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg', fallback: <SiGooglecloud className="w-5 h-5 text-[#4285F4]" /> },
@@ -145,6 +158,7 @@ const TECH_CATEGORIES = [
                     { name: 'Jenkins', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg', fallback: <SiJenkins className="w-5 h-5 text-[#D24939]" /> },
                     { name: 'GitHub Actions', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg', fallback: <SiGithubactions className="w-5 h-5 text-[#2088FF]" /> },
                     { name: 'Terraform', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg', fallback: <SiTerraform className="w-5 h-5 text-[#7B42BC]" /> },
+                    { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg', fallback: <SiLinux className="w-5 h-5 text-black" /> },
                 ]
             }
         ]
@@ -152,7 +166,9 @@ const TECH_CATEGORIES = [
     {
         id: 'ai-automation',
         title: 'AI & Automation',
-        icon: <FaRobot className="text-base" />,
+        icon: <FaRobot className="text-[15px]" />,
+        badge: 'LLMs & Bots',
+        description: 'Intelligent AI models, Retrieval-Augmented Generation (RAG), neural networks, and automated business workflows.',
         categories: [
             {
                 name: 'Artificial Intelligence & LLMs',
@@ -164,6 +180,7 @@ const TECH_CATEGORIES = [
                     { name: 'Python AI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', fallback: <SiPython className="w-5 h-5 text-[#3776AB]" /> },
                     { name: 'TensorFlow', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', fallback: <SiTensorflow className="w-5 h-5 text-[#FF6F00]" /> },
                     { name: 'PyTorch', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg', fallback: <SiPytorch className="w-5 h-5 text-[#EE4C2C]" /> },
+                    { name: 'Hugging Face', icon: null, fallback: <SiHuggingface className="w-5 h-5 text-[#FFD21E]" /> },
                 ]
             },
             {
@@ -180,7 +197,9 @@ const TECH_CATEGORIES = [
     {
         id: 'games',
         title: 'Games & 3D',
-        icon: <FaGamepad className="text-base" />,
+        icon: <FaGamepad className="text-[15px]" />,
+        badge: 'Engines & 3D',
+        description: 'Immersive realtime 3D engines, cross-platform gameplay, physics simulation, and interactive WebGL experiences.',
         categories: [
             {
                 name: 'Engines & 3D Interactive',
@@ -197,8 +216,20 @@ const TECH_CATEGORIES = [
 ];
 
 export default function TechnologiesSection() {
+    const dispatch = useDispatch();
     const [techList, setTechList] = useState(TECH_CATEGORIES);
     const [activeTab, setActiveTab] = useState(TECH_CATEGORIES[0].id);
+    const [direction, setDirection] = useState(0);
+    const prevIndexRef = useRef(0);
+
+    const activeIndex = techList.findIndex((t) => t.id === activeTab);
+
+    const handleTabChange = (newId) => {
+        const newIndex = techList.findIndex((t) => t.id === newId);
+        setDirection(newIndex > prevIndexRef.current ? 1 : -1);
+        prevIndexRef.current = newIndex;
+        setActiveTab(newId);
+    };
 
     useEffect(() => {
         const fetchTechnologies = async () => {
@@ -213,7 +244,6 @@ export default function TechnologiesSection() {
                 else if (data?.success && Array.isArray(data.data)) rawItems = data.data;
                 else if (Array.isArray(data?.technologies)) rawItems = data.technologies;
 
-                // If DB items exist, merge them into the respective categories
                 if (rawItems.length > 0) {
                     setTechList((prev) =>
                         prev.map((categoryGroup) => {
@@ -241,41 +271,79 @@ export default function TechnologiesSection() {
                     );
                 }
             } catch (err) {
-                // Silently maintain high-quality preset list
+                // Keep presets
             }
         };
 
         fetchTechnologies();
     }, []);
 
-    const activeTech = techList.find((t) => t.id === activeTab) || techList[0];
+    const activeTech = techList[activeIndex] || techList[0];
+
+    // Slide variants for directional tab switching
+    const slideVariants = {
+        enter: (dir) => ({
+            x: dir > 0 ? 60 : -60,
+            opacity: 0,
+            scale: 0.98,
+        }),
+        center: {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            transition: {
+                x: { type: "spring", stiffness: 350, damping: 30 },
+                opacity: { duration: 0.25 },
+            },
+        },
+        exit: (dir) => ({
+            x: dir < 0 ? 60 : -60,
+            opacity: 0,
+            scale: 0.98,
+            transition: {
+                x: { type: "spring", stiffness: 350, damping: 30 },
+                opacity: { duration: 0.18 },
+            },
+        }),
+    };
 
     return (
-        <section id="technologies" className="bg-[#f9fafb] py-16 md:py-24 lg:py-28 site-full-grid border-t border-black/[0.06]" aria-label="Technologies">
+        <section id="technologies" className="bg-[#f8f9fa] py-16 md:py-24 lg:py-28 site-full-grid border-t border-black/[0.06] overflow-hidden" aria-label="Technologies">
             <div className="site-full-grid-inner">
                 {/* Eyebrow */}
-                <p className="text-[13px] font-semibold uppercase tracking-[0.22em] text-black/55 mb-4 sm:mb-5">
-                    Engineering Ecosystem
-                </p>
-
-                {/* Divider */}
-                <div className="h-px w-full bg-black/10 mb-8 sm:mb-10" />
-
-                {/* Two-Column Header matching Cubix style */}
-                <div className="grid grid-cols-1 gap-6 sm:mt-8 xl:grid-cols-[1.1fr_0.9fr] xl:items-start xl:gap-10 mb-10 md:mb-14">
-                    <h2 className="w-full text-[30px] sm:text-[42px] md:text-[50px] lg:text-[58px] font-bold leading-[1.1] tracking-tight text-black">
-                        <span className="text-black/55">Technologies </span>We Build With.
-                    </h2>
-                    <p className="w-full text-left text-[16px] sm:text-[18px] md:text-[19px] font-medium leading-relaxed text-black/55 xl:pt-2">
-                        Deep, current expertise across mobile, web, cross-platform, game engines, databases, AI, and cloud, ready to plug into your roadmap.
+                <div className="flex items-center justify-between mb-4 sm:mb-5">
+                    <p className="text-[13px] font-semibold uppercase tracking-[0.22em] text-black/50">
+                        Engineering Ecosystem
                     </p>
+                    <span className="hidden sm:inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200/60 shadow-xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        Production-Ready Stacks
+                    </span>
                 </div>
 
-                {/* Interactive Cubix-Style Container Card */}
-                <div className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
-                    {/* Top Tab Bar with Smooth Sliding Highlight */}
-                    <div className="overflow-x-auto border-b border-black/10 bg-[#f5f6f8] p-1.5 md:p-2.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-                        <div role="tablist" aria-label="Technology categories" className="relative flex gap-1 md:gap-2">
+                {/* Divider */}
+                <div className="h-px w-full bg-black/10 mb-8 sm:mb-12" />
+
+                {/* Two-Column Header */}
+                <div className="grid grid-cols-1 gap-6 sm:mt-8 xl:grid-cols-[1.1fr_0.9fr] xl:items-start xl:gap-10 mb-10 md:mb-14">
+                    <h2 className="w-full text-[30px] sm:text-[42px] md:text-[52px] lg:text-[60px] font-bold leading-[1.08] tracking-tight text-black">
+                        <span className="text-black/50">Technologies </span>We Build With.
+                    </h2>
+                    <div className="flex flex-col gap-2">
+                        <p className="w-full text-left text-[16px] sm:text-[18px] md:text-[20px] font-medium leading-relaxed text-black/60">
+                            Deep, current expertise across mobile, web, cross-platform, game engines, databases, AI, and cloud, ready to plug into your roadmap.
+                        </p>
+                        <p className="text-sm text-[#0FB5B7] font-semibold">
+                            Hover over any technology to explore our battle-tested capabilities.
+                        </p>
+                    </div>
+                </div>
+
+                {/* Interactive Cubix-Style Container Card with 3D Depth */}
+                <div className="overflow-hidden rounded-3xl border border-black/10 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+                    {/* Top Tab Bar with Smooth Spring Sliding Pill Indicator */}
+                    <div className="overflow-x-auto border-b border-black/10 bg-[#f4f5f7] p-2 md:p-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                        <div role="tablist" aria-label="Technology categories" className="relative flex gap-1.5 sm:gap-2">
                             {techList.map((tab) => {
                                 const isActive = activeTab === tab.id;
                                 return (
@@ -284,21 +352,21 @@ export default function TechnologiesSection() {
                                         type="button"
                                         role="tab"
                                         aria-selected={isActive}
-                                        onClick={() => setActiveTab(tab.id)}
-                                        className="relative z-10 flex shrink-0 items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2.5 sm:px-6 sm:py-3.5 text-left outline-none transition-colors duration-200 cursor-pointer"
+                                        onClick={() => handleTabChange(tab.id)}
+                                        className="relative z-10 flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-2xl px-4 py-2.5 sm:px-6 sm:py-3.5 text-left outline-none transition-all duration-300 cursor-pointer"
                                     >
-                                        {/* Animated Sliding Pill Background */}
+                                        {/* Animated Sliding Pill Highlight */}
                                         {isActive && (
                                             <motion.span
                                                 layoutId="activeTechTabPill"
-                                                className="absolute inset-0 rounded-xl bg-white shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-black/[0.08]"
-                                                transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                                                className="absolute inset-0 rounded-2xl bg-white shadow-[0_3px_12px_rgba(0,0,0,0.08)] border border-black/[0.08]"
+                                                transition={{ type: "spring", stiffness: 420, damping: 30 }}
                                             />
                                         )}
                                         <span className={`relative z-10 flex items-center gap-2 text-[14px] sm:text-[15px] md:text-[16px] transition-colors duration-200 ${
                                             isActive ? "font-bold text-[#0B0C0D]" : "font-medium text-[#0B0C0D]/55 hover:text-[#0B0C0D]"
                                         }`}>
-                                            <span className={`${isActive ? "text-[#0FB5B7]" : "text-black/40"}`}>{tab.icon}</span>
+                                            <span className={`transition-colors duration-200 ${isActive ? "text-[#0FB5B7]" : "text-black/40"}`}>{tab.icon}</span>
                                             {tab.title}
                                         </span>
                                     </button>
@@ -307,44 +375,72 @@ export default function TechnologiesSection() {
                         </div>
                     </div>
 
-                    {/* Tab Content Panel */}
-                    <div className="p-6 sm:p-8 md:p-10 lg:p-12 min-h-[380px] bg-white">
-                        <AnimatePresence mode="wait">
+                    {/* Active Tab Description Bar */}
+                    <div className="px-6 py-4 md:px-10 border-b border-black/[0.06] bg-gradient-to-r from-gray-50/80 via-white to-gray-50/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                        <div className="flex items-center gap-3">
+                            <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-[#0FB5B7]/10 text-[#0FB5B7]">
+                                {activeTech.badge}
+                            </span>
+                            <span className="text-sm text-black/60 font-medium hidden md:inline">
+                                {activeTech.description}
+                            </span>
+                        </div>
+                        <span className="text-xs font-semibold text-black/40">
+                            {activeTech.categories.reduce((acc, c) => acc + c.items.length, 0)} Total Technologies
+                        </span>
+                    </div>
+
+                    {/* Tab Content Panel with Directional Sliding & Cascading Cards */}
+                    <div className="p-6 sm:p-8 md:p-10 lg:p-12 min-h-[420px] bg-white overflow-hidden relative">
+                        <AnimatePresence custom={direction} mode="wait">
                             <motion.div
                                 key={activeTab}
-                                initial={{ opacity: 0, y: 12 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                transition={{ duration: 0.28, ease: "easeOut" }}
+                                custom={direction}
+                                variants={slideVariants}
+                                initial="enter"
+                                animate="center"
+                                exit="exit"
                                 className="flex flex-col gap-10"
                             >
-                                {activeTech.categories.map((subCat, idx) => (
-                                    <div key={idx} className="space-y-4">
-                                        <div className="flex items-center gap-3">
-                                            <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-bold text-black/85 tracking-tight">
-                                                {subCat.name}
+                                {activeTech.categories.map((subCat, subIdx) => (
+                                    <div key={subIdx} className="space-y-5">
+                                        <div className="flex items-center justify-between">
+                                            <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-bold text-black/85 tracking-tight flex items-center gap-3">
+                                                <span>{subCat.name}</span>
+                                                <span className="text-xs font-semibold text-black/45 px-2.5 py-0.5 rounded-full bg-gray-100 border border-black/5">
+                                                    {subCat.items.length} Techs
+                                                </span>
                                             </h3>
-                                            <span className="text-[11px] font-semibold uppercase tracking-wider text-black/45 px-2.5 py-0.5 rounded-full bg-gray-100 border border-black/5">
-                                                {subCat.items.length} Techs
-                                            </span>
                                         </div>
 
-                                        {/* Technology Grid with Interactive Cards */}
+                                        {/* Technology Grid with Staggered Interactive Transform Cards */}
                                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
                                             {subCat.items.map((item, itemIdx) => (
                                                 <motion.div
-                                                    key={itemIdx}
-                                                    whileHover={{ y: -3, scale: 1.02 }}
-                                                    transition={{ duration: 0.18, ease: "easeOut" }}
-                                                    className="group flex items-center gap-3 px-3.5 py-3 rounded-xl bg-gray-50/70 hover:bg-white border border-black/[0.06] hover:border-[#0FB5B7]/40 shadow-[0_1px_2px_rgba(0,0,0,0.03)] hover:shadow-md hover:shadow-[#0FB5B7]/10 transition-all duration-300 cursor-pointer"
+                                                    key={`${activeTab}-${subIdx}-${itemIdx}`}
+                                                    initial={{ opacity: 0, y: 15, scale: 0.96 }}
+                                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                    transition={{
+                                                        delay: itemIdx * 0.025,
+                                                        duration: 0.3,
+                                                        ease: [0.22, 1, 0.36, 1],
+                                                    }}
+                                                    whileHover={{
+                                                        y: -5,
+                                                        scale: 1.03,
+                                                        boxShadow: "0 12px 28px -6px rgba(15, 181, 183, 0.25)",
+                                                    }}
+                                                    whileTap={{ scale: 0.98 }}
+                                                    className="group relative flex items-center gap-3.5 px-4 py-3.5 rounded-2xl bg-gray-50/80 hover:bg-[#0FB5B7] border border-black/[0.06] hover:border-[#0FB5B7] transition-all duration-300 cursor-pointer shadow-xs"
                                                     title={item.name}
                                                 >
-                                                    <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-white shadow-xs group-hover:bg-[#0FB5B7]/10 transition-colors p-1 border border-black/5">
+                                                    {/* Elevated Icon Tile */}
+                                                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-white shadow-xs group-hover:scale-110 group-hover:shadow-md transition-all duration-300 p-1.5 border border-black/5">
                                                         {item.icon ? (
                                                             <img
                                                                 src={item.icon}
                                                                 alt={item.name}
-                                                                className="w-5 h-5 object-contain"
+                                                                className="w-5 h-5 object-contain transition-transform duration-300 group-hover:scale-105"
                                                                 loading="lazy"
                                                                 onError={(e) => {
                                                                     e.target.style.display = 'none';
@@ -356,8 +452,15 @@ export default function TechnologiesSection() {
                                                             {item.fallback}
                                                         </span>
                                                     </div>
-                                                    <span className="text-[13px] sm:text-[14px] font-semibold text-black/80 group-hover:text-[#0FB5B7] transition-colors truncate">
+
+                                                    {/* Technology Label */}
+                                                    <span className="text-[14px] sm:text-[15px] font-semibold text-black/85 group-hover:text-white transition-colors duration-200 truncate">
                                                         {item.name}
+                                                    </span>
+
+                                                    {/* Subtle Hover Arrow Indicator */}
+                                                    <span className="absolute right-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200 text-white text-xs">
+                                                        ↗
                                                     </span>
                                                 </motion.div>
                                             ))}
@@ -366,6 +469,25 @@ export default function TechnologiesSection() {
                                 ))}
                             </motion.div>
                         </AnimatePresence>
+                    </div>
+
+                    {/* Bottom Interactive CTA Bar */}
+                    <div className="p-6 md:p-8 bg-[#0b0c0d] text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-t border-black/10">
+                        <div>
+                            <p className="text-[17px] md:text-[19px] font-bold text-white tracking-tight">
+                                Need a custom technology stack or architecture consultation?
+                            </p>
+                            <p className="text-xs md:text-sm text-white/60 mt-0.5 font-normal">
+                                Our senior software architects analyze your requirements and recommend the optimal technology stack.
+                            </p>
+                        </div>
+                        <button
+                            onClick={() => dispatch(openPopup())}
+                            className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 bg-[#0FB5B7] hover:bg-[#0FB5B7]/90 text-white font-semibold text-sm transition-all duration-300 hover:scale-105 shadow-md shadow-[#0FB5B7]/30 whitespace-nowrap active:scale-95"
+                        >
+                            <span>Consult Our Architects</span>
+                            <FaArrowRight className="text-xs" />
+                        </button>
                     </div>
                 </div>
             </div>
