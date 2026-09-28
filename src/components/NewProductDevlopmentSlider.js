@@ -93,20 +93,31 @@ export default function ProductProcess() {
   }, []);
 
   return (
-    <div className='flex bg-black w-full flex-col py-20'>
-      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-12 lg:px-16 2xl:px-24">
-        {/* Header */}
-        <div className="md:pt-10 font-bold text-3xl py-10 md:text-5xl lg:text-7xl tracking-tighter">
-          <h2 className="text-white leading-tight">Our Product</h2>
-          <h2 className="text-[#0FB5B7] leading-tight">Development Journey</h2>
-          <p className="flex text-white text-sm md:text-lg font-medium items-center gap-2 mt-6 opacity-80 tracking-normal">
-            Bringing Your Vision to Life, Step by Step
-            <FaArrowRight className='rotate-90' />
+    <section className="flex bg-[#0B0F17] w-full flex-col py-24 md:py-32 site-full-grid border-t border-white/10" aria-label="Development Process">
+      <div className="site-full-grid-inner">
+        {/* Eyebrow */}
+        <p className="text-[13px] font-semibold uppercase tracking-[0.22em] text-white/55 mb-4 sm:mb-5">
+          Methodology & Delivery
+        </p>
+
+        {/* Divider */}
+        <div className="h-px w-full bg-white/20 mb-10 sm:mb-12" />
+
+        {/* Two-Column Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 md:mb-20">
+          <div>
+            <h2 className="text-[32px] sm:text-[44px] md:text-[54px] lg:text-[64px] font-bold leading-[1.08] tracking-tight text-white">
+              <span className="text-white/55">Our Product</span> <br />
+              Development Journey.
+            </h2>
+          </div>
+          <p className="text-base sm:text-lg text-white/60 max-w-md font-medium leading-relaxed">
+            From strategic discovery to high-scale deployment, we turn complex ideas into seamless, market-leading digital products.
           </p>
         </div>
 
         {/* Main Content */}
-        <div ref={containerRef} className="flex bg-black text-white relative pt-20">
+        <div ref={containerRef} className="flex bg-transparent text-white relative pt-12 md:pt-16">
           {/* Left Progress Line */}
           <div className="hidden lg:flex flex-col items-center w-[1px] mr-12 lg:mr-20 relative flex-shrink-0">
             {/* Background line */}
@@ -179,6 +190,6 @@ export default function ProductProcess() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

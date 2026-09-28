@@ -8,6 +8,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #0FB5B7;
+  --dark-color: #0b0c0d;
+  --site-container: 1520px;
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
 .font-manrope {
   font-family: 'Manrope', sans-serif;
 }
@@ -20,115 +28,124 @@ html {
      footer up through the viewport on every page change.
      Components that want smooth scrolling pass behavior:'smooth' explicitly. */
   font-family: 'Manrope', sans-serif;
+  scrollbar-gutter: stable;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: "Manrope", "system-ui", Helvetica, Arial, "sans-serif" !important;
   font-weight: 800;
   letter-spacing: -0.03em;
   -webkit-font-smoothing: antialiased;
 }
 
-
 body {
   font-family: 'Manrope', sans-serif;
+  color: var(--dark-color);
+  overflow-x: hidden !important;
+  -webkit-font-smoothing: antialiased;
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+p {
+  font-weight: 400;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+a {
+  cursor: pointer;
 }
 
-/* body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* ───── Site Grid (Cubix-style) ───── */
+.site-full-grid {
+  width: 100%;
+  padding-inline: 1rem;
+}
+@media (min-width: 640px) { .site-full-grid { padding-inline: 2rem; } }
+@media (min-width: 768px) { .site-full-grid { padding-inline: 3rem; } }
+@media (min-width: 1280px) { .site-full-grid { padding-inline: 4rem; } }
+
+.site-full-grid-inner {
+  width: 100%;
+  max-width: var(--site-container);
+  margin-inline: auto;
+  padding-inline: 2px;
 }
 
-/* styles/globals.css or styles/tailwind.css */
-/* styles/globals.css or styles/tailwind.css */
+/* ───── Text Utilities ───── */
+.text-theme { color: var(--primary-color) !important; }
+.text-grey { color: inherit; opacity: 0.6; }
+.bg-theme { background-color: var(--primary-color) !important; }
+
+/* ───── Marquee Animations ───── */
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-100%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
+.animate-marquee { animation: marquee 30s linear infinite; }
+.animate-marquee-for-mobile { animation: marquee 8s linear infinite; }
 
-.animate-marquee {
-  animation: marquee 30s linear infinite;
-}
+/* ───── Scrollbar ───── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-.animate-marquee-for-mobile {
-  animation: marquee 8s linear infinite;
-}
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: #888; border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background-color: #555; }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge, and Firefox */
-.no-scrollbar {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
-}
-
-/* Footer Reveal / Curtain Effect */
-.footer-reveal-container {
-  position: relative;
-  width: 100%;
-}
-
-.main-content-wrapper {
-  position: relative;
-  z-index: 10;
-  background: white;
-}
-
-.sticky-footer-wrapper {
-  position: sticky;
-  bottom: 0;
-  z-index: 0;
-  width: 100%;
-}
-
+/* ───── Footer Reveal / Curtain Effect ───── */
+.footer-reveal-container { position: relative; width: 100%; }
+.main-content-wrapper { position: relative; z-index: 10; background: white; }
+.sticky-footer-wrapper { position: sticky; bottom: 0; z-index: 0; width: 100%; }
 @media (max-width: 1023px) {
-  .sticky-footer-wrapper {
-    position: relative !important;
-  }
+  .sticky-footer-wrapper { position: relative !important; }
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* ───── Slider Gradient (Cubix-style) ───── */
+.sliderGradient:after,
+.sliderGradient:before {
+  background: transparent !important;
+  content: "";
+  height: 102%;
+  position: absolute;
+  top: -1%;
+  width: 300px;
+  z-index: 99;
+}
+.sliderGradient:before {
+  background: linear-gradient(90deg, #000, rgba(0,0,0,.71) 50%, transparent);
+  left: 0;
+}
+.sliderGradient:after {
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,.71) 50%, #000);
+  right: 0;
+}
+@media (max-width: 576px) {
+  .sliderGradient:after, .sliderGradient:before { width: 100px; }
 }
 
-::-webkit-scrollbar-track {
+/* ───── Contact Form Glass (Cubix-style) ───── */
+.home-contact-form-glass {
+  background: linear-gradient(160deg, rgba(255,255,255,0.06) 0%, transparent 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(24px);
+}
+.home-contact-field-shell {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  transition: border-color 0.2s;
+}
+.home-contact-field-shell:focus-within {
+  border-color: var(--primary-color);
+}
+.home-contact-field {
   background: transparent;
+  border: none;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #0FB5B7;
-  border-radius: 10px;
-}
+/* ───── FAQ Accordion ───── */
+.faq-sec p { color: inherit; }
 
-::-webkit-scrollbar-button {
-  display: none;
-}
+/* ───── Splide Overrides ───── */
+.splide__pagination { bottom: -3.3em !important; justify-content: start !important; }
+.splide__pagination__page { border-radius: 0 !important; height: 5px !important; opacity: 1 !important; width: 35px !important; }
+.splide__pagination__page.is-active { background: #000 !important; transform: unset !important; }

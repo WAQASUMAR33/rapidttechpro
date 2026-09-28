@@ -11,9 +11,9 @@ import TwoColumnSection from "@/components/NewProductDevlopmentSlider";
 import TechnologiesSection from "@/components/TechnologiesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import DarkAwardsSection from "@/components/DarkAwardsSection";
-// import HighlightsSection from "@/components/HighlightsSection";
 import SuccessStories from "@/components/OurSuccessStories";
 import TeamSection from "@/components/TeamSection";
+import FAQSection from "@/components/FAQSection";
 
 export default function Home() {
 
@@ -28,25 +28,49 @@ export default function Home() {
   return (
     <>
       <ChatWithWhatsapp />
-      <div className="flex flex-col h-[100dvh] w-full overflow-hidden">
-        <Herosection />
-        <AutoImagePlayCarousel />
-      </div>
-      <OurJourney />
-      <SuccessStories />
-      <TwoColumnSection />
-      <TechnologiesSection />
+
+      {/* ─── Hero ─── */}
+      <Herosection />
+
+      {/* ─── Client Logo Ticker ─── */}
       <AutoImagePlayCarousel />
+
+      {/* ─── Stats / Journey ─── */}
+      <OurJourney />
+
+      {/* ─── Case Studies / Portfolio ─── */}
+      <SuccessStories />
+
+      {/* ─── Process Section (dark) ─── */}
+      <TwoColumnSection />
+
+      {/* ─── Technologies (tabbed) ─── */}
+      <TechnologiesSection />
+
+      {/* ─── Client Logo Ticker ─── */}
+      <AutoImagePlayCarousel />
+
+      {/* ─── Testimonials (dark) ─── */}
       <TestimonialsSection />
+
+      {/* ─── Industries We Serve (light gray) ─── */}
       <Industries />
+
+      {/* ─── Awards (dark) ─── */}
       <DarkAwardsSection />
-      {/* TODO: re-enable once real highlight videos are prepared */}
-      {/* <HighlightsSection /> */}
+
+      {/* ─── Team ─── */}
       <TeamSection />
-      <div className=" w-full overflow-hidden">
+
+      {/* ─── Text Marquee ─── */}
+      <div className="w-full overflow-hidden">
         <Autoplayslider companyNames={companyNames} />
       </div>
-      {/* <BlogSection /> */}
+
+      {/* ─── FAQ (light gray) ─── */}
+      <FAQSection />
+
+      {/* ─── Contact / CTA (dark) ─── */}
       <CallToAction />
     </>
   );

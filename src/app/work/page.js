@@ -1,15 +1,27 @@
 export const metadata = {
-  title: "Our Work",
-  description: "Browse RapidTechPro's portfolio of successful projects spanning web, mobile, and enterprise technology solutions.",
+  title: "Case Studies & Portfolio — Web Apps, Mobile Apps & Enterprise Systems",
+  description: "Explore RapidTechPro's portfolio of 149+ successfully delivered projects. Case studies in native mobile apps, cloud POS, enterprise ERP systems, and high-performance web applications.",
+  keywords: [
+    "software development portfolio",
+    "mobile app case studies",
+    "custom web applications portfolio",
+    "enterprise software projects",
+    "POS case studies",
+    "RapidTechPro client work"
+  ],
   alternates: { canonical: "/work" },
   openGraph: {
-    title: "Our Work | RapidTechPro",
-    description: "Browse RapidTechPro's portfolio of successful projects spanning web, mobile, and enterprise technology solutions.",
+    title: "Case Studies & Portfolio — Web Apps, Mobile Apps & Enterprise Systems | RapidTechPro",
+    description: "Browse 149+ completed projects across web, iOS, Android, and enterprise software.",
     url: "/work",
     images: [{ url: "/company/logo.png", width: 1200, height: 630, alt: "RapidTechPro Portfolio" }],
     type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Our Work | RapidTechPro", description: "Browse RapidTechPro's portfolio of successful projects." },
+  twitter: {
+    card: "summary_large_image",
+    title: "Case Studies & Portfolio | RapidTechPro",
+    description: "Browse 149+ completed projects across web, mobile, ERP, and POS systems.",
+  },
 };
 
 import CallToAction from "@/components/CallToAction";
@@ -20,9 +32,9 @@ import JsonLd from "@/components/JsonLd";
 const workSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  name: "Our Work — RapidTechPro Portfolio",
-  url: "/work",
-  description: "A collection of successful technology projects delivered by RapidTechPro.",
+  name: "Our Work — RapidTechPro Portfolio & Case Studies",
+  url: "https://rapidtechpro.com/work",
+  description: "A collection of 149+ successful custom software, web, and mobile app projects delivered by RapidTechPro.",
   publisher: { "@type": "Organization", name: "RapidTechPro", url: "https://rapidtechpro.com" },
 };
 

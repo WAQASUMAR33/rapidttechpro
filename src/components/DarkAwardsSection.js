@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FaArrowRight } from 'react-icons/fa';
 
 const awards = [
     {
@@ -47,26 +48,32 @@ const awards = [
     }
 ];
 
-// Duplicate the awards to create a seamless loop
 const duplicatedAwards = [...awards, ...awards];
 
 export default function DarkAwardsSection() {
     return (
-        <section className="bg-black text-white py-16 md:py-24 overflow-hidden border-t border-gray-900">
-            <div className="px-6 md:px-12 lg:px-24 mb-12 max-w-7xl mx-auto">
-                <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                    Our awards and <br />
-                    <span className="text-bluish">recognitions</span>
-                </h2>
-                <p className="text-gray-400 text-lg max-w-2xl leading-relaxed">
-                    Recognized globally for our industry-leading development expertise and innovative solutions. Creating innovative, user-friendly, and life-changing products is what we do!
-                </p>
+        <section className="bg-[#000000] text-white overflow-hidden">
+            <div className="site-full-grid py-14 md:py-24 lg:py-[120px]">
+                <div className="site-full-grid-inner">
+                    {/* Eyebrow */}
+                    <p className="mb-4 text-[13px] font-semibold uppercase tracking-[0.22em] text-white/55 sm:mb-5">
+                        Awards & Recognition
+                    </p>
+                    <div className="h-px w-full bg-white/25" />
+
+                    {/* Header */}
+                    <div className="mt-10 flex flex-col items-start gap-6 sm:mt-12 md:flex-row md:items-end md:justify-between md:gap-10 mb-12 md:mb-16">
+                        <h2 className="max-w-[560px] text-[28px] font-bold leading-[1.25] tracking-tight text-white sm:text-4xl lg:max-w-[640px] lg:text-[48px] lg:leading-[1.2]">
+                            <span className="text-grey">Our awards and </span>recognitions
+                        </h2>
+                    </div>
+                </div>
             </div>
 
-            {/* Infinite Marquee Container */}
-            <div className="relative flex overflow-hidden group">
+            {/* Infinite Marquee Container - full width */}
+            <div className="relative flex overflow-hidden group pb-14 md:pb-24">
                 <motion.div
-                    className="flex gap-6 whitespace-nowrap"
+                    className="flex gap-4 whitespace-nowrap"
                     animate={{
                         x: ['0%', '-50%']
                     }}
@@ -82,26 +89,27 @@ export default function DarkAwardsSection() {
                     {duplicatedAwards.map((award, index) => (
                         <div
                             key={index}
-                            className="w-[320px] md:w-[380px] bg-[#111111] border border-gray-800 rounded-[32px] p-8 flex flex-col justify-between h-56 shrink-0 hover:border-bluish/50 transition-colors"
+                            className="w-[300px] md:w-[380px] bg-white/[0.03] border border-white/[0.06] rounded-[20px] p-7 flex flex-col justify-between h-52 shrink-0 hover:border-[#0FB5B7]/30 transition-colors group/card"
                         >
                             <div className="flex justify-between items-start">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-lg bg-gray-900 flex items-center justify-center overflow-hidden border border-gray-800">
-                                        <img                                             src={award.logo}
+                                    <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center overflow-hidden border border-white/[0.08]">
+                                        <img
+                                            src={award.logo}
                                             alt={award.company}
-                                            className="w-7 h-7 object-contain brightness-0 invert"
+                                            className="w-6 h-6 object-contain brightness-0 invert"
                                             onError={(e) => { e.target.style.display = 'none'; }}
                                         />
                                     </div>
-                                    <span className="font-bold text-xl tracking-tight text-white uppercase">{award.company}</span>
+                                    <span className="font-bold text-[16px] tracking-tight text-white uppercase">{award.company}</span>
                                 </div>
-                                <div className="flex items-center gap-1.5 bg-black/40 px-3 py-1 rounded-full border border-gray-800">
-                                    <span className="text-bluish text-sm">★</span>
+                                <div className="flex items-center gap-1.5 bg-white/[0.05] px-3 py-1 rounded-full border border-white/[0.08]">
+                                    <span className="text-[#0FB5B7] text-sm">★</span>
                                     <span className="font-bold text-sm">{award.rating}</span>
                                 </div>
                             </div>
-                            <div className="mt-8">
-                                <p className="text-gray-500 text-base leading-relaxed whitespace-normal line-clamp-2">
+                            <div className="mt-6">
+                                <p className="text-white/40 text-[15px] leading-relaxed whitespace-normal line-clamp-2 font-medium">
                                     {award.description}
                                 </p>
                             </div>
@@ -109,16 +117,6 @@ export default function DarkAwardsSection() {
                     ))}
                 </motion.div>
             </div>
-
-            <style jsx>{`
-                .no-scrollbar::-webkit-scrollbar {
-                    display: none;
-                }
-                .no-scrollbar {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
-            `}</style>
         </section>
     );
 }

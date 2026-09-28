@@ -129,6 +129,30 @@ const DEFAULT_TECH_DATA = [
         ]
     },
     {
+        id: 'ai-automation',
+        title: 'AI & Automation',
+        categories: [
+            {
+                name: 'Artificial Intelligence & LLMs',
+                items: [
+                    { name: 'OpenAI GPT-4', icon: null, iconComponent: <FaCode className="w-5 h-5 text-[#10A37F]" /> },
+                    { name: 'LangChain', icon: null, iconComponent: <FaLayerGroup className="w-5 h-5 text-[#00A67E]" /> },
+                    { name: 'Llama 3', icon: null, iconComponent: <FaServer className="w-5 h-5 text-[#0866FF]" /> },
+                    { name: 'Python AI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+                    { name: 'Hugging Face', icon: null, iconComponent: <FaTools className="w-5 h-5 text-[#FFD21E]" /> },
+                ]
+            },
+            {
+                name: 'Workflow Automation & Bots',
+                items: [
+                    { name: 'n8n Workflows', icon: null, iconComponent: <FaCodeBranch className="w-5 h-5 text-[#EA4B71]" /> },
+                    { name: 'Zapier & Make', icon: null, iconComponent: <FaCloud className="w-5 h-5 text-[#FF4A00]" /> },
+                    { name: 'Custom ERP Bots', icon: null, iconComponent: <FaServer className="w-5 h-5 text-[#0FB5B7]" /> },
+                ]
+            }
+        ]
+    },
+    {
         id: 'games',
         title: 'Games',
         categories: [
@@ -161,6 +185,7 @@ function buildTechCategories(apiTechnologies) {
     const isDatabase = (name) => /postgres|mongo|mysql|redis|prisma|dynamo|elastic|sql|database|supabase/i.test(name);
     const isCloud = (name) => /vercel|aws|azure|cloud|docker|kubernetes|nginx|jenkins|firebase|heroku|devops/i.test(name);
     const isGames = (name) => /unity|unreal|godot|game|cryengine/i.test(name);
+    const isAI = (name) => /ai|openai|gpt|langchain|llama|python|machine learning|nlp|automation|n8n|zapier|bot/i.test(name);
 
     // Dynamic categorizations
     const webFrontend = [];
@@ -170,6 +195,7 @@ function buildTechCategories(apiTechnologies) {
     const crossPlatform = [];
     const databases = [];
     const cloudDevops = [];
+    const aiAutomation = [];
     const games = [];
     const others = [];
 
@@ -188,9 +214,11 @@ function buildTechCategories(apiTechnologies) {
             cloudDevops.push(item);
         } else if (isGames(name)) {
             games.push(item);
+        } else if (isAI(name)) {
+            aiAutomation.push(item);
         } else if (/react|next|tailwind|html|css|bootstrap|typescript|javascript|vue|angular/i.test(name)) {
             webFrontend.push(item);
-        } else if (/node|graphql|php|wordpress|laravel|django|nest|express|python|api/i.test(name)) {
+        } else if (/node|graphql|php|wordpress|laravel|django|nest|express|api/i.test(name)) {
             webBackend.push(item);
         } else {
             others.push(item);
@@ -273,12 +301,25 @@ function buildTechCategories(apiTechnologies) {
             ]
         },
         {
+            id: 'ai-automation',
+            title: 'AI & Automation',
+            categories: [
+                {
+                    name: 'Artificial Intelligence & LLMs',
+                    items: mergeItems(aiAutomation, [
+                        ...DEFAULT_TECH_DATA[5].categories[0].items,
+                        ...DEFAULT_TECH_DATA[5].categories[1].items
+                    ])
+                }
+            ]
+        },
+        {
             id: 'games',
             title: 'Games',
             categories: [
                 {
                     name: 'Engines & 3D',
-                    items: mergeItems(games, DEFAULT_TECH_DATA[5].categories[0].items)
+                    items: mergeItems(games, DEFAULT_TECH_DATA[6].categories[0].items)
                 }
             ]
         }
@@ -327,30 +368,42 @@ export default function TechnologiesSection() {
     const activeTech = techList.find(t => t.id === activeTab) || techList[0];
 
     return (
-        <section className="bg-white py-16 md:py-24 px-6 md:px-12 lg:px-24">
-            <div className="max-w-7xl mx-auto">
-                {/* Header */}
-                <div className="mb-12 md:mb-20">
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6">
-                        Technologies we use
-                    </h2>
-                    <p className="text-lg md:text-xl text-black max-w-4xl leading-relaxed">
-                        Hire from our pool of 350+ specialized experts in web, mobile, and software engineering, specializing in the latest technologies and frameworks, ready to scale your development teams effortlessly.
+        <section className="bg-[#f9fafb] py-24 md:py-32 site-full-grid border-t border-black/[0.06]" aria-label="Technologies">
+            <div className="site-full-grid-inner">
+                {/* Eyebrow */}
+                <p className="text-[13px] font-semibold uppercase tracking-[0.22em] text-black/55 mb-4 sm:mb-5">
+                    Engineering Ecosystem
+                </p>
+
+                {/* Divider */}
+                <div className="h-px w-full bg-black/10 mb-10 sm:mb-12" />
+
+                {/* Two-Column Header */}
+                <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 md:mb-20">
+                    <div>
+                        <h2 className="text-[32px] sm:text-[44px] md:text-[54px] lg:text-[64px] font-bold leading-[1.08] tracking-tight text-[#0b0c0d]">
+                            <span className="text-black/55">Technologies</span> <br />
+                            We Build With.
+                        </h2>
+                    </div>
+                    <p className="text-base sm:text-lg text-black/60 max-w-md font-medium leading-relaxed">
+                        Hire from our pool of 12+ specialized experts in web, mobile, AI, and cloud engineering — built to scale your software effortlessly.
                     </p>
                 </div>
 
                 {/* Main Tabs Container */}
-                <div className="flex flex-col lg:flex-row gap-12 min-h-[500px] border-t border-gray-100 pt-12">
+                <div className="flex flex-col lg:flex-row gap-12 min-h-[500px] border-t border-black/[0.06] pt-12">
                     {/* Sidebar Buttons */}
-                    <div className="lg:w-1/4 flex overflow-x-auto lg:overflow-visible flex-row lg:flex-col gap-6 lg:gap-1 border-b border-gray-200 lg:border-none mb-8 lg:mb-0 pb-2 lg:pb-0 scroll-smooth custom-scrollbar">
+                    <div className="lg:w-1/4 flex overflow-x-auto lg:overflow-visible flex-row lg:flex-col gap-2.5 border-b border-black/[0.06] lg:border-none mb-8 lg:mb-0 pb-3 lg:pb-0 scroll-smooth no-scrollbar">
                         {techList.map((tab) => (
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`text-left px-2 lg:px-8 pt-2 pb-1 lg:py-5 lg:rounded-full text-lg md:text-2xl font-bold transition-all duration-300 whitespace-nowrap flex-shrink-0 ${activeTab === tab.id
-                                    ? 'border-b-[3px] border-[#0FB5B7] lg:border-none lg:bg-gradient-to-r lg:from-[#DFF7F5] lg:to-white text-black lg:shadow-sm'
-                                    : 'border-b-[3px] border-transparent text-black hover:bg-gray-50'
-                                    }`}
+                                className={`text-left px-5 lg:px-6 py-3.5 rounded-full text-base md:text-lg font-bold transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
+                                    activeTab === tab.id
+                                        ? 'bg-[#0FB5B7] text-white shadow-md shadow-[#0FB5B7]/20 scale-[1.02]'
+                                        : 'bg-white text-black/75 hover:bg-black/5 border border-black/[0.06]'
+                                }`}
                             >
                                 {tab.title}
                             </button>
@@ -358,38 +411,36 @@ export default function TechnologiesSection() {
                     </div>
 
                     {/* Content Panel */}
-                    <div className="lg:w-3/4 lg:pl-16 lg:border-l border-gray-100">
+                    <div className="lg:w-3/4 lg:pl-12 lg:border-l border-black/[0.06]">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeTab}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                transition={{ duration: 0.4, ease: "easeOut" }}
-                                className="flex flex-col gap-12"
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -15 }}
+                                transition={{ duration: 0.35, ease: "easeOut" }}
+                                className="flex flex-col gap-10"
                             >
                                 {activeTech?.categories?.length > 0 ? (
                                     activeTech.categories.map((cat, idx) => (
-                                        <div key={idx} className="space-y-6">
-                                            <h3 className="text-2xl md:text-3xl font-bold text-black tracking-tight">
+                                        <div key={idx} className="space-y-5">
+                                            <h3 className="text-xl md:text-2xl font-bold text-black/85 tracking-tight">
                                                 {cat.name}
                                             </h3>
-                                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5">
                                                 {cat.items.map((item, i) => (
                                                     <motion.div
                                                         key={`${cat.name || idx}-${item.id || item.name || i}-${i}`}
-                                                        whileHover={{ y: -4 }}
+                                                        whileHover={{ y: -3 }}
                                                         transition={{ duration: 0.2, ease: 'easeOut' }}
-                                                        className="group flex items-center gap-3 px-5 py-4 bg-[#F5F5F5] rounded-full cursor-pointer overflow-hidden relative"
-                                                        style={{ transition: 'background 0.3s ease, box-shadow 0.3s ease' }}
-                                                        onMouseEnter={e => { e.currentTarget.style.background = '#0FB5B7'; e.currentTarget.querySelectorAll('.chip-text').forEach(el => { el.style.color = '#fff'; }); }}
-                                                        onMouseLeave={e => { e.currentTarget.style.background = '#F5F5F5'; e.currentTarget.querySelectorAll('.chip-text').forEach(el => { el.style.color = ''; }); }}
+                                                        className="group flex items-center gap-3 px-4 py-3.5 bg-white border border-black/[0.07] hover:border-[#0FB5B7] rounded-full cursor-pointer shadow-sm hover:shadow-md transition-all duration-300"
                                                     >
-                                                        <div className="w-9 h-9 flex items-center justify-center flex-shrink-0 bg-white rounded-full shadow-sm">
+                                                        <div className="w-8 h-8 flex items-center justify-center flex-shrink-0 bg-gray-50 rounded-full group-hover:bg-[#0FB5B7]/10 transition-colors">
                                                             {item.icon ? (
-                                                                <img                                                                     src={item.icon}
+                                                                <img
+                                                                    src={item.icon}
                                                                     alt={item.name}
-                                                                    className="w-5 h-5 object-contain"
+                                                                    className="w-4 h-4 object-contain"
                                                                     onError={(e) => { e.target.style.display = 'none'; }}
                                                                 />
                                                             ) : item.iconComponent ? (
@@ -398,7 +449,9 @@ export default function TechnologiesSection() {
                                                                 <FaLayerGroup className="w-4 h-4 text-[#0FB5B7]" />
                                                             )}
                                                         </div>
-                                                        <span className="chip-text text-black font-semibold text-sm md:text-base transition-colors duration-300">{item.name}</span>
+                                                        <span className="text-black/85 font-semibold text-sm transition-colors duration-200 group-hover:text-[#0FB5B7]">
+                                                            {item.name}
+                                                        </span>
                                                     </motion.div>
                                                 ))}
                                             </div>

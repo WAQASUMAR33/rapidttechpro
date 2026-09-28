@@ -1,129 +1,127 @@
-'use client'
-import React, { useState, useEffect, useRef } from "react";
+'use client';
+import React from "react";
 import { FaArrowRight, FaPlay } from "react-icons/fa";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { openPopup } from "@/store/popupSlice";
 import Link from "next/link";
+
 export default function HeroSection() {
     const dispatch = useDispatch();
-    const [isMouseInside, setIsMouseInside] = useState(false);
-    const attractAreaRef = useRef(null);
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const scale = useTransform(x, [-250, 0, 250], [1, 1.1, 1]);
-
-    useEffect(() => {
-        const handleMouseMove = (event) => {
-            if (window.innerWidth >= 768 && attractAreaRef.current) {
-                const areaRect = attractAreaRef.current.getBoundingClientRect();
-                const areaCenter = {
-                    x: areaRect.left + areaRect.width / 2,
-                    y: areaRect.top + areaRect.height / 2,
-                };
-
-                const distanceX = event.clientX - areaCenter.x;
-                const distanceY = event.clientY - areaCenter.y;
-                const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
-
-                const maxDistance = areaRect.width;
-                const isWithinArea = distance <= maxDistance;
-
-                if (isWithinArea) {
-                    setIsMouseInside(true);
-                    const attractionFactor = 1 - Math.pow(Math.min(distance / maxDistance, 1), 2);
-                    x.set(distanceX * attractionFactor * 0.6);
-                    y.set(distanceY * attractionFactor * 0.6);
-                } else {
-                    setIsMouseInside(false);
-                    x.set(0);
-                    y.set(0);
-                }
-            } else {
-                x.set(0);
-                y.set(0);
-            }
-        };
-
-        window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [x, y]);
 
     return (
-        <section className="relative flex-1 w-full overflow-hidden" aria-label="Hero">
+        <section className="relative min-h-screen flex flex-col justify-end w-full overflow-hidden" aria-label="Hero">
+            {/* Background Video */}
             <video
-                className="absolute inset-0 w-full h-full object-cover "
+                className="absolute inset-0 w-full h-full object-cover"
                 src="/video/temwork.mp4"
                 autoPlay
                 loop
                 muted
                 playsInline
+                poster="/video/poster.jpg"
             />
-            <div className="relative flex flex-col justify-center items-center h-full w-full pt-32 bg-black bg-opacity-50">
-                <div className="w-full max-w-2xl lg:max-w-4xl px-4 sm:px-12 text-left flex flex-col items-start pb-20 md:pb-32 mt-16 md:mt-32 lg:mt-40">
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.1] tracking-tight">
-                        Your Trusted <span className="text-bluish">Custom Software</span>
-                        <br />
-                        Development Partner.
-                    </h1>
-                    <p className="max-w-2xl text-base md:text-lg lg:text-xl text-white/90 mt-6 leading-relaxed">
-                        Struggling with manual processes? We specialize in custom software solutions that automate your workflows — freeing you to focus on what truly matters.
-                    </p>
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/85" />
 
-                    <div className="flex flex-wrap gap-4 mt-10 mb-16 md:mb-20">
-                        <button
-                            onClick={() => dispatch(openPopup())}
-                            className="group bg-bluish text-white px-6 py-2.5 md:px-8 md:py-3 rounded-full flex items-center gap-2 text-sm md:text-base font-bold hover:bg-[#0da0a2] transition-all shadow-lg shadow-bluish/20"
-                        >
-                            Book Free Consultancy <FaArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
-                        </button>
-                        <Link href="/work"
-                            className="group border border-white/30 bg-white/5 backdrop-blur-md text-white px-6 py-2.5 md:px-8 md:py-3 rounded-full flex items-center gap-3 text-sm md:text-base font-bold hover:bg-white/10 transition-all"
-                        >
-                            <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center -ml-1">
-                                <FaPlay className="text-[10px] ml-0.5" />
-                            </div>
-                            See Our Work
-                        </Link>
-                    </div>
-                </div>
-            </div>
-
-            {/* <div className="absolute bottom-4 left-4 md:left-12 gap-2 flex justify-center items-center text-sm md:text-xl text-white">
-                <div className="h-2 w-2 md:h-4 md:w-4 rounded-full bg-bluish"></div>
-                Clients We've Served
-            </div> */}
-            {/* <div className="hidden md:flex absolute -bottom-5 opacity-90 right-8 h-[350px] w-[350px] z-30 rounded-full items-center justify-center">
-                <img src="/images/think.PNG" loading="lazy"></img>
-
-            </div> */}
-
-            <div
-                ref={attractAreaRef}
-                className="hidden md:flex  absolute -bottom-32 -right-10 h-[500px] w-[500px] z-30 rounded-full items-center justify-center"
-            >
-                <button onClick={() => { dispatch(openPopup()); }} className="pointer-events-auto">
-
-                    <motion.div
-                        className="h-32 w-32 md:h-[150px] md:w-[200px] bg-[url('/images/cloud.PNG')] bg-contain p-6 flex flex-col justify-center items-center md:text-base text-center text-white"
-                        style={{ x: x, y: y, scale: scale }}
-                        transition={{ type: "spring", stiffness: 50, damping: 20, duration: 0.8 }}
-                        initial={{
-                            backgroundImage: "url('/images/cloud.PNG')" // Initial background
-                        }}
-                        whileHover={{
-                            backgroundImage: "url('/images/cloud2.png')", // Change to cloud2.png on hover
-                            scale: 1.1, // Optional: Slightly scale the element on hover
-                            color: "black", // Optional: Change text color
-                            transition: { duration: 0.5 } // Smooth transition
-                        }}
+            <div className="relative flex flex-col justify-end h-full w-full site-full-grid">
+                <div className="site-full-grid-inner pb-16 md:pb-24 lg:pb-32 pt-40 md:pt-48 lg:pt-56">
+                    {/* Eyebrow */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2, duration: 0.6 }}
+                        className="text-[13px] font-semibold uppercase tracking-[0.22em] text-[#0FB5B7] mb-4 sm:mb-5"
                     >
-                        <FaArrowRight className="transform -rotate-45 mb-2" />
-                        Let's Talk About Your Project
+                        Enterprise Software • Mobile Apps • Cloud Systems
+                    </motion.p>
 
+                    {/* Divider */}
+                    <div className="h-px w-full bg-white/25 mb-10 sm:mb-12" />
+
+                    <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
+                        {/* Headline */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4, duration: 0.7 }}
+                            className="max-w-[700px]"
+                        >
+                            <h1 className="text-[32px] sm:text-[44px] md:text-[56px] lg:text-[72px] font-bold leading-[1.08] tracking-tight text-white">
+                                <span className="text-grey">Engineering Next-Gen</span>{" "}
+                                Custom Software & Mobile Applications.
+                            </h1>
+                        </motion.div>
+
+                        {/* Right side CTA + Subtext */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.6, duration: 0.7 }}
+                            className="flex flex-col gap-6 max-w-[460px] lg:pb-2"
+                        >
+                            <p className="text-[16px] sm:text-[18px] font-medium leading-snug text-white/70">
+                                <span className="text-white">Empowering ambitious businesses globally.</span>{" "}
+                                We design and build enterprise web platforms, native iOS & Android apps, ERPs, and automated workflows engineered to outperform your competition.
+                            </p>
+
+                            <div className="flex flex-wrap gap-3">
+                                {/* Primary CTA */}
+                                <button
+                                    onClick={() => dispatch(openPopup())}
+                                    className="group relative inline-flex w-fit shrink-0 items-center overflow-hidden rounded-full py-0.5 pl-0.5 font-semibold transition-colors h-[46px] pr-5 text-[13px] border border-white/25 bg-transparent hover:bg-white/5"
+                                >
+                                    <span aria-hidden="true" className="absolute left-0.5 top-0.5 bottom-0.5 rounded-full transition-[width] duration-500 ease-out group-hover:w-[calc(100%-0.25rem)] w-[38px] bg-[#0FB5B7]" />
+                                    <span className="relative z-10 flex items-center gap-2.5">
+                                        <span className="flex shrink-0 items-center justify-center h-[38px] w-[38px]">
+                                            <FaArrowRight className="text-white text-xs -rotate-45 transition-transform duration-500 group-hover:rotate-0" />
+                                        </span>
+                                        <span className="pl-0.5 pr-0.5 transition-colors duration-300 text-white/80 group-hover:text-white whitespace-nowrap">
+                                            Book Free Consultancy
+                                        </span>
+                                    </span>
+                                </button>
+
+                                {/* Secondary CTA */}
+                                <Link
+                                    href="/work"
+                                    className="group relative inline-flex w-fit shrink-0 items-center overflow-hidden rounded-full py-0.5 pl-0.5 font-semibold transition-colors h-[46px] pr-5 text-[13px] border border-white/25 bg-transparent hover:bg-white/5"
+                                >
+                                    <span aria-hidden="true" className="absolute left-0.5 top-0.5 bottom-0.5 rounded-full transition-[width] duration-500 ease-out group-hover:w-[calc(100%-0.25rem)] w-[38px] bg-white" />
+                                    <span className="relative z-10 flex items-center gap-2.5">
+                                        <span className="flex shrink-0 items-center justify-center h-[38px] w-[38px]">
+                                            <FaPlay className="text-black text-[10px] ml-0.5" />
+                                        </span>
+                                        <span className="pl-0.5 pr-0.5 transition-colors duration-300 text-white/80 group-hover:text-black whitespace-nowrap">
+                                            See Our Work
+                                        </span>
+                                    </span>
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Stats bar at bottom */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.9, duration: 0.7 }}
+                        className="mt-16 md:mt-20 flex flex-wrap items-center gap-8 md:gap-16 border-t border-white/10 pt-8"
+                    >
+                        <div>
+                            <span className="text-[32px] md:text-[48px] font-bold text-white tracking-tight leading-none">149+</span>
+                            <p className="text-[13px] font-medium text-white/50 mt-1 uppercase tracking-wider">Completed Projects</p>
+                        </div>
+                        <div>
+                            <span className="text-[32px] md:text-[48px] font-bold text-white tracking-tight leading-none">12+</span>
+                            <p className="text-[13px] font-medium text-white/50 mt-1 uppercase tracking-wider">Talented Professionals</p>
+                        </div>
+                        <div>
+                            <span className="text-[32px] md:text-[48px] font-bold text-white tracking-tight leading-none">100+</span>
+                            <p className="text-[13px] font-medium text-white/50 mt-1 uppercase tracking-wider">Satisfied Clients</p>
+                        </div>
                     </motion.div>
-
-                </button>
+                </div>
             </div>
         </section>
     );

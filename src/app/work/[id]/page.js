@@ -120,25 +120,30 @@ export default function ProjectDetailPage() {
 
   const resolveImage = (path) => resolveImageUrl(path, null);
 
-  // Named image fields from API
-  const mainImage = resolveImage(project.mainImage) || resolveImage(project.imageUrl || project.image) || '/images/herosection.png';
+  // Named image fields from API (STRICTLY network/API images only, NO hardcoded dummy fallbacks)
+  const mainImage = resolveImage(project.mainImage) || resolveImage(project.imageUrl || project.image);
   const bannerImage = resolveImage(project.bannerImage) || mainImage;
   const projectIcon = resolveImage(project.projectIcon || project.logo);
 
-  // Challenge section images
-  const challengeImage1 = resolveImage(project.challengeImage1) || mainImage;
-  const challengeImage2 = resolveImage(project.challengeImage2) || resolveImage(project.images?.[0]?.imageUrl) || '/images/mobile-hero.png';
-  const challengeImage3 = resolveImage(project.challengeImage3) || resolveImage(project.images?.[1]?.imageUrl) || '/images/webhero.png';
+  // Challenge section images - only genuine images from API
+  const challengeImage1 = resolveImage(project.challengeImage1);
+  const challengeImage2 = resolveImage(project.challengeImage2) || resolveImage(project.images?.[0]?.imageUrl);
+  const challengeImage3 = resolveImage(project.challengeImage3) || resolveImage(project.images?.[1]?.imageUrl);
+  const challengeImages = [challengeImage1, challengeImage2, challengeImage3].filter(Boolean);
 
-  // Adaptable design / AR section images
-  const adaptableImage1 = resolveImage(project.adaptableImage1) || resolveImage(project.images?.[0]?.imageUrl) || '/images/mobile-hero.png';
-  const adaptableImage2 = resolveImage(project.adaptableImage2) || resolveImage(project.images?.[1]?.imageUrl) || '/images/serviceshero.png';
-  const adaptableImage3 = resolveImage(project.adaptableImage3) || resolveImage(project.images?.[2]?.imageUrl) || '/images/companybanner.png';
+  // Adaptable design / AR section images - only genuine images from API
+  const adaptableImage1 = resolveImage(project.adaptableImage1);
+  const adaptableImage2 = resolveImage(project.adaptableImage2) || resolveImage(project.images?.[0]?.imageUrl);
+  const adaptableImage3 = resolveImage(project.adaptableImage3) || resolveImage(project.images?.[2]?.imageUrl);
+  const adaptableImages = [adaptableImage1, adaptableImage2, adaptableImage3].filter(Boolean);
 
   // Full gallery from images[].imageUrl
   const rawGallery = project.images?.length > 0
     ? project.images.map(img => resolveImage(img.imageUrl || img.url)).filter(Boolean)
     : [];
+
+  const growthImage = rawGallery.length > 0 ? rawGallery[0] : (mainImage || bannerImage);
+  const resultsFeatureImage = rawGallery.length > 1 ? rawGallery[1] : (challengeImage1 || bannerImage || mainImage);
 
   const rawDesc = project.shortDescription || project.description || project.blog || '';
   const rawCategory = project.categories?.length > 0
@@ -182,9 +187,13 @@ export default function ProjectDetailPage() {
     challengeImage1,
     challengeImage2,
     challengeImage3,
+    challengeImages,
     adaptableImage1,
     adaptableImage2,
     adaptableImage3,
+    adaptableImages,
+    growthImage,
+    resultsFeatureImage,
     category: rawCategory,
     clientName: project.client || project.clientName || 'Confidential',
     duration: project.duration || '1 Year',
@@ -232,7 +241,13 @@ export default function ProjectDetailPage() {
           >
             <div>
               {p.projectIcon && (
-                <img src={p.projectIcon} className="h-12 w-auto object-contain" alt="Logo"  loading="lazy" />
+                <img
+                  src={p.projectIcon}
+                  className="h-12 w-auto object-contain"
+                  alt={`${p.title} Logo`}
+                  loading="lazy"
+                  decoding="async"
+                />
               )}
             </div>
             <h1 className="text-3xl md:text-3xl lg:text-4xl xl:text-4xl font-bold text-gray-900 leading-[1.1] tracking-tight">
@@ -246,10 +261,18 @@ export default function ProjectDetailPage() {
           </motion.div>
         </section>
 
-        {/* 2. BANNER IMAGE SECTION (130vh) */}
-        <section className="h-[130vh] w-full px-0 relative overflow-hidden">
-          <img src={p.bannerImage} className="w-full h-full object-cover" alt="Hero Banner"  loading="lazy" />
-        </section>
+        {/* 2. BANNER IMAGE SECTION */}
+        {p.bannerImage && (
+          <section className="h-[60vh] md:h-[90vh] lg:h-[120vh] w-full px-0 relative overflow-hidden bg-black/5">
+            <img
+              src={p.bannerImage}
+              className="w-full h-full object-cover"
+              alt={`${p.title} Hero Banner`}
+              loading="lazy"
+              decoding="async"
+            />
+          </section>
+        )}
 
         {/* 3. ABOUT CLIENT SECTION (100vh) */}
         <section className="h-screen w-full flex items-center px-6 md:px-16 max-w-7xl mx-auto border-b border-gray-900/10">
@@ -316,7 +339,14 @@ export default function ProjectDetailPage() {
                   >
                     <div className="w-10 h-10 flex items-center justify-center shrink-0">
                       {tech.icon ? (
-                        <img src={tech.icon} className="w-full h-full object-contain" alt={tech.name}  loading="lazy" />
+                        <img
+                          src={tech.icon}
+                          className="w-full h-full object-contain"
+                          alt={tech.name}
+                          loading="lazy"
+                          decoding="async"
+                          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                        />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-white rounded-lg font-bold text-xl border border-gray-200">{tech.name.charAt(0)}</div>
                       )}
@@ -350,43 +380,97 @@ export default function ProjectDetailPage() {
             </motion.p>
           </motion.div>
 
-          {/* Bottom Row: 3 Staggered Mobile Mockups */}
-          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-10 md:gap-6 lg:gap-10">
-
-            {/* Screen 1 - Left (Lowered) */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 100 }}
-              whileInView={{ opacity: 1, scale: 1, y: 60 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.1 }}
-              className="w-full md:w-[30%] aspect-[9/18] rounded-[40px] md:rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black bg-white"
-            >
-              <img src={p.challengeImage1} className="w-full h-full object-cover" alt="Challenge Screen 1"  loading="lazy" />
-            </motion.div>
-
-            {/* Screen 2 - Center (Raised & Slightly Larger) */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 100 }}
-              whileInView={{ opacity: 1, scale: 1, y: -40 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="w-full md:w-[32%] aspect-[9/19] rounded-[45px] md:rounded-[55px] overflow-hidden shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2)] border-[10px] border-black z-10 bg-white"
-            >
-              <img src={p.challengeImage2} className="w-full h-full object-cover" alt="Challenge Screen 2"  loading="lazy" />
-            </motion.div>
-
-            {/* Screen 3 - Right (Lowered) */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 100 }}
-              whileInView={{ opacity: 1, scale: 1, y: 80 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="w-full md:w-[30%] aspect-[9/18] rounded-[40px] md:rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black bg-white"
-            >
-              <img src={p.challengeImage3} className="w-full h-full object-cover" alt="Challenge Screen 3"  loading="lazy" />
-            </motion.div>
-
-          </div>
+          {/* Challenge Showcase Images - ONLY from API */}
+          {p.challengeImages?.length > 0 && (
+            <div className="w-full flex flex-col md:flex-row items-center justify-center gap-10 md:gap-8">
+              {p.challengeImages.length === 1 ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95, y: 50 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="w-full max-w-4xl rounded-[24px] md:rounded-[36px] overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.15)] border-4 border-black/10 bg-white"
+                >
+                  <img
+                    src={p.challengeImages[0]}
+                    className="w-full h-auto object-cover max-h-[750px]"
+                    alt={`${p.title} Challenge Showcase`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </motion.div>
+              ) : p.challengeImages.length === 2 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
+                  {p.challengeImages.map((img, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0.95, y: 50 }}
+                      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: idx * 0.2 }}
+                      className="w-full rounded-[24px] md:rounded-[36px] overflow-hidden shadow-xl border-4 border-black/10 bg-white"
+                    >
+                      <img
+                        src={img}
+                        className="w-full h-auto object-cover max-h-[600px]"
+                        alt={`${p.title} Challenge Screen ${idx + 1}`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              ) : (
+                <div className="w-full flex flex-col md:flex-row items-center justify-between gap-10 md:gap-6 lg:gap-10">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: 100 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 60 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.1 }}
+                    className="w-full md:w-[30%] aspect-[9/18] rounded-[40px] md:rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black bg-white"
+                  >
+                    <img
+                      src={p.challengeImages[0]}
+                      className="w-full h-full object-cover"
+                      alt="Challenge Screen 1"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: 100 }}
+                    whileInView={{ opacity: 1, scale: 1, y: -40 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.3 }}
+                    className="w-full md:w-[32%] aspect-[9/19] rounded-[45px] md:rounded-[55px] overflow-hidden shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2)] border-[10px] border-black z-10 bg-white"
+                  >
+                    <img
+                      src={p.challengeImages[1]}
+                      className="w-full h-full object-cover"
+                      alt="Challenge Screen 2"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, y: 100 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 80 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                    className="w-full md:w-[30%] aspect-[9/18] rounded-[40px] md:rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black bg-white"
+                  >
+                    <img
+                      src={p.challengeImages[2]}
+                      className="w-full h-full object-cover"
+                      alt="Challenge Screen 3"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </motion.div>
+                </div>
+              )}
+            </div>
+          )}
         </section>
         {/* 6. THE PROCESS (Sticky Heading + Global Scroll) */}
         <section className="px-6 md:px-16 max-w-7xl mx-auto flex flex-col md:flex-row gap-10 md:gap-12 items-start relative min-h-screen">
@@ -451,26 +535,34 @@ export default function ProjectDetailPage() {
           </div>
         </section>
 
-        {/* 8. MAIN IMAGE OVERLAP (Exact 50/50 Black & White Split) */}
-        <section className="relative z-20">
-          {/* Half Black, Half White Background */}
-          <div className="absolute inset-0 z-0 flex flex-col pointer-events-none">
-            <div className="w-full h-1/2 bg-black"></div>
-            <div className="w-full h-1/2 bg-white"></div>
-          </div>
+        {/* 8. MAIN IMAGE OVERLAP */}
+        {p.imageUrl && (
+          <section className="relative z-20">
+            {/* Half Black, Half White Background */}
+            <div className="absolute inset-0 z-0 flex flex-col pointer-events-none">
+              <div className="w-full h-1/2 bg-black"></div>
+              <div className="w-full h-1/2 bg-white"></div>
+            </div>
 
-          <div className="w-full max-w-[95%] 2xl:max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 relative z-10 py-0">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="w-full h-auto rounded-[12px] md:rounded-[24px] overflow-hidden shadow-2xl bg-white border-2 border-gray-100"
-            >
-              <img src={p.imageUrl} className="w-full h-auto object-cover" alt="Main Project Overview"  loading="lazy" />
-            </motion.div>
-          </div>
-        </section>
+            <div className="w-full max-w-[95%] 2xl:max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 relative z-10 py-0">
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                className="w-full h-auto rounded-[12px] md:rounded-[24px] overflow-hidden shadow-2xl bg-white border-2 border-gray-100"
+              >
+                <img
+                  src={p.imageUrl}
+                  className="w-full h-auto object-cover"
+                  alt={`${p.title} Main Overview`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </motion.div>
+            </div>
+          </section>
+        )}
 
         {/* 9. HANDLING GROWTH */}
         <section className="bg-white text-gray-900 relative z-20">
@@ -484,7 +576,7 @@ export default function ProjectDetailPage() {
             >
               {p.growthHeading}
             </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            <div className={`grid grid-cols-1 ${p.growthImage ? 'md:grid-cols-2' : ''} gap-20 items-center`}>
               <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -501,22 +593,30 @@ export default function ProjectDetailPage() {
                   </motion.div>
                 ))}
               </motion.div>
-              <div className="rounded-[40px] md:rounded-[80px] bg-gray-100 p-2 md:p-5 h-[400px] md:h-[600px] shadow-inner overflow-hidden border-2 border-gray-200">
-                <img src={p.gallery[4 % p.gallery.length] || p.imageUrl} className="w-full h-full object-cover rounded-[30px] md:rounded-[60px]" alt="Growth Visual"  loading="lazy" />
-              </div>
+              {p.growthImage && (
+                <div className="rounded-[40px] md:rounded-[80px] bg-gray-100 p-2 md:p-5 h-[400px] md:h-[600px] shadow-inner overflow-hidden border-2 border-gray-200">
+                  <img
+                    src={p.growthImage}
+                    className="w-full h-full object-cover rounded-[30px] md:rounded-[60px]"
+                    alt={`${p.title} Growth Visual`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </section>
 
-        {/* 9. ADAPTABLE DESIGN & AR FEATURES */}
-        <section className="bg-white py-32 md:py-48 px-6 md:px-16 overflow-hidden">
+        {/* 10. ADAPTABLE DESIGN & AR FEATURES */}
+        <section className="bg-white py-24 md:py-36 px-6 md:px-16 overflow-hidden">
           <div className="max-w-7xl mx-auto flex flex-col items-start">
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={stagger}
-              className="space-y-6 mb-24 max-w-4xl"
+              className={`space-y-6 max-w-4xl ${p.adaptableImages?.length > 0 ? 'mb-24' : 'mb-4'}`}
             >
               <motion.h2 variants={fadeIn} className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tighter leading-tight uppercase">
                 {p.arHeading.split('<br />').length > 1 ? (
@@ -530,41 +630,97 @@ export default function ProjectDetailPage() {
               </motion.p>
             </motion.div>
 
-            {/* Staggered Mobile Mockups */}
-            <div className="w-full flex flex-col md:flex-row items-center justify-between gap-10 md:gap-0">
-              {/* Screen 1 - Left Staggered */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 100 }}
-                whileInView={{ opacity: 1, scale: 1, y: 40 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.1 }}
-                className="w-full md:w-[30%] aspect-[9/18] rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black"
-              >
-                <img src={p.adaptableImage1} className="w-full h-full object-cover" alt="App Screen 1"  loading="lazy" />
-              </motion.div>
-
-              {/* Screen 2 - Center Main */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 100 }}
-                whileInView={{ opacity: 1, scale: 1, y: -40 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.3 }}
-                className="w-full md:w-[32%] aspect-[9/19] rounded-[55px] overflow-hidden shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2)] border-[10px] border-black z-10"
-              >
-                <img src={p.adaptableImage2} className="w-full h-full object-cover" alt="App Screen 2"  loading="lazy" />
-              </motion.div>
-
-              {/* Screen 3 - Right Staggered */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 100 }}
-                whileInView={{ opacity: 1, scale: 1, y: 80 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className="w-full md:w-[30%] aspect-[9/18] rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black"
-              >
-                <img src={p.adaptableImage3} className="w-full h-full object-cover" alt="App Screen 3"  loading="lazy" />
-              </motion.div>
-            </div>
+            {/* Staggered Mobile Mockups - ONLY from API */}
+            {p.adaptableImages?.length > 0 && (
+              <div className="w-full flex flex-col md:flex-row items-center justify-center gap-10 md:gap-8">
+                {p.adaptableImages.length === 1 ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: 50 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                    className="w-full max-w-4xl rounded-[24px] md:rounded-[36px] overflow-hidden shadow-xl border-4 border-black/10 bg-white"
+                  >
+                    <img
+                      src={p.adaptableImages[0]}
+                      className="w-full h-auto object-cover max-h-[750px]"
+                      alt={`${p.title} Feature Screen`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </motion.div>
+                ) : p.adaptableImages.length === 2 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
+                    {p.adaptableImages.map((img, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, scale: 0.95, y: 50 }}
+                        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: idx * 0.2 }}
+                        className="w-full rounded-[24px] md:rounded-[36px] overflow-hidden shadow-xl border-4 border-black/10 bg-white"
+                      >
+                        <img
+                          src={img}
+                          className="w-full h-auto object-cover max-h-[600px]"
+                          alt={`${p.title} Feature Screen ${idx + 1}`}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="w-full flex flex-col md:flex-row items-center justify-between gap-10 md:gap-0">
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9, y: 100 }}
+                      whileInView={{ opacity: 1, scale: 1, y: 40 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 0.1 }}
+                      className="w-full md:w-[30%] aspect-[9/18] rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black"
+                    >
+                      <img
+                        src={p.adaptableImages[0]}
+                        className="w-full h-full object-cover"
+                        alt="App Screen 1"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9, y: 100 }}
+                      whileInView={{ opacity: 1, scale: 1, y: -40 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 0.3 }}
+                      className="w-full md:w-[32%] aspect-[9/19] rounded-[55px] overflow-hidden shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2)] border-[10px] border-black z-10"
+                    >
+                      <img
+                        src={p.adaptableImages[1]}
+                        className="w-full h-full object-cover"
+                        alt="App Screen 2"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9, y: 100 }}
+                      whileInView={{ opacity: 1, scale: 1, y: 80 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 0.5 }}
+                      className="w-full md:w-[30%] aspect-[9/18] rounded-[50px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] border-[8px] border-black"
+                    >
+                      <img
+                        src={p.adaptableImages[2]}
+                        className="w-full h-full object-cover"
+                        alt="App Screen 3"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </motion.div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </section>
 
@@ -593,20 +749,25 @@ export default function ProjectDetailPage() {
           </div>
         </section>
         {/* 11. FEATURE RESULTS IMAGE */}
-        <section className="w-full relative overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="w-full"
-          >
-            <img               src={p.gallery[5 % p.gallery.length] || p.imageUrl}
-              className="w-full h-auto object-cover"
-              alt="Product Showcase"
-             loading="lazy" />
-          </motion.div>
-        </section>
+        {p.resultsFeatureImage && (
+          <section className="w-full relative overflow-hidden">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className="w-full"
+            >
+              <img
+                src={p.resultsFeatureImage}
+                className="w-full h-auto object-cover max-h-[800px]"
+                alt={`${p.title} Product Showcase`}
+                loading="lazy"
+                decoding="async"
+              />
+            </motion.div>
+          </section>
+        )}
 
         {/* 12. PROJECT SHOWCASE (SCROLLING ROWS) */}
         {p.gallery?.length > 0 && (
@@ -627,7 +788,7 @@ export default function ProjectDetailPage() {
                 >
                   {[...p.gallery, ...p.gallery, ...p.gallery, ...p.gallery, ...p.gallery].map((img, i) => (
                     <div key={`row1-${i}`} className="w-[450px] md:w-[700px] lg:w-[1000px] shrink-0 rounded-[30px] md:rounded-[40px] overflow-hidden shadow-2xl bg-white border border-slate-700/50">
-                      <img src={img} className="w-full h-[200px] md:h-[300px] lg:h-[450px] object-cover" alt={`Showcase item row 1 - ${i}`}  loading="lazy" />
+                      <img src={img} className="w-full h-[200px] md:h-[300px] lg:h-[450px] object-cover" alt={`Showcase item row 1 - ${i}`} loading="lazy" decoding="async" />
                     </div>
                   ))}
                 </motion.div>
@@ -643,7 +804,7 @@ export default function ProjectDetailPage() {
                   {/* Reversing the array to provide visual variation between rows */}
                   {[...p.gallery, ...p.gallery, ...p.gallery, ...p.gallery, ...p.gallery].reverse().map((img, i) => (
                     <div key={`row2-${i}`} className="w-[450px] md:w-[700px] lg:w-[1000px] shrink-0 rounded-[30px] md:rounded-[40px] overflow-hidden shadow-2xl bg-white border border-slate-700/50">
-                      <img src={img} className="w-full h-[200px] md:h-[300px] lg:h-[450px] object-cover" alt={`Showcase item row 2 - ${i}`}  loading="lazy" />
+                      <img src={img} className="w-full h-[200px] md:h-[300px] lg:h-[450px] object-cover" alt={`Showcase item row 2 - ${i}`} loading="lazy" decoding="async" />
                     </div>
                   ))}
                 </motion.div>

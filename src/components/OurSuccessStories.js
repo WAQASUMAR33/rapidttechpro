@@ -125,83 +125,110 @@ const SuccessStories = () => {
   }
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-24 bg-white relative overflow-hidden h-full">
-      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-12 lg:px-16 2xl:px-24">
-        <div className="flex justify-between items-end mb-12 md:mb-16">
-          <h2
-            ref={headingRef}
-            className="text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 text-left"
-          >
-            Our success stories
-          </h2>
-          <Link href="/work" className="hidden md:flex items-center gap-2 text-gray-500 hover:text-black transition-colors font-medium">
-            More case studies <FaArrowRight className="text-sm" />
-          </Link>
-        </div>
+    <section ref={sectionRef} className="bg-white relative overflow-hidden" id="case-studies">
+      <div className="site-full-grid pt-4 md:pt-6 lg:pt-8 pb-16 md:pb-24 lg:pb-28">
+        <div className="site-full-grid-inner">
+          {/* Eyebrow */}
+          <p className="mb-4 text-[13px] font-semibold uppercase tracking-[0.22em] text-black/45 sm:mb-5">
+            Case Studies
+          </p>
+          <div className="h-px w-full bg-black/10" />
 
-        {loading ? (
-          <div className="flex justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#25CBA1]"></div>
+          {/* Header */}
+          <div className="mt-10 flex flex-col items-start gap-6 sm:mt-12 md:flex-row md:items-end md:justify-between md:gap-10">
+            <h2
+              ref={headingRef}
+              className="max-w-[560px] text-[28px] font-bold leading-[1.25] tracking-tight text-black sm:text-4xl lg:max-w-[640px] lg:text-[48px] lg:leading-[1.2]"
+            >
+              <span className="text-grey">Our </span>success stories
+            </h2>
+
+            {/* Cubix-style pill button */}
+            <Link
+              href="/work"
+              className="group relative inline-flex w-fit shrink-0 items-center overflow-hidden rounded-full py-0.5 pl-0.5 font-semibold transition-colors h-[42px] pr-5 text-[13px] border border-black/15 bg-transparent"
+            >
+              <span aria-hidden="true" className="absolute left-0.5 top-0.5 bottom-0.5 rounded-full transition-[width] duration-500 ease-out group-hover:w-[calc(100%-0.25rem)] w-[36px] bg-black" />
+              <span className="relative z-10 flex items-center gap-2.5">
+                <span className="flex shrink-0 items-center justify-center h-[36px] w-[36px]">
+                  <FaArrowRight className="text-white text-xs -rotate-45 transition-transform duration-500 group-hover:rotate-0" />
+                </span>
+                <span className="pl-0.5 pr-0.5 transition-colors duration-300 text-black/80 group-hover:text-white whitespace-nowrap">
+                  More case studies
+                </span>
+              </span>
+            </Link>
           </div>
-        ) : (
-          <div className="flex flex-wrap md:-mx-6 lg:-mx-8">
-            {stories.map((story, index) => (
-              <div
-                key={story.id}
-                className={`w-full md:w-1/2 px-4 md:px-6 lg:px-8 mb-12 md:mb-24 ${index % 2 === 1 ? 'md:mt-32' : ''}`}
-                ref={(el) => (cardRefs.current[index] = el)}
-              >
-                <div className="bg-white group">
-                  <Link href={`/work/${story.id}`}>
-                    <div className="overflow-hidden rounded-xl h-[500px] md:h-[650px] lg:h-[800px] bg-gray-50">
-                      <img                         src={resolveImage(story.mainImage || story.image)}
-                        alt={story.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                       loading="lazy" />
-                    </div>
-                  </Link>
-                  <div className="pt-6 flex flex-col items-start gap-4">
-                    {(story.logo || story.projectIcon) && (
-                      <img                         src={resolveImage(story.logo || story.projectIcon)}
-                        alt={`${story.title} logo`}
-                        className="h-6 md:h-8 w-auto object-contain"
-                       loading="lazy" />
-                    )}
 
-                    <div className="flex flex-col gap-2">
-                      <Link href={`/work/${story.id}`}>
-                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight hover:text-bluish transition-colors">
-                          {story.title}
-                        </h3>
-                      </Link>
+          {/* Cards Grid */}
+          {loading ? (
+            <div className="flex justify-center py-20 mt-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0FB5B7]"></div>
+            </div>
+          ) : (
+            <div className="mt-12 md:mt-16 flex flex-wrap md:-mx-6 lg:-mx-8">
+              {stories.map((story, index) => (
+                <div
+                  key={story.id}
+                  className={`w-full md:w-1/2 px-4 md:px-6 lg:px-8 mb-12 md:mb-24 ${index % 2 === 1 ? 'md:mt-32' : ''}`}
+                  ref={(el) => (cardRefs.current[index] = el)}
+                >
+                  <div className="bg-white group">
+                    <Link href={`/work/${story.id}`}>
+                      <div className="overflow-hidden rounded-[20px] h-[400px] md:h-[550px] lg:h-[700px] bg-gray-50">
+                        <img
+                          src={resolveImage(story.mainImage || story.image)}
+                          alt={story.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                          loading="lazy"
+                        />
+                      </div>
+                    </Link>
+                    <div className="pt-6 flex flex-col items-start gap-3">
+                      {(story.logo || story.projectIcon) && (
+                        <img
+                          src={resolveImage(story.logo || story.projectIcon)}
+                          alt={`${story.title} logo`}
+                          className="h-6 md:h-8 w-auto object-contain"
+                          loading="lazy"
+                        />
+                      )}
 
-                      <p className="text-gray-500 mt-2 text-sm md:text-base lg:text-lg leading-relaxed max-w-xl">
-                        {(() => {
-                          const desc = (typeof story.shortDescription === 'string' ? story.shortDescription : '') || (typeof story.description === 'string' ? story.description : '');
-                          const firstSentence = desc.split('.')[0];
-                          return firstSentence ? firstSentence + '.' : desc;
-                        })()}
-                      </p>
+                      <div className="flex flex-col gap-2">
+                        <Link href={`/work/${story.id}`}>
+                          <h3 className="text-[22px] md:text-[28px] lg:text-[32px] font-bold text-black leading-tight tracking-tight hover:text-[#0FB5B7] transition-colors">
+                            {story.title}
+                          </h3>
+                        </Link>
+
+                        <p className="text-[15px] md:text-[16px] font-medium text-black/55 leading-relaxed max-w-xl">
+                          {(() => {
+                            const desc = (typeof story.shortDescription === 'string' ? story.shortDescription : '') || (typeof story.description === 'string' ? story.description : '');
+                            const firstSentence = desc.split('.')[0];
+                            return firstSentence ? firstSentence + '.' : desc;
+                          })()}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
 
-        <div className="md:hidden w-full flex justify-center items-center mt-8">
-          <Link href="/work" className="px-8 h-12 flex justify-center items-center rounded-full border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black transition-all font-semibold">
-            Explore All Work
-          </Link>
+          <div className="md:hidden w-full flex justify-center items-center mt-8">
+            <Link href="/work" className="px-8 h-12 flex justify-center items-center rounded-full border border-black bg-black text-white hover:bg-white hover:text-black hover:border-black transition-all font-semibold text-[13px]">
+              Explore All Work
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* Popup */}
+      {/* Rating Popup */}
       <AnimatePresence>
         {showPopup && (
           <motion.div
-            className="fixed bottom-4 right-4 bg-[#25CBA1] text-black p-4 rounded-2xl shadow-xl z-10 border border-white/20 backdrop-blur-md"
+            className="fixed bottom-4 right-4 bg-[#0FB5B7] text-black p-4 rounded-2xl shadow-xl z-10 border border-white/20 backdrop-blur-md"
             initial="hidden"
             animate="visible"
             exit="exit"
@@ -211,19 +238,16 @@ const SuccessStories = () => {
             <div className="flex md:flex-row flex-col space-y-3 md:space-y-0 md:space-x-3 text-xs md:text-sm font-bold">
               <div className="bg-white rounded-md p-2 text-black text-center">
                 <img src='/business/google.png' alt='Google Reviews' className='w-16 h-6 mx-auto object-cover' loading="lazy"></img>
-                {/* <p>Google</p> */}
                 <p>4.9 </p>
                 <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
               </div>
               <div className="bg-white rounded-md p-2 text-black text-center">
                 <img src='/business/trustpilot.png' alt='Trustpilot Reviews' className='w-20 h-6 mx-auto object-cover' loading="lazy"></img>
-                {/* <p>Trustpilot</p> */}
                 <p>4.8</p>
                 <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
               </div>
               <div className="bg-white rounded-md p-2 text-black text-center">
                 <img src='/business/clutch.png' alt='Clutch Reviews' className='w-16 h-6 mx-auto object-cover ' loading="lazy"></img>
-                {/* <p>Clutch</p> */}
                 <p>5</p>
                 <div className="flex justify-center mt-2">⭐⭐⭐⭐⭐</div>
               </div>

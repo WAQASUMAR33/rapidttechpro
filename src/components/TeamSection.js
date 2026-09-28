@@ -129,20 +129,28 @@ const TeamSection = ({
     const otherMembers = ceo ? teamMembers.filter((m) => m.id !== ceo.id) : teamMembers;
 
     return (
-        <section className={className}>
-            <div className="max-w-7xl mx-auto px-6 md:px-12">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-3xl md:text-5xl font-bold text-black mb-3">{title}</h2>
-                    {subtitle && (
-                        <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">{subtitle}</p>
-                    )}
-                </motion.div>
+        <section className="bg-white py-24 md:py-32 site-full-grid border-t border-black/[0.06]" aria-label="Team Members">
+            <div className="site-full-grid-inner">
+                {/* Eyebrow */}
+                <p className="text-[13px] font-semibold uppercase tracking-[0.22em] text-black/55 mb-4 sm:mb-5">
+                    Leadership & Experts
+                </p>
+
+                {/* Divider */}
+                <div className="h-px w-full bg-black/10 mb-10 sm:mb-12" />
+
+                {/* Two-Column Header */}
+                <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-16 md:mb-20">
+                    <div>
+                        <h2 className="text-[32px] sm:text-[44px] md:text-[54px] lg:text-[64px] font-bold leading-[1.08] tracking-tight text-[#0b0c0d]">
+                            <span className="text-black/55">Meet The</span> <br />
+                            Minds Behind The Tech.
+                        </h2>
+                    </div>
+                    <p className="text-base sm:text-lg text-black/60 max-w-md font-medium leading-relaxed">
+                        The talented engineers, designers, and product leaders dedicated to scaling your digital platforms from concept to reality.
+                    </p>
+                </div>
 
                 {/* CEO spotlight - top centre of the team section */}
                 {ceo && (
@@ -153,7 +161,7 @@ const TeamSection = ({
                         viewport={{ once: true, amount: 0.2 }}
                         className="flex justify-center mb-12 md:mb-16"
                     >
-                        <div className="w-full max-w-sm">
+                        <div className="w-full max-w-md">
                             <MemberCard member={ceo} featured />
                         </div>
                     </motion.div>
@@ -165,7 +173,7 @@ const TeamSection = ({
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.05 }}
-                        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10"
+                        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8"
                     >
                         {otherMembers.map((member, index) => (
                             <MemberCard key={member.id || index} member={member} />

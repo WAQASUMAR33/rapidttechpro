@@ -1,10 +1,19 @@
 export const metadata = {
-  title: "About Us",
-  description: "Learn about RapidTechPro — our story, mission, and the team behind our innovative technology solutions.",
+  title: "About Us — Global Custom Software & Mobile App Development Company",
+  description: "Discover how RapidTechPro empowers startups and enterprises across the US, UK, UAE, and Pakistan with world-class custom software development, mobile apps, enterprise ERP, and dedicated engineering talent.",
+  keywords: [
+    "about RapidTechPro",
+    "custom software development company profile",
+    "software house in Lahore",
+    "software company in Islamabad",
+    "software company in Mandi Bahauddin",
+    "hire software developers Pakistan",
+    "Mr Waqas CEO RapidTechPro"
+  ],
   alternates: { canonical: "/about-us" },
   openGraph: {
-    title: "About Us | RapidTechPro",
-    description: "Learn about RapidTechPro — our story, mission, and the team behind our innovative technology solutions.",
+    title: "About Us — Global Custom Software & Mobile App Development Company | RapidTechPro",
+    description: "Discover how RapidTechPro engineers cutting-edge software and mobile apps for businesses across 10+ countries.",
     url: "/about-us",
     images: [{ url: "/company/logo.png", width: 1200, height: 630, alt: "About RapidTechPro" }],
     type: "website",
@@ -12,7 +21,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "About Us | RapidTechPro",
-    description: "Learn about RapidTechPro — our story, mission, and the team behind us.",
+    description: "Learn about RapidTechPro — our mission, 149+ completed projects, and our engineering leadership.",
   },
 };
 
@@ -29,7 +38,7 @@ export default function AboutUs() {
             "@context": "https://schema.org",
             "@type": "AboutPage",
             "name": "About RapidTechPro",
-            "description": "Learn about RapidTechPro — our story, mission, and the team behind our innovative technology solutions.",
+            "description": "RapidTechPro is an international custom software, web, and mobile app development company delivering enterprise digital solutions worldwide.",
             "url": "https://rapidtechpro.com/about-us"
         },
         {

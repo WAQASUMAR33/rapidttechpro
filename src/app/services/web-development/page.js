@@ -1,15 +1,29 @@
 export const metadata = {
-  title: "Web Development",
-  description: "High-performance web development services by RapidTechPro — from landing pages to complex web applications.",
+  title: "Custom Web Application Development Company",
+  description: "Scale your business with RapidTechPro's custom web application development services. We engineer secure, fast Next.js web apps, SaaS platforms, enterprise portals, and cloud APIs.",
+  keywords: [
+    "custom web application development company",
+    "web app development services",
+    "Next.js web development",
+    "SaaS platform development",
+    "enterprise web portals",
+    "full stack web development services",
+    "React web applications",
+    "web development company Lahore Islamabad"
+  ],
   alternates: { canonical: "/services/web-development" },
   openGraph: {
-    title: "Web Development | RapidTechPro",
-    description: "High-performance web development services by RapidTechPro — from landing pages to complex web applications.",
+    title: "Custom Web Application Development Company | RapidTechPro",
+    description: "Scale your business with RapidTechPro's custom web development services — Next.js portals, SaaS products, and secure enterprise architectures.",
     url: "/services/web-development",
     images: [{ url: "/company/logo.png", width: 1200, height: 630, alt: "Web Development — RapidTechPro" }],
     type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Web Development | RapidTechPro", description: "High-performance web development services by RapidTechPro." },
+  twitter: {
+    card: "summary_large_image",
+    title: "Custom Web Application Development Company | RapidTechPro",
+    description: "High-performance web development, Next.js, React, and cloud APIs built to scale effortlessly.",
+  },
 };
 
 import UserLayout from "@/app/UserLayout";
@@ -24,15 +38,25 @@ import JsonLd from "@/components/JsonLd";
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Web Development",
-  url: "/services/web-development",
-  description: "High-performance web development services — from landing pages to complex web applications.",
-  provider: { "@type": "Organization", name: "RapidTechPro", url: "https://rapidtechpro.com" },
-  breadcrumb: { "@type": "BreadcrumbList", itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://rapidtechpro.com" },
-    { "@type": "ListItem", position: 2, name: "Services", item: "/services" },
-    { "@type": "ListItem", position: 3, name: "Web Development", item: "/services/web-development" },
-  ]},
+  name: "Custom Web Application Development Services",
+  serviceType: "Software Development",
+  url: "https://rapidtechpro.com/services/web-development",
+  description: "High-performance custom web application development services — from high-converting SaaS platforms to enterprise portals.",
+  provider: {
+    "@type": "Organization",
+    name: "RapidTechPro",
+    url: "https://rapidtechpro.com",
+    logo: "https://rapidtechpro.com/company/logo.png"
+  },
+  areaServed: ["United States", "United Kingdom", "United Arab Emirates", "Saudi Arabia", "Pakistan"],
+  breadcrumb: {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://rapidtechpro.com" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://rapidtechpro.com/services" },
+      { "@type": "ListItem", position: 3, name: "Web Development", item: "https://rapidtechpro.com/services/web-development" },
+    ]
+  },
 };
 
 export default function EcommerceSolutions(){

@@ -1,15 +1,28 @@
 export const metadata = {
-  title: "UI/UX Design & Figma",
-  description: "Professional UI/UX design services using Figma — crafting intuitive and visually stunning digital experiences.",
+  title: "UI/UX Product Design & Figma Prototyping Agency",
+  description: "Craft intuitive, world-class user experiences with RapidTechPro's UI/UX design services. From Figma interactive prototypes and design systems to mobile app interfaces that maximize conversion rates.",
+  keywords: [
+    "UI UX design services",
+    "Figma design agency",
+    "mobile app UI UX design",
+    "web design and prototyping",
+    "product design systems",
+    "UI UX agency Pakistan Lahore",
+    "hire UI UX designers"
+  ],
   alternates: { canonical: "/services/uiux-figma" },
   openGraph: {
-    title: "UI/UX Design & Figma | RapidTechPro",
-    description: "Professional UI/UX design services using Figma — crafting intuitive and visually stunning digital experiences.",
+    title: "UI/UX Product Design & Figma Prototyping Agency | RapidTechPro",
+    description: "Award-winning UI/UX design and clickable Figma prototypes engineered for maximum retention and user conversion.",
     url: "/services/uiux-figma",
     images: [{ url: "/company/logo.png", width: 1200, height: 630, alt: "UI/UX Design — RapidTechPro" }],
     type: "website",
   },
-  twitter: { card: "summary_large_image", title: "UI/UX Design & Figma | RapidTechPro", description: "Professional UI/UX design using Figma by RapidTechPro." },
+  twitter: {
+    card: "summary_large_image",
+    title: "UI/UX Product Design & Figma Agency | RapidTechPro",
+    description: "Professional UI/UX product design, interactive wireframing, and Figma design systems.",
+  },
 };
 
 import JsonLd from "@/components/JsonLd";
@@ -17,15 +30,25 @@ import JsonLd from "@/components/JsonLd";
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "UI/UX Design",
-  url: "/services/uiux-figma",
-  description: "Professional UI/UX design services crafting intuitive and visually stunning digital experiences.",
-  provider: { "@type": "Organization", name: "RapidTechPro", url: "https://rapidtechpro.com" },
-  breadcrumb: { "@type": "BreadcrumbList", itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://rapidtechpro.com" },
-    { "@type": "ListItem", position: 2, name: "Services", item: "/services" },
-    { "@type": "ListItem", position: 3, name: "UI/UX Design", item: "/services/uiux-figma" },
-  ]},
+  name: "UI/UX Design & Prototyping Services",
+  serviceType: "Digital Product Design",
+  url: "https://rapidtechpro.com/services/uiux-figma",
+  description: "Professional UI/UX design services crafting intuitive, visually stunning digital experiences and Figma interactive prototypes.",
+  provider: {
+    "@type": "Organization",
+    name: "RapidTechPro",
+    url: "https://rapidtechpro.com",
+    logo: "https://rapidtechpro.com/company/logo.png"
+  },
+  areaServed: ["United States", "United Kingdom", "United Arab Emirates", "Saudi Arabia", "Pakistan"],
+  breadcrumb: {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://rapidtechpro.com" },
+      { "@type": "ListItem", position: 2, name: "Services", item: "https://rapidtechpro.com/services" },
+      { "@type": "ListItem", position: 3, name: "UI/UX Design", item: "https://rapidtechpro.com/services/uiux-figma" },
+    ]
+  },
 };
 
 import UserLayout from "@/app/UserLayout";

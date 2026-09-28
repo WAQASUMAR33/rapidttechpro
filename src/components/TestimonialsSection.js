@@ -1,7 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaFacebook } from 'react-icons/fa';
 
 const FALLBACK = [
     {
@@ -85,105 +84,106 @@ export default function TestimonialsSection() {
     }, []);
 
     return (
-        <section className="bg-black text-white py-16 md:py-24 px-6 md:px-12 lg:px-24 relative overflow-hidden">
-            {/* Background Glows */}
-            <div className="absolute top-0 left-[-10%] w-[40%] h-full bg-[#0FB5B7]/10 blur-[120px] rounded-full pointer-events-none opacity-40"></div>
-            <div className="absolute bottom-0 right-[-10%] w-[40%] h-full bg-[#0FB5B7]/10 blur-[120px] rounded-full pointer-events-none opacity-40"></div>
-
-            <div className="max-w-7xl mx-auto relative z-10">
-                {/* Header */}
-                <div className="text-center mb-16 md:mb-24">
-                    <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-6">
-                        Our clients simply love <span className="text-[#0FB5B7]">what we do</span>
-                    </h2>
-                    <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto mb-10">
-                        Proud to serve as the innovation partner for industry leaders who have experienced our expertise and excellence firsthand.
+        <section className="bg-[#000000] text-white">
+            <div className="site-full-grid py-14 md:py-24 lg:py-[152px]">
+                <div className="site-full-grid-inner">
+                    {/* Eyebrow */}
+                    <p className="mb-4 text-[13px] font-semibold uppercase tracking-[0.22em] text-white/55 sm:mb-5">
+                        Client Reviews
                     </p>
-                    {/* Rating Badges */}
-                    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-                        <div className="flex items-center gap-4">
-                            <img src="/business/clutch.png" alt="Clutch" className="h-6 w-auto object-contain brightness-0 invert"  loading="lazy" />
-                            <div className="text-left">
-                                <div className="flex text-red-600 text-sm">★★★★★</div>
-                                <div className="text-[10px] text-white font-bold uppercase tracking-widest">52 Reviews</div>
+                    <div className="h-px w-full bg-white/25" />
+
+                    {/* Header */}
+                    <div className="mt-10 flex flex-col items-start gap-6 sm:mt-12 md:flex-row md:items-end md:justify-between md:gap-10">
+                        <h2 className="max-w-[560px] text-[28px] font-bold leading-[1.25] tracking-tight text-white sm:text-4xl lg:max-w-[640px] lg:text-[48px] lg:leading-[1.2]">
+                            <span className="text-grey">Our clients simply </span>love what we do
+                        </h2>
+
+                        {/* Rating Badges */}
+                        <div className="flex flex-wrap items-center gap-6 md:gap-10">
+                            <div className="flex items-center gap-3">
+                                <img src="/business/clutch.png" alt="Clutch" className="h-5 w-auto object-contain brightness-0 invert" loading="lazy" />
+                                <div className="text-left">
+                                    <div className="flex text-[#0FB5B7] text-xs gap-0.5">★★★★★</div>
+                                    <div className="text-[10px] text-white/60 font-semibold uppercase tracking-wider">52 Reviews</div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <FaFacebook className="w-8 h-8 text-blue-500" />
-                            <div className="text-left">
-                                <div className="flex text-blue-600 text-sm">★★★★★</div>
-                                <div className="text-[10px] text-white font-bold uppercase tracking-widest">32 Reviews</div>
+                            <div className="flex items-center gap-3">
+                                <img src="/business/google.png" alt="Google" className="h-5 w-auto object-contain" loading="lazy" />
+                                <div className="text-left">
+                                    <div className="flex text-[#0FB5B7] text-xs gap-0.5">★★★★★</div>
+                                    <div className="text-[10px] text-white/60 font-semibold uppercase tracking-wider">4.9 Rating</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                {/* Testimonials List */}
-                <div className="space-y-12 max-w-6xl mx-auto">
-                    {loading ? (
-                        // Skeleton loading
-                        [...Array(3)].map((_, i) => (
-                            <div key={i} className="bg-[#0c0c0c] border border-gray-800 rounded-[24px] p-8 md:p-10 animate-pulse">
-                                <div className="h-4 bg-gray-700 rounded w-full mb-3" />
-                                <div className="h-4 bg-gray-700 rounded w-4/5 mb-3" />
-                                <div className="h-4 bg-gray-700 rounded w-3/5 mb-8" />
-                            </div>
-                        ))
-                    ) : (
-                        testimonials.map((item, index) => (
-                            <motion.div
-                                key={item.id ?? index}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: index * 0.1 }}
-                                className="bg-[#050505] border border-gray-800/50 rounded-[64px] p-10 md:p-16 flex flex-col gap-10 hover:border-[#0FB5B7]/30 transition-all duration-300 group shadow-2xl relative overflow-hidden"
-                            >
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-[#0FB5B7]/5 blur-[60px] rounded-full pointer-events-none group-hover:bg-[#0FB5B7]/10 transition-colors"></div>
+                    {/* Testimonials List */}
+                    <div className="mt-12 md:mt-16 space-y-4">
+                        {loading ? (
+                            [...Array(3)].map((_, i) => (
+                                <div key={i} className="bg-white/[0.03] border border-white/[0.06] rounded-[20px] p-8 md:p-10 animate-pulse">
+                                    <div className="h-4 bg-white/10 rounded w-full mb-3" />
+                                    <div className="h-4 bg-white/10 rounded w-4/5 mb-3" />
+                                    <div className="h-4 bg-white/10 rounded w-3/5 mb-8" />
+                                </div>
+                            ))
+                        ) : (
+                            testimonials.map((item, index) => (
+                                <motion.div
+                                    key={item.id ?? index}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                                    className="bg-white/[0.03] border border-white/[0.06] rounded-[20px] p-8 md:p-12 lg:p-14 flex flex-col gap-8 hover:border-[#0FB5B7]/30 transition-all duration-300 group relative overflow-hidden"
+                                >
+                                    {/* Quote */}
+                                    <p className="text-[18px] md:text-[24px] lg:text-[28px] text-white/90 leading-[1.45] font-normal tracking-tight">
+                                        &ldquo;{item.review}&rdquo;
+                                    </p>
 
-                                <p className="text-xl md:text-3xl text-gray-200 leading-relaxed font-normal tracking-tight">
-                                    &ldquo;{item.review}&rdquo;
-                                </p>
-
-                                <div className="w-full border-t border-gray-800/50 pt-6 mt-2 flex items-center justify-between">
-                                    <div className="flex items-center gap-4">
-                                        <div className="relative">
-                                            {item.image ? (
-                                                <img                                                     src={item.image}
-                                                    alt={item.name}
-                                                    className="w-14 h-14 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all border border-gray-800"
-                                                    onError={e => { e.target.style.display = 'none'; }}
-                                                />
-                                            ) : (
-                                                <div className="bg-[#2a2a2a] w-14 h-14 rounded-full flex items-center justify-center text-gray-400 font-medium text-lg border border-gray-800 group-hover:bg-[#0FB5B7] group-hover:text-black transition-colors">
-                                                    {getInitials(item.name)}
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="font-bold text-white text-base leading-tight group-hover:text-[#0FB5B7] transition-colors">
-                                                {item.name}, <span className="text-gray-400 font-medium text-[13px]">{item.role}</span>
-                                            </span>
-                                            <div className="flex text-yellow-500 text-xs mt-1.5 gap-0.5">
-                                                {[...Array(5)].map((_, i) => (
-                                                    <span key={i}>★</span>
-                                                ))}
+                                    {/* Author */}
+                                    <div className="w-full border-t border-white/[0.06] pt-6 flex items-center justify-between">
+                                        <div className="flex items-center gap-4">
+                                            <div className="relative">
+                                                {item.image ? (
+                                                    <img
+                                                        src={item.image}
+                                                        alt={item.name}
+                                                        className="w-12 h-12 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all border border-white/10"
+                                                        onError={e => { e.target.style.display = 'none'; }}
+                                                    />
+                                                ) : (
+                                                    <div className="bg-white/[0.08] w-12 h-12 rounded-full flex items-center justify-center text-white/60 font-semibold text-base border border-white/10 group-hover:bg-[#0FB5B7] group-hover:text-black transition-colors">
+                                                        {getInitials(item.name)}
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <span className="font-bold text-white text-[15px] leading-tight group-hover:text-[#0FB5B7] transition-colors">
+                                                    {item.name}
+                                                </span>
+                                                <span className="text-white/40 font-medium text-[13px] mt-0.5">
+                                                    {item.role}
+                                                </span>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    {/* Company Logo on Right */}
-                                    <div className="opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all">
-                                        <img                                             src={item.companyLogo || "/business/clutch.png"}
-                                            alt="Project Logo"
-                                            className="h-6 md:h-8 w-auto object-contain"
-                                            onError={e => { e.target.style.display = 'none'; }}
-                                        />
+                                        {/* Company Logo on Right */}
+                                        <div className="opacity-30 grayscale group-hover:grayscale-0 group-hover:opacity-80 transition-all">
+                                            <img
+                                                src={item.companyLogo || "/business/clutch.png"}
+                                                alt="Project Logo"
+                                                className="h-5 md:h-6 w-auto object-contain"
+                                                onError={e => { e.target.style.display = 'none'; }}
+                                            />
+                                        </div>
                                     </div>
-                                </div>
-                            </motion.div>
-                        ))
-                    )}
+                                </motion.div>
+                            ))
+                        )}
+                    </div>
                 </div>
             </div>
         </section>
