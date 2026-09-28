@@ -10,10 +10,9 @@ import {
     SiFlutter, SiDart, SiRedux, SiExpo, SiIonic,
     SiPostgresql, SiMongodb, SiMysql, SiRedis, SiPrisma, SiSupabase, SiElasticsearch, SiSqlite,
     SiGooglecloud, SiVercel, SiFirebase, SiHeroku, SiDocker, SiKubernetes, SiNginx, SiJenkins, SiGithubactions, SiTerraform, SiLinux,
-    SiOpenai, SiTensorflow, SiPytorch, SiLangchain, SiHuggingface,
-    SiUnity, SiUnrealengine, SiGodotengine, SiBlender, SiThreedotjs
+    SiOpenai, SiTensorflow, SiPytorch, SiLangchain, SiHuggingface
 } from "react-icons/si";
-import { FaCode, FaServer, FaCloud, FaDatabase, FaMobileAlt, FaRobot, FaGamepad, FaLayerGroup, FaAws, FaArrowRight } from "react-icons/fa";
+import { FaCode, FaServer, FaCloud, FaDatabase, FaMobileAlt, FaRobot, FaLayerGroup, FaAws, FaArrowRight } from "react-icons/fa";
 
 const TECH_CATEGORIES = [
     {
@@ -193,26 +192,7 @@ const TECH_CATEGORIES = [
                 ]
             }
         ]
-    },
-    {
-        id: 'games',
-        title: 'Games & 3D',
-        icon: <FaGamepad className="text-[15px]" />,
-        badge: 'Engines & 3D',
-        description: 'Immersive realtime 3D engines, cross-platform gameplay, physics simulation, and interactive WebGL experiences.',
-        categories: [
-            {
-                name: 'Engines & 3D Interactive',
-                items: [
-                    { name: 'Unreal Engine 5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unrealengine/unrealengine-original.svg', fallback: <SiUnrealengine className="w-5 h-5 text-black" /> },
-                    { name: 'Unity 3D', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg', fallback: <SiUnity className="w-5 h-5 text-black" /> },
-                    { name: 'Godot Engine', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/godot/godot-original.svg', fallback: <SiGodotengine className="w-5 h-5 text-[#478CBF]" /> },
-                    { name: 'Blender 3D', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg', fallback: <SiBlender className="w-5 h-5 text-[#F5792A]" /> },
-                    { name: 'Three.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg', fallback: <SiThreedotjs className="w-5 h-5 text-black" /> },
-                ]
-            }
-        ]
-    },
+    }
 ];
 
 export default function TechnologiesSection() {
