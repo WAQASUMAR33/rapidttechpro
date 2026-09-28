@@ -178,8 +178,8 @@ export default function Header() {
                             ) : (
                                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-black text-white ${isLightPage ? "bg-[#0FB5B7]" : "bg-white/20"}`}>R</div>
                             )}
-                            <span className={`transition-colors duration-300 ${isScrolled && isLightPage ? "text-black group-hover:text-[#0FB5B7]" : (isLightPage ? "text-black group-hover:text-[#0FB5B7]" : "text-white group-hover:text-white/80")}`}>
-                                Rapid<span className="text-[#0FB5B7]">TechPro</span>.
+                            <span className={`font-extrabold tracking-tight transition-colors duration-300 ${isScrolled && isLightPage ? "text-black group-hover:text-[#0FB5B7]" : (isLightPage ? "text-black group-hover:text-[#0FB5B7]" : "text-white group-hover:text-white/80")}`}>
+                                RAPID<span className="text-[#0FB5B7]">TECHPRO</span>
                             </span>
                         </Link>
 

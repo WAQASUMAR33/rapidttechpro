@@ -14,6 +14,7 @@ import DarkAwardsSection from "@/components/DarkAwardsSection";
 import SuccessStories from "@/components/OurSuccessStories";
 import TeamSection from "@/components/TeamSection";
 import FAQSection from "@/components/FAQSection";
+import WhyChooseUs from "@/components/WhyChooseUs";
 
 export default function Home() {
 
@@ -55,6 +56,9 @@ export default function Home() {
 
       {/* ─── Industries We Serve (light gray) ─── */}
       <Industries />
+
+      {/* ─── Why Choose Us (Cubix-style architectural grid) ─── */}
+      <WhyChooseUs />
 
       {/* ─── Awards (dark) ─── */}
       <DarkAwardsSection />
